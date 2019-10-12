@@ -1,15 +1,31 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-
+import Home from '../views/home'
+import Community from '../views/community'
+import SelfCenter from '../views/selfcenter'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'hash',
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      component: Home
+    },
+    {
+      path: '/#/home',
+      name: 'home',
+      component: Home
+    },
+    {
+      path: '/#/community',
+      name: 'community',
+      component: Community
+    },
+    {
+      path: '/#/selfcenter',
+      name: 'selfcenter',
+      component: SelfCenter
     }
   ]
 })

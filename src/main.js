@@ -5,7 +5,8 @@ import App from './App'
 import router from './router'
 import '../static/css/mui.css'
 import mui from '../src/assets/js/mui.js'
-
+import './assets/iconfont/iconfont.css'
+import './theme/common.css'
 Vue.config.productionTip = false
 Vue.prototype.mui=mui
 /* eslint-disable no-new */

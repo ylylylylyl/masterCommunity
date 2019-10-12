@@ -1,23 +1,25 @@
 <template>
-  <div>
-     <ul class="mui-table-view"> 
-        <li class="mui-table-view-cell mui-collapse">
-            <a class="mui-navigate-right" href="#">面板1</a>
-            <div class="mui-collapse-content">
-                <p>面板1子内容</p>
-            </div>
-        </li>
-    </ul>
+  <div class="body">
+    <Header>
+
+    </Header>
+    <div class="content-container">
+      <router-view></router-view>
+    </div>
+
+    <NavBar>
+
+    </NavBar>
   </div>
 
 </template>
 <script>
+import NavBar from './components/NavBar'
+import Header from './components/Header'
 export default {
-  name: 'HelloWorld',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
+  components:{
+    NavBar,
+    Header
   }
 }
 </script>

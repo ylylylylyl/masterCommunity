@@ -1,0 +1,37 @@
+{
+  "id": "1454366",
+  "name": "community",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1211848",
+      "name": "我的",
+      "font_class": "wode",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "5661142",
+      "name": "首页",
+      "font_class": "shouye",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "7391189",
+      "name": "定位",
+      "font_class": "dingwei",
+      "unicode": "e642",
+      "unicode_decimal": 58946
+    },
+    {
+      "icon_id": "10534234",
+      "name": "社区–线性",
+      "font_class": "shequxianxing",
+      "unicode": "e66b",
+      "unicode_decimal": 58987
+    }
+  ]
+}
