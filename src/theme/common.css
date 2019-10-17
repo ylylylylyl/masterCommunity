@@ -4,14 +4,21 @@
     font-size:14px 
 }
 * { touch-action: pan-y; }
+.icon {
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+ }
 body{
     height: 100vh !important;
 }
-.body{
-    height: 100%;
+li{
+    list-style: none;
 }
 .mui-bar-tab .mui-tab-item.mui-active {
-    color: 	#6E8B3D
+    color: 	#6E8B3D;
+    font-weight: bold;
 }
 .content-container{ 
     height: 100%;

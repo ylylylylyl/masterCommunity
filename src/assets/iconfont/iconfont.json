@@ -13,6 +13,34 @@
       "unicode_decimal": 58905
     },
     {
+      "icon_id": "2727690",
+      "name": "快速报修",
+      "font_class": "repair",
+      "unicode": "e661",
+      "unicode_decimal": 58977
+    },
+    {
+      "icon_id": "3555646",
+      "name": "论坛资讯",
+      "font_class": "luntanzixun",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "3847163",
+      "name": "天气",
+      "font_class": "tianqi",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "3858671",
+      "name": "生活缴费",
+      "font_class": "icon-test",
+      "unicode": "e645",
+      "unicode_decimal": 58949
+    },
+    {
       "icon_id": "5661142",
       "name": "首页",
       "font_class": "shouye",
@@ -20,11 +48,39 @@
       "unicode_decimal": 58915
     },
     {
+      "icon_id": "5723098",
+      "name": "缴费大厅",
+      "font_class": "jiaofeidating",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
+      "icon_id": "7338644",
+      "name": "更多",
+      "font_class": "gengduo",
+      "unicode": "e6ae",
+      "unicode_decimal": 59054
+    },
+    {
       "icon_id": "7391189",
       "name": "定位",
       "font_class": "dingwei",
       "unicode": "e642",
       "unicode_decimal": 58946
+    },
+    {
+      "icon_id": "7935744",
+      "name": "停车库",
+      "font_class": "tingcheku",
+      "unicode": "e656",
+      "unicode_decimal": 58966
+    },
+    {
+      "icon_id": "7991707",
+      "name": "电话",
+      "font_class": "dianhua",
+      "unicode": "e667",
+      "unicode_decimal": 58983
     },
     {
       "icon_id": "10534234",

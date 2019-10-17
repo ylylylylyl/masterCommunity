@@ -12,6 +12,9 @@
         display: flex;
         justify-content:center;
         align-items: center;
+        position: fixed;
+        z-index: 100;
+        width: 100%;
     }
     .icon-dingwei{
         display: block;
