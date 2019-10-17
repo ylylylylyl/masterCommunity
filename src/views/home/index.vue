@@ -207,9 +207,9 @@ export default {
   },
   methods: {
     muinit() {
-      this.sliderinterval();
+   
       mui.init({});
-
+      this.sliderinterval();
       mui.ready(function() {
         mui(".mui-scroll-wrapper").scroll({
           bounce: true //是否启用回弹
