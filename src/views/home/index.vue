@@ -1,5 +1,8 @@
 <template>
-  <div class="main-content">
+  <div>
+    <Header></Header>
+    <div class="main-content">
+    
     <div class="mui-slider">
       <div class="mui-slider-group mui-slider-loop">
         <!--支持循环，需要重复图片节点-->
@@ -193,10 +196,16 @@
         </div>
     </div>
   </div>
+  </div>
+  
 </template>
 
 <script>
+import Header from '../../components/Header'
 export default {
+  components:{
+    Header
+  },
   mounted: function() {
     this.muinit();
   },

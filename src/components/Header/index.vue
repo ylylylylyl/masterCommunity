@@ -8,7 +8,7 @@
 <style scoped>
     .header{
         height: 40px;
-        background: #6E8B3D;
+        background: #6E8B3D !important;
         display: flex;
         justify-content:center;
         align-items: center;

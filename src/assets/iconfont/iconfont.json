@@ -13,6 +13,13 @@
       "unicode_decimal": 58905
     },
     {
+      "icon_id": "1973188",
+      "name": "男头像",
+      "font_class": "user__easyico",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
       "icon_id": "2727690",
       "name": "快速报修",
       "font_class": "repair",
@@ -25,6 +32,13 @@
       "font_class": "luntanzixun",
       "unicode": "e613",
       "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "3558139",
+      "name": "个人资料",
+      "font_class": "gerenziliao",
+      "unicode": "e626",
+      "unicode_decimal": 58918
     },
     {
       "icon_id": "3847163",
@@ -81,6 +95,13 @@
       "font_class": "dianhua",
       "unicode": "e667",
       "unicode_decimal": 58983
+    },
+    {
+      "icon_id": "8713058",
+      "name": "个人缴费明细",
+      "font_class": "gerenjiaofeimingxi",
+      "unicode": "e609",
+      "unicode_decimal": 58889
     },
     {
       "icon_id": "10534234",
