@@ -3,11 +3,12 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import '../static/css/mui.css'
 import mui from '../static/js/mui.js'
 import './assets/iconfont/iconfont.css'
 import './assets/iconfont/iconfont.js'
-import '../static/css/mui.css'
 
+import '../static/css/app.css'
 
 import './theme/common.css'
 Vue.config.productionTip = false

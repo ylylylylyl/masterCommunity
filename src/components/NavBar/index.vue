@@ -9,7 +9,7 @@
                     <span class="mui-icon iconfont icon-shequxianxing"></span>
                 </div>
                 <span class="mui-icon"></span>
-                <span class="mui-tab-label">社区</span> 
+                <span class="mui-tab-label">物业</span> 
             </a>
             <a @click="routerfuc(3)" class="mui-tab-item">
                 <span class="mui-icon iconfont icon-wode"></span>

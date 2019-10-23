@@ -1,7 +1,9 @@
 <template>
     <div class="header">
-       <span class="iconfont icon-dingwei"></span>
-       <span class="comm-name">智慧社区</span>
+        <slot>
+
+        </slot>
+      
     </div>
 </template>
 
