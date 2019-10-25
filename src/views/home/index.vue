@@ -157,12 +157,17 @@
         <span class="label-add">有料</span>
         <span class="label-add">有趣</span>
         <span class="label-add">有优惠</span>
-        <div class="news-content">
-            <div class="news news-style1">
-                <p>[提醒]啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
-                <img src="../../assets/image/1.jpg"/>
-            </div>
-            <div class="news news-style2">
+        <div class="news-content" v-for="(news,i) in newslist" :key="i">
+            <div class="news news-style1" @click="toLink(this)">
+              <a class="news-a" :href="news.url"></a>
+              <div>
+                <p>{{news.title}}</p> 
+                <p>{{news.ptime}}</p>
+              </div>
+                
+                <img :src="news.imgsrc" />
+            </div> 
+            <!-- <div class="news news-style2">
                 <p>[提醒]啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
                 <div class="style2-img">
                     <img src="../../assets/image/1.jpg"/>
@@ -171,31 +176,11 @@
                 </div>
 
                 
-            </div>
-            <div class="news news-style3">
+            </div> -->
+            <!-- <div class="news news-style3">
                 <p>[提醒]啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
                 <img src="../../assets/image/1.jpg"/>
-            </div>
-        </div>
-        <div class="news-content">
-            <div class="news news-style1">
-                <p>[提醒]啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
-                <img src="../../assets/image/1.jpg"/>
-            </div>
-            <div class="news news-style2">
-                <p>[提醒]啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
-                <div class="style2-img">
-                    <img src="../../assets/image/1.jpg"/>
-                    <img src="../../assets/image/1.jpg"/>
-                    <img src="../../assets/image/1.jpg"/>
-                </div>
-
-                
-            </div>
-            <div class="news news-style3">
-                <p>[提醒]啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
-                <img src="../../assets/image/1.jpg"/>
-            </div>
+            </div> -->
         </div>
     </div>
   </div>
@@ -206,20 +191,29 @@
 <script>
 import Header from '../../components/Header'
 export default {
+  data(){
+    return{
+      newslist:[]
+    }
+  },
   components:{
     Header
   },
-  mounted: function() {
-    this.muinit();
-  },
-  updated: {
-    function() {
+   updated(){
+    
       this.sliderinterval();
-    }
+    
   },
+  mounted(){
+  
+      this.muinit();
+      this.getNews();
+    
+  }
+  ,
+ 
   methods: {
-    muinit() {
-   
+    muinit() { 
       mui.init({});
       this.sliderinterval();
       mui.ready(function() {
@@ -228,13 +222,31 @@ export default {
         });
       });
     },
+    getNews(){
+      const root = process.env.API_HOST;
+    // https://3g.163.com/touch/reconstruct/article/list/BDC4QSV3wangning/0-10.html
+        this.$http.get(root+'/touch/reconstruct/article/list/BDC4QSV3wangning/0-10.html')
+                 .then(result=>{
+                   let str = result.body.substring(9,result.body.length-1)
+                   this.newslist = JSON.parse(str).BDC4QSV3wangning;
+            },error=>{
+              console.log(error)
+            }).catch(err => {
+          　　console.log(err)
+          })
+
+    },
     sliderinterval() {
       //图片轮播
       var gallery = mui(".mui-slider");
       gallery.slider({
         interval: 2000 //自动轮播周期，若为0则不自动播放，默认为0；
       });
+    },
+    toLink(t){
+      event.currentTarget.children[0].click();
     }
+
   }
 };
 </script>

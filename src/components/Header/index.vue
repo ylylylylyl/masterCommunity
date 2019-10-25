@@ -3,7 +3,6 @@
         <slot>
 
         </slot>
-      
     </div>
 </template>
 
@@ -27,4 +26,5 @@
     .comm-name{
         color: white;
     }
+ 
 </style>

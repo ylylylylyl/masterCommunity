@@ -7,12 +7,20 @@ import '../static/css/mui.css'
 import mui from '../static/js/mui.js'
 import './assets/iconfont/iconfont.css'
 import './assets/iconfont/iconfont.js'
+import Ajax from './utils/ajax'
 
 import '../static/css/app.css'
 
 import './theme/common.css'
+import VueResource from 'vue-resource'
+import VueJsonp from 'vue-jsonp'
+
 Vue.config.productionTip = false
+Vue.use(VueResource)
 Vue.prototype.mui = mui
+Vue.prototype.$ajax = Ajax
+Vue.use(VueJsonp)
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

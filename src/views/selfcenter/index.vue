@@ -12,7 +12,7 @@
                     </svg>
               </div>
               <div class="login-container">
-                  <span class="login-text">登录/注册</span>
+                  <span class="login-text" @click="login()">登录/注册</span>
                   <span class="mui-icon mui-icon-arrowright"></span>
               </div>
           </div>
@@ -108,7 +108,11 @@
 
 <script>
     export default {
-        
+        methods: {
+            login(){
+                this.$router.push('/login')
+            }
+        },
     }
 </script>
 <style scoped>
