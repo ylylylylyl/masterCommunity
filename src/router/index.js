@@ -6,6 +6,7 @@ import SelfCenter from '../views/selfcenter'
 import Login from '../views/login'
 import Regist from '../views/regist'
 import Layout from '../components/layout'
+import LivingPayment from '../views/livingpayment'
 Vue.use(Router)
 
 export default new Router({
@@ -42,6 +43,11 @@ export default new Router({
           path: '/selfcenter',
           name: 'selfcenter',
           component: SelfCenter
+        },
+        {
+          path: '/livingpayment',
+          name: 'livingpayment',
+          component: LivingPayment
         }
       ]
 

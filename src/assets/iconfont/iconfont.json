@@ -13,6 +13,27 @@
       "unicode_decimal": 58905
     },
     {
+      "icon_id": "1715035",
+      "name": "电费",
+      "font_class": "dianfei",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    },
+    {
+      "icon_id": "1715040",
+      "name": "燃气费",
+      "font_class": "ranqifei",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
+    },
+    {
+      "icon_id": "1715043",
+      "name": "水费",
+      "font_class": "shuifei",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    },
+    {
       "icon_id": "1973188",
       "name": "男头像",
       "font_class": "user__easyico",

@@ -53,14 +53,14 @@
       <div class="mui-content">
         <div class="mui-row">
             <div class="mui-col-xs-3 mui-col-xs-3" >
-                <li class="mui-table-view-cell">
+                <a @click="torouter(1)" class="mui-table-view-cell">
                     <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-icon-test"></use>
                     </svg>
                     <a >
                            生活缴费   
                     </a>
-                </li>
+                </a>
             </div>
             <div class="mui-col-xs-3 mui-col-xs-3">
                 <li class="mui-table-view-cell">
@@ -243,8 +243,16 @@ export default {
         interval: 2000 //自动轮播周期，若为0则不自动播放，默认为0；
       });
     },
-    toLink(t){
+    toLink(){
       event.currentTarget.children[0].click();
+    },
+    torouter(num){
+      switch(num){
+        case 1:
+          this.$router.push('/livingpayment')
+        break
+         
+      }
     }
 
   }
