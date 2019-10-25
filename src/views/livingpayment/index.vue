@@ -6,7 +6,7 @@
                 <span class="living-title">生活缴费·智慧小区</span>
             </div>
             <div class="header-right">
-                <span class="living-title"> 缴费记录</span>
+                <span class="living-title" @click="torecords()"> 缴费记录</span>
                
             </div>
             
@@ -194,6 +194,9 @@ export default {
                     
                 ]
             });
+        },
+        torecords(){
+            this.$router.push('/paymentrecords')
         }
     }
 }

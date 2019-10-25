@@ -16,6 +16,9 @@ body{
 li{
     list-style: none;
 }
+a{
+    color: black;
+}
 .mui-bar-tab .mui-tab-item.mui-active {
     color: 	#6E8B3D;
     font-weight: bold;
@@ -30,4 +33,6 @@ li{
     border-left: #6E8B3D 5px solid;
     padding-left: 10px;
 }
-
+.header{
+    height: 40px;
+}

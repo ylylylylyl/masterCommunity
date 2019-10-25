@@ -7,6 +7,7 @@ import Login from '../views/login'
 import Regist from '../views/regist'
 import Layout from '../components/layout'
 import LivingPayment from '../views/livingpayment'
+import PaymentRecords from '../views/paymentrecords'
 Vue.use(Router)
 
 export default new Router({
@@ -48,6 +49,11 @@ export default new Router({
           path: '/livingpayment',
           name: 'livingpayment',
           component: LivingPayment
+        },
+        {
+          path: '/paymentrecords',
+          name: 'paymentrecords',
+          component: PaymentRecords
         }
       ]
 
