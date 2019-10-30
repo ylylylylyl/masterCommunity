@@ -223,7 +223,7 @@ export default {
       });
     },
     getNews(){
-      const root = process.env.API_HOST;
+      const root = process.env.OPEN_HOST;
     // https://3g.163.com/touch/reconstruct/article/list/BDC4QSV3wangning/0-10.html
         this.$http.get(root+'/touch/reconstruct/article/list/BDC4QSV3wangning/0-10.html')
                  .then(result=>{
