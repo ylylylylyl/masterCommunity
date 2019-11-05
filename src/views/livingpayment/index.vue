@@ -1,6 +1,6 @@
 <template>
     <div class="living-content">
-        <div class="header">
+        <div class="l-header">
             <div class="header-left">
                 <span class="mui-icon mui-icon-arrowleft" @click="goback()"></span>
                 <span class="living-title">生活缴费·智慧小区</span>
@@ -19,7 +19,7 @@
             </div>
             <!--内容区-->
             <div class="mui-card-content">
-                <div class="pay-item">
+                <div class="pay-item" @click="toAddPay()">
                     <div class="pay-item-top">
                         <svg class="icon icon-svg" aria-hidden="true">
                             <use xlink:href="#icon-ranqifei"></use>
@@ -73,7 +73,7 @@
         height: 100vh;
     }
     /* header */
-    .header{
+    .l-header{
         display: flex;
         height: 150px;
         background-color: #6E8B3D;
@@ -197,7 +197,12 @@ export default {
         },
         torecords(){
             this.$router.push('/paymentrecords')
+        },
+        toAddPay(){
+            this.$router.push('/addpayuser')
         }
+        
+
     }
 }
 </script>

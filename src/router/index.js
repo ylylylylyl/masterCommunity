@@ -8,6 +8,8 @@ import Regist from '../views/regist'
 import Layout from '../components/layout'
 import LivingPayment from '../views/livingpayment'
 import PaymentRecords from '../views/paymentrecords'
+import AddPayUser from '../views/addpayuser'
+import PropertyPayment from '../views/propertypayment'
 Vue.use(Router)
 
 export default new Router({
@@ -54,6 +56,16 @@ export default new Router({
           path: '/paymentrecords',
           name: 'paymentrecords',
           component: PaymentRecords
+        },
+        {
+          path: '/addpayuser',
+          name: 'addpayuser',
+          component: AddPayUser
+        },
+        {
+          path: '/propertypayment',
+          name: 'propertypayment',
+          component: PropertyPayment
         }
       ]
 

@@ -63,14 +63,14 @@
                 </a>
             </div>
             <div class="mui-col-xs-3 mui-col-xs-3">
-                <li class="mui-table-view-cell">
+                <a @click="torouter(2)" class="mui-table-view-cell">
                      <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-jiaofeidating"></use>
                     </svg>
                     <a >
                         物业缴费 
                     </a>
-                </li>
+                </a>
             </div>
             <div class="mui-col-xs-3 mui-col-xs-3">
                 <li class="mui-table-view-cell">
@@ -251,7 +251,9 @@ export default {
         case 1:
           this.$router.push('/livingpayment')
         break
-         
+        case 2:
+          this.$router.push('/propertypayment')
+        break
       }
     }
 
@@ -312,14 +314,15 @@ export default {
 }
 .news-style1{
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 .news-style1>img{
     width: 100px;
     height: 60px;
 }
-.news-style1>p{
-    width: 60%;
+.news-style1>div{
+    width: 65%;
     
 }
 .news>p{
