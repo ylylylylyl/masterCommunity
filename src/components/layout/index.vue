@@ -5,7 +5,7 @@
       <router-view></router-view>
     </div>
 
-    <NavBar>
+    <NavBar  v-show="$route.name!=='propertypayment'">
 
     </NavBar>
   </div>
