@@ -1,21 +1,21 @@
 <template>
     <div>
-         <div class="header">
-            <span @click="goback()" class="mui-icon mui-icon-arrowleft"></span>
-            <span>物业缴费</span>
+        <div class="fixed-container">
+            <BackHeader>物业缴费</BackHeader>
+            <div class="address-container">
+                <span class="address-span">安顺路181弄2号102室</span>
+            </div>
+            <div class="select-container">
+                <span class="mui-icon mui-icon-arrowdown" v-show="!isopen"></span>
+                <span class="mui-icon mui-icon-arrowup" v-show="isopen"></span>
+                <select @click="handleChange" class="mui-h5" style="margin:auto; color:#000;">
+                    <option value="1">2019</option>
+                    <option value="2">2018</option>
+                    <option value="3">2017</option>
+                </select>
+            </div>
         </div>
-        <div class="address-container">
-            <span class="address-span">安顺路181弄2号102室</span>
-        </div>
-        <div class="select-container">
-            <span class="mui-icon mui-icon-arrowdown" v-show="!isopen"></span>
-            <span class="mui-icon mui-icon-arrowup" v-show="isopen"></span>
-			<select @click="handleChange" class="mui-h5" style="margin:auto; color:#000;">
-				<option value="1">2019</option>
-				<option value="2">2018</option>
-				<option value="3">2017</option>
-			</select>
-        </div>
+        
         <div class="payment-container">
             <div class="payment-item">
                     <div class="payment-item-date">
@@ -80,12 +80,21 @@
         </div>
         
         <div class="payment-footer">
-
+            <div>
+                <span>合计：</span>
+                <span class="total-pay" >300.00</span>
+            </div>
+            
+            <button type="button" class="mui-btn submit">提交订单</button>
         </div>
     </div>
 </template>
 <script>
+import BackHeader from '../../components/LeftHeader'
 export default {
+    components:{
+        BackHeader
+    },
     data(){
         return{
             isopen:false
@@ -165,18 +174,36 @@ export default {
     }
     .item-des-pay span:nth-child(2){
         font-size: 12px;
-        color: rgb(235, 130, 44)
+        color: #eb822c
     }
     .payment-container{
         padding-bottom: 50px;
+        padding-top: 142px;
+    }
+    .submit{
+        background-color: #6E8B3D;
+        color: white;
     }
     .payment-footer{
         position: fixed;
-        height: 50px;
+        height: 70px;
         width: 100%;
-        background: black;
-        border-top: 1px black solid;
+        background: white;
+        border-top: 1px gray solid;
         bottom: 0px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px;
+    }
+    .total-pay{
+        color:#eb822c;
+        font-weight:700;
+        font-size: 16px;
+    }
+    .fixed-container{
+        position: fixed;
+        width: 100%;
     }
    
 </style>

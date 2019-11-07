@@ -50,7 +50,6 @@
         font-size: 18px;
     }
     .mui-input-group{
-        
         margin-top: 20px;
     }
     .mui-input-row{

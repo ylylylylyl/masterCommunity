@@ -1,10 +1,6 @@
 <template>
     <div>
-        <div class="header">
-            <span @click="goback()" class="mui-icon mui-icon-arrowleft"></span>
-            <span>缴费记录</span>
-           
-        </div>
+        <BackHeader>缴费记录</BackHeader>
         <div class="records-content">
             <div class="records-content-item">
                 <div class="item-title">
@@ -139,7 +135,11 @@
 </style>
 
 <script>
+import BackHeader from '../../components/LeftHeader'
 export default {
+    components:{
+       BackHeader
+    },
     methods:{
         goback(){
             this.$router.go(-1)

@@ -38,3 +38,9 @@ a{
     display: flex;
     align-items: center;
 }
+.back-header{
+    height: 40px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
