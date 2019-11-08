@@ -59,7 +59,10 @@
 				</div>
 				<textarea type="textarea" rows="5" class="mui-input-speech" placeholder="请输入内容"/>
 			</div>
-			<button type="button" class="mui-btn submit-btn ">确认提交</button>
+			<div class="submit-container">
+				<button type="button" class="mui-btn submit-btn ">确认提交</button>
+			</div>
+			
         </div>
     </div>
 </template>
@@ -204,10 +207,15 @@ export default {
 		width: 100%;
 		border: none;
 	}
+	.submit-container{
+		display: flex;
+		justify-content: center;
+	}
 	.submit-btn{
 		background: #6E8B3D;
 		color: white;
-		width: 160px;
+		width: 250px;
 		border-radius: 20px;
+		height: 40px;
 	}
 </style>
