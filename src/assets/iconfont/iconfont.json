@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1029218",
+      "name": "星号",
+      "font_class": "asterisks-1-copy",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "1056886",
+      "name": "时间",
+      "font_class": "shijian",
+      "unicode": "e6af",
+      "unicode_decimal": 59055
+    },
+    {
       "icon_id": "1211848",
       "name": "我的",
       "font_class": "wode",
@@ -90,6 +104,13 @@
       "unicode_decimal": 58926
     },
     {
+      "icon_id": "5431169",
+      "name": "联系电话",
+      "font_class": "lianxidianhua",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
       "icon_id": "5661142",
       "name": "首页",
       "font_class": "shouye",
@@ -109,6 +130,20 @@
       "font_class": "tongzhigonggao",
       "unicode": "e634",
       "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "6888896",
+      "name": "联系人",
+      "font_class": "lianxiren",
+      "unicode": "e663",
+      "unicode_decimal": 58979
+    },
+    {
+      "icon_id": "6901605",
+      "name": "房间",
+      "font_class": "fangjian",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
     },
     {
       "icon_id": "7338644",
@@ -158,6 +193,13 @@
       "font_class": "shequxianxing",
       "unicode": "e66b",
       "unicode_decimal": 58987
+    },
+    {
+      "icon_id": "11032209",
+      "name": "类型",
+      "font_class": "leixing",
+      "unicode": "e614",
+      "unicode_decimal": 58900
     }
   ]
 }

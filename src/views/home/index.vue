@@ -73,14 +73,14 @@
                 </a>
             </div>
             <div class="mui-col-xs-3 mui-col-xs-3">
-                <li class="mui-table-view-cell">
+                <a @click="torouter(3)" class="mui-table-view-cell">
                      <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-repair"></use>
                     </svg>
                     <a >
                        生活报修
                     </a>
-                </li>
+                </a>
             </div>
             <div class="mui-col-xs-3 mui-col-xs-3">
                 <li class="mui-table-view-cell">
@@ -253,6 +253,9 @@ export default {
         break
         case 2:
           this.$router.push('/propertypayment')
+        break
+        case 3:
+          this.$router.push('/liferepair')
         break
       }
     }

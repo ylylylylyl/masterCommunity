@@ -10,7 +10,7 @@ import LivingPayment from '../views/livingpayment'
 import PaymentRecords from '../views/paymentrecords'
 import AddPayUser from '../views/addpayuser'
 import PropertyPayment from '../views/propertypayment'
-const LifeRepair = import('../views/liferepair')
+const LifeRepair = () => import('../views/liferepair')
 Vue.use(Router)
 
 export default new Router({
