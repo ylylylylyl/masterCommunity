@@ -10,6 +10,7 @@ import LivingPayment from '../views/livingpayment'
 import PaymentRecords from '../views/paymentrecords'
 import AddPayUser from '../views/addpayuser'
 import PropertyPayment from '../views/propertypayment'
+import RepairReport from '../views/repairreport'
 const LifeRepair = () => import('../views/liferepair')
 Vue.use(Router)
 
@@ -72,6 +73,11 @@ export default new Router({
           path: '/liferepair',
           name: 'liferepair',
           component: LifeRepair
+        },
+        {
+          path: '/repairreport',
+          name: 'repairReport',
+          component: RepairReport
         }
       ]
 

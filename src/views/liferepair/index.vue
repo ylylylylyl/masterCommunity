@@ -5,7 +5,7 @@
         <span @click="goback()" class="mui-icon mui-icon-arrowleft"></span>
         <span>我要报修</span>
       </div>
-      <span class="records-span">报修记录</span>
+      <span class="records-span" @click="toRecords()">报修记录</span>
     </div>
     <div class="repair-container">
       <button id="type-btn" class="btn mui-btn mui-btn-block" @click="initRepair()">
@@ -142,15 +142,17 @@ export default {
       this.$router.go(-1);
     },
     changeImage(e) {
-	  var file = e.target.files[0];
-	  if(file){
-		var reader = new FileReader();
-		reader.readAsDataURL(file);
-		reader.onload = e => {
-		this.uploadimg = reader.result;
-      };
-	}
-     
+      var file = e.target.files[0];
+      if(file){
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = e => {
+      this.uploadimg = reader.result;
+        };
+     }
+    },
+    toRecords(){
+      this.$router.push('/repairreport')
     }
   }
 };

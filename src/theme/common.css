@@ -44,3 +44,12 @@ a{
     display: flex;
     align-items: center;
 }
+.center-header{
+    height: 40px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+.mui-backdrop{
+    z-index: 1;
+  }
