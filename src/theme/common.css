@@ -43,6 +43,10 @@ a{
     background-color: white;
     display: flex;
     align-items: center;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 998;
 }
 .center-header{
     height: 40px;
@@ -52,4 +56,8 @@ a{
 }
 .mui-backdrop{
     z-index: 1;
+  }
+  .com-container{
+      margin-top: 40px;
+     
   }

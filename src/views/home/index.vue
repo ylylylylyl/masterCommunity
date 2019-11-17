@@ -76,12 +76,12 @@
               </a>
             </div>
             <div class="mui-col-xs-3 mui-col-xs-3">
-              <li class="mui-table-view-cell">
+              <a @click="torouter(4)" class="mui-table-view-cell">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-luntanzixun" />
                 </svg>
                 <a>社区论坛</a>
-              </li>
+              </a>
             </div>
           </div>
           <div class="mui-row">
@@ -240,6 +240,8 @@ export default {
         case 3:
           this.$router.push("/liferepair");
           break;
+        case 4:
+          this.$router.push('/forum')
       }
     },
     open(){

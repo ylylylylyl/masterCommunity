@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="com-container">
         <BackHeader>缴费记录</BackHeader>
         <div class="records-content">
             <div class="records-content-item">

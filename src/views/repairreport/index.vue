@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div >
         <Header>报修记录</Header>
-        <div>
-            <div class="repair-item">
+        <div class="com-container">
+            <div class="repair-item" @click="toRecords()">
                 <div class="repair-item-title">
                     <span>水龙头坏了</span>
                     <span class="mui-icon mui-icon-arrowright"></span>
@@ -28,13 +28,18 @@
 
 <script>
  import  Header from '../../components/LeftHeader'
+ import ReportRecords from './reportrecords'
 export default {
    components:{
-       Header
+       Header,
+       ReportRecords
    },
     methods:{
         goback(){
             this.$router.go(-1)
+        },
+        toRecords(){
+            this.$router.push('/reportrecords')
         }
     }
 }

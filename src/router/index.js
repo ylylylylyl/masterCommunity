@@ -11,7 +11,9 @@ import PaymentRecords from '../views/paymentrecords'
 import AddPayUser from '../views/addpayuser'
 import PropertyPayment from '../views/propertypayment'
 import RepairReport from '../views/repairreport'
+import ReportRecords from '../views/repairreport/reportrecords.vue'
 const LifeRepair = () => import('../views/liferepair')
+const Forum = () => import('../views/forum')
 Vue.use(Router)
 
 export default new Router({
@@ -78,6 +80,17 @@ export default new Router({
           path: '/repairreport',
           name: 'repairReport',
           component: RepairReport
+        },
+        {
+          path: '/reportrecords',
+          name: 'reportrecords',
+          component: ReportRecords
+        },
+        {
+          path:'/forum',
+          name:'forum',
+          component:Forum
+
         }
       ]
 

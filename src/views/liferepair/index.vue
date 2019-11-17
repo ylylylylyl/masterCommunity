@@ -7,7 +7,7 @@
       </div>
       <span class="records-span" @click="toRecords()">报修记录</span>
     </div>
-    <div class="repair-container">
+    <div class="com-container repair-container">
       <button id="type-btn" class="btn mui-btn mui-btn-block" @click="initRepair()">
         <div>
           <span class="iconfont icon-leixing"></span>
@@ -162,6 +162,8 @@ export default {
   padding-right: 10px;
   display: flex;
   justify-content: space-between;
+  position: fixed;
+  z-index: 100;
 }
 .records-span {
   color: #6e8b3d;
@@ -180,7 +182,8 @@ export default {
 }
 
 .repair-container {
-  margin-top: 15px;
+  margin-top: 40px;
+
 }
 .mui-icon-arrowright {
   font-size: 16px;

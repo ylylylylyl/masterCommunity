@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div >
         <div class="fixed-container">
             <BackHeader>物业缴费</BackHeader>
-            <div class="address-container">
+            <div class="com-container address-container">
                 <span class="address-span">安顺路181弄2号102室</span>
             </div>
             <div class="select-container">
