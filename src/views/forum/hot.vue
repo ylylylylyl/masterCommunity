@@ -1,6 +1,6 @@
 <template>
     <div>
-         <div class="forum-item ">
+         <div class="forum-item " @click="toDetail(item)" v-for="item in forum" :key="item.forumid">
             <div class="left">
                 <b class="num">1</b>
                 <div>
@@ -21,71 +21,35 @@
                 <img class="des-img" src="../../assets/image/self-bg.jpg"/>
             </div>
         </div>
-         <div class="forum-item">
-            <div class="left">
-                <b class="num">1</b>
-                <div>
-                    <span class="item-title">今天遇到一件有趣的事</span>
-                    <div class="user-info">
-                        <img src="../../assets/image/self-bg.jpg" class="user-avatar"/>
-                        <span>用户1</span>
-                    </div>
-                    <p class="item-des">今天遇到一件有趣的事今天遇到一件有趣的事今天遇到一件有趣的事今天遇到一件有趣的事</p>
-                    <span class="datetime">2019-11-16 14:00 </span>
-                    <span> 14</span>
-                     <svg class="icon icon-zan" aria-hidden="true">
-                        <use xlink:href="#icon-zan" />
-                    </svg>
-                </div>
-            </div>
-            <div class="right">
-                <img class="des-img" src="../../assets/image/self-bg.jpg"/>
-            </div>
-        </div>
-        <div class="forum-item">
-            <div class="left">
-                <b class="num">1</b>
-                <div>
-                    <span class="item-title">今天遇到一件有趣的事</span>
-                    <div class="user-info">
-                        <img src="../../assets/image/self-bg.jpg" class="user-avatar"/>
-                        <span>用户1</span>
-                    </div>
-                    <p class="item-des">今天遇到一件有趣的事今天遇到一件有趣的事今天遇到一件有趣的事今天遇到一件有趣的事</p>
-                    <span class="datetime">2019-11-16 14:00 </span>
-                    <span> 14</span>
-                     <svg class="icon icon-zan" aria-hidden="true">
-                        <use xlink:href="#icon-zan" />
-                    </svg>
-                </div>
-            </div>
-            <div class="right">
-                <img class="des-img" src="../../assets/image/self-bg.jpg"/>
-            </div>
-        </div>
-        <div class="forum-item">
-            <div class="left">
-                <b class="num">1</b>
-                <div>
-                    <span class="item-title">今天遇到一件有趣的事</span>
-                    <div class="user-info">
-                        <img src="../../assets/image/self-bg.jpg" class="user-avatar"/>
-                        <span>用户1</span>
-                    </div>
-                    <p class="item-des">今天遇到一件有趣的事今天遇到一件有趣的事今天遇到一件有趣的事今天遇到一件有趣的事</p>
-                    <span class="datetime">2019-11-16 14:00 </span>
-                    <span class="zan-span"> 14</span>
-                     <svg class="icon icon-zan" aria-hidden="true">
-                        <use xlink:href="#icon-zan" />
-                    </svg>
-                </div>
-            </div>
-            <div class="right">
-                <img class="des-img" src="../../assets/image/self-bg.jpg"/>
-            </div>
-        </div>
+        
     </div>
 </template>
+<script>
+
+export default {
+    methods:{
+        toDetail(item){
+             this.$router.push({
+                path: '/forumdetail',
+                query: {
+                    forumid: item.forumid,
+                    userid: item.userid,
+                },
+            });
+            // this.$router.push('/forumdetail'+forumid)
+        }
+    },
+    data(){
+        return{
+            forum:[
+                {userid:'001',forumid:'1'},
+                {userid:'002',forumid:'2'},
+                {userid:'003',forumid:'3'}
+            ]
+        }
+    }
+}
+</script>
 <style scoped>
  
   .forum-item{

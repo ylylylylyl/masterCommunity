@@ -7,7 +7,8 @@
       <div class="mui-input-row mui-search">
         <input type="search" class="search mui-input-clear" placeholder="请输入关键字" />
       </div>
-      <span class="mui-icon mui-icon-plus"></span>
+      <a id="menu" class="mui-action-menu mui-icon mui-icon-bars mui-pull-right" href="#topPopover"></a>
+      <!-- <span class="mui-icon mui-icon-plus"></span> -->
     </div>
     <div id="slider" class="mui-slider">
       <div
@@ -44,6 +45,37 @@
         </div>
       </div>
     </div>
+  <div id="topPopover" class="mui-popover">
+			<div class="mui-popover-arrow"></div>
+			<div class="mui-scroll-wrapper">
+				<div class="mui-scroll">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">
+							<a href="#">
+                <span class="mui-icon mui-icon-compose"></span>
+                我要发帖
+              </a>
+						</li>
+						<li class="mui-table-view-cell"><a href="#">
+              <span class="mui-icon mui-icon-chatboxes"></span>
+              我的发帖
+            </a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+    <!-- <div class="footer">
+      <button type="button" class="mui-btn mui-btn-outlined backhome">
+        <span class="mui-icon mui-icon-home"></span>
+        返回主页
+        </button>
+      <button type="button" class="mui-btn mui-btn-outlined my-forum">
+        <span class="mui-icon mui-icon-bars"></span>
+        我的发布
+      </button>
+    </div> -->
   </div>
 </template>
 <script>
@@ -171,6 +203,25 @@ export default {
   top: 110px;
   position: fixed;
 }
+#topPopover {
+  position: fixed;
+  top: 16px;
+  right: 6px;
+}
+#topPopover .mui-popover-arrow {
+  left: auto;
+  right: 6px;
+}
+.mui-popover {
+  height: 100px;
+}
+.mui-action-menu{
+  color:white
+}
+.mui-content {
+  padding: 10px;
+}
+
 /* .mui-slider .mui-slider-group {
   white-space: normal;
 } */

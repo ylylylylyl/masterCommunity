@@ -19,6 +19,9 @@ li{
 a{
     color: black;
 }
+p{
+    margin-bottom: 0px;
+}
 .mui-bar-tab .mui-tab-item.mui-active {
     color: 	#6E8B3D;
     font-weight: bold;
@@ -30,7 +33,7 @@ a{
     height: 100%;
 }
 .fun-label{
-    border-left: #6E8B3D 5px solid;
+    border-left: ##458B00 5px solid;
     padding-left: 10px;
 }
 .header{

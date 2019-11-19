@@ -14,6 +14,7 @@ import RepairReport from '../views/repairreport'
 import ReportRecords from '../views/repairreport/reportrecords.vue'
 const LifeRepair = () => import('../views/liferepair')
 const Forum = () => import('../views/forum')
+const ForumDetail = ()=>import('../views/forum/forumdetail.vue')
 Vue.use(Router)
 
 export default new Router({
@@ -85,14 +86,21 @@ export default new Router({
           path: '/reportrecords',
           name: 'reportrecords',
           component: ReportRecords
-        },
-        {
-          path:'/forum',
-          name:'forum',
-          component:Forum
-
         }
+       
       ]
+
+    },
+    {
+      path: '/forum',
+      name: 'forum',
+      component: Forum
+
+    },
+    {
+      path:'/forumdetail',
+      name: 'forumdetail',
+      component:ForumDetail
 
     }
   ]

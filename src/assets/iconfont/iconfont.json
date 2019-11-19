@@ -27,6 +27,13 @@
       "unicode_decimal": 58905
     },
     {
+      "icon_id": "1232634",
+      "name": "qq",
+      "font_class": "qq",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
       "icon_id": "1715035",
       "name": "电费",
       "font_class": "dianfei",
@@ -53,6 +60,13 @@
       "font_class": "user__easyico",
       "unicode": "e600",
       "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "2506219",
+      "name": "赞",
+      "font_class": "zan1",
+      "unicode": "e640",
+      "unicode_decimal": 58944
     },
     {
       "icon_id": "2699656",
@@ -139,6 +153,13 @@
       "unicode_decimal": 59127
     },
     {
+      "icon_id": "6684308",
+      "name": "微信",
+      "font_class": "weixin",
+      "unicode": "e637",
+      "unicode_decimal": 58935
+    },
+    {
       "icon_id": "6888896",
       "name": "联系人",
       "font_class": "lianxiren",
@@ -193,6 +214,13 @@
       "font_class": "dibudaohanglan-",
       "unicode": "e630",
       "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "9186713",
+      "name": "朋友圈",
+      "font_class": "pengyouquan",
+      "unicode": "e668",
+      "unicode_decimal": 58984
     },
     {
       "icon_id": "10534234",
