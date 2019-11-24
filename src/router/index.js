@@ -15,6 +15,8 @@ import ReportRecords from '../views/repairreport/reportrecords.vue'
 const LifeRepair = () => import('../views/liferepair')
 const Forum = () => import('../views/forum')
 const ForumDetail = ()=>import('../views/forum/forumdetail.vue')
+const PublishForum = ()=>import('../views/forum/publish')
+
 Vue.use(Router)
 
 export default new Router({
@@ -102,6 +104,11 @@ export default new Router({
       name: 'forumdetail',
       component:ForumDetail
 
+    },
+    {
+      path:'/publishforum',
+      name:'publishforum',
+      component:PublishForum
     }
   ]
 })

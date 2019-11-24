@@ -39,20 +39,18 @@
       <div class="mui-card-content reply-container">
         <div class="item-container" v-for="(item,key) in replyData" :key="key">
           <img
-            v-if="item.beforeuserid==forumuserid"
             class="user-avatar"
             src="../../assets/image/self-bg.jpg"
           />
-          <div style="width:100%" v-if="item.beforeuserid==forumuserid">
+          <div style="width:100%" >
             <span>{{item.username}}</span>
-            <p>{{item.content}}</p>
+            <div style="display:flex">
+              <p>{{item.content}}</p>
+              <span style="margin-left:5px" class="mui-icon mui-icon-chatboxes" @click="publishCom(item.userid)"></span>
+            </div>
+            
              <div class="reply-child" >
-                 
-               <!-- <div v-if="item2.beforeuserid==item.userid" class="reply-child-item"> -->
-                <!-- <span>用户2&nbsp&nbsp回复&nbsp&nbsp用户1</span>
-                <p>这是一条评论</p> -->
-                <Detail class="" :replyData='item.child'/>
-              <!-- </div>  -->
+                <Detail class="" :replyData='item.child' @showDialog="publishCom"/>
             </div> 
             <p>11-17 16:40</p>
           </div>
@@ -60,99 +58,119 @@
       </div>
     </div>
     <div class="footer">
-      <div>
+      <div class="footer-item" @click="publishCom(forumuserid)">
         <span class="mui-icon mui-icon-chatboxes"></span>
         <span>评论</span>
       </div>
-      <div>
+      <div class="footer-item">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-zan1" />
         </svg>
         <span>点赞</span>
       </div>
     </div>
+    <CommentDetail v-if="this.commentShow" @changeCommentShow="changeCommentShow" :replytarget=targtuserid></CommentDetail>
   </div>
 </template>
 <script>
 import Header from "../../components/LeftHeader";
 import Detail from './detail'
+import CommentDetail from './commentDetail'
 export default {
   components: {
     Header,
-    Detail
+    Detail,
+    CommentDetail
   },
   mounted() {
       this.init()
         this.treeObj(this.reply)
   },
   methods: {
+    changeCommentShow(){
+      this.commentShow = false
+    },
+    publishCom(userid){
+      this.commentShow = true
+      if(userid){
+        this.targtuserid = userid
+      }
+    },
       init(){
           const { forumid, userid } = this.$route.query;
             this.forumuserid = userid;
       },
     treeObj(obj) {
+      console.log(obj)
       obj.map(item => {
-        // if (item.parent !== null) {
+        if (item.beforereplyid != null) {
           obj.map(o => {
-            if (item.beforeuserid === o.userid) {
+            if (item.beforereplyid === o.replyid) {
               
               if (!o.child) {
                 o.child = [];
               }
               o.child.push(item);
               o.child = o.child;
-              console.log(o.child)
             }
           });
-        // }
+        }
       });
-      this.replyData = obj.filter(item => item.beforeuserid === this.forumuserid) ;
+      this.replyData = obj.filter(item => item.beforereplyid == null) ;
       console.log(this.replyData)
     }
   },
+  
   data() {
     return {
+      commentShow:false,
       forumuserid: "",
+      targtuserid:"",
       reply: [
         {
+          replyid:'00000001',
           forumid: 1,
           userid: "002",
           username: "用户2",
-          content: "挺好的",
+          content: "我是用户2",
           time: "2019-4-12",
-          beforeuserid: "001"
+          beforereplyid: null
         },
         {
+          replyid:'00000002',
           forumid: 1,
           userid: "003",
           username: "用户3",
-          content: "不好的",
+          content: "我是用户3",
           time: "2019-4-12",
-          beforeuserid: "002"
+          beforereplyid: null
         },
         {
+           replyid:'00000003',
           forumid: 1,
           userid: "004",
           username: "用户4",
-          content: "挺好的",
+          content: "我是用户4",
           time: "2019-4-12",
-          beforeuserid: "003"
+          beforereplyid: "00000001"
         },
         {
+           replyid:'00000004',
           forumid: 1,
           userid: "005",
           username: "用户5",
-          content: "挺好的",
+          content: "我是用户5",
           time: "2019-4-12",
-          beforeuserid: "001"
+          beforereplyid: "00000003"
         },
          {
+          replyid:'00000005',
           forumid: 1,
           userid: "005",
           username: "用户5",
-          content: "挺好的",
+          content: "我是用户5",
           time: "2019-4-12",
-          beforeuserid: "002"
+          beforereplyid: "00000002"
         }
       ],
       replyData:''
@@ -238,4 +256,10 @@ export default {
   justify-content: space-around;
 
 }
+.footer-item{
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+
 </style>

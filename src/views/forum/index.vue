@@ -1,9 +1,10 @@
 <template>
   <div>
     <div class="header">
-      <svg class="icon" aria-hidden="true">
+      <span class="mui-icon iconfont icon-shouye" @click="$router.push('/home')"></span>
+      <!-- <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-luntanzixun" />
-      </svg>
+      </svg> -->
       <div class="mui-input-row mui-search">
         <input type="search" class="search mui-input-clear" placeholder="请输入关键字" />
       </div>
@@ -50,13 +51,13 @@
 			<div class="mui-scroll-wrapper">
 				<div class="mui-scroll">
 					<ul class="mui-table-view">
-						<li class="mui-table-view-cell">
+						<li class="mui-table-view-cell" @click="toRouter(1)">
 							<a href="#">
                 <span class="mui-icon mui-icon-compose"></span>
                 我要发帖
               </a>
 						</li>
-						<li class="mui-table-view-cell"><a href="#">
+						<li class="mui-table-view-cell" @click="toRouter(2)"><a href="#">
               <span class="mui-icon mui-icon-chatboxes"></span>
               我的发帖
             </a>
@@ -91,6 +92,18 @@ export default {
   mounted() {
     mui(".mui-input-row input").input();
     mui(".mui-slider").slider();
+  },
+  beforeDestroy(){
+    document.getElementsByClassName('mui-backdrop')[0].style.display = "none"
+  },
+  methods:{
+    toRouter(index){
+      switch(index){
+        case 1:
+          this.$router.push('/publishforum')
+          
+      }
+    }
   }
 };
 </script>
@@ -114,8 +127,9 @@ export default {
   height: 34px;
   line-height: 34px;
 }
-.icon {
+.icon-shouye {
   font-size: 28px;
+  color:white;
 }
 .mui-icon-plus {
   color: white;
@@ -221,6 +235,7 @@ export default {
 .mui-content {
   padding: 10px;
 }
+
 
 /* .mui-slider .mui-slider-group {
   white-space: normal;
