@@ -27,6 +27,7 @@
             accept="image/png, image/jpeg, image/gif, image/jpg"
             style="display:none;position: absolute;"
             id="btn-upload"
+            capture="camera"
           />
         </div>
       </div>
