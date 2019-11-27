@@ -17,6 +17,8 @@ const Forum = () => import('../views/forum')
 const ForumDetail = () => import('../views/forum/forumdetail.vue')
 const PublishForum = () => import('../views/forum/publish')
 const HouseInfo = () => import('../views/houseinfo')
+const HouseInfoDetail = () => import('../views/houseinfo/infodetail.vue')
+const BindHouse = ()=> import('../views/houseinfo/bindhouse.vue')
 Vue.use(Router)
 
 export default new Router({
@@ -93,6 +95,17 @@ export default new Router({
           path: '/houseinfo',
           name: 'houseinfo',
           component: HouseInfo
+        },
+        {
+          path: '/houseinfodet',
+          name:'houseinfodet',
+          component:HouseInfoDetail
+        },
+        {
+          path:'/bindhouse',
+          name:'bindhouse',
+          component:BindHouse
+
         }
        
       ]

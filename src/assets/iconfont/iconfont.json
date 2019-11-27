@@ -69,6 +69,13 @@
       "unicode_decimal": 58944
     },
     {
+      "icon_id": "2596798",
+      "name": "房屋",
+      "font_class": "fangwu",
+      "unicode": "e770",
+      "unicode_decimal": 59248
+    },
+    {
       "icon_id": "2699656",
       "name": "home 房屋",
       "font_class": "home",
@@ -81,6 +88,13 @@
       "font_class": "repair",
       "unicode": "e661",
       "unicode_decimal": 58977
+    },
+    {
+      "icon_id": "3187393",
+      "name": "用户",
+      "font_class": "yonghu",
+      "unicode": "e615",
+      "unicode_decimal": 58901
     },
     {
       "icon_id": "3555646",
@@ -111,6 +125,13 @@
       "unicode_decimal": 58949
     },
     {
+      "icon_id": "3865404",
+      "name": "电话",
+      "font_class": "dianhua1",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
       "icon_id": "3895515",
       "name": "记录",
       "font_class": "techreport-",
@@ -125,11 +146,25 @@
       "unicode_decimal": 58906
     },
     {
+      "icon_id": "5603502",
+      "name": "物业缴费",
+      "font_class": "wuyejiaofei",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
       "icon_id": "5661142",
       "name": "首页",
       "font_class": "shouye",
       "unicode": "e623",
       "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "5664312",
+      "name": "fsux_图表_面积图",
+      "font_class": "ic_tubiao_mianji",
+      "unicode": "e601",
+      "unicode_decimal": 58881
     },
     {
       "icon_id": "5723098",
@@ -214,6 +249,13 @@
       "font_class": "dibudaohanglan-",
       "unicode": "e630",
       "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "8802013",
+      "name": "地址",
+      "font_class": "dizhi",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
     },
     {
       "icon_id": "9186713",

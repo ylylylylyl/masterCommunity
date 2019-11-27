@@ -3,7 +3,7 @@
        <header class="header">
            <span class="mui-icon mui-icon-arrowleft" @click="$router.go(-1)"></span>
            <span class="header-title">我的房屋</span>
-           <p>绑定房屋</p>
+           <p @click="$router.push('/bindhouse')">绑定房屋</p>
        </header>
        <div class="item-container">
            <div class="item">
@@ -16,7 +16,7 @@
                </div>
                <div class="item-addr">
                    <span>住址：四川省成都市锦江区</span>
-                   <span class="detail-span">查看详情</span>
+                   <span class="detail-span" @click="$router.push('/houseinfodet')">查看详情</span>
                </div>
            </div>
             <div class="item">
