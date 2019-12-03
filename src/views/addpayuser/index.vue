@@ -5,7 +5,7 @@
                 <span @click="goback()" class="mui-icon mui-icon-arrowleft"></span>
                 <span class="comm-name">新增缴费账户</span>
             </div>
-            <span class="city-span">成都市</span>
+            <span class="city-span" @click="toChoose()">成都市</span>
         </div>
         <div class="addpay-content">
             <div class="addpay-item-title">
@@ -41,12 +41,14 @@
     </div>
 </template>
 <script>
-import Util from '../../utils/util'
- const util = new Util()
+import {goback} from '../../utils/util'
 export default {
     methods: {
         goback(){
-            util.goback.bind(this)()
+            goback.bind(this)()
+        },
+        toChoose(){
+            this.$router.push('/citychoose')
         }
     },
 }

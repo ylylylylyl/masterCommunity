@@ -1,7 +1,3 @@
-class Util {
-  goback () {
-    this.$router.go(-1)
-  }
+export function goback () {
+  this.$router.go(-1)
 }
-
-export default Util

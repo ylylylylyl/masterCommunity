@@ -1,6 +1,6 @@
 <template>
   <div id="content2" class="mui-control-content">
-    <div class="mui-card">
+    <div class="mui-card" @click="toDetail()">
       <!--页眉，放置标题-->
       <div class="mui-card-header">
         <div>
@@ -59,6 +59,15 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  methods:{
+    toDetail(){
+      this.$router.push('/announcedetail')
+    }
+  }
+}
+</script>
 <style scoped>
 
 .card-item {

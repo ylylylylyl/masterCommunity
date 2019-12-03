@@ -18,7 +18,9 @@ const ForumDetail = () => import('../views/forum/forumdetail.vue')
 const PublishForum = () => import('../views/forum/publish')
 const HouseInfo = () => import('../views/houseinfo')
 const HouseInfoDetail = () => import('../views/houseinfo/infodetail.vue')
-const BindHouse = ()=> import('../views/houseinfo/bindhouse.vue')
+const BindHouse = () => import('../views/houseinfo/bindhouse.vue')
+const AnnounceDetail = () => import('../views/community/announceDetail.vue')
+const CityChoose = () => import('../views/addpayuser/citychoose')
 Vue.use(Router)
 
 export default new Router({
@@ -98,16 +100,20 @@ export default new Router({
         },
         {
           path: '/houseinfodet',
-          name:'houseinfodet',
-          component:HouseInfoDetail
+          name: 'houseinfodet',
+          component: HouseInfoDetail
         },
         {
-          path:'/bindhouse',
-          name:'bindhouse',
-          component:BindHouse
+          path: '/bindhouse',
+          name: 'bindhouse',
+          component: BindHouse
 
+        },
+        {
+          path: '/announcedetail',
+          name: 'announcedetail',
+          component: AnnounceDetail
         }
-       
       ]
 
     },
@@ -118,15 +124,20 @@ export default new Router({
 
     },
     {
-      path:'/forumdetail',
+      path: '/forumdetail',
       name: 'forumdetail',
-      component:ForumDetail
+      component: ForumDetail
 
     },
     {
-      path:'/publishforum',
-      name:'publishforum',
-      component:PublishForum
+      path: '/publishforum',
+      name: 'publishforum',
+      component: PublishForum
+    },
+    {
+      path: '/citychoose',
+      name: 'cityChoose',
+      component: CityChoose
     }
   ]
 })

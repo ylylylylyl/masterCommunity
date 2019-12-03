@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "695127",
+      "name": "标题",
+      "font_class": "biaoti",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
       "icon_id": "1029218",
       "name": "星号",
       "font_class": "asterisks-1-copy",
@@ -32,6 +39,20 @@
       "font_class": "qq",
       "unicode": "e60a",
       "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "1240783",
+      "name": "地址",
+      "font_class": "dizhi1",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "1301372",
+      "name": "时间",
+      "font_class": "shijian1",
+      "unicode": "e65f",
+      "unicode_decimal": 58975
     },
     {
       "icon_id": "1715035",
@@ -209,6 +230,13 @@
       "unicode_decimal": 58927
     },
     {
+      "icon_id": "7155220",
+      "name": "用户",
+      "font_class": "yonghu1",
+      "unicode": "e650",
+      "unicode_decimal": 58960
+    },
+    {
       "icon_id": "7338644",
       "name": "更多",
       "font_class": "gengduo",
@@ -235,6 +263,13 @@
       "font_class": "dianhua",
       "unicode": "e667",
       "unicode_decimal": 58983
+    },
+    {
+      "icon_id": "8245730",
+      "name": "内容管理(1)",
+      "font_class": "neirongguanli",
+      "unicode": "e662",
+      "unicode_decimal": 58978
     },
     {
       "icon_id": "8713058",

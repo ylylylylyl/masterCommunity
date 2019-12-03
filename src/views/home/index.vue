@@ -120,11 +120,11 @@
           </div>
         </div>
       </div>
-      <div class="notice-container">
+      <div class="notice-container" @click="toAnnounce()">
         <div class="notice-title">
           <span>社区公告</span>
         </div>
-        <div class="notice-content">
+        <div class="notice-content" >
           <span>今日公告</span>
           <p>111111111111111111111111111111111111111111111111</p>
         </div>
@@ -246,6 +246,9 @@ export default {
     },
     open(){
       this.isopen = true
+    },
+    toAnnounce(){
+      this.$router.push('/announcedetail')
     }
   }
 };
