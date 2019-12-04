@@ -4,7 +4,9 @@
         <div class="detail-content">
              <div class="publisher-info">
                 <div class="info-item">
-                    <span class="iconfont icon-biaoti"></span>
+                     <svg class="icon notice-icon" aria-hidden="true">
+                        <use xlink:href="#icon-tongzhigonggao" />
+                    </svg>
                     <span class="item-span">关于停电的通知</span>
                 </div>
                 <div class="info-item">

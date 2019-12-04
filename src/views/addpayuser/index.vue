@@ -5,7 +5,7 @@
                 <span @click="goback()" class="mui-icon mui-icon-arrowleft"></span>
                 <span class="comm-name">新增缴费账户</span>
             </div>
-            <span class="city-span" @click="toChoose()">成都市</span>
+            <span class="city-span" @click="toChoose()" v-if="getCity">{{getCity}}</span>
         </div>
         <div class="addpay-content">
             <div class="addpay-item-title">
@@ -42,14 +42,24 @@
 </template>
 <script>
 import {goback} from '../../utils/util'
+import { mapGetters, mapActions } from "vuex";
 export default {
+    created(){
+        this.setCurCity()
+    },
+    computed:{
+        getCity(){
+            return this.$store.state.chooseCity
+        }
+    },
     methods: {
+         ...mapActions(["setCurCity"]),
         goback(){
             goback.bind(this)()
         },
         toChoose(){
             this.$router.push('/citychoose')
-        }
+        },
     },
 }
 </script>
