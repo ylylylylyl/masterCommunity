@@ -125,6 +125,9 @@
           <span>社区公告</span>
         </div>
         <div class="notice-content" >
+           <svg class="icon notice-icon" aria-hidden="true">
+            <use xlink:href="#icon-tongzhigonggao" />
+          </svg>
           <span>今日公告</span>
           <p>111111111111111111111111111111111111111111111111</p>
         </div>
@@ -361,7 +364,7 @@ export default {
   vertical-align: middle;
 }
 .notice-icon {
-  width: 10%;
+  font-size: 20px;
 }
 .notice-content > p {
   height: 30px;

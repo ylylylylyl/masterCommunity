@@ -22,9 +22,6 @@ a{
 p{
     margin-bottom: 0px;
 }
-.body{
-    height: 100%;
-}
 .mui-bar-tab .mui-tab-item.mui-active {
     color: 	#6E8B3D;
     font-weight: bold;
@@ -64,7 +61,7 @@ p{
 .mui-backdrop{
     z-index: 1;
   }
-  .com-container{
-      margin-top: 40px;
-     
-  }
+.com-container{
+    padding-top: 40px;
+    
+}

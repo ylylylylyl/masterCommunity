@@ -180,11 +180,6 @@ export default {
   border-bottom: 1px whitesmoke solid;
   margin-bottom: 0;
 }
-
-.repair-container {
-  margin-top: 40px;
-
-}
 .mui-icon-arrowright {
   font-size: 16px;
 }

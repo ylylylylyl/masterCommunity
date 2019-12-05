@@ -117,7 +117,7 @@ export default {
         align-items: center;
     }
     .address-container{
-        height: 60px;
+        height: 80px;
         background: #6E8B3D;
         color: white;
         display: flex;

@@ -21,6 +21,7 @@ const HouseInfoDetail = () => import('../views/houseinfo/infodetail.vue')
 const BindHouse = () => import('../views/houseinfo/bindhouse.vue')
 const AnnounceDetail = () => import('../views/community/announceDetail.vue')
 const CityChoose = () => import('../views/addpayuser/citychoose')
+const SelfInfo = () => import('../views/selfinfo')
 Vue.use(Router)
 
 export default new Router({
@@ -79,11 +80,6 @@ export default new Router({
           component: PropertyPayment
         },
         {
-          path: '/liferepair',
-          name: 'liferepair',
-          component: LifeRepair
-        },
-        {
           path: '/repairreport',
           name: 'repairReport',
           component: RepairReport
@@ -138,6 +134,16 @@ export default new Router({
       path: '/citychoose',
       name: 'cityChoose',
       component: CityChoose
+    },
+    {
+      path: '/liferepair',
+      name: 'liferepair',
+      component: LifeRepair
+    },
+    {
+      path: '/selfinfo',
+      name: 'selfinfo',
+      component: SelfInfo
     }
   ]
 })
