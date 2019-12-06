@@ -134,7 +134,8 @@ export default {
   },
   methods:{
     initData(){
-      this.loading = true
+      let loading = document.querySelector('#ajaxLoading')
+      loading.style.display = 'block'
       //  const root = process.env.OPEN_HOST;
       //http://www.68party.com/app/cityList
       this.$http
@@ -147,7 +148,7 @@ export default {
               const {data} = result.body
               this.cityData = data.filter(item=>item.nameIndex!='热门')        
               this.hotcity = data.filter(item=>item.nameIndex=='热门')
-              console.log(this.hotcity)
+              loading.style.display = 'none'
               this.loading = false
             }
           },
@@ -166,7 +167,9 @@ export default {
     chooseCityFunc(cityName){
       this.$store.commit('CHOOSE_CITY',cityName)
       this.$router.push('/addpayuser')
-    }
+    },
+    
+
 	}
 }
 </script>

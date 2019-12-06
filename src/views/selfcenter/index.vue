@@ -1,6 +1,6 @@
 <template>
-  <div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-draggable">
-    <aside id="offCanvasSide" class="mui-off-canvas-right">
+  <div id="offCanvasWrapper" class="mui-off-canvas-wrap">
+    <!-- <aside id="offCanvasSide" class="mui-off-canvas-right">
       <div id="offCanvasSideScroll" class="mui-scroll-wrapper">
         <div class="mui-scroll">
           <ul class="mui-table-view">
@@ -25,8 +25,9 @@
           </ul>
         </div>
       </div>
-    </aside>
-    <div class="mui-inner-wrap">
+    </aside> -->
+    <Aside></Aside>
+    <div class="mui-inner-wrap" id="mui-inner-wrap">
       <div class="self-header">
         <div class="settings-container">
           <span></span>
@@ -35,7 +36,6 @@
             href="#offCanvasSide"
             class="mui-icon mui-action-menu mui-icon-gear mui-pull-right"
           ></a>
-          <!-- <span id="offCanvasBtn"  class="mui-icon mui-icon-gear " href="#offCanvasSide" ></span> -->
         </div>
         <div class="avatar-container">
           <div class="avatar">
@@ -67,8 +67,8 @@
           </div>
         </div>
       </div>
-      <div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
-        <div class="mui-scroll">
+      <div id="offCanvasContentScroll" class>
+        <div class>
           <div class="self-tab">
             <div class="self-tab-item" @click="toRouter(1)">
               <div class="tab-left">
@@ -138,17 +138,34 @@
         </div>
       </div>
 
-      <div class="mui-off-canvas-backdrop"></div>
+      <div id="backdrop" class="mui-off-canvas-backdrop"></div>
     </div>
   </div>
 </template>
 
 <script>
+import Aside from './aside'
 export default {
-  
+  components:{
+    Aside
+  },
+  mounted() {
+    // 监听点击遮罩关闭事件
+    document.getElementById("backdrop").addEventListener("tap", function() {
+      //阻止默认事件
+      event.detail.gesture.preventDefault();
+    });
+    // 左滑
+    document.getElementById("mui-inner-wrap").addEventListener("swipeleft", function() {
+        mui(".mui-off-canvas-right").offCanvas("show");
+      });
+      // 右滑
+    document.getElementById("mui-inner-wrap").addEventListener("swiperight", function() {
+        mui(".mui-off-canvas-right").offCanvas("close");
+      });
+  },
   methods: {
     login() {
-      console.log(111);
       this.$router.push("/login");
     },
     toRouter(index) {
@@ -158,6 +175,10 @@ export default {
           break;
       }
     }
+  },
+  destroyed(){
+    console.log( document.getElementsByTagName('body')[0])
+    document.getElementsByTagName('body')[0].classList.remove('mui-fullscreen')
   }
 };
 </script>
