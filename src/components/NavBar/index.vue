@@ -1,17 +1,17 @@
 <template>
     <nav class="mui-bar mui-bar-tab">
-            <a @click="routerfuc(1)" class="mui-tab-item mui-active">
+            <a @click="routerfuc(1)"  :class='{ "mui-active": activeIndex == "/home"} ' class="mui-tab-item">
                 <span class="mui-icon iconfont icon-shouye"></span>
                 <span class="mui-tab-label">首页</span>
             </a>
-            <a  @click="routerfuc(2)" class="mui-tab-item circle-container">
+            <a  @click="routerfuc(2)"  :class='{ "mui-active": activeIndex == "/community"}' class="mui-tab-item circle-container">
                 <div class="circle">
                     <span class="mui-icon iconfont icon-shequxianxing"></span>
                 </div>
                 <span class="mui-icon"></span>
                 <span class="mui-tab-label">物业</span> 
             </a>
-            <a @click="routerfuc(3)" class="mui-tab-item">
+            <a @click="routerfuc(3)" :class='{ "mui-active": activeIndex == "/selfcenter"}' class="mui-tab-item">
                 <span class="mui-icon iconfont icon-wode"></span>
                 <span class="mui-tab-label">我的</span>
             </a>
@@ -20,7 +20,20 @@
 
 <script>
     export default {
+        data(){
+            return{
+                activeIndex:this.$route.path
+            }
+        },
+        watch:{
+            $route( to , from ){
+                this.activeIndex = to.path
+            }
+        },
         methods:{
+            mounted() {
+                console.log(this.activeIndex)
+            },
             routerfuc(item){
                 switch(item){
                     case 1:

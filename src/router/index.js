@@ -18,14 +18,17 @@ const ForumDetail = () => import('../views/forum/forumdetail.vue')
 const PublishForum = () => import('../views/forum/publish')
 const HouseInfo = () => import('../views/houseinfo')
 const HouseInfoDetail = () => import('../views/houseinfo/infodetail.vue')
-const BindHouse = ()=> import('../views/houseinfo/bindhouse.vue')
-const OpenDoor = ()=>import('../views/opendoor')
+const BindHouse = () => import('../views/houseinfo/bindhouse.vue')
+const OpenDoor = () => import('../views/opendoor')
+const BindHouse = () => import('../views/houseinfo/bindhouse.vue')
+const AnnounceDetail = () => import('../views/community/announceDetail.vue')
+const CityChoose = () => import('../views/addpayuser/citychoose')
+const SelfInfo = () => import('../views/selfinfo')
 Vue.use(Router)
 
 export default new Router({
   // mode: 'history',
-  routes: [
-    {
+  routes: [{
       path: '/login',
       component: Login
     },
@@ -36,8 +39,7 @@ export default new Router({
     {
       path: '/',
       component: Layout,
-      children: [
-        {
+      children: [{
           path: '/',
           name: 'home',
           component: Home
@@ -78,11 +80,6 @@ export default new Router({
           component: PropertyPayment
         },
         {
-          path: '/liferepair',
-          name: 'liferepair',
-          component: LifeRepair
-        },
-        {
           path: '/repairreport',
           name: 'repairReport',
           component: RepairReport
@@ -99,21 +96,25 @@ export default new Router({
         },
         {
           path: '/houseinfodet',
-          name:'houseinfodet',
-          component:HouseInfoDetail
+          name: 'houseinfodet',
+          component: HouseInfoDetail
         },
         {
-          path:'/bindhouse',
-          name:'bindhouse',
-          component:BindHouse
+          path: '/bindhouse',
+          name: 'bindhouse',
+          component: BindHouse
 
         },
         {
-          path:'/opendoor',
-          name:'opendoor',
-          component:OpenDoor
+          path: '/opendoor',
+          name: 'opendoor',
+          component: OpenDoor
+        },
+        {
+          path: '/announcedetail',
+          name: 'announcedetail',
+          component: AnnounceDetail
         }
-       
       ]
 
     },
@@ -124,15 +125,30 @@ export default new Router({
 
     },
     {
-      path:'/forumdetail',
+      path: '/forumdetail',
       name: 'forumdetail',
-      component:ForumDetail
+      component: ForumDetail
 
     },
     {
-      path:'/publishforum',
-      name:'publishforum',
-      component:PublishForum
+      path: '/publishforum',
+      name: 'publishforum',
+      component: PublishForum
+    },
+    {
+      path: '/citychoose',
+      name: 'cityChoose',
+      component: CityChoose
+    },
+    {
+      path: '/liferepair',
+      name: 'liferepair',
+      component: LifeRepair
+    },
+    {
+      path: '/selfinfo',
+      name: 'selfinfo',
+      component: SelfInfo
     }
   ]
 })

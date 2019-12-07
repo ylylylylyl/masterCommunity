@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="header">
-      <span class="mui-icon iconfont icon-shouye" @click="$router.push('/home')"></span>
+      <span class="mui-icon iconfont icon-shouye" @click="toRouter(2)"></span>
       <!-- <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-luntanzixun" />
       </svg> -->
@@ -94,14 +94,20 @@ export default {
     mui(".mui-slider").slider();
   },
   beforeDestroy(){
-    document.getElementsByClassName('mui-backdrop')[0].style.display = "none"
+    if(document.getElementsByClassName('mui-backdrop')[0]){
+      document.getElementsByClassName('mui-backdrop')[0].style.display = "none"
+    }
+    
   },
   methods:{
     toRouter(index){
       switch(index){
         case 1:
           this.$router.push('/publishforum')
-          
+        break;
+        case 2:
+         this.$router.push('/home') 
+        break;
       }
     }
   }

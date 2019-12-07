@@ -14,23 +14,24 @@ import '../static/css/mui.poppicker.css'
 import './assets/iconfont/iconfont.css'
 import './assets/iconfont/iconfont.js'
 import Ajax from './utils/ajax'
-
+import './filters'
 import '../static/css/app.css'
 
 import './theme/common.css'
 import VueResource from 'vue-resource'
-import VueJsonp from 'vue-jsonp'
+import store from './store'
 
 Vue.config.productionTip = false
 Vue.use(VueResource)
 Vue.prototype.mui = mui
 Vue.prototype.$ajax = Ajax
-Vue.use(VueJsonp)
+
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 

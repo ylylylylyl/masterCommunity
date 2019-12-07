@@ -8918,8 +8918,8 @@ uuid@^3.0.1, uuid@^3.3.2:
 
 v-emoji-picker@^1.2.6:
   version "1.2.6"
-  resolved "https://registry.npm.taobao.org/v-emoji-picker/download/v-emoji-picker-1.2.6.tgz#441652c687afd6f7e54946a44752c43406d5d5a3"
-  integrity sha1-RBZSxoev1vflSUakR1LENAbV1aM=
+  resolved "https://registry.yarnpkg.com/v-emoji-picker/-/v-emoji-picker-1.2.6.tgz#441652c687afd6f7e54946a44752c43406d5d5a3"
+  integrity sha512-4lXIYKKjHt3pYEqFEHI6fzl9mFqa/zFZEDcrHMQJtwqzYxDolcnjCmuMUFkrFOjlpyjg3xmM1vpfRL24Rwbw5A==
   dependencies:
     vue-class-component "^7.1.0"
     vue-property-decorator "^8.2.2"
@@ -9067,6 +9067,11 @@ vue@^2.5.2:
   version "2.6.10"
   resolved "https://registry.npm.taobao.org/vue/download/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha1-pysaQqTYKnIepDjRtr9V5mGVxjc=
+
+vuex@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.1.2.tgz#a2863f4005aa73f2587e55c3fadf3f01f69c7d4d"
+  integrity sha512-ha3jNLJqNhhrAemDXcmMJMKf1Zu4sybMPr9KxJIuOpVcsDQlTBYLLladav2U+g1AvdYDG5Gs0xBTb0M5pXXYFQ==
 
 w3c-hr-time@^1.0.1:
   version "1.0.1"
