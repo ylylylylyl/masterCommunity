@@ -17,6 +17,7 @@
     "babel-plugin-transform-remove-strict-mode": "^0.0.2",
     "echarts": "^4.4.0",
     "mui": "^0.0.1",
+    "qrcode": "^1.4.4",
     "qs": "^6.9.0",
     "style-loader": "^1.0.0",
     "svg-sprite-loader": "^4.1.6",

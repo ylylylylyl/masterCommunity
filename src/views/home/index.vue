@@ -94,12 +94,12 @@
               </li>
             </div>
             <div class="mui-col-xs-3 mui-col-xs-3">
-              <li class="mui-table-view-cell">
+              <a @click="torouter(5)" class="mui-table-view-cell">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-tingcheku" />
                 </svg>
                 <a>我要停车</a>
-              </li>
+              </a>
             </div>
             <div class="mui-col-xs-3 mui-col-xs-3">
               <li class="mui-table-view-cell">
@@ -242,6 +242,10 @@ export default {
           break;
         case 4:
           this.$router.push('/forum')
+          break;
+        case 5:
+          this.$router.push('/opendoor')
+          break;
       }
     },
     open(){

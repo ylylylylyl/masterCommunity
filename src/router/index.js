@@ -19,6 +19,7 @@ const PublishForum = () => import('../views/forum/publish')
 const HouseInfo = () => import('../views/houseinfo')
 const HouseInfoDetail = () => import('../views/houseinfo/infodetail.vue')
 const BindHouse = ()=> import('../views/houseinfo/bindhouse.vue')
+const OpenDoor = ()=>import('../views/opendoor')
 Vue.use(Router)
 
 export default new Router({
@@ -106,6 +107,11 @@ export default new Router({
           name:'bindhouse',
           component:BindHouse
 
+        },
+        {
+          path:'/opendoor',
+          name:'opendoor',
+          component:OpenDoor
         }
        
       ]
