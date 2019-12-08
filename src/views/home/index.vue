@@ -2,7 +2,7 @@
   <div>
     <Header>
       <span class="iconfont icon-dingwei"></span>
-      <span class="comm-name">智慧社区</span>
+      <span  @click="torouter(0)" class="comm-name">智慧社区</span>
     </Header>
     <div class="main-content">
       <div class="mui-slider">
@@ -234,6 +234,9 @@ export default {
     },
     torouter(num) {
       switch (num) {
+        case 0:
+          this.$router.push("/village")
+          break;
         case 1:
           this.$router.push("/livingpayment");
           break;

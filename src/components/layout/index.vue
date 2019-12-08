@@ -34,10 +34,11 @@ export default {
     Header
   },
   created(){
-      this.setCurCity()
+      this.setCurCity(),
+      this.setVillage()
   },
   methods:{
-     ...mapActions(["setCurCity"]),
+     ...mapActions(["setCurCity","setVillage"]),
   }
 }
 </script>

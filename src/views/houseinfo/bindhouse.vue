@@ -38,6 +38,26 @@
           </div>
         </div>
       </div>
+      <div class="user-info">
+        <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-yonghu" />
+          </svg>
+          <span>用户信息</span>
+                 <div class="info-content">
+          <div class="input-container">
+            <span class="input-left">用户名</span>
+            <input type="text" class="mui-input-clear inout-right" placeholder="请输入房屋所有人" />
+          </div>
+           <div class="input-container">
+            <span class="input-left">身份证号</span>
+            <input type="text" class="mui-input-clear inout-right" placeholder="请输入房屋所有人身份证号" />
+          </div>
+        </div>
+      </div>
+      <div class="btn-container">
+        <button type="button" class="mui-btn mui-btn-primary">提交</button>
+      </div>
+    
     </div>
   </div>
 </template>
@@ -73,6 +93,21 @@
     border: none;
     margin-bottom: 0px;
 }
+.house-info,.user-info{
+  margin: 10px;
+}
+.btn-container{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.btn-container .mui-btn{
+  width: 80%;
+  height: 40px;
+  background: #6E8B3D;
+  border: none;
+}
+
 </style>
 <script>
 import Header from "../../components/LeftHeader";

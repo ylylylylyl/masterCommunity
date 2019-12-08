@@ -20,135 +20,140 @@ const HouseInfo = () => import('../views/houseinfo')
 const HouseInfoDetail = () => import('../views/houseinfo/infodetail.vue')
 const BindHouse = () => import('../views/houseinfo/bindhouse.vue')
 const OpenDoor = () => import('../views/opendoor')
-const BindHouse = () => import('../views/houseinfo/bindhouse.vue')
 const AnnounceDetail = () => import('../views/community/announceDetail.vue')
 const CityChoose = () => import('../views/addpayuser/citychoose')
 const SelfInfo = () => import('../views/selfinfo')
+const Village = () => import('../views/village')
 Vue.use(Router)
 
 export default new Router({
   // mode: 'history',
   routes: [{
-      path: '/login',
-      component: Login
-    },
-    {
-      path: '/regist',
-      component: Regist
-    },
-    {
+    path: '/login',
+    component: Login
+  },
+  {
+    path: '/regist',
+    component: Regist
+  },
+  {
+    path: '/',
+    component: Layout,
+    children: [{
       path: '/',
-      component: Layout,
-      children: [{
-          path: '/',
-          name: 'home',
-          component: Home
-        },
-        {
-          path: '/home',
-          name: 'home',
-          component: Home
-        },
-        {
-          path: '/community',
-          name: 'community',
-          component: Community
-        },
-        {
-          path: '/selfcenter',
-          name: 'selfcenter',
-          component: SelfCenter
-        },
-        {
-          path: '/livingpayment',
-          name: 'livingpayment',
-          component: LivingPayment
-        },
-        {
-          path: '/paymentrecords',
-          name: 'paymentrecords',
-          component: PaymentRecords
-        },
-        {
-          path: '/addpayuser',
-          name: 'addpayuser',
-          component: AddPayUser
-        },
-        {
-          path: '/propertypayment',
-          name: 'propertypayment',
-          component: PropertyPayment
-        },
-        {
-          path: '/repairreport',
-          name: 'repairReport',
-          component: RepairReport
-        },
-        {
-          path: '/reportrecords',
-          name: 'reportrecords',
-          component: ReportRecords
-        },
-        {
-          path: '/houseinfo',
-          name: 'houseinfo',
-          component: HouseInfo
-        },
-        {
-          path: '/houseinfodet',
-          name: 'houseinfodet',
-          component: HouseInfoDetail
-        },
-        {
-          path: '/bindhouse',
-          name: 'bindhouse',
-          component: BindHouse
-
-        },
-        {
-          path: '/opendoor',
-          name: 'opendoor',
-          component: OpenDoor
-        },
-        {
-          path: '/announcedetail',
-          name: 'announcedetail',
-          component: AnnounceDetail
-        }
-      ]
+      name: 'home',
+      component: Home
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: Home
+    },
+    {
+      path: '/community',
+      name: 'community',
+      component: Community
+    },
+    {
+      path: '/selfcenter',
+      name: 'selfcenter',
+      component: SelfCenter
+    },
+    {
+      path: '/livingpayment',
+      name: 'livingpayment',
+      component: LivingPayment
+    },
+    {
+      path: '/paymentrecords',
+      name: 'paymentrecords',
+      component: PaymentRecords
+    },
+    {
+      path: '/addpayuser',
+      name: 'addpayuser',
+      component: AddPayUser
+    },
+    {
+      path: '/propertypayment',
+      name: 'propertypayment',
+      component: PropertyPayment
+    },
+    {
+      path: '/repairreport',
+      name: 'repairReport',
+      component: RepairReport
+    },
+    {
+      path: '/reportrecords',
+      name: 'reportrecords',
+      component: ReportRecords
+    },
+    {
+      path: '/houseinfo',
+      name: 'houseinfo',
+      component: HouseInfo
+    },
+    {
+      path: '/houseinfodet',
+      name: 'houseinfodet',
+      component: HouseInfoDetail
+    },
+    {
+      path: '/bindhouse',
+      name: 'bindhouse',
+      component: BindHouse
 
     },
     {
-      path: '/forum',
-      name: 'forum',
-      component: Forum
-
+      path: '/opendoor',
+      name: 'opendoor',
+      component: OpenDoor
     },
     {
-      path: '/forumdetail',
-      name: 'forumdetail',
-      component: ForumDetail
-
-    },
-    {
-      path: '/publishforum',
-      name: 'publishforum',
-      component: PublishForum
-    },
-    {
-      path: '/citychoose',
-      name: 'cityChoose',
-      component: CityChoose
-    },
-    {
-      path: '/liferepair',
-      name: 'liferepair',
-      component: LifeRepair
-    },
-    {
-      path: '/selfinfo',
-      name: 'selfinfo',
-      component: SelfInfo
+      path: '/announcedetail',
+      name: 'announcedetail',
+      component: AnnounceDetail
     }
+    ]
+
+  },
+  {
+    path: '/forum',
+    name: 'forum',
+    component: Forum
+
+  },
+  {
+    path: '/forumdetail',
+    name: 'forumdetail',
+    component: ForumDetail
+
+  },
+  {
+    path: '/publishforum',
+    name: 'publishforum',
+    component: PublishForum
+  },
+  {
+    path: '/citychoose',
+    name: 'cityChoose',
+    component: CityChoose
+  },
+  {
+    path: '/liferepair',
+    name: 'liferepair',
+    component: LifeRepair
+  },
+  {
+    path: '/selfinfo',
+    name: 'selfinfo',
+    component: SelfInfo
+  },
+  {
+    path: '/village',
+    name: 'village',
+    component: Village
+  }
   ]
 })

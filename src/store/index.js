@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 import {
   MP
@@ -8,43 +9,84 @@ import {
 Vue.use(Vuex)
 
 const CHOOSE_CITY = 'CHOOSE_CITY'
+const VILLAGE = 'VILLAGE'
+const CUR_PROVINCE = 'CUR_PROVINCE' //当前省份
+const CUR_CITY = 'CUR_CITY' //当前城市
 
 const state = {
-  chooseCity: ''
+  chooseCity: '',
+  village: '',
+  curProvince: '',
+  curCity: '',
 }
 
 const getters = {
-  chooseCity: state => state.chooseCity
+  chooseCity: state => state.chooseCity,
+  village: state => state.village,
+  curProvince: state => state.curProvince,
+  curCity: state => state.city
 }
 
 const mutations = {
   [CHOOSE_CITY] (state, str) {
     state.chooseCity = str
-  }
+  },
+  [VILLAGE] (state, str) {
+    state.village = str
+  },
+  [CUR_CITY] (state, str) {
+    state.curCity = str
+  },
+  [CUR_PROVINCE] (state, str) {
+    state.curProvince = str
+  },
+ 
 }
 const actions = {
-  setCurCity ({commit}) {
+  setCurCity({
+    commit
+  }) {
     MP('B96xQKulGmzWLRsLRQVHqD4G7EPaF1tD').then(BMap => {
       // 百度地图API功能
       var geolocation = new BMap.Geolocation()
       geolocation.getCurrentPosition((position) => {
+        console.log(position)
         let city = position.address.city // 获取城市信息 
+        let province = position.address.province
         commit(CHOOSE_CITY, city)
+        commit(CUR_CITY, city)
+        commit(CUR_PROVINCE, province)
+        console.log(province)
       }, e => {
         commit(CHOOSE_CITY, '定位失败')
       }, {
         provider: 'baidu'
       })
     })
-    // var geolocation = new BMap.Geolocation()
-    // geolocation.getCurrentPosition((position) => {
-    //   let city = position.address.city // 获取城市信息 
-    //   commit(CHOOSE_CITY, city)
-    // }, e => {
-    //   commit(CHOOSE_CITY, '定位失败')
-    // }, {
-    //   provider: 'baidu'
-    // })
+  },
+  setVillage({
+    commit
+  }) {
+    return axios
+      .get(
+        "https://restapi.amap.com/v3/config/district?key=8224cb94492d645e544a7b13df3ea7db"
+      )
+      .then(
+        result => {
+          console.log(result)
+          if (result.statusText == "OK") {
+            const data = result.data.districts[0].districts
+            console.log(data)
+            commit(VILLAGE, data)
+          }
+        },
+        error => {
+          console.log(error);
+        }
+      )
+      .catch(err => {
+        console.log(err);
+      });
   }
 }
 
