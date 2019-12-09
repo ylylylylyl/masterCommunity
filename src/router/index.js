@@ -24,6 +24,9 @@ const AnnounceDetail = () => import('../views/community/announceDetail.vue')
 const CityChoose = () => import('../views/addpayuser/citychoose')
 const SelfInfo = () => import('../views/selfinfo')
 const Village = () => import('../views/village')
+const Province = () => import('../views/village/province.vue')
+const City = () => import('../views/village/city.vue')
+const Area = ()=> import('../views/village/area.vue')
 Vue.use(Router)
 
 export default new Router({
@@ -153,7 +156,29 @@ export default new Router({
   {
     path: '/village',
     name: 'village',
-    component: Village
+    component: Village,
+    children: [
+      {
+        path: '/',
+        name: 'province',
+        component: Province
+      },
+      {
+        path: '/village/province',
+        name: 'province',
+        component: Province
+      },
+      {
+        path: '/village/city',
+        name: 'city',
+        component: City
+      },
+      {
+        path: '/village/area',
+        name: 'area',
+        component: Area
+      }
+    ]
   }
   ]
 })

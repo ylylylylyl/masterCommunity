@@ -15,7 +15,7 @@
                 <label>
                     <span class="mui-icon mui-icon-compose"></span>
                 </label>
-                <input v-model="pwd" type="password" class="mui-input-clear mui-input-password" placeholder="请输入密码">
+                <input v-model="pwd" type="password" class="mui-input-password" placeholder="请输入密码">
             </div>
             
         </div>
@@ -69,7 +69,7 @@
        margin-right: 10px;
        margin-top: 10px;
     }
-    .mui-input-clear{
+    .mui-input-clear,.mui-input-password{
         width: 85%;
     }
     .mui-input-row{

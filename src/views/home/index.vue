@@ -2,7 +2,7 @@
   <div>
     <Header>
       <span class="iconfont icon-dingwei"></span>
-      <span  @click="torouter(0)" class="comm-name">智慧社区</span>
+      <span  @click="torouter(0)" class="comm-name">{{chooseVillage}}</span>
     </Header>
     <div class="main-content">
       <div class="mui-slider">
@@ -174,6 +174,7 @@
 <script>
 import Header from "../../components/Header";
 import Tele from "../../components/telecomplaints";
+import {mapState} from 'vuex';
 export default {
   data() {
     return {
@@ -184,6 +185,9 @@ export default {
   components: {
     Header,
     Tele
+  },
+  computed:{
+     ...mapState(['chooseVillage'])
   },
   updated() {
     this.sliderinterval();

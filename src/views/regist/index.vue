@@ -15,13 +15,13 @@
                 <label>
                     <span class="mui-icon mui-icon-compose"></span>
                 </label>
-                <input type="password" class="mui-input-clear mui-input-password" placeholder="请输入密码">
+                <input type="password" class="mui-input-password" placeholder="请输入密码">
             </div>
             <div class="mui-input-row">
                 <label>
                     <span class="mui-icon mui-icon-compose"></span>
                 </label>
-                <input type="password" class="mui-input-clear mui-input-password" placeholder="请确认密码">
+                <input type="password" class="mui-input-password" placeholder="请确认密码">
             </div>
         </div>
         <div>
@@ -74,7 +74,7 @@
        margin-right: 10px;
        margin-top: 10px;
     }
-    .mui-input-clear{
+    .mui-input-clear,.mui-input-password{
         width: 85%;
     }
     .mui-input-row{

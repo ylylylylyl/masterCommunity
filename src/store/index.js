@@ -10,21 +10,24 @@ Vue.use(Vuex)
 
 const CHOOSE_CITY = 'CHOOSE_CITY'
 const VILLAGE = 'VILLAGE'
-const CUR_PROVINCE = 'CUR_PROVINCE' //当前省份
-const CUR_CITY = 'CUR_CITY' //当前城市
+const CUR_PROVINCE = 'CUR_PROVINCE' // 当前省份
+const CUR_CITY = 'CUR_CITY' // 当前城市
+const CHOOSE_VILLAGE = 'CHOOSE_VILLAGE'// 所选择的小区
 
 const state = {
   chooseCity: '',
   village: '',
   curProvince: '',
   curCity: '',
+  chooseVillage: '请选择小区'
 }
 
 const getters = {
   chooseCity: state => state.chooseCity,
   village: state => state.village,
   curProvince: state => state.curProvince,
-  curCity: state => state.city
+  curCity: state => state.city,
+  chooseVillage: state => state.chooseVillage
 }
 
 const mutations = {
@@ -40,10 +43,13 @@ const mutations = {
   [CUR_PROVINCE] (state, str) {
     state.curProvince = str
   },
- 
+  [CHOOSE_VILLAGE] (state, str) {
+    state.chooseVillage = str
+  }
 }
+
 const actions = {
-  setCurCity({
+  setCurCity ({
     commit
   }) {
     MP('B96xQKulGmzWLRsLRQVHqD4G7EPaF1tD').then(BMap => {
@@ -51,7 +57,7 @@ const actions = {
       var geolocation = new BMap.Geolocation()
       geolocation.getCurrentPosition((position) => {
         console.log(position)
-        let city = position.address.city // 获取城市信息 
+        let city = position.address.city // 获取城市信息
         let province = position.address.province
         commit(CHOOSE_CITY, city)
         commit(CUR_CITY, city)
@@ -64,12 +70,12 @@ const actions = {
       })
     })
   },
-  setVillage({
+  setVillage ({
     commit
   }) {
     return axios
       .get(
-        "https://restapi.amap.com/v3/config/district?key=8224cb94492d645e544a7b13df3ea7db"
+        'https://restapi.amap.com/v3/config/district?key=8224cb94492d645e544a7b13df3ea7db'
       )
       .then(
         result => {

@@ -35,12 +35,12 @@ function endLoading () {
 Axios.interceptors.request.use(config => {
   const UID = sessionStorage.getItem('WXDYFS')
   const PATH = router.currentRoute.path
-    // Message.closeAll()
-    // if (!isString(UID) && PATH !=='/login') {
-    //     Message.error('非常抱歉，登陆已过期请重新登录！')
-    //     router.push('/login')
-    //     return
-    // }
+  // Message.closeAll()
+// if (!isString(UID) && PATH !=='/login') {
+//     Message.error('非常抱歉，登陆已过期请重新登录！')
+//     router.push('/login')
+//     return
+// }
     
     let contentType = ''
     // POST请求头设置
@@ -161,52 +161,52 @@ Axios.interceptors.response.use(response => {
  * }
  */
 class Ajax {
-    static post(options) {
-        let isShowLoading=options.isShowLoading || false
-        if (isShowLoading) startLoading()
-        return new Promise((resolve, reject) => {
-            Axios({
-                url: options.url,
-                method: 'POST',
-                params: options.params|| '',
-                data: options.data || '',
-                formData:options.formData||false,
-                isDownload:options.isDownload|| false
-            }).then((response) => {
-                if (isShowLoading) endLoading()
-                if (response.status === 200) {
-                    resolve(response.data)
-                    return
-                }
-                reject(response)
-            }).catch(err => {
-                if (isShowLoading) endLoading()
-                reject(err)
-            })
-        })
+  static post(options) {
+    let isShowLoading = options.isShowLoading || false
+    if (isShowLoading) startLoading()
+    return new Promise((resolve, reject) => {
+      Axios({
+        url: options.url,
+        method: 'POST',
+        params: options.params || '',
+        data: options.data || '',
+        formData: options.formData || false,
+        isDownload: options.isDownload || false
+      }).then((response) => {
+        if (isShowLoading) endLoading()
+        if (response.status === 200) {
+          resolve(response.data)
+          return
+        }
+        reject(response)
+      }).catch(err => {
+        if (isShowLoading) endLoading()
+        reject(err)
+      })
+    })
+  }
+  // GET请求
+        static get(options) {
+    let isShowLoading=options.isShowLoading || false
+    if (isShowLoading) startLoading()
+    return new Promise((resolve, reject) => {
+    Axios({
+    url: options.url,
+    method: 'GET',
+    params: options.params || '',
+    isDownload:options.isDownload|| false
+    }).then(response => {
+    if (isShowLoading) endLoading()
+    if (response.status === 200) {
+    resolve(response.data)
+    return
     }
-    // GET请求
-    static get(options) {
-        let isShowLoading=options.isShowLoading || false
-        if (isShowLoading) startLoading()
-        return new Promise((resolve, reject) => {
-            Axios({
-                url: options.url,
-                method: 'GET',
-                params: options.params || '',
-                isDownload:options.isDownload|| false
-            }).then(response => {
-                if (isShowLoading) endLoading()
-                if (response.status === 200) {
-                    resolve(response.data)
-                    return
-                }
-                reject(response)
-            }).catch(err => {
-                if (isShowLoading) endLoading()
-                reject(err)
-            })
-        })
+    reject(response)
+    }).catch(err => {
+    if (isShowLoading) endLoading()
+    reject(err)
+    })
+    })
     }
 }
 
