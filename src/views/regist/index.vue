@@ -9,28 +9,29 @@
                 <label>
                     <span class="mui-icon mui-icon-person"></span>
                 </label>
-                <input type="text" class="mui-input-clear" placeholder="请输入手机号">
+                <input v-model="phone" type="text" class="mui-input-clear" placeholder="请输入手机号">
             </div>
             <div class="mui-input-row">
                 <label>
                     <span class="mui-icon mui-icon-compose"></span>
                 </label>
-                <input type="password" class="mui-input-password" placeholder="请输入密码">
+                <input v-model="pwd" type="password" class="mui-input-password" placeholder="请输入密码">
             </div>
             <div class="mui-input-row">
                 <label>
                     <span class="mui-icon mui-icon-compose"></span>
                 </label>
-                <input type="password" class="mui-input-password" placeholder="请确认密码">
+                <input v-model="pwdAgain" type="password" class="mui-input-password" placeholder="请确认密码">
             </div>
         </div>
-        <div>
+        <div class="bottom">
+            <span class="tip">{{tip}}</span>
             <p class="regist-btn" @click="regist()">
                 <span class="mui-icon mui-icon-help"></span>
             已有账号点击登录
             </p>
         </div>
-    <button type="button" class="mui-btn mui-btn-outlined">注册</button>
+    <button type="button" class="mui-btn mui-btn-outlined" @click="userRegist()">注册</button>
     <button type="button" class="mui-btn mui-btn-outlined back-btn" @click="backtohome">返回主页</button>
     </div>
 </template>
@@ -93,6 +94,16 @@
     label{
         width: 15%;
     }
+    .tip{
+        color: red;
+        font-weight: bold;
+        margin-left: 5px;
+    }
+    .bottom{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
 </style>
 
@@ -101,6 +112,14 @@ export default {
     mounted() {
         // 解决mui-input框不刷新无icon问题
         mui(".mui-input-row input").input();
+    },
+    data(){
+        return{
+            phone:'',
+            pwd:'',
+            pwdAgain:'',
+            tip:'' //提示内容
+        }
     },
     methods: {
         goback(){
@@ -111,6 +130,42 @@ export default {
         },
          backtohome(){
             this.$router.push('/home')
+        },
+        userRegist(){
+            if(this.phone==''||this.phone==null){
+                this.tip = "手机号码不能为空"
+                return
+            }
+            if(this.pwd==''||this.pwd==null){
+                this.tip = "密码不能为空"
+                return
+            }
+            if(this.pwdAgain==''||this.pwdAgain==null){
+                this.tip = "请再次输入密码"
+                return
+            }
+            if(this.pwdAgain!==this.pwd){
+                this.tip = "两次输入密码不一致"
+                return
+            }
+            const root = process.env.API_HOST;
+            const user = {
+                phone:this.phone,
+                pwd:this.pwd
+            }
+            this.$ajax.post({
+                // http://localhost:8081/regist
+                url:root+'user/regist',
+                data:user,
+                
+            }).then(result=>{
+                if(result.status){
+                    this.regist();
+                }else{
+                    this.tip = result.result
+                }
+                
+            })
         }
     },
 }
