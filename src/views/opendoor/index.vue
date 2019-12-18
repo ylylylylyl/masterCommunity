@@ -7,11 +7,10 @@
             </div>
             <span class="date-span">该二维码有效期至2019-11-30</span>
 
-            
         </div>
-        
+
     </div>
-    
+
 </template>
 <style scoped>
     .container{
@@ -39,35 +38,35 @@
     }
 </style>
 <script>
-import QRCode from "qrcode"; //引入生成二维码插件
+import QRCode from 'qrcode' // 引入生成二维码插件
 import Header from '../../components/LeftHeader'
 export default {
-    data(){
-        return{
-            QRCodeMsg: "", //生成二维码信息
-        }
-    },
-    components:{
-        Header
-    },
-    mounted(){
-        this.init()
-    },
-    methods:{
-        init(){
-             this.QRCodeMsg = window.location.href;//生成的二维码为URL地址
-        }
-    },
-    watch: {
-    // 通过监听获取数据
-    QRCodeMsg(val) {
-      // 获取页面的canvas
-      var msg = document.getElementById("QRCode");
-      // 将获取到的数据（val）画到msg（canvas）上
-      QRCode.toCanvas(msg, val, function(error) {
-        console.log(error);
-      });
+  data () {
+    return {
+      QRCodeMsg: '' // 生成二维码信息
     }
   },
+  components: {
+    Header
+  },
+  mounted () {
+    this.init()
+  },
+  methods: {
+    init () {
+      this.QRCodeMsg = window.location.href// 生成的二维码为URL地址
+    }
+  },
+  watch: {
+    // 通过监听获取数据
+    QRCodeMsg (val) {
+      // 获取页面的canvas
+      var msg = document.getElementById('QRCode')
+      // 将获取到的数据（val）画到msg（canvas）上
+      QRCode.toCanvas(msg, val, function (error) {
+        console.log(error)
+      })
+    }
+  }
 }
 </script>

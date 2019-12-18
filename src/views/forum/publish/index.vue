@@ -10,7 +10,7 @@
     </div>
       <div>
         <textarea v-model="valueInput" class="content-txt" placeholder="分享新鲜事"></textarea>
-        <div class="upload-container">  
+        <div class="upload-container">
             <div class="picture-container" v-show="uploadimg.length!=0">
                 <div class="img-container" v-for="(item,key) in uploadimg" :key="key">
                     <img :src="item" class="upload-img" />
@@ -18,8 +18,8 @@
                 <div class="upload-item" @click="uploadImg" >
                     <span class="mui-icon mui-icon-plusempty"></span>
                 </div>
-            </div>       
-           
+            </div>
+
           <input
             @change="changeImage($event)"
             ref="fileBtn"
@@ -47,54 +47,54 @@
   </div>
 </template>
 <script>
-import VEmojiPicker from "v-emoji-picker";
+import VEmojiPicker from 'v-emoji-picker'
 
-import packEmoji from "v-emoji-picker/data/emojis.js";
+import packEmoji from 'v-emoji-picker/data/emojis.js'
 export default {
   components: {
     VEmojiPicker
   },
   data: () => ({
-    valueInput: "",
+    valueInput: '',
     showDialog: false,
     uploadimg: []
   }),
   methods: {
-    selectEmoji(emoji) {
-      console.log(emoji);
+    selectEmoji (emoji) {
+      console.log(emoji)
     },
-    toogleDialogEmoji() {
-      this.showDialog = !this.showDialog;
+    toogleDialogEmoji () {
+      this.showDialog = !this.showDialog
     },
-    onSelectEmoji(dataEmoji) {
-      this.valueInput += dataEmoji.emoji;
+    onSelectEmoji (dataEmoji) {
+      this.valueInput += dataEmoji.emoji
       // Optional
       // this.toogleDialogEmoji();
     },
-    changeImage(e) {
-      var file = e.target.files[0];
-      if(file){
-      var reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = e => {
-      this.uploadimg .push (reader.result);
-        };
-     }
+    changeImage (e) {
+      var file = e.target.files[0]
+      if (file) {
+        var reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = e => {
+          this.uploadimg.push(reader.result)
+        }
+      }
     },
-    uploadImg(){
-        this.$refs.fileBtn.click();
+    uploadImg () {
+      this.$refs.fileBtn.click()
     }
   },
   computed: {
-    emojisNative() {
-      return packEmoji;
+    emojisNative () {
+      return packEmoji
     }
   }
   //   events:{
   //     select: 'Emit event on Selected Emoji',
   //     changeCategory: 'Emit event on Change Category'
   //   }
-};
+}
 </script>
 
 <style scoped>
@@ -156,7 +156,7 @@ textarea {
 }
 .content-container{
     background: white;
-   
+
 }
 .picture-container{
     display: flex;

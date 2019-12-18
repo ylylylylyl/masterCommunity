@@ -48,10 +48,10 @@
               <p>{{item.content}}</p>
               <span style="margin-left:5px" class="mui-icon mui-icon-chatboxes" @click="publishCom(item.userid)"></span>
             </div>
-            
+
              <div class="reply-child" >
                 <Detail class="" :replyData='item.child' @showDialog="publishCom"/>
-            </div> 
+            </div>
             <p>11-17 16:40</p>
           </div>
         </div>
@@ -73,7 +73,7 @@
   </div>
 </template>
 <script>
-import Header from "../../components/LeftHeader";
+import Header from '../../components/LeftHeader'
 import Detail from './detail'
 import CommentDetail from './commentDetail'
 export default {
@@ -82,101 +82,100 @@ export default {
     Detail,
     CommentDetail
   },
-  mounted() {
-      this.init()
-        this.treeObj(this.reply)
+  mounted () {
+    this.init()
+    this.treeObj(this.reply)
   },
   methods: {
-    changeCommentShow(){
+    changeCommentShow () {
       this.commentShow = false
     },
-    publishCom(userid){
+    publishCom (userid) {
       this.commentShow = true
-      if(userid){
+      if (userid) {
         this.targtuserid = userid
       }
     },
-      init(){
-          const { forumid, userid } = this.$route.query;
-            this.forumuserid = userid;
-      },
-    treeObj(obj) {
+    init () {
+      const { forumid, userid } = this.$route.query
+      this.forumuserid = userid
+    },
+    treeObj (obj) {
       console.log(obj)
       obj.map(item => {
         if (item.beforereplyid != null) {
           obj.map(o => {
             if (item.beforereplyid === o.replyid) {
-              
               if (!o.child) {
-                o.child = [];
+                o.child = []
               }
-              o.child.push(item);
-              o.child = o.child;
+              o.child.push(item)
+              o.child = o.child
             }
-          });
+          })
         }
-      });
-      this.replyData = obj.filter(item => item.beforereplyid == null) ;
+      })
+      this.replyData = obj.filter(item => item.beforereplyid == null)
       console.log(this.replyData)
     }
   },
-  
-  data() {
+
+  data () {
     return {
-      commentShow:false,
-      forumuserid: "",
-      targtuserid:"",
+      commentShow: false,
+      forumuserid: '',
+      targtuserid: '',
       reply: [
         {
-          replyid:'00000001',
+          replyid: '00000001',
           forumid: 1,
-          userid: "002",
-          username: "用户2",
-          content: "我是用户2",
-          time: "2019-4-12",
+          userid: '002',
+          username: '用户2',
+          content: '我是用户2',
+          time: '2019-4-12',
           beforereplyid: null
         },
         {
-          replyid:'00000002',
+          replyid: '00000002',
           forumid: 1,
-          userid: "003",
-          username: "用户3",
-          content: "我是用户3",
-          time: "2019-4-12",
+          userid: '003',
+          username: '用户3',
+          content: '我是用户3',
+          time: '2019-4-12',
           beforereplyid: null
         },
         {
-           replyid:'00000003',
+          replyid: '00000003',
           forumid: 1,
-          userid: "004",
-          username: "用户4",
-          content: "我是用户4",
-          time: "2019-4-12",
-          beforereplyid: "00000001"
+          userid: '004',
+          username: '用户4',
+          content: '我是用户4',
+          time: '2019-4-12',
+          beforereplyid: '00000001'
         },
         {
-           replyid:'00000004',
+          replyid: '00000004',
           forumid: 1,
-          userid: "005",
-          username: "用户5",
-          content: "我是用户5",
-          time: "2019-4-12",
-          beforereplyid: "00000003"
+          userid: '005',
+          username: '用户5',
+          content: '我是用户5',
+          time: '2019-4-12',
+          beforereplyid: '00000003'
         },
-         {
-          replyid:'00000005',
+        {
+          replyid: '00000005',
           forumid: 1,
-          userid: "005",
-          username: "用户5",
-          content: "我是用户5",
-          time: "2019-4-12",
-          beforereplyid: "00000002"
+          userid: '005',
+          username: '用户5',
+          content: '我是用户5',
+          time: '2019-4-12',
+          beforereplyid: '00000002'
         }
       ],
-      replyData:''
-    };
+      replyData: ''
+    }
   }
-};
+}
 </script>
 <style scoped>
 .detail {

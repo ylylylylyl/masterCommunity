@@ -27,21 +27,21 @@
 </template>
 
 <script>
- import  Header from '../../components/LeftHeader'
- import ReportRecords from './reportrecords'
+import Header from '../../components/LeftHeader'
+import ReportRecords from './reportrecords'
 export default {
-   components:{
-       Header,
-       ReportRecords
-   },
-    methods:{
-        goback(){
-            this.$router.go(-1)
-        },
-        toRecords(){
-            this.$router.push('/reportrecords')
-        }
+  components: {
+    Header,
+    ReportRecords
+  },
+  methods: {
+    goback () {
+      this.$router.go(-1)
+    },
+    toRecords () {
+      this.$router.push('/reportrecords')
     }
+  }
 }
 </script>
 <style scoped>

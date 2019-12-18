@@ -9,7 +9,7 @@
                     <span class="mui-icon iconfont icon-shequxianxing"></span>
                 </div>
                 <span class="mui-icon"></span>
-                <span class="mui-tab-label">物业</span> 
+                <span class="mui-tab-label">物业</span>
             </a>
             <a @click="routerfuc(3)" :class='{ "mui-active": activeIndex == "/selfcenter"}' class="mui-tab-item">
                 <span class="mui-icon iconfont icon-wode"></span>
@@ -19,37 +19,36 @@
 </template>
 
 <script>
-    export default {
-        data(){
-            return{
-                activeIndex:this.$route.path
-            }
-        },
-        watch:{
-            $route( to , from ){
-                this.activeIndex = to.path
-            }
-        },
-        methods:{
-            mounted() {
-                console.log(this.activeIndex)
-            },
-            routerfuc(item){
-                switch(item){
-                    case 1:
-                        this.$router.push('/home')
-                    break
-                    case 2:
-                        this.$router.push('/community')
-                    break
-                    case 3:
-                        this.$router.push('/selfcenter')
-                    break
-                }
-                 
-            }
-        }
+export default {
+  data () {
+    return {
+      activeIndex: this.$route.path
     }
+  },
+  watch: {
+    $route (to, from) {
+      this.activeIndex = to.path
+    }
+  },
+  methods: {
+    mounted () {
+      console.log(this.activeIndex)
+    },
+    routerfuc (item) {
+      switch (item) {
+        case 1:
+          this.$router.push('/home')
+          break
+        case 2:
+          this.$router.push('/community')
+          break
+        case 3:
+          this.$router.push('/selfcenter')
+          break
+      }
+    }
+  }
+}
 </script>
 <style scoped>
     .circle{
@@ -62,7 +61,7 @@
         right: 0;
         bottom: 23px;
         margin: 0 auto;
-        
+
     }
     .circle-container{
         position: relative;

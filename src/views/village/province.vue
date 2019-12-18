@@ -48,42 +48,42 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions, mapMutations } from "vuex";
-import Province from "./province";
-import { searchFromCity } from "../../utils/util";
+import { mapGetters, mapActions, mapMutations } from 'vuex'
+import Province from './province'
+import { searchFromCity } from '../../utils/util'
 export default {
   components: {
     Province
   },
   computed: {
-    ...mapGetters(["village", "curProvince"])
+    ...mapGetters(['village', 'curProvince'])
   },
-  mounted() {
-    this.search(this.curProvince);
-    this.leftData = this.village;
+  mounted () {
+    this.search(this.curProvince)
+    this.leftData = this.village
   },
-  data() {
+  data () {
     return {
-      province: "", //当前选择的省份
-      city: "", //当前选择的城市
-      area: "", //当前选择的区域
-      leftData: [], //左边数据
-      rightData: [], //右边数据
+      province: '', // 当前选择的省份
+      city: '', // 当前选择的城市
+      area: '', // 当前选择的区域
+      leftData: [], // 左边数据
+      rightData: [], // 右边数据
       cityData: [],
       loading: false
-    };
+    }
   },
   methods: {
-    search(province) {
-      this.$store.commit("CUR_PROVINCE", province);
-      this.province = province;
-      this.loading = true;
+    search (province) {
+      this.$store.commit('CUR_PROVINCE', province)
+      this.province = province
+      this.loading = true
       searchFromCity(province).then(res => {
-        this.loading = false;
+        this.loading = false
         if (res.status) {
-          this.rightData = res.districts[0].districts;
+          this.rightData = res.districts[0].districts
         }
-      });
+      })
     },
     //  search(province){
     //     this.$store.commit('CUR_PROVINCE',province)
@@ -104,19 +104,19 @@ export default {
     //    })
 
     //  },
-    searchArea(city) {
-      this.city = city;
+    searchArea (city) {
+      this.city = city
       this.$router.push({
-        path: "/village/city",
+        path: '/village/city',
         query: {
           province: this.province,
           city: this.city,
           left: this.rightData
         }
-      });
+      })
     }
   }
-};
+}
 </script>
 <style scoped>
 .city-title {

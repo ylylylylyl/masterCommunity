@@ -67,7 +67,7 @@
             <span class="mui-icon mui-icon-plusempty" v-show='!uploadimg'></span>
 			<img :src="uploadimg" class="upload-img" v-show='uploadimg' />
           </button>
-         
+
           <input
             @change="changeImage($event)"
             ref="fileBtn"
@@ -86,76 +86,76 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       typedata: [
-        { value: 1, text: "消防" },
-        { value: 2, text: "照明" },
-        { value: 3, text: "暖气" },
-        { value: 4, text: "马桶" },
-        { value: 5, text: "桌椅" },
-        { value: 6, text: "其他" }
+        { value: 1, text: '消防' },
+        { value: 2, text: '照明' },
+        { value: 3, text: '暖气' },
+        { value: 4, text: '马桶' },
+        { value: 5, text: '桌椅' },
+        { value: 6, text: '其他' }
       ],
-      uploadimg: ""
-    };
+      uploadimg: ''
+    }
   },
-  mounted() {
-	 
+  mounted () {
+
     //    this.initRepair()
   },
   methods: {
-    initRepair() {
-      var picker = new mui.PopPicker();
-      picker.setData(this.typedata);
-      var showUserPickerButton = document.getElementById("type-btn");
-      var userResult = document.getElementById("type-result");
+    initRepair () {
+      var picker = new mui.PopPicker()
+      picker.setData(this.typedata)
+      var showUserPickerButton = document.getElementById('type-btn')
+      var userResult = document.getElementById('type-result')
       // showUserPickerButton.addEventListener('tap', function(event) {
-      picker.show(function(items) {
-        userResult.innerText = items[0].text;
-        //返回 false 可以阻止选择框的关闭
-        //return false;
-      });
+      picker.show(function (items) {
+        userResult.innerText = items[0].text
+        // 返回 false 可以阻止选择框的关闭
+        // return false;
+      })
       // }, false);
     },
-    initDate() {
-      var d = new Date();
-      d.setMonth(d.getMonth() + 1);
+    initDate () {
+      var d = new Date()
+      d.setMonth(d.getMonth() + 1)
       var dtPicker = new mui.DtPicker({
-        beginDate: new Date(), //设置开始日期
-        endDate: new Date(d) //设置结束日期
-      });
-      dtPicker.show(function(selectItems) {
+        beginDate: new Date(), // 设置开始日期
+        endDate: new Date(d) // 设置结束日期
+      })
+      dtPicker.show(function (selectItems) {
         // console.log(selectItems.y);//结果为：{text: "2016",value: 2016}
         // console.log(selectItems.m);//结果为：{text: "05",value: "05"}
         // console.log(selectItems.d.text);//11
         // console.log(selectItems.h.text);//09
         // console.log(selectItems.i.text);//09
         // console.log(selectItems.text);//结果为：2016-10-11 09:09
-        document.getElementById("date-result").innerText = selectItems.text;
-        dtPicker.dispose(); //关闭日期控件，释放资源。
-      });
+        document.getElementById('date-result').innerText = selectItems.text
+        dtPicker.dispose() // 关闭日期控件，释放资源。
+      })
     },
-    upload() {
-      this.$refs.fileBtn.click();
+    upload () {
+      this.$refs.fileBtn.click()
     },
-    goback() {
-      this.$router.go(-1);
+    goback () {
+      this.$router.go(-1)
     },
-    changeImage(e) {
-      var file = e.target.files[0];
-      if(file){
-      var reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = e => {
-      this.uploadimg = reader.result;
-        };
-     }
+    changeImage (e) {
+      var file = e.target.files[0]
+      if (file) {
+        var reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = e => {
+          this.uploadimg = reader.result
+        }
+      }
     },
-    toRecords(){
+    toRecords () {
       this.$router.push('/repairreport')
     }
   }
-};
+}
 </script>
 <style  scoped>
 .back-header {

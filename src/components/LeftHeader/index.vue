@@ -8,10 +8,10 @@
 </template>
 <script>
 export default {
-    methods:{
-        goback(){
-            this.$router.go(-1)
-        }
+  methods: {
+    goback () {
+      this.$router.go(-1)
     }
+  }
 }
 </script>

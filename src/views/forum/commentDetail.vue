@@ -9,17 +9,17 @@
 </template>
 <script>
 export default {
-    mounted(){
-        console.log(this.replytarget)
-    },
-    props:{
-        replytarget:String
-    },
-    methods:{
-        close(){
-            this.$emit('changeCommentShow')
-        }
+  mounted () {
+    console.log(this.replytarget)
+  },
+  props: {
+    replytarget: String
+  },
+  methods: {
+    close () {
+      this.$emit('changeCommentShow')
     }
+  }
 }
 </script>
 <style scoped>
@@ -38,7 +38,7 @@ export default {
   margin-top: 15px;
   flex: 4;
   height: 100px;
- 
+
 }
 .action-container{
      flex: 1;

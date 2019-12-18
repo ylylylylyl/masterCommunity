@@ -53,35 +53,35 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       loading: false,
       rightData: [
-        '祥和里','123','456'
+        '祥和里', '123', '456'
       ],
-      queryleft:''
-    };
-  },
-  computed: {
-    province() {
-      return this.$route.query.province;
-    },
-    city() {
-      return this.$route.query.city;
-    },
-    area() {
-      return this.$route.query.area;
-    },
-    leftData() {
-      return this.$route.query.left;
+      queryleft: ''
     }
   },
-  mounted() {
-    this.search(this.city);
+  computed: {
+    province () {
+      return this.$route.query.province
+    },
+    city () {
+      return this.$route.query.city
+    },
+    area () {
+      return this.$route.query.area
+    },
+    leftData () {
+      return this.$route.query.left
+    }
+  },
+  mounted () {
+    this.search(this.area)
   },
   methods: {
-    search(value) {
-      // this.loading = true;
+    search (cityname) {
+      this.loading = true
       // //  https://restapi.amap.com/v3/config/district?key=8224cb94492d645e544a7b13df3ea7db&&keywords=%E5%9B%9B%E5%B7%9D%E7%9C%81
       // this.$ajax
       //   .get({
@@ -98,42 +98,41 @@ export default {
       //     }
       //   });
     },
-    chooseArea(area) {
+    chooseArea (area) {
       this.$router.push({
-        path: "/home"
-      });
-      this.$store.commit('CHOOSE_VILLAGE',area)
+        path: '/home'
+      })
+      this.$store.commit('CHOOSE_VILLAGE', area)
     },
-   async goCity() {
-    await  this.goCitySearch(this.province)
-    this.$router.push({
-      path: "/village/city",
-      query: {
-        province: this.province,
-        city: this.city,
-        left: this.queryleft
-      }
-    });
-  },
-  goCitySearch(province){
+    async goCity () {
+      await this.goCitySearch(this.province)
+      this.$router.push({
+        path: '/village/city',
+        query: {
+          province: this.province,
+          city: this.city,
+          left: this.queryleft
+        }
+      })
+    },
+    goCitySearch (province) {
       return this.$ajax
         .get({
-          url: "https://restapi.amap.com/v3/config/district",
+          url: 'https://restapi.amap.com/v3/config/district',
           params: {
-            key: "8224cb94492d645e544a7b13df3ea7db",
+            key: '8224cb94492d645e544a7b13df3ea7db',
             keywords: province
           }
         })
         .then(res => {
           if (res.status) {
-            this.queryleft =  res.districts[0].districts;
+            this.queryleft = res.districts[0].districts
           }
-
-        });
+        })
+    }
   }
-  },
- 
-};
+
+}
 </script>
 <style scoped>
 .city-title {

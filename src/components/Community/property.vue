@@ -23,9 +23,9 @@
 </template>
 <script>
 export default {
-  methods:{
-    toRouter(route){
-      switch(route){
+  methods: {
+    toRouter (route) {
+      switch (route) {
         case 1:
           this.$router.push('/houseinfo')
       }

@@ -9,17 +9,18 @@
                 <label>
                     <span class="mui-icon mui-icon-person"></span>
                 </label>
-                <input v-model="name" type="text" class="mui-input-clear" placeholder="请输入手机号">
+                <input v-model="userphone" type="text" class="mui-input-clear" placeholder="请输入手机号">
             </div>
             <div class="mui-input-row">
                 <label>
                     <span class="mui-icon mui-icon-compose"></span>
                 </label>
-                <input v-model="pwd" type="password" class="mui-input-password" placeholder="请输入密码">
+                <input v-model="userpassword" type="password" class="mui-input-password" placeholder="请输入密码">
             </div>
-            
+
         </div>
-        <div>
+        <div class="bottom">
+            <span class="tip">{{tip}}</span>
             <p class="regist-btn" @click="regist()">
                 <span class="mui-icon mui-icon-help"></span>
             没有账号点击注册
@@ -85,52 +86,82 @@
     .back-btn{
         background: lightgrey;
     }
-    
+
     .mui-input-row label{
         width: 15%;
     }
-
+    .tip{
+        color: red;
+        font-weight: bold;
+        margin-left: 5px;
+    }
+    .bottom{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 </style>
 
 <script>
+import {PHONE_REG} from '../../utils/rej'
 export default {
-     mounted() {
-        // 解决mui-input框不刷新无icon问题
-        mui(".mui-input-row input").input();
+  mounted () {
+    // 解决mui-input框不刷新无icon问题
+    mui('.mui-input-row input').input()
+  },
+  data () {
+    return {
+      userphone: '',
+      userpassword: '',
+      tip: ''
+    }
+  },
+  watch: {
+    userphone (val) {
+      if (PHONE_REG.test(val)) {
+        this.tip = ''
+      } else {
+        this.tip = '请输入正确的手机号码'
+      }
+    }
+  },
+  methods: {
+    goback () {
+      this.$router.go(-1)
     },
-    data(){
-        return {
-            name:this.name,
-            pwd:this.pwd
+    regist () {
+      this.$router.push('/regist')
+    },
+    backtohome () {
+      this.$router.push('/home')
+    },
+    login () {
+      if (this.userphone === '' || this.userphone == null) {
+        this.tip = '请输入手机号码'
+        return
+      }
+      if (this.userpassword === '' || this.userpassword == null) {
+        this.tip = '请输入密码'
+        return
+      }
+      const root = process.env.API_HOST
+      const user = {
+        userphone: this.userphone,
+        userpassword: this.userpassword
+      }
+      this.$ajax.post({
+        // http://localhost:8081/regist
+        url: root + 'user/login',
+        data: user
+
+      }).then(result => {
+        if (result.status) {
+          this.$router.push('/home')
+        } else {
+          this.tip = result.msg
         }
-    },
-    methods: {
-        goback(){
-            this.$router.go(-1)
-        },
-        regist(){
-            this.$router.push('/regist')
-        },
-        backtohome(){
-            this.$router.push('/home')
-        },
-        login(){
-            const root = process.env.API_HOST;
-            console.log(root);
-            const user = {
-                name:this.name,
-                pwd:this.pwd
-            }
-            this.$ajax.post({
-                // http://localhost:8081/regist
-                url:root+'user/regist',
-                data:user,
-                
-            }).then(result=>{
-                console.log(result)
-                
-            })
-        }
-    },
+      })
+    }
+  }
 }
 </script>

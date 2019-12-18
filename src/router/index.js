@@ -26,7 +26,7 @@ const SelfInfo = () => import('../views/selfinfo')
 const Village = () => import('../views/village')
 const Province = () => import('../views/village/province.vue')
 const City = () => import('../views/village/city.vue')
-const Area = ()=> import('../views/village/area.vue')
+const Area = () => import('../views/village/area.vue')
 Vue.use(Router)
 
 export default new Router({

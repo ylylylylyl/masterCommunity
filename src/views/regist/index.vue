@@ -55,7 +55,7 @@
         font-size: 18px;
     }
     .mui-input-group{
-        
+
         margin-top: 20px;
     }
     .mui-input-row{
@@ -109,64 +109,74 @@
 
 <script>
 export default {
-    mounted() {
-        // 解决mui-input框不刷新无icon问题
-        mui(".mui-input-row input").input();
+  mounted () {
+    // 解决mui-input框不刷新无icon问题
+    mui('.mui-input-row input').input()
+  },
+  data () {
+    return {
+      phone: '',
+      pwd: '',
+      pwdAgain: '',
+      tip: '' // 提示内容
+    }
+  },
+  watch: {
+    phone (val) {
+      var reg = /^[1](([3][0-9])|([4][5-9])|([5][0-3,5-9])|([6][5,6])|([7][0-8])|([8][0-9])|([9][1,8,9]))[0-9]{8}$/
+
+      if (!reg.test(val)) {
+        this.tip = '请输入正确的手机号码'
+      } else {
+        this.tip = ''
+      }
+    }
+  },
+  methods: {
+    goback () {
+      this.$router.go(-1)
     },
-    data(){
-        return{
-            phone:'',
-            pwd:'',
-            pwdAgain:'',
-            tip:'' //提示内容
+    regist () {
+      this.$router.push('/login')
+    },
+    backtohome () {
+      this.$router.push('/home')
+    },
+    userRegist () {
+      if (this.phone == '' || this.phone == null) {
+        this.tip = '手机号码不能为空'
+        return
+      }
+      if (this.pwd == '' || this.pwd == null) {
+        this.tip = '密码不能为空'
+        return
+      }
+      if (this.pwdAgain == '' || this.pwdAgain == null) {
+        this.tip = '请再次输入密码'
+        return
+      }
+      if (this.pwdAgain !== this.pwd) {
+        this.tip = '两次输入密码不一致'
+        return
+      }
+      const root = process.env.API_HOST
+      const user = {
+        phone: this.phone,
+        pwd: this.pwd
+      }
+      this.$ajax.post({
+        // http://localhost:8081/regist
+        url: 'http://localhost:8081/' + 'user/regist',
+        data: user
+
+      }).then(result => {
+        if (result.status) {
+          this.regist()
+        } else {
+          this.tip = result.result
         }
-    },
-    methods: {
-        goback(){
-            this.$router.go(-1)
-        },
-        regist(){
-            this.$router.push('/login')
-        },
-         backtohome(){
-            this.$router.push('/home')
-        },
-        userRegist(){
-            if(this.phone==''||this.phone==null){
-                this.tip = "手机号码不能为空"
-                return
-            }
-            if(this.pwd==''||this.pwd==null){
-                this.tip = "密码不能为空"
-                return
-            }
-            if(this.pwdAgain==''||this.pwdAgain==null){
-                this.tip = "请再次输入密码"
-                return
-            }
-            if(this.pwdAgain!==this.pwd){
-                this.tip = "两次输入密码不一致"
-                return
-            }
-            const root = process.env.API_HOST;
-            const user = {
-                phone:this.phone,
-                pwd:this.pwd
-            }
-            this.$ajax.post({
-                // http://localhost:8081/regist
-                url:root+'user/regist',
-                data:user,
-                
-            }).then(result=>{
-                if(result.status){
-                    this.regist();
-                }else{
-                    this.tip = result.result
-                }
-                
-            })
-        }
-    },
+      })
+    }
+  }
 }
 </script>

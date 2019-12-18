@@ -16,7 +16,7 @@
                     <span class="status-content">2019-11-16 </span>
                 </div>
             </div>
-        
+
             <div class="div-container repair-info">
                 <div class="info-title">报修信息</div>
                 <div class="info-content">
@@ -25,7 +25,7 @@
                     <div class="info-img">
                         <img src="../../assets/image/1.jpg"/>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="div-container repair-info">
@@ -56,10 +56,10 @@
 <script>
 import Header from '../../components/LeftHeader'
 export default {
-    
-    components:{
-        Header
-    }
+
+  components: {
+    Header
+  }
 }
 </script>
 
@@ -74,7 +74,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-       
+
     }
     .status-content{
         color: #6E8B3D;

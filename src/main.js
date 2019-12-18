@@ -26,7 +26,6 @@ Vue.use(VueResource)
 Vue.prototype.mui = mui
 Vue.prototype.$ajax = Ajax
 
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -57,7 +57,7 @@
       <div class="btn-container">
         <button type="button" class="mui-btn mui-btn-primary">提交</button>
       </div>
-    
+
     </div>
   </div>
 </template>
@@ -110,54 +110,54 @@
 
 </style>
 <script>
-import Header from "../../components/LeftHeader";
+import Header from '../../components/LeftHeader'
 export default {
   components: {
     Header
   },
-  data() {
+  data () {
     return {
       typedata: [
-        { value: 1, text: "东和春天" },
-        { value: 2, text: "白河左岸" },
-        { value: 3, text: "海棠湾" },
-        { value: 4, text: "祥和里" },
-        { value: 5, text: "海棠公馆" },
-        { value: 6, text: "其他" }
+        { value: 1, text: '东和春天' },
+        { value: 2, text: '白河左岸' },
+        { value: 3, text: '海棠湾' },
+        { value: 4, text: '祥和里' },
+        { value: 5, text: '海棠公馆' },
+        { value: 6, text: '其他' }
       ],
-      buildingdata:[
-           { value: 1, text: "一单元" },
-            { value: 2, text: "二单元" },
-            { value: 3, text: "三单元" },
-            { value: 4, text: "四单元" },
-            { value: 5, text: "五单元" },
-            { value: 6, text: "六单元" }
+      buildingdata: [
+        { value: 1, text: '一单元' },
+        { value: 2, text: '二单元' },
+        { value: 3, text: '三单元' },
+        { value: 4, text: '四单元' },
+        { value: 5, text: '五单元' },
+        { value: 6, text: '六单元' }
       ]
-    };
+    }
   },
   methods: {
-    initRepair() {
-      var picker = new mui.PopPicker();
-      picker.setData(this.typedata);
-      var showUserPickerButton = document.getElementById("comm-btn");
-      var userResult = document.getElementById("comm-result");
-      picker.show(function(items) {
-        userResult.innerText = items[0].text;
-        //返回 false 可以阻止选择框的关闭
-        //return false;
-      });
+    initRepair () {
+      var picker = new mui.PopPicker()
+      picker.setData(this.typedata)
+      var showUserPickerButton = document.getElementById('comm-btn')
+      var userResult = document.getElementById('comm-result')
+      picker.show(function (items) {
+        userResult.innerText = items[0].text
+        // 返回 false 可以阻止选择框的关闭
+        // return false;
+      })
     },
-    initBuilding() {
-      var picker = new mui.PopPicker();
-      picker.setData(this.buildingdata);
-      var showUserPickerButton = document.getElementById("building-btn");
-      var userResult = document.getElementById("building-result");
-      picker.show(function(items) {
-        userResult.innerText = items[0].text;
-        //返回 false 可以阻止选择框的关闭
-        //return false;
-      });
+    initBuilding () {
+      var picker = new mui.PopPicker()
+      picker.setData(this.buildingdata)
+      var showUserPickerButton = document.getElementById('building-btn')
+      var userResult = document.getElementById('building-result')
+      picker.show(function (items) {
+        userResult.innerText = items[0].text
+        // 返回 false 可以阻止选择框的关闭
+        // return false;
+      })
     }
   }
-};
+}
 </script>

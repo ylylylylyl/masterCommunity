@@ -26,7 +26,7 @@
                     <span class="addpay-title">用户编号</span>
                     <input type="text" class="mui-input-clear" placeholder="请输入用户编号">
                 </div>
-               
+
             </div>
             <div class="btn-container">
                 <div class="mui-input-row mui-checkbox mui-left">
@@ -35,29 +35,29 @@
                 </div>
                 <button type="button" class="mui-btn mui-btn-primary">确认新建</button>
             </div>
-            
+
         </div>
-        
+
     </div>
 </template>
 <script>
 import {goback} from '../../utils/util'
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from 'vuex'
 export default {
-    computed:{
-        ...mapGetters(['chooseCity']),
-        // getCity(){
-        //     return this.$store.state.chooseCity
-        // }
+  computed: {
+    ...mapGetters(['chooseCity'])
+    // getCity(){
+    //     return this.$store.state.chooseCity
+    // }
+  },
+  methods: {
+    goback () {
+      goback.bind(this)()
     },
-    methods: {
-        goback(){
-            goback.bind(this)()
-        },
-        toChoose(){
-            this.$router.push('/citychoose')
-        },
-    },
+    toChoose () {
+      this.$router.push('/citychoose')
+    }
+  }
 }
 </script>
 <style scoped>
@@ -73,7 +73,7 @@ export default {
         color: #6E8B3D;
     }
     /* 主体部分 */
-    
+
     .addpay-item-title{
        height: 50px;
        background: white;
@@ -114,7 +114,7 @@ export default {
     }
     .mui-radio.mui-left input[type='radio'], .mui-checkbox.mui-left input[type='checkbox']{
         left: 0px;
-        
+
     }
     label{
         color: gray;

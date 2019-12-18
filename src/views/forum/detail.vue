@@ -15,55 +15,54 @@
 <script>
 import CommentDetail from './commentDetail'
 export default {
-  components:{
+  components: {
     CommentDetail
   },
-  props: {replyData:Array},
-  name:'Detail',
-  mounted(){
-    var list=[]
-    this.listData = this.setGridDataFromTree(list, this.replyData, "")
+  props: {replyData: Array},
+  name: 'Detail',
+  mounted () {
+    var list = []
+    this.listData = this.setGridDataFromTree(list, this.replyData, '')
     console.log(this.listData)
   },
-  data(){
-      return{
-          commentShow:false,
-          temp:'',
-          replytarget:'',
-          listData:[]
-      }
-  
+  data () {
+    return {
+      commentShow: false,
+      temp: '',
+      replytarget: '',
+      listData: []
+    }
   },
- 
-  methods:{
-     setGridDataFromTree(list,dataSource){
-        if (!(Array.isArray(dataSource) && dataSource.length >0)) return ;            
-        dataSource.forEach((father) => {
-            // debugger;
-            console.log(father)
-            list.push(father);            
-            if (typeof (father.child) == "undefined") {                
-            } else {                
-                this.setGridDataFromTree(list, father.child);
-            }
-        });
-          return list;
+
+  methods: {
+    setGridDataFromTree (list, dataSource) {
+      if (!(Array.isArray(dataSource) && dataSource.length > 0)) return
+      dataSource.forEach((father) => {
+        // debugger;
+        console.log(father)
+        list.push(father)
+        if (typeof (father.child) === 'undefined') {
+        } else {
+          this.setGridDataFromTree(list, father.child)
+        }
+      })
+      return list
     },
-      func(value){
-          this.temp = value
-          return value.userid
-      },
-    publishCom(userid){
-      this.$emit('showDialog',userid)
+    func (value) {
+      this.temp = value
+      return value.userid
+    },
+    publishCom (userid) {
+      this.$emit('showDialog', userid)
       // console.log(111)
       // this.replytarget = userid
       // this.commentShow = true
     },
-    changeCommentShow(){
+    changeCommentShow () {
       this.commentShow = false
     }
   }
-};
+}
 </script>
 <style scoped>
 

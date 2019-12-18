@@ -158,7 +158,6 @@
                       <img src="../../assets/image/1.jpg"/>
                   </div>
 
-                  
           </div>-->
           <!-- <div class="news news-style3">
                   <p>[提醒]啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
@@ -172,100 +171,100 @@
 </template>
 
 <script>
-import Header from "../../components/Header";
-import Tele from "../../components/telecomplaints";
-import {mapState} from 'vuex';
+import Header from '../../components/Header'
+import Tele from '../../components/telecomplaints'
+import {mapState} from 'vuex'
 export default {
-  data() {
+  data () {
     return {
       newslist: [],
-      isopen:false
-    };
+      isopen: false
+    }
   },
   components: {
     Header,
     Tele
   },
-  computed:{
-     ...mapState(['chooseVillage'])
+  computed: {
+    ...mapState(['chooseVillage'])
   },
-  updated() {
-    this.sliderinterval();
+  updated () {
+    this.sliderinterval()
   },
-  mounted() {
-    this.muinit();
-    this.getNews();
+  mounted () {
+    this.muinit()
+    this.getNews()
   },
   methods: {
-    muinit() {
-      mui.init({});
-      this.sliderinterval();
-      mui.ready(function() {
-        mui(".mui-scroll-wrapper").scroll({
-          bounce: true //是否启用回弹
-        });
-      });
+    muinit () {
+      mui.init({})
+      this.sliderinterval()
+      mui.ready(function () {
+        mui('.mui-scroll-wrapper').scroll({
+          bounce: true // 是否启用回弹
+        })
+      })
     },
-    getNews() {
-      const root = process.env.OPEN_HOST;
+    getNews () {
+      const root = process.env.OPEN_HOST
       // https://3g.163.com/touch/reconstruct/article/list/BDC4QSV3wangning/0-10.html
       this.$http
         .get(
-          root + "/touch/reconstruct/article/list/BDC4QSV3wangning/0-10.html"
+          root + '/touch/reconstruct/article/list/BDC4QSV3wangning/0-10.html'
         )
         .then(
           result => {
-            let str = result.body.substring(9, result.body.length - 1);
-            this.newslist = JSON.parse(str).BDC4QSV3wangning;
+            let str = result.body.substring(9, result.body.length - 1)
+            this.newslist = JSON.parse(str).BDC4QSV3wangning
           },
           error => {
-            console.log(error);
+            console.log(error)
           }
         )
         .catch(err => {
-          console.log(err);
-        });
+          console.log(err)
+        })
     },
-    sliderinterval() {
-      //图片轮播
-      var gallery = mui(".mui-slider");
+    sliderinterval () {
+      // 图片轮播
+      var gallery = mui('.mui-slider')
       gallery.slider({
-        interval: 2000 //自动轮播周期，若为0则不自动播放，默认为0；
-      });
+        interval: 2000 // 自动轮播周期，若为0则不自动播放，默认为0；
+      })
     },
-    toLink() {
-      event.currentTarget.children[0].click();
+    toLink () {
+      event.currentTarget.children[0].click()
     },
-    torouter(num) {
+    torouter (num) {
       switch (num) {
         case 0:
-          this.$router.push("/village")
-          break;
+          this.$router.push('/village')
+          break
         case 1:
-          this.$router.push("/livingpayment");
-          break;
+          this.$router.push('/livingpayment')
+          break
         case 2:
-          this.$router.push("/propertypayment");
-          break;
+          this.$router.push('/propertypayment')
+          break
         case 3:
-          this.$router.push("/liferepair");
-          break;
+          this.$router.push('/liferepair')
+          break
         case 4:
           this.$router.push('/forum')
-          break;
+          break
         case 5:
           this.$router.push('/opendoor')
-          break;
+          break
       }
     },
-    open(){
+    open () {
       this.isopen = true
     },
-    toAnnounce(){
+    toAnnounce () {
       this.$router.push('/announcedetail')
     }
   }
-};
+}
 </script>
 
 <style scoped>

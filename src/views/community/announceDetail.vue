@@ -17,13 +17,13 @@
                     <span class="iconfont  icon-dizhi1"></span>
                     <span class="item-span">XX小区</span>
                 </div>
-               
+
                  <div class="info-item">
                     <span class="iconfont icon-shijian1"></span>
                     <span class="item-span">2019-12-13 16:02</span>
                 </div>
             </div>
-            <div class="publish-content"> 
+            <div class="publish-content">
                 <span class="iconfont icon-neirongguanli"></span>
                 <p class="publish-content-p">
                     数组中正在处理的当前元素的索引。 如果提供了，则起始索引号为0，否则从索引1起始。
@@ -35,15 +35,15 @@
                 </p>
             </div>
         </div>
-       
+
     </div>
 </template>
 <script>
 import Header from '../../components/LeftHeader'
 export default {
-   components:{
-       Header
-   } 
+  components: {
+    Header
+  }
 }
 </script>
 <style scoped>
@@ -62,7 +62,7 @@ export default {
 }
 .info-item{
     height: 50px;
-    line-height: 50px; 
+    line-height: 50px;
     padding-left: 5px;
     border-bottom: 1px rgb(240, 240, 240) solid;
 }

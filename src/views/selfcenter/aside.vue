@@ -3,7 +3,7 @@
       <div id="offCanvasSideScroll" class="mui-scroll-wrapper">
         <svg class="icon icon-ziyuan" aria-hidden="true">
             <use xlink:href="#icon-ziyuan" />
-        </svg>  
+        </svg>
         <span class="tongyong">通用设置</span>
         <div class="mui-scroll">
           <ul class="mui-table-view">
@@ -34,7 +34,7 @@
     .tongyong{
         font-weight: bold;
         font-size:16px;
-        
+
     }
     .mui-scroll-wrapper{
         margin: 10px;
@@ -45,7 +45,7 @@
     }
     .icon-ziyuan{
         font-size:16px;
-       
+
     }
     .icon{
         margin-right: 5px;

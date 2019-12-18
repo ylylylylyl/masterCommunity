@@ -1,6 +1,6 @@
 export function isObject (value) {
   // eslint-disable-next-line eqeqeq
-  return typeof (value) === 'object' && Object.prototype.toString.call(value).toLowerCase() == '[object object]' && !value.length; 
+  return typeof (value) === 'object' && Object.prototype.toString.call(value).toLowerCase() == '[object object]' && !value.length
 }
 
 export function isArray (value) {

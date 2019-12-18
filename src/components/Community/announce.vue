@@ -61,8 +61,8 @@
 </template>
 <script>
 export default {
-  methods:{
-    toDetail(){
+  methods: {
+    toDetail () {
       this.$router.push('/announcedetail')
     }
   }

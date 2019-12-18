@@ -37,8 +37,6 @@
   </div>
 </template>
 
-
-
 <style scoped>
 .comm-container {
   background-color: white;
@@ -86,16 +84,16 @@
 
 </style>
 <script>
-import Header from "../../components/Header";
-import Property from "../../components/Community/property";
-import Announce from "../../components/Community/announce"
+import Header from '../../components/Header'
+import Property from '../../components/Community/property'
+import Announce from '../../components/Community/announce'
 import LostThing from '../../components/Community/lostthing'
 export default {
   components: {
     Header,
-	Property,
-	Announce,
-	LostThing
+    Property,
+    Announce,
+    LostThing
   }
-};
+}
 </script>

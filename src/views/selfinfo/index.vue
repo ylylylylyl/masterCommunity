@@ -48,9 +48,9 @@
 <script>
 import Header from '../../components/LeftHeader'
 export default {
-    components:{
-        Header
-    }
+  components: {
+    Header
+  }
 }
 </script>
 

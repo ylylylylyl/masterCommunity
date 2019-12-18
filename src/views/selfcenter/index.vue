@@ -146,41 +146,41 @@
 <script>
 import Aside from './aside'
 export default {
-  components:{
+  components: {
     Aside
   },
-  mounted() {
+  mounted () {
     // 监听点击遮罩关闭事件
-    document.getElementById("backdrop").addEventListener("tap", function() {
-      //阻止默认事件
-      event.detail.gesture.preventDefault();
-    });
+    document.getElementById('backdrop').addEventListener('tap', function () {
+      // 阻止默认事件
+      event.detail.gesture.preventDefault()
+    })
     // 左滑
-    document.getElementById("mui-inner-wrap").addEventListener("swipeleft", function() {
-        mui(".mui-off-canvas-right").offCanvas("show");
-      });
-      // 右滑
-    document.getElementById("mui-inner-wrap").addEventListener("swiperight", function() {
-        mui(".mui-off-canvas-right").offCanvas("close");
-      });
+    document.getElementById('mui-inner-wrap').addEventListener('swipeleft', function () {
+      mui('.mui-off-canvas-right').offCanvas('show')
+    })
+    // 右滑
+    document.getElementById('mui-inner-wrap').addEventListener('swiperight', function () {
+      mui('.mui-off-canvas-right').offCanvas('close')
+    })
   },
   methods: {
-    login() {
-      this.$router.push("/login");
+    login () {
+      this.$router.push('/login')
     },
-    toRouter(index) {
+    toRouter (index) {
       switch (index) {
         case 1:
-          this.$router.push("/selfinfo");
-          break;
+          this.$router.push('/selfinfo')
+          break
       }
     }
   },
-  destroyed(){
-    console.log( document.getElementsByTagName('body')[0])
+  destroyed () {
+    console.log(document.getElementsByTagName('body')[0])
     document.getElementsByTagName('body')[0].classList.remove('mui-fullscreen')
   }
-};
+}
 </script>
 <style scoped>
 .mui-content {

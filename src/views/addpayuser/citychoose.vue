@@ -59,7 +59,7 @@
     }
     .mui-col-xs-11{
         background: white;
-        
+
     }
     .mui-segmented-control.mui-segmented-control-inverted.mui-segmented-control-vertical .mui-control-item{
         border-bottom: none;
@@ -103,73 +103,71 @@
     .choose-city-container{
       margin-top: 10px;
       padding-left: 10px;
-    
-      
+
     }
 </style>
 <script>
-import Header from "../../components/LeftHeader";
+import Header from '../../components/LeftHeader'
 import BMap from 'BMap'
 export default {
   components: {
     Header
   },
-  data(){
-    return{
-      loading:false,
-      hotcity:[],
-      cityData:[],
-      chooseCityData:''
+  data () {
+    return {
+      loading: false,
+      hotcity: [],
+      cityData: [],
+      chooseCityData: ''
     }
   },
-  computed:{
-    currentCity(){
+  computed: {
+    currentCity () {
       return this.$store.state.chooseCity
     }
   },
-  mounted(){
-    this.$nextTick(()=>{
-       this.initData()
+  mounted () {
+    this.$nextTick(() => {
+      this.initData()
     })
   },
-  methods:{
-    initData(){
+  methods: {
+    initData () {
       let loading = document.querySelector('#ajaxLoading')
       loading.style.display = 'block'
       //  const root = process.env.OPEN_HOST;
-      //http://www.68party.com/app/cityList
+      // http://www.68party.com/app/cityList
       this.$http
         .get(
-          "http://www.68party.com/app/cityList"
+          'http://www.68party.com/app/cityList'
         )
         .then(
           result => {
-            if(result.body.data){
+            if (result.body.data) {
               const {data} = result.body
-              this.cityData = data.filter(item=>item.nameIndex!='热门')        
-              this.hotcity = data.filter(item=>item.nameIndex=='热门')
+              this.cityData = data.filter(item => item.nameIndex != '热门')
+              this.hotcity = data.filter(item => item.nameIndex == '热门')
               loading.style.display = 'none'
               this.loading = false
             }
           },
           error => {
-            console.log(error);
+            console.log(error)
           }
         )
         .catch(err => {
-          console.log(err);
-        });
+          console.log(err)
+        })
     },
-     goAnchor(selector) {
-        var anchor = this.$el.querySelector(selector)
-       document.documentElement.scrollTop = anchor.offsetTop
+    goAnchor (selector) {
+      var anchor = this.$el.querySelector(selector)
+      document.documentElement.scrollTop = anchor.offsetTop
     },
-    chooseCityFunc(cityName){
-      this.$store.commit('CHOOSE_CITY',cityName)
+    chooseCityFunc (cityName) {
+      this.$store.commit('CHOOSE_CITY', cityName)
       this.$router.push('/addpayuser')
-    },
-    
+    }
 
-	}
+  }
 }
 </script>

@@ -34,14 +34,14 @@
           id="item2mobile"
           class="bg md-f1 mui-slider-item mui-control-content detailInfos1 md-box md-ver"
         >
-        
+
           <Question></Question>
         </div>
         <div
           id="item3mobile"
           class="bg md-f1 mui-slider-item mui-control-content detailInfos2 md-box md-ver"
         >
-        
+
           <Share></Share>
         </div>
       </div>
@@ -80,38 +80,37 @@
   </div>
 </template>
 <script>
-import Hot from "./hot";
-import Question from "./question";
-import Share from "./share";
+import Hot from './hot'
+import Question from './question'
+import Share from './share'
 export default {
   components: {
     Hot,
     Question,
     Share
   },
-  mounted() {
-    mui(".mui-input-row input").input();
-    mui(".mui-slider").slider();
+  mounted () {
+    mui('.mui-input-row input').input()
+    mui('.mui-slider').slider()
   },
-  beforeDestroy(){
-    if(document.getElementsByClassName('mui-backdrop')[0]){
-      document.getElementsByClassName('mui-backdrop')[0].style.display = "none"
+  beforeDestroy () {
+    if (document.getElementsByClassName('mui-backdrop')[0]) {
+      document.getElementsByClassName('mui-backdrop')[0].style.display = 'none'
     }
-    
   },
-  methods:{
-    toRouter(index){
-      switch(index){
+  methods: {
+    toRouter (index) {
+      switch (index) {
         case 1:
           this.$router.push('/publishforum')
-        break;
+          break
         case 2:
-         this.$router.push('/home') 
-        break;
+          this.$router.push('/home')
+          break
       }
     }
   }
-};
+}
 </script>
 <style scoped>
 .header {
@@ -241,7 +240,6 @@ export default {
 .mui-content {
   padding: 10px;
 }
-
 
 /* .mui-slider .mui-slider-group {
   white-space: normal;

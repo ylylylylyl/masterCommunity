@@ -71,9 +71,9 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
-    
+
 </template>
 <style scoped>
     p{
@@ -90,10 +90,10 @@
         border: 1px lightgray solid;
         background: white;
         font-size:12px;
-        border-radius: 10px; 
+        border-radius: 10px;
         width: 50px;
         text-align: center;
-       
+
     }
     .item-title{
         padding: 10px;
@@ -137,13 +137,13 @@
 <script>
 import BackHeader from '../../components/LeftHeader'
 export default {
-    components:{
-       BackHeader
-    },
-    methods:{
-        goback(){
-            this.$router.go(-1)
-        }
+  components: {
+    BackHeader
+  },
+  methods: {
+    goback () {
+      this.$router.go(-1)
     }
+  }
 }
 </script>

@@ -27,20 +27,18 @@
 <script>
 import NavBar from '../../components/NavBar'
 import Header from '../../components/Header'
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from 'vuex'
 export default {
-  components:{
+  components: {
     NavBar,
     Header
   },
-  created(){
-      this.setCurCity(),
-      this.setVillage()
+  created () {
+    this.setCurCity(),
+    this.setVillage()
   },
-  methods:{
-     ...mapActions(["setCurCity","setVillage"]),
+  methods: {
+    ...mapActions(['setCurCity', 'setVillage'])
   }
 }
 </script>
-
-

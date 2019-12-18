@@ -7,9 +7,9 @@
             </div>
             <div class="header-right">
                 <span class="living-title" @click="torecords()"> 缴费记录</span>
-               
+
             </div>
-            
+
         </div>
         <div class="mui-card">
             <!--页眉，放置标题-->
@@ -78,7 +78,7 @@
         height: 150px;
         background-color: #6E8B3D;
         justify-content: space-between;
-        
+
         padding-top: 10px;
 
     }
@@ -98,14 +98,14 @@
         position: absolute;
         top: 60px;
         width: 95%;
-        
+
     }
     .mui-icon-more{
       font-weight: bolder;
     }
     .mui-card-header:after, .mui-card-footer:before{
         height: 0;/**去掉card中间横线 */
-        
+
     }
     .pay-item-top{
         display: flex;
@@ -114,7 +114,7 @@
         font-size: 30px;
         margin-left: 10px;
         margin-right: 20px;
-    } 
+    }
     .pay-title{
         font-weight: bold;
     }
@@ -123,7 +123,7 @@
         justify-content: space-between;
         margin-top: 20px;
         border-bottom: 1px rgb(228, 225, 225) solid;
-    }   
+    }
     /* 图表 */
     .echart{
         top: 200px;
@@ -132,77 +132,76 @@
 </style>
 <script>
 export default {
-    mounted(){
-        this.echartsinit()
+  mounted () {
+    this.echartsinit()
+  },
+  methods: {
+    goback () {
+      this.$router.go(-1)
     },
-    methods:{
-        goback(){
-            this.$router.go(-1)
+    echartsinit () {
+      var echarts = require('echarts')
+      // 基于准备好的dom，初始化echarts实例
+      var myChart = echarts.init(document.getElementById('echart'))
+      myChart.setOption({
+        title: {
+          text: '统计'
         },
-        echartsinit(){
-            var echarts = require('echarts');
-            // 基于准备好的dom，初始化echarts实例
-            var myChart = echarts.init(document.getElementById('echart'));
-            myChart.setOption({
-                title: {
-                    text: '统计'
-                },
-                tooltip: {
-                    trigger: 'axis'
-                },
-                legend: {
-                    data:['水费','电费','气费']
-                },
-                grid: {
-                    left: '3%',
-                    right: '4%',
-                    bottom: '3%',
-                    containLabel: true
-                },
-                toolbox: {
-                    feature: {
-                        saveAsImage: {}
-                    }
-                },
-                xAxis: {
-                    type: 'category',
-                    boundaryGap: false,
-                    data: ['1月','2月','3月','4月','5月','6月']
-                },
-                yAxis: {
-                    type: 'value'
-                },
-                series: [
-                    {
-                        name:'水费',
-                        type:'line',
-                        stack: '总量',
-                        data:[120, 132, 101, 134, 90, 230, 210]
-                    },
-                    {
-                        name:'电费',
-                        type:'line',
-                        stack: '总量',
-                        data:[220, 182, 191, 234, 290, 330, 310]
-                    },
-                    {
-                        name:'气费',
-                        type:'line',
-                        stack: '总量',
-                        data:[150, 232, 201, 154, 190, 330, 410]
-                    },
-                    
-                ]
-            });
+        tooltip: {
+          trigger: 'axis'
         },
-        torecords(){
-            this.$router.push('/paymentrecords')
+        legend: {
+          data: ['水费', '电费', '气费']
         },
-        toAddPay(){
-            this.$router.push('/addpayuser')
-        }
-        
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
+        },
+        xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          data: ['1月', '2月', '3月', '4月', '5月', '6月']
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [
+          {
+            name: '水费',
+            type: 'line',
+            stack: '总量',
+            data: [120, 132, 101, 134, 90, 230, 210]
+          },
+          {
+            name: '电费',
+            type: 'line',
+            stack: '总量',
+            data: [220, 182, 191, 234, 290, 330, 310]
+          },
+          {
+            name: '气费',
+            type: 'line',
+            stack: '总量',
+            data: [150, 232, 201, 154, 190, 330, 410]
+          }
 
+        ]
+      })
+    },
+    torecords () {
+      this.$router.push('/paymentrecords')
+    },
+    toAddPay () {
+      this.$router.push('/addpayuser')
     }
+
+  }
 }
 </script>

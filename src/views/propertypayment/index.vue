@@ -15,12 +15,12 @@
                 </select>
             </div>
         </div>
-        
+
         <div class="payment-container">
             <div class="payment-item">
                     <div class="payment-item-date">
                         <span>2019年02月</span>
-                        
+
                     </div>
                     <div class="payment-item-des">
                         <div>
@@ -35,7 +35,7 @@
             <div class="payment-item">
                 <div class="payment-item-date">
                     <span>2019年02月</span>
-                    
+
                 </div>
                 <div class="payment-item-des">
                     <div>
@@ -50,7 +50,7 @@
             <div class="payment-item">
                 <div class="payment-item-date">
                     <span>2019年02月</span>
-                    
+
                 </div>
                 <div class="payment-item-des">
                     <div>
@@ -65,7 +65,7 @@
             <div class="payment-item">
                 <div class="payment-item-date">
                     <span>2019年02月</span>
-                    
+
                 </div>
                 <div class="payment-item-des">
                     <div>
@@ -78,13 +78,13 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="payment-footer">
             <div>
                 <span>合计：</span>
                 <span class="total-pay" >300.00</span>
             </div>
-            
+
             <button type="button" class="mui-btn submit">提交订单</button>
         </div>
     </div>
@@ -92,22 +92,22 @@
 <script>
 import BackHeader from '../../components/LeftHeader'
 export default {
-    components:{
-        BackHeader
-    },
-    data(){
-        return{
-            isopen:false
-        }
-    },
-    methods:{
-        goback(){
-            this.$router.go(-1)
-        },
-        handleChange(){
-            this.isopen = !this.isopen
-        }
+  components: {
+    BackHeader
+  },
+  data () {
+    return {
+      isopen: false
     }
+  },
+  methods: {
+    goback () {
+      this.$router.go(-1)
+    },
+    handleChange () {
+      this.isopen = !this.isopen
+    }
+  }
 }
 </script>
 <style scoped>
@@ -154,14 +154,14 @@ export default {
         display: flex;
         align-items: center;
         color: gray;
-        
+
     }
     .payment-item-des{
         height: 50px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-       
+
     }
     .item-des-pay{
         display: flex;
@@ -205,5 +205,5 @@ export default {
         position: fixed;
         width: 100%;
     }
-   
+
 </style>

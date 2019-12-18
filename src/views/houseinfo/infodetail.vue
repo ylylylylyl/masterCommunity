@@ -69,16 +69,16 @@
     <div class="btn-container">
         <button type="button" class="mui-btn mui-btn-outlined pay-btn">缴费</button>
     </div>
-    
+
   </div>
 </template>
 <script>
-import Header from "../../components/LeftHeader";
+import Header from '../../components/LeftHeader'
 export default {
   components: {
     Header
   }
-};
+}
 </script>
 <style scoped>
 .item {

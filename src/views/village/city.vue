@@ -50,47 +50,47 @@
   </div>
 </template>
 <script>
-import { searchFromCity } from "../../utils/util";
+import { searchFromCity } from '../../utils/util'
 export default {
-  data() {
+  data () {
     return {
       loading: false,
       rightData: [],
-      area:'',
-      province:this.$route.query.province,
-      city:this.$route.query.city,
-      leftData:this.$route.query.left
-    };
+      area: '',
+      province: this.$route.query.province,
+      city: this.$route.query.city,
+      leftData: this.$route.query.left
+    }
   },
-  mounted() {
-    this.search(this.city);
+  mounted () {
+    this.search(this.city)
   },
   methods: {
-    search(value) {
+    search (value) {
       this.city = value
-      this.loading = true;
+      this.loading = true
       searchFromCity(value)
         .then(res => {
-          this.loading = false;
+          this.loading = false
           if (res.status) {
-            this.rightData = res.districts[0].districts;
+            this.rightData = res.districts[0].districts
           }
-        });
-    },
-    searchArea(area){
-       this.area = area
-       this.$router.push({
-         path:'/village/area',
-         query:{
-           province:this.province,
-           city:this.city,
-           area:this.area,
-           left:this.rightData
-         }
         })
-     }
+    },
+    searchArea (area) {
+      this.area = area
+      this.$router.push({
+        path: '/village/area',
+        query: {
+          province: this.province,
+          city: this.city,
+          area: this.area,
+          left: this.rightData
+        }
+      })
+    }
   }
-};
+}
 </script>
 <style scoped>
 .city-title {

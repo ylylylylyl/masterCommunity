@@ -24,15 +24,15 @@
         height: 120px;
 
     }
-   
+
 </style>
 <script>
 export default {
-  mounted() {
+  mounted () {
     // mui("#picture").on("tap", "li>a", function() {
     //   mui.alert('你刚点击了"' + this.innerHTML + '"按钮');
     //   //  mui("#picture").popover('toggle');//这是可以用来关闭底部弹窗的事件
     // });
   }
-};
+}
 </script>

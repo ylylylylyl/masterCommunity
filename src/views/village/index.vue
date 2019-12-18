@@ -11,19 +11,19 @@
   </div>
 </template>
 <script>
-import {mapGetters,mapActions} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 import Province from './province'
 export default {
-  components:{
+  components: {
     Province
   },
-    computed:{
-        ...mapGetters(['village','curProvince'])
-    },
-  mounted() {
-    mui(".mui-input-row input").input();
+  computed: {
+    ...mapGetters(['village', 'curProvince'])
+  },
+  mounted () {
+    mui('.mui-input-row input').input()
   }
-};
+}
 </script>
 <style scoped>
 .header {

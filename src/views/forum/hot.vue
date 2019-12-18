@@ -21,37 +21,37 @@
                 <img class="des-img" src="../../assets/image/self-bg.jpg"/>
             </div>
         </div>
-        
+
     </div>
 </template>
 <script>
 
 export default {
-    methods:{
-        toDetail(item){
-             this.$router.push({
-                path: '/forumdetail',
-                query: {
-                    forumid: item.forumid,
-                    userid: item.userid,
-                },
-            });
-            // this.$router.push('/forumdetail'+forumid)
+  methods: {
+    toDetail (item) {
+      this.$router.push({
+        path: '/forumdetail',
+        query: {
+          forumid: item.forumid,
+          userid: item.userid
         }
-    },
-    data(){
-        return{
-            forum:[
-                {userid:'001',forumid:'1'},
-                {userid:'002',forumid:'2'},
-                {userid:'003',forumid:'3'}
-            ]
-        }
+      })
+      // this.$router.push('/forumdetail'+forumid)
     }
+  },
+  data () {
+    return {
+      forum: [
+        {userid: '001', forumid: '1'},
+        {userid: '002', forumid: '2'},
+        {userid: '003', forumid: '3'}
+      ]
+    }
+  }
 }
 </script>
 <style scoped>
- 
+
   .forum-item{
       display: flex;
       justify-content: space-between;
@@ -114,5 +114,5 @@ export default {
   .zan-span{
       color: darkred;
   }
-  
+
 </style>

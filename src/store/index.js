@@ -80,19 +80,19 @@ const actions = {
       .then(
         result => {
           console.log(result)
-          if (result.statusText == "OK") {
+          if (result.statusText == 'OK') {
             const data = result.data.districts[0].districts
             console.log(data)
             commit(VILLAGE, data)
           }
         },
         error => {
-          console.log(error);
+          console.log(error)
         }
       )
       .catch(err => {
-        console.log(err);
-      });
+        console.log(err)
+      })
   }
 }
 
