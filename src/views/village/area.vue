@@ -81,22 +81,23 @@ export default {
   },
   methods: {
     search (cityname) {
+      const root = process.env.API_HOST
       this.loading = true
       // //  https://restapi.amap.com/v3/config/district?key=8224cb94492d645e544a7b13df3ea7db&&keywords=%E5%9B%9B%E5%B7%9D%E7%9C%81
-      // this.$ajax
-      //   .get({
-      //     url: "https://restapi.amap.com/v3/config/district",
-      //     params: {
-      //       key: "8224cb94492d645e544a7b13df3ea7db",
-      //       keywords: value
-      //     }
-      //   })
-      //   .then(res => {
-      //     this.loading = false;
-      //     if (res.status) {
-      //       this.rightData = res.districts[0].districts;
-      //     }
-      //   });
+      this.$ajax
+        .post({
+          url: root + '/village/getVillage',
+          data: {
+            cityname: cityname
+          }
+        })
+        .then(res => {
+          console.log(res)
+          this.loading = false
+          if (res.status) {
+            // this.rightData = res.districts[0].districts;
+          }
+        });
     },
     chooseArea (area) {
       this.$router.push({

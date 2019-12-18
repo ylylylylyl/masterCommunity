@@ -166,7 +166,7 @@ export default {
       }
       this.$ajax.post({
         // http://localhost:8081/regist
-        url: 'http://localhost:8081/' + 'user/regist',
+        url: 'http://localhost:8080/' + 'user/regist',
         data: user
 
       }).then(result => {
