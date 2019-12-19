@@ -156,6 +156,7 @@ export default {
 
       }).then(result => {
         if (result.status) {
+          this.$store.commit('CUR_USERINFO', result.object)
           this.$router.push('/home')
         } else {
           this.tip = result.msg

@@ -13,13 +13,15 @@ const VILLAGE = 'VILLAGE'
 const CUR_PROVINCE = 'CUR_PROVINCE' // 当前省份
 const CUR_CITY = 'CUR_CITY' // 当前城市
 const CHOOSE_VILLAGE = 'CHOOSE_VILLAGE'// 所选择的小区
+const CUR_USERINFO = 'CUR_USERINFO'
 
 const state = {
   chooseCity: '',
   village: '',
   curProvince: '',
   curCity: '',
-  chooseVillage: '请选择小区'
+  chooseVillage: '请选择小区',
+  curUserInfo: {} // 当前用户信息
 }
 
 const getters = {
@@ -27,7 +29,8 @@ const getters = {
   village: state => state.village,
   curProvince: state => state.curProvince,
   curCity: state => state.city,
-  chooseVillage: state => state.chooseVillage
+  chooseVillage: state => state.chooseVillage,
+  curUserInfo: state => state.curUserInfo
 }
 
 const mutations = {
@@ -45,6 +48,10 @@ const mutations = {
   },
   [CHOOSE_VILLAGE] (state, str) {
     state.chooseVillage = str
+  },
+  [CUR_USERINFO] (state, obj) {
+    state.curUserInfo = obj
+    console.log(state.curUserInfo)
   }
 }
 
@@ -79,10 +86,8 @@ const actions = {
       )
       .then(
         result => {
-          console.log(result)
           if (result.statusText == 'OK') {
             const data = result.data.districts[0].districts
-            console.log(data)
             commit(VILLAGE, data)
           }
         },

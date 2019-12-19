@@ -37,14 +37,20 @@
             <span class="mui-icon mui-icon-spinner-cycle mui-spin"></span>
           </div>玩命加载中...
         </div>
-        <div class="mui-control-content" v-if="!loading">
+        <div class="no-content" v-if="!loading&&rightData==null">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-apptubiao-" />
+          </svg>
+          <span>该区域暂未开通相关社区</span>
+        </div>
+        <div class="mui-control-content" v-if="!loading&&rightData!=null">
           <ul class="mui-table-view">
             <li
               class="mui-table-view-cell"
-              v-for="(item,key) in rightData"
-              :key="key"
+              v-for="item in rightData"
+              :key="item.villageid"
               @click="chooseArea(item)"
-            >{{item}}</li>
+            >{{item.villagename}}</li>
           </ul>
         </div>
       </div>
@@ -52,17 +58,18 @@
   </div>
 </template>
 <script>
+import {mapGetters} from 'vuex'
 export default {
   data () {
     return {
+      userid: '',
       loading: false,
-      rightData: [
-        '祥和里', '123', '456'
-      ],
+      rightData: [],
       queryleft: ''
     }
   },
   computed: {
+    ...mapGetters(['curUserInfo']),
     province () {
       return this.$route.query.province
     },
@@ -83,7 +90,6 @@ export default {
     search (cityname) {
       const root = process.env.API_HOST
       this.loading = true
-      // //  https://restapi.amap.com/v3/config/district?key=8224cb94492d645e544a7b13df3ea7db&&keywords=%E5%9B%9B%E5%B7%9D%E7%9C%81
       this.$ajax
         .post({
           url: root + '/village/getVillage',
@@ -92,18 +98,34 @@ export default {
           }
         })
         .then(res => {
-          console.log(res)
           this.loading = false
           if (res.status) {
-            // this.rightData = res.districts[0].districts;
+            this.rightData = res.result
+          } else {
+            this.rightData = null
           }
-        });
+        })
     },
-    chooseArea (area) {
+    chooseArea (item) {
+      const root = process.env.API_HOST
+      console.log(this.curUserInfo)
+      const postData = {
+        userid: this.curUserInfo.userid,
+        lastloginchoose: item.villageid
+      }
       this.$router.push({
         path: '/home'
       })
-      this.$store.commit('CHOOSE_VILLAGE', area)
+      this.$store.commit('CHOOSE_VILLAGE', item.villagename)
+      this.$ajax.post({
+        url: root + 'user/chooseVillage',
+        data: postData
+      })
+        .then(res => {
+          if (res.status) {
+
+          }
+        })
     },
     async goCity () {
       await this.goCitySearch(this.province)
@@ -186,5 +208,20 @@ export default {
 }
 .mui-spinner {
   margin-bottom: 15px;
+}
+.no-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.no-content>.icon{
+  font-size: 80px;
+  margin-bottom: 20px;
+}
+.no-content span{
+  font-weight: bold;
+  color: #6e8b3d;
 }
 </style>

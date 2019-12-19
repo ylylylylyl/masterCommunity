@@ -118,6 +118,13 @@
       "unicode_decimal": 58901
     },
     {
+      "icon_id": "3500061",
+      "name": "没有",
+      "font_class": "apptubiao-",
+      "unicode": "e690",
+      "unicode_decimal": 59024
+    },
+    {
       "icon_id": "3555646",
       "name": "论坛资讯",
       "font_class": "luntanzixun",
