@@ -114,7 +114,8 @@ export default {
         lastloginchoose: item.villageid
       }
       this.$router.push({
-        path: '/home'
+        // path: '/home'
+        path: '/bindhouse?villagename=' + item.villagename
       })
       this.$store.commit('CHOOSE_VILLAGE', item.villagename)
       this.$ajax.post({

@@ -105,7 +105,10 @@ export default new Router({
     {
       path: '/bindhouse',
       name: 'bindhouse',
-      component: BindHouse
+      component: BindHouse,
+      meta: {
+        keepAlive: true
+      }
 
     },
     {

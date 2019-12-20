@@ -15,7 +15,9 @@
               <span>小区</span>
             </div>
             <div>
-              <span id="comm-result">点击选择</span>
+              
+              <span id="comm-result" v-if="!$route.query.villagename">点击选择</span>
+              <span id="comm-result" v-if="$route.query.villagename">{{$route.query.villagename}}</span>
               <span class="mui-icon mui-icon-arrowright"></span>
             </div>
           </button>
@@ -32,7 +34,7 @@
             <span class="input-left">房屋号</span>
             <input type="text" class="mui-input-clear inout-right" placeholder="请输入房屋号" />
           </div>
-           <div class="input-container">
+          <div class="input-container">
             <span class="input-left">房屋面积</span>
             <input type="text" class="mui-input-clear inout-right" placeholder="请输入房屋面积" />
           </div>
@@ -40,15 +42,15 @@
       </div>
       <div class="user-info">
         <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-yonghu" />
-          </svg>
-          <span>用户信息</span>
-                 <div class="info-content">
+          <use xlink:href="#icon-yonghu" />
+        </svg>
+        <span>用户信息</span>
+        <div class="info-content">
           <div class="input-container">
             <span class="input-left">用户名</span>
             <input type="text" class="mui-input-clear inout-right" placeholder="请输入房屋所有人" />
           </div>
-           <div class="input-container">
+          <div class="input-container">
             <span class="input-left">身份证号</span>
             <input type="text" class="mui-input-clear inout-right" placeholder="请输入房屋所有人身份证号" />
           </div>
@@ -57,7 +59,6 @@
       <div class="btn-container">
         <button type="button" class="mui-btn mui-btn-primary">提交</button>
       </div>
-
     </div>
   </div>
 </template>
@@ -79,34 +80,36 @@
   border-bottom: 1px whitesmoke solid;
   margin-bottom: 0;
 }
-.input-container{
-    display: flex;
-    height: 40px;
-    justify-content: space-between;
-    align-items: center;
+.input-container {
+  display: flex;
+  height: 40px;
+  justify-content: space-between;
+  align-items: center;
 }
-.input-left{
-    flex: 1
+.input-left {
+  flex: 1;
 }
-.inout-right{
-    flex: 4;
-    border: none;
-    margin-bottom: 0px;
+.inout-right {
+  flex: 4;
+  border: none;
+  margin-bottom: 0px;
 }
-.house-info,.user-info{
+.house-info,
+.user-info {
   margin: 10px;
 }
-.btn-container{
+.btn-container {
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
-.btn-container .mui-btn{
+.btn-container .mui-btn {
   width: 80%;
   height: 40px;
-  background: #6E8B3D;
+  background: #6e8b3d;
   border: none;
 }
+
 
 </style>
 <script>
@@ -115,37 +118,42 @@ export default {
   components: {
     Header
   },
-  data () {
+  created () {
+    console.log("加载了")
+  },
+  data() {
     return {
       typedata: [
-        { value: 1, text: '东和春天' },
-        { value: 2, text: '白河左岸' },
-        { value: 3, text: '海棠湾' },
-        { value: 4, text: '祥和里' },
-        { value: 5, text: '海棠公馆' },
-        { value: 6, text: '其他' }
+        { value: 1, text: "东和春天" },
+        { value: 2, text: "白河左岸" },
+        { value: 3, text: "海棠湾" },
+        { value: 4, text: "祥和里" },
+        { value: 5, text: "海棠公馆" },
+        { value: 6, text: "其他" }
       ],
       buildingdata: [
-        { value: 1, text: '一单元' },
-        { value: 2, text: '二单元' },
-        { value: 3, text: '三单元' },
-        { value: 4, text: '四单元' },
-        { value: 5, text: '五单元' },
-        { value: 6, text: '六单元' }
-      ]
-    }
+        { value: 1, text: "一单元" },
+        { value: 2, text: "二单元" },
+        { value: 3, text: "三单元" },
+        { value: 4, text: "四单元" },
+        { value: 5, text: "五单元" },
+        { value: 6, text: "六单元" }
+      ],
+      villagename: this.$route.query.villagename
+    };
   },
   methods: {
     initRepair () {
-      var picker = new mui.PopPicker()
-      picker.setData(this.typedata)
-      var showUserPickerButton = document.getElementById('comm-btn')
-      var userResult = document.getElementById('comm-result')
-      picker.show(function (items) {
-        userResult.innerText = items[0].text
-        // 返回 false 可以阻止选择框的关闭
-        // return false;
-      })
+      this.$router.push('/village')
+      // var picker = new mui.PopPicker();
+      // picker.setData(this.typedata);
+      // var showUserPickerButton = document.getElementById("comm-btn");
+      // var userResult = document.getElementById("comm-result");
+      // picker.show(function(items) {
+      // userResult.innerText = this.$route.query.villagename
+      //   // 返回 false 可以阻止选择框的关闭
+      //   // return false;
+      // });
     },
     initBuilding () {
       var picker = new mui.PopPicker()
@@ -153,11 +161,11 @@ export default {
       var showUserPickerButton = document.getElementById('building-btn')
       var userResult = document.getElementById('building-result')
       picker.show(function (items) {
-        userResult.innerText = items[0].text
+        userResult.innerText = items[0].text;
         // 返回 false 可以阻止选择框的关闭
         // return false;
-      })
+      });
     }
   }
-}
+};
 </script>

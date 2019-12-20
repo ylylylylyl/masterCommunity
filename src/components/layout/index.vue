@@ -2,9 +2,12 @@
   <div class="body">
 
     <div class="content-container" >
-      <transition name="transitionRouter">
-        <router-view></router-view>
-      </transition>
+      <!-- <transition name="transitionRouter"> -->
+        <keep-alive>
+          <router-view v-if="$route.meta.keepAlive"></router-view>
+        </keep-alive>
+        <router-view v-if="!$route.meta.keepAlive"></router-view>
+      <!-- </transition> -->
     </div>
 
     <NavBar  v-show="$route.name!=='propertypayment'">
