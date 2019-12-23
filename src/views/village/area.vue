@@ -108,14 +108,13 @@ export default {
     },
     chooseArea (item) {
       const root = process.env.API_HOST
-      console.log(this.curUserInfo)
       const postData = {
         userid: this.curUserInfo.userid,
         lastloginchoose: item.villageid
       }
       this.$router.push({
         // path: '/home'
-        path: '/bindhouse?villagename=' + item.villagename
+        path: '/bindhouse?villagename=' + item.villagename + '&&villageid=' + item.villageid
       })
       this.$store.commit('CHOOSE_VILLAGE', item.villagename)
       this.$ajax.post({
