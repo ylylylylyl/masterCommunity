@@ -53,6 +53,16 @@
             <span class="input-left">身份证号</span>
             <input type="text" v-model="postData.cardId" class="mui-input-clear inout-right" placeholder="请输入房屋所有人身份证号" />
           </div>
+           <div class="input-container">
+            <span class="input-left">联系电话</span>
+            <input type="text" v-model="postData.phoneNumber" class="mui-input-clear inout-right" placeholder="请输入房屋所有人联系电话" />
+          </div>
+          <div class="input-container">
+            <span class="input-left">设为默认地址</span>
+            <div id="mySwitch" class="mui-switch mui-switch-mini mui-active">
+              <div class="mui-switch-handle"></div>
+            </div>
+          </div>
           <span class="tip">{{tip}}</span>
         </div>
       </div>
@@ -145,7 +155,10 @@ export default {
         houseRoom: '', // 房屋号
         cardId: '', // 身份证号
         houseArea: '', // 房屋面积
-        houseOwner: '' // 房屋所有人
+        houseOwner: '', // 房屋所有人
+        status: 1, // 是否设为默认
+        phoneNumber: '', // 联系电话
+        chooseAddr: '' // 选择的具体地址
       },
       tip: '' // 提示文字
     }
@@ -160,7 +173,21 @@ export default {
     }
   },
   mounted () {
-    console.log(this.curUserInfo)
+    mui('.mui-switch')['switch']()
+    // var isActive = document.getElementById('mySwitch').classList.contains('mui-active')
+    // if (isActive) {
+    //   console.log('打开状态')
+    // } else {
+    //   console.log('关闭状态')
+    // }
+    document.getElementById('mySwitch').addEventListener('toggle', event => {
+      if (event.detail.isActive) {
+        this.postData.status = 1
+      } else {
+        this.postData.status = 0
+      }
+      console.log(this.postData.status)
+    })
   },
   watch: {
     villageId (val) {
@@ -208,13 +235,19 @@ export default {
         this.tip = '请输入身份证号码'
         return
       }
+      if (this.postData.phoneNumber === null || this.postData.phoneNumber === '') {
+        this.tip = '请输入手机号码'
+        return
+      }
       this.tip = null
       this.postData.userid = this.curUserInfo.userid
       this.postData.village = Number(this.postData.village)
       this.postData.cardId = Number(this.postData.cardId)
       this.postData.houseArea = Number(this.postData.houseArea)
-      console.log(this.postData)
+      this.postData.chooseAddr = localStorage.getItem('chooseProvince') + localStorage.getItem('chooseCity') + localStorage.getItem('chooseArea') + this.villagename
+      this.postData.phoneNumber = Number(this.postData.phoneNumber)
       const root = process.env.API_HOST
+      console.log(this.postData)
       this.$ajax.post({
         url: root + 'bindhouse/bindhousebyuser',
         data: this.postData

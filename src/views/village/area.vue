@@ -89,6 +89,7 @@ export default {
   methods: {
     search (cityname) {
       const root = process.env.API_HOST
+      localStorage.setItem('chooseArea', cityname)
       this.loading = true
       this.$ajax
         .post({

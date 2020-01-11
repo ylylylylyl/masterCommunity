@@ -150,19 +150,6 @@
 
             <img :src="news.imgsrc" />
           </div>
-          <!-- <div class="news news-style2">
-                  <p>[提醒]啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
-                  <div class="style2-img">
-                      <img src="../../assets/image/1.jpg"/>
-                      <img src="../../assets/image/1.jpg"/>
-                      <img src="../../assets/image/1.jpg"/>
-                  </div>
-
-          </div>-->
-          <!-- <div class="news news-style3">
-                  <p>[提醒]啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
-                  <img src="../../assets/image/1.jpg"/>
-          </div>-->
         </div>
       </div>
     </div>
@@ -178,7 +165,8 @@ export default {
   data () {
     return {
       newslist: [],
-      isopen: false
+      isopen: false,
+      chooseVillage: ''
     }
   },
   components: {
@@ -186,7 +174,8 @@ export default {
     Tele
   },
   computed: {
-    ...mapState(['chooseVillage'])
+    // ...mapState(['chooseVillage'])
+    ...mapState(['curUserInfo'])
   },
   updated () {
     this.sliderinterval()
@@ -194,6 +183,7 @@ export default {
   mounted () {
     this.muinit()
     this.getNews()
+    this.getDefaultVill()
   },
   methods: {
     muinit () {
@@ -262,6 +252,19 @@ export default {
     },
     toAnnounce () {
       this.$router.push('/announcedetail')
+    },
+    getDefaultVill () {
+      console.log(this.curUserInfo.userid)
+      const root = process.env.API_HOST
+      this.$ajax.post({
+        url: root + 'bindhouse/selectdefault',
+        data: {
+          userid: this.curUserInfo.userid
+        }
+      })
+        .then(res => {
+          this.chooseVillage = res.result
+        })
     }
   }
 }

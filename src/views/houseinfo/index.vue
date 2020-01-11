@@ -6,39 +6,50 @@
            <p @click="$router.push('/bindhouse')">绑定房屋</p>
        </header>
        <div class="item-container">
-           <div class="item">
+           <div class="item" v-for="item in bindHouseList" :key="item.binid">
                <div class="item-self">
-                   <span>业主：海阔天空</span>
-                   <span>18780566642</span>
+                   <span>业主：{{item.houseowner}}</span>
+                   <span>{{item.phonenumber}}</span>
                </div>
                <div>
-                   <span>房号：1-123</span>
+                   <span>房号：{{item.house}}</span>
                </div>
                <div class="item-addr">
-                   <span>住址：四川省成都市锦江区</span>
+                   <span>住址：{{item.chooseaddr}}</span>
                    <span class="detail-span" @click="$router.push('/houseinfodet')">查看详情</span>
-               </div>
-           </div>
-            <div class="item">
-               <div class="item-self">
-                   <span>业主：海阔天空</span>
-                   <span>18780566642</span>
-               </div>
-               <div>
-                   <span>房号：1-123</span>
-               </div>
-               <div class="item-addr">
-                   <span>住址：四川省成都市锦江区</span>
-                   <span class="detail-span">查看详情</span>
                </div>
            </div>
        </div>
     </div>
 </template>
 <script>
+import {mapGetters} from 'vuex'
 export default {
-  components: {
-
+  mounted () {
+    this.init()
+  },
+  data () {
+    return {
+      bindHouseList: []
+    }
+  },
+  computed: {
+    ...mapGetters(['curUserInfo'])
+  },
+  methods: {
+    //   获取绑定的房屋信息
+    init () {
+      const root = process.env.API_HOST
+      this.$ajax.post({
+        url: root + 'bindhouse/selectbindhouse',
+        data: {
+          userid: this.curUserInfo.userid
+        }
+      })
+        .then(res => {
+          this.bindHouseList = res.result
+        })
+    }
   }
 }
 </script>
