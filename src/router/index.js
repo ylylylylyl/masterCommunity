@@ -93,12 +93,12 @@ export default new Router({
       component: ReportRecords
     },
     {
-      path: '/houseinfo',
+      path: '/houseinfo/',
       name: 'houseinfo',
       component: HouseInfo
     },
     {
-      path: '/houseinfodet',
+      path: '/houseinfodet/:bindid',
       name: 'houseinfodet',
       component: HouseInfoDetail
     },

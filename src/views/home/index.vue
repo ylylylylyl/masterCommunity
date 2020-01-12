@@ -165,8 +165,7 @@ export default {
   data () {
     return {
       newslist: [],
-      isopen: false,
-      chooseVillage: ''
+      isopen: false
     }
   },
   components: {
@@ -174,8 +173,13 @@ export default {
     Tele
   },
   computed: {
-    // ...mapState(['chooseVillage'])
+    ...mapState(['chooseVillage']),
     ...mapState(['curUserInfo'])
+  },
+  watch: {
+    chooseVillage (val) {
+      console.log(val)
+    }
   },
   updated () {
     this.sliderinterval()
@@ -254,17 +258,18 @@ export default {
       this.$router.push('/announcedetail')
     },
     getDefaultVill () {
-      console.log(this.curUserInfo.userid)
-      const root = process.env.API_HOST
-      this.$ajax.post({
-        url: root + 'bindhouse/selectdefault',
-        data: {
-          userid: this.curUserInfo.userid
-        }
-      })
-        .then(res => {
-          this.chooseVillage = res.result
+      if (this.chooseVillage == null) {
+        const root = process.env.API_HOST
+        this.$ajax.post({
+          url: root + 'bindhouse/selectdefault',
+          data: {
+            userid: this.curUserInfo.userid
+          }
         })
+          .then(res => {
+            this.$store.commit('CHOOSE_VILLAGE', res.result)
+          })
+      }
     }
   }
 }

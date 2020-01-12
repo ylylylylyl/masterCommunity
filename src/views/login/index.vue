@@ -262,6 +262,7 @@
 
 <script>
 import {PHONE_REG} from '../../utils/rej'
+import {mapState} from 'vuex'
 export default {
   mounted () {
     // 解决mui-input框不刷新无icon问题
@@ -274,6 +275,9 @@ export default {
       tip: '',
       root: process.env.API_HOST
     }
+  },
+  computed: {
+    ...mapState(['chooseVillage'])
   },
   watch: {
     userphone (val) {
@@ -330,15 +334,18 @@ export default {
         userid: userid
       }
       this.$ajax.post({
-        url: this.root + 'bindhouse/selectbindhouse',
+        url: this.root + 'bindhouse/selectdefault',
         data: postData
-      }).then(res => {
-        if (res.status) {
-          this.$router.push('/home')
-        } else {
-          this.$router.push('/bindhouse')
-        }
       })
+        .then(res => {
+          if (res.status) {
+            console.log(res.result)
+            this.$store.commit('CHOOSE_VILLAGE', res.result)
+            this.$router.push('/home')
+          } else {
+            this.$router.push('/bindhouse')
+          }
+        })
     }
   }
 }

@@ -20,7 +20,7 @@ const state = {
   village: '',
   curProvince: '',
   curCity: '',
-  chooseVillage: '请选择小区',
+  chooseVillage: null,
   curUserInfo: {} // 当前用户信息
 }
 
@@ -47,6 +47,7 @@ const mutations = {
     state.curProvince = str
   },
   [CHOOSE_VILLAGE] (state, str) {
+    console.log(str)
     state.chooseVillage = str
   },
   [CUR_USERINFO] (state, obj) {

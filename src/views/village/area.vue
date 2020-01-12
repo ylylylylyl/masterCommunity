@@ -117,7 +117,7 @@ export default {
         // path: '/home'
         path: '/bindhouse?villagename=' + item.villagename + '&&villageid=' + item.villageid
       })
-      this.$store.commit('CHOOSE_VILLAGE', item.villagename)
+      // this.$store.commit('CHOOSE_VILLAGE', item.villagename)
       this.$ajax.post({
         url: root + 'user/chooseVillage',
         data: postData

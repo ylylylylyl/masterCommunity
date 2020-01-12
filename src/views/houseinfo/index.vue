@@ -16,7 +16,7 @@
                </div>
                <div class="item-addr">
                    <span>住址：{{item.chooseaddr}}</span>
-                   <span class="detail-span" @click="$router.push('/houseinfodet')">查看详情</span>
+                   <span class="detail-span" @click="$router.push(`/houseinfodet/${item.bindid}`)">查看详情</span>
                </div>
            </div>
        </div>
