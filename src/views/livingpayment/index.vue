@@ -26,7 +26,7 @@
                         </svg>
                         <div>
                             <span class="pay-title">燃气费</span>
-                            <p>0234567</p>
+                            <p>{{livingnumid}}</p>
                         </div>
                     </div>
                     <div>
@@ -40,7 +40,7 @@
                         </svg>
                         <div>
                             <span class="pay-title">电费</span>
-                            <p>0234567</p>
+                            <p>{{livingnumid}}</p>
                         </div>
                     </div>
                     <div>
@@ -54,7 +54,7 @@
                         </svg>
                         <div>
                             <span class="pay-title">水费</span>
-                            <p>0234567</p>
+                            <p>{{livingnumid}}</p>
                         </div>
                     </div>
                     <div>
@@ -134,6 +134,13 @@
 export default {
   mounted () {
     this.echartsinit()
+    this.paymentinit()
+  },
+  data () {
+    return {
+      root: process.env.API_HOST,
+      livingnumid: '' // 户号
+    }
   },
   methods: {
     goback () {
@@ -194,6 +201,18 @@ export default {
 
         ]
       })
+    },
+    paymentinit () {
+      const bindid = localStorage.getItem('bindid')
+      this.$ajax.post({
+        url: this.root + 'bindhouse/selectdetail',
+        data: {bindid: Number(bindid)}
+      })
+        .then(res => {
+          if (res.status) {
+            this.livingnumid = res.object.livingnumid
+          }
+        })
     },
     torecords () {
       this.$router.push('/paymentrecords')

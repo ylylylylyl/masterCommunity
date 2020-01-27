@@ -112,12 +112,10 @@ export default {
       switch (sta) {
         case 0:
           return '否'
-          break
         case 1:
           return '是'
-          break
         default:
-          return "未知"
+          return '未知'
       }
     }
   }

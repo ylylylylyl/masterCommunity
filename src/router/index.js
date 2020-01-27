@@ -44,8 +44,8 @@ export default new Router({
     component: Layout,
     children: [{
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'login',
+      component: Login
     },
     {
       path: '/home',

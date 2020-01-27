@@ -339,9 +339,9 @@ export default {
       })
         .then(res => {
           if (res.status) {
-            console.log(res.result)
             this.$store.commit('CHOOSE_VILLAGE', res.result)
             this.$router.push('/home')
+            localStorage.setItem('bindid', res.object.bindid)
           } else {
             this.$router.push('/bindhouse')
           }

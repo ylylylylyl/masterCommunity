@@ -24,7 +24,7 @@
                 </div>
                  <div class="addpay-item">
                     <span class="addpay-title">用户编号</span>
-                    <input type="text" class="mui-input-clear" placeholder="请输入用户编号">
+                    <input type="text" class="mui-input-clear" v-model="houseNumber" placeholder="请输入用户编号">
                 </div>
 
             </div>
@@ -33,7 +33,7 @@
                     <label>我已阅读并同意《智能社区协议》</label>
                     <input name="checkbox1" value="Item 1" type="checkbox" checked>
                 </div>
-                <button type="button" class="mui-btn mui-btn-primary">确认新建</button>
+                <button type="button" class="mui-btn mui-btn-primary" @click="submit()">确认新建</button>
             </div>
 
         </div>
@@ -44,8 +44,14 @@
 import {goback} from '../../utils/util'
 import { mapGetters, mapActions } from 'vuex'
 export default {
+  data () {
+    return {
+      houseNumber: '',
+      root: process.env.API_HOST
+    }
+  },
   computed: {
-    ...mapGetters(['chooseCity'])
+    ...mapGetters(['chooseCity', 'curUserInfo'])
     // getCity(){
     //     return this.$store.state.chooseCity
     // }
@@ -56,6 +62,24 @@ export default {
     },
     toChoose () {
       this.$router.push('/citychoose')
+    },
+    submit () {
+      const bindid = localStorage.getItem('bindid')
+      const params = {
+        bindid: Number(bindid),
+        houseNumber: Number(this.houseNumber)
+      }
+      this.$ajax.post({
+        url: this.root + 'bindhouse/bindhousenum',
+        data: params
+      }).then(res => {
+        if (res.status) {
+            console.log(res)
+            this.$router.push('/livingpayment')
+        }
+      })
+      console.log(this.curUserInfo)
+      console.log(params)
     }
   }
 }
