@@ -27,6 +27,11 @@ const Village = () => import('../views/village')
 const Province = () => import('../views/village/province.vue')
 const City = () => import('../views/village/city.vue')
 const Area = () => import('../views/village/area.vue')
+const BankCard = () => import('../views/bankcard')
+const AddCard = () => import('../views/bankcard/addcard.vue')
+const Wallet = () => import('../views/wallet')
+const Recharge = () => import('../views/wallet/recharge.vue')
+const Deposit = () => import('../views/wallet/deposit.vue')
 Vue.use(Router)
 
 export default new Router({
@@ -182,6 +187,31 @@ export default new Router({
         component: Area
       }
     ]
+  },
+  {
+    path: '/bankcard',
+    name: 'bankcard',
+    component: BankCard
+  },
+  {
+    path: '/addcard',
+    name: 'addcard',
+    component: AddCard
+  },
+  {
+    path: '/wallet',
+    name: 'wallet',
+    component: Wallet
+  },
+  {
+    path: '/recharge',
+    name: 'recharge',
+    component: Recharge
+  },
+  {
+    path: '/deposit',
+    name: 'deposit',
+    component: Deposit
   }
   ]
 })

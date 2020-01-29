@@ -26,8 +26,8 @@
             没有账号点击注册
             </p>
         </div>
-    <button type="button" class="mui-btn mui-btn-outlined l-btn" @click="login()">登录</button>
-    <button type="button" class="mui-btn mui-btn-outlined back-btn" @click="backtohome">返回主页</button>
+        <button type="button" class="mui-btn mui-btn-outlined l-btn" @click="login()">登录</button>
+        <button type="button" class="mui-btn mui-btn-outlined back-btn" @click="backtohome">返回主页</button>
           <div class="container">
       <svg
         class="ghost"

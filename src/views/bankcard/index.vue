@@ -1,0 +1,142 @@
+<template>
+    <div class="content-container">
+        <Header>银行卡</Header>
+        <div class="bank-card-container">
+            <div class="bank-card-item" v-for="item in this.bankCardData" :key="item.bankid">
+                <div class="bank-icon-container">
+                    <svg class="icon" aria-hidden="true">
+                        <use :xlink:href="item.bankcompany| initIcon"/>
+                    </svg>
+                </div>
+                <div class="bank-card-info">
+                    <div class="card-info-title">
+                        <span class="bank-name-span">{{item.bankcompany}}</span>
+                        <p class="bank-type-p">储蓄卡</p>
+                    </div>
+                    <p class="bank-num-p">.... .... .... {{item.bankcardnum.slice(12,16)}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="bank-add-container" @click="$router.push('/addcard')">
+            <span class="mui-icon mui-icon-plusempty"></span>
+            <span>添加银行卡</span>
+        </div>
+    </div>
+</template>
+
+<style scoped>
+    .content-container{
+        background-color: #EDEDED;
+    }
+    .bank-card-container{
+        
+        padding: 55px 15px 15px 15px;
+    }
+    .bank-card-item{
+        height: 100px;
+        background-color: #C75056;
+        display: flex;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+    .bank-icon-container{
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        background-color: #EBCCCB;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       
+    }
+    .bank-icon-container>svg{
+        font-size: 26px;
+    }
+    .bank-card-info{
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .bank-name-span{
+        font-weight: bold;
+        color: white;
+        margin-bottom: 5px;
+    }
+    .bank-type-p{
+        color: lightgray;
+    }
+    .bank-num-p{
+        color: white;
+        font-weight: bold;
+        font-size: 32px;
+    }
+    .bank-add-container{
+        height: 60px;
+        background-color: white;
+        border-radius: 5px;
+        margin: 5px 15px;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+    }
+    .bank-add-container>span{
+        margin-right: 15px
+    }
+</style>
+
+<script>
+import {mapGetters} from 'vuex'
+import Header from '../../components/LeftHeader'
+export default {
+  components: {
+    Header
+  },
+  data () {
+    return {
+      root: process.env.API_HOST,
+      bankCardData: []
+    }
+  },
+  computed: {
+    ...mapGetters(['curUserInfo'])
+  },
+  mounted () {
+    this.initBankCard()
+  },
+  filters: {
+    initIcon (item) {
+        console.log(item)
+      switch (item) {
+        case '中国银行':
+          return '#icon-zhongguoyinhang'
+        case '招商银行':
+          return '#icon-yinhanglogo-'
+        default:
+          return '未知'
+      }
+    }
+  },
+  methods: {
+    initBankCard () {
+      const {userid} = this.curUserInfo
+      this.$ajax.post({
+        url: this.root + 'bankcard/selectbankcard',
+        data: {userid}
+      })
+        .then(res => {
+          if (res.status) {
+            this.bankCardData = res.result
+            console.log(this.bankCardData)
+          }
+        })
+    },
+    initIcon (item) {
+        switch(item){
+            case "中国银行":
+        }
+    }
+  }
+}
+</script>

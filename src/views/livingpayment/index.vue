@@ -33,15 +33,15 @@
                         <span class="mui-icon mui-icon-arrowright"></span>
                     </div>
                 </div>
-                 <div class="pay-item">
-                    <div class="pay-item-top">
-                        <svg class="icon icon-svg" aria-hidden="true">
-                            <use xlink:href="#icon-dianfei"></use>
-                        </svg>
-                        <div>
-                            <span class="pay-title">电费</span>
-                            <p>{{livingnumid}}</p>
-                        </div>
+                <div class="pay-item">
+                  <div class="pay-item-top">
+                      <svg class="icon icon-svg" aria-hidden="true">
+                          <use xlink:href="#icon-dianfei"></use>
+                      </svg>
+                      <div>
+                          <span class="pay-title">电费</span>
+                          <p>{{livingnumid}}</p>
+                      </div>
                     </div>
                     <div>
                         <span class="mui-icon mui-icon-arrowright"></span>
@@ -218,7 +218,7 @@ export default {
       this.$router.push('/paymentrecords')
     },
     toAddPay () {
-      this.$router.push('/addpayuser')
+      if (!this.livingnumid) this.$router.push('/addpayuser')
     }
 
   }

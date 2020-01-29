@@ -49,7 +49,7 @@
           </div>
         </div>
         <div class="wallet-container">
-          <div class="detail-item">
+          <div class="detail-item" @click="toRouter(2)">
             <span>0.00</span>
             <span>零钱</span>
           </div>
@@ -61,7 +61,7 @@
             <span>0.00</span>
             <span>现金</span>
           </div>
-          <div class="detail-item">
+          <div class="detail-item" @click="toRouter(4)">
             <span>0.00</span>
             <span>银行卡</span>
           </div>
@@ -172,6 +172,13 @@ export default {
       switch (index) {
         case 1:
           this.$router.push('/selfinfo')
+          break
+        case 2:
+          this.$router.push('/wallet')
+          break
+        case 4:
+          // 银行卡
+          this.$router.push('/bankcard')
           break
       }
     }
