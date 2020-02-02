@@ -246,6 +246,7 @@ export default {
       this.postData.houseArea = Number(this.postData.houseArea)
       this.postData.chooseAddr = localStorage.getItem('chooseProvince') + localStorage.getItem('chooseCity') + localStorage.getItem('chooseArea') + this.villagename
       this.postData.phoneNumber = Number(this.postData.phoneNumber)
+      this.postData.villageid = Number(this.villageId)
       const root = process.env.API_HOST
       console.log(this.postData)
       this.$ajax.post({

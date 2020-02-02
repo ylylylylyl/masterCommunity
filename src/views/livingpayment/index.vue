@@ -19,7 +19,7 @@
             </div>
             <!--内容区-->
             <div class="mui-card-content">
-                <div class="pay-item" @click="toAddPay()">
+                <div class="pay-item" @click="toAddPay(1)">
                     <div class="pay-item-top">
                         <svg class="icon icon-svg" aria-hidden="true">
                             <use xlink:href="#icon-ranqifei"></use>
@@ -33,7 +33,7 @@
                         <span class="mui-icon mui-icon-arrowright"></span>
                     </div>
                 </div>
-                <div class="pay-item">
+                <div class="pay-item" @click="toAddPay(2)">
                   <div class="pay-item-top">
                       <svg class="icon icon-svg" aria-hidden="true">
                           <use xlink:href="#icon-dianfei"></use>
@@ -47,7 +47,7 @@
                         <span class="mui-icon mui-icon-arrowright"></span>
                     </div>
                 </div>
-                 <div class="pay-item">
+                 <div class="pay-item" @click="toAddPay(3)">
                     <div class="pay-item-top">
                         <svg class="icon icon-svg" aria-hidden="true">
                             <use xlink:href="#icon-shuifei"></use>
@@ -131,22 +131,36 @@
     }
 </style>
 <script>
+var _=require('lodash')
 export default {
-  mounted () {
-    this.echartsinit()
-    this.paymentinit()
+  async mounted () {
+     this.paymentinit()
+    console.log(this.createDateDate())
   },
   data () {
     return {
       root: process.env.API_HOST,
-      livingnumid: '' // 户号
+      livingnumid: '', // 户号
+      object: {}
     }
   },
   methods: {
     goback () {
       this.$router.go(-1)
     },
-    echartsinit () {
+    async echartsinit (livingnumid) {
+      await this.$ajax.post({
+        url: this.root + 'livingorder/selectMonthOrderByTpe',
+        data: {livingnumid}
+      })
+        .then(res => {
+          this.object = res.object
+          // if (res.status) {
+            console.log(_.groupBy(res.result, function (item) {
+              return item.livingtype
+            }))
+          // }
+        })
       var echarts = require('echarts')
       // 基于准备好的dom，初始化echarts实例
       var myChart = echarts.init(document.getElementById('echart'))
@@ -174,7 +188,7 @@ export default {
         xAxis: {
           type: 'category',
           boundaryGap: false,
-          data: ['1月', '2月', '3月', '4月', '5月', '6月']
+          data: this.createDateDate()
         },
         yAxis: {
           type: 'value'
@@ -184,19 +198,19 @@ export default {
             name: '水费',
             type: 'line',
             stack: '总量',
-            data: [120, 132, 101, 134, 90, 230, 210]
+            data: this.object.waterData
           },
           {
             name: '电费',
             type: 'line',
             stack: '总量',
-            data: [220, 182, 191, 234, 290, 330, 310]
+            data: this.object.electricity
           },
           {
             name: '气费',
             type: 'line',
             stack: '总量',
-            data: [150, 232, 201, 154, 190, 330, 410]
+            data: this.object.gas
           }
 
         ]
@@ -213,14 +227,49 @@ export default {
             this.livingnumid = res.object.livingnumid
           }
         })
+        .then(() => {
+          this.echartsinit(this.livingnumid)
+        }
+
+        )
     },
     torecords () {
-      this.$router.push('/paymentrecords')
+      this.$router.push({
+        path: '/paymentrecords',
+        query: {
+          livingnumid: this.livingnumid
+        }
+      })
     },
-    toAddPay () {
-      if (!this.livingnumid) this.$router.push('/addpayuser')
+    toAddPay (index) {
+      if (!this.livingnumid) {
+        this.$router.push('/addpayuser')
+      } else {
+        this.$router.push({
+          path: '/livingpay',
+          query: {
+            type: index,
+            livingnumid: this.livingnumid
+          }
+        })
+      }
+    },
+    toRouter () {
+      this.$router.push('/livingpay')
+    },
+    createDateDate () {
+       var dataArr = [];
+      var data = new Date();
+      var year = data.getFullYear();
+      data.setMonth(data.getMonth() + 1, 1); //获取到当前月份,设置月份
+      for (var i = 0; i < 6; i++) {
+        data.setMonth(data.getMonth() - 1); //每次循环一次 月份值减1
+        var m = data.getMonth() + 1;
+        m = m < 10 ? "0" + m : m;
+        dataArr.push(data.getFullYear() + "-" + m);
+      }
+     return dataArr.reverse();
     }
-
   }
 }
 </script>

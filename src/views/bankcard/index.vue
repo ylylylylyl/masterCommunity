@@ -107,12 +107,19 @@ export default {
   },
   filters: {
     initIcon (item) {
-        console.log(item)
       switch (item) {
         case '中国银行':
           return '#icon-zhongguoyinhang'
         case '招商银行':
           return '#icon-yinhanglogo-'
+        case '农业银行':
+          return '#icon-nongyeyinhang'
+        case '建设银行':
+          return '#icon-jiansheyinhang'
+        case '中国工商银行':
+          return '#icon-ICBC'
+        case '交通银行':
+          return '#icon-jiaotongyinhang'
         default:
           return '未知'
       }
@@ -131,11 +138,6 @@ export default {
             console.log(this.bankCardData)
           }
         })
-    },
-    initIcon (item) {
-        switch(item){
-            case "中国银行":
-        }
     }
   }
 }

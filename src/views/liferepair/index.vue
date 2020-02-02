@@ -30,14 +30,14 @@
           <span class="mui-icon mui-icon-arrowright"></span>
         </div>
       </button>
-      <button class="btn mui-btn mui-btn-block">
+      <!-- <button class="btn mui-btn mui-btn-block">
         <div>
           <span class="iconfont icon-fangjian"></span>
           <span>房间选择</span>
         </div>
 
         <span class="room-span">1-101</span>
-      </button>
+      </button> -->
       <div class="repair-user-container">
         <div class="repair-user">
           <span class="iconfont icon-lianxiren"></span>
@@ -48,6 +48,11 @@
           <span class="iconfont icon-lianxidianhua"></span>
           <span class="repair-user-title">联系电话</span>
           <input type="text" class="mui-input-clear" placeholder="请输入联系电话" />
+        </div>
+        <div class="repair-user">
+         <span class="iconfont icon-fangjian"></span>
+          <span class="repair-user-title">具体地址</span>
+          <input type="text" class="mui-input-clear" placeholder="请输入详细地址" />
         </div>
       </div>
       <div class="problem-container">

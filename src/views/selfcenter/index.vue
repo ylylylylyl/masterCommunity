@@ -50,19 +50,19 @@
         </div>
         <div class="wallet-container">
           <div class="detail-item" @click="toRouter(2)">
-            <span>0.00</span>
+            <span>{{userinfo.walletbalance}}</span>
             <span>零钱</span>
           </div>
           <div class="detail-item">
-            <span>0.00</span>
+            <span>0</span>
             <span>卡券</span>
           </div>
           <div class="detail-item">
-            <span>0.00</span>
+            <span>0</span>
             <span>现金</span>
           </div>
           <div class="detail-item" @click="toRouter(4)">
-            <span>0.00</span>
+            <span>{{userinfo.bankcount}}</span>
             <span>银行卡</span>
           </div>
         </div>
@@ -137,32 +137,30 @@
           </div>
         </div>
       </div>
-
       <div id="backdrop" class="mui-off-canvas-backdrop"></div>
     </div>
   </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 import Aside from './aside'
 export default {
   components: {
     Aside
   },
   mounted () {
-    // 监听点击遮罩关闭事件
-    document.getElementById('backdrop').addEventListener('tap', function () {
-      // 阻止默认事件
-      event.detail.gesture.preventDefault()
-    })
-    // 左滑
-    document.getElementById('mui-inner-wrap').addEventListener('swipeleft', function () {
-      mui('.mui-off-canvas-right').offCanvas('show')
-    })
-    // 右滑
-    document.getElementById('mui-inner-wrap').addEventListener('swiperight', function () {
-      mui('.mui-off-canvas-right').offCanvas('close')
-    })
+    this.init()
+    this.findWalletAndBank()
+  },
+  computed: {
+    ...mapGetters(['curUserInfo'])
+  },
+  data () {
+    return {
+      root: process.env.API_HOST,
+      userinfo: {}
+    }
   },
   methods: {
     login () {
@@ -181,6 +179,33 @@ export default {
           this.$router.push('/bankcard')
           break
       }
+    },
+    init () {
+      // 监听点击遮罩关闭事件
+      document.getElementById('backdrop').addEventListener('tap', function () {
+      // 阻止默认事件
+        event.detail.gesture.preventDefault()
+      })
+      // 左滑
+      document.getElementById('mui-inner-wrap').addEventListener('swipeleft', function () {
+        mui('.mui-off-canvas-right').offCanvas('show')
+      })
+      // 右滑
+      document.getElementById('mui-inner-wrap').addEventListener('swiperight', function () {
+        mui('.mui-off-canvas-right').offCanvas('close')
+      })
+    },
+    findWalletAndBank () {
+      const {userid} = this.curUserInfo
+      this.$ajax.post({
+        url: this.root + 'user/selectByUserId',
+        data: {userid}
+      })
+        .then(res => {
+          if (res.status) {
+            this.userinfo = res.object
+          }
+        })
     }
   },
   destroyed () {

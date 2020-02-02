@@ -7,21 +7,37 @@
             </svg>
             <div class="wallet-info">
                 <p class="wallet-info-p">我的零钱</p>
-                <span class="wallet-info-span">￥12.25</span>
+                <span class="wallet-info-span">￥{{walletbalance}}</span>
             </div>
             <div class="btn-container">
                 <button type="button" class="mui-btn mui-btn-outlined l-btn" @click="toRouter(1)">充值</button>
-                <button type="button" class="mui-btn mui-btn-outlined l-btn" @click="toRouter(2)">提现</button>
+                <button
+                 type="button"
+                 class="mui-btn mui-btn-outlined l-btn"
+                 @click="toRouter(2)">提现</button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 import Header from '../../components/LeftHeader'
 export default {
   components: {
     Header
+  },
+  mounted () {
+    this.init()
+  },
+  computed: {
+    ...mapGetters(['curUserInfo'])
+  },
+  data () {
+    return {
+      root: process.env.API_HOST,
+      walletbalance: ''
+    }
   },
   methods: {
     toRouter (index) {
@@ -30,11 +46,26 @@ export default {
           this.$router.push('/recharge')
           break
         case 2:
-          this.$router.push('/deposit')
+          this.$router.push({
+            path: '/deposit',
+            query: { walletbalance: this.walletbalance }
+          })
           break
       }
-
+    },
+    init () {
+      const {userid} = this.curUserInfo
+      this.$ajax.post({
+        url: this.root + 'user/selectByUserId',
+        data: {userid}
+      })
+        .then(res => {
+          if (res.status) {
+            this.walletbalance = res.object.walletbalance
+          }
+        })
     }
+
   }
 }
 </script>

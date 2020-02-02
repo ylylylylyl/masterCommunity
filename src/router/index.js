@@ -32,6 +32,7 @@ const AddCard = () => import('../views/bankcard/addcard.vue')
 const Wallet = () => import('../views/wallet')
 const Recharge = () => import('../views/wallet/recharge.vue')
 const Deposit = () => import('../views/wallet/deposit.vue')
+const LivingPay = () => import('../views/livingpayment/livingpay.vue')
 Vue.use(Router)
 
 export default new Router({
@@ -71,11 +72,6 @@ export default new Router({
       path: '/livingpayment',
       name: 'livingpayment',
       component: LivingPayment
-    },
-    {
-      path: '/paymentrecords',
-      name: 'paymentrecords',
-      component: PaymentRecords
     },
     {
       path: '/addpayuser',
@@ -212,6 +208,16 @@ export default new Router({
     path: '/deposit',
     name: 'deposit',
     component: Deposit
+  },
+  {
+    path: '/livingpay',
+    name: 'livingpay',
+    component: LivingPay
+  },
+  {
+    path: '/paymentrecords',
+    name: 'paymentrecords',
+    component: PaymentRecords
   }
   ]
 })
