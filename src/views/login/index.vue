@@ -342,6 +342,7 @@ export default {
             this.$store.commit('CHOOSE_VILLAGE', res.result)
             this.$router.push('/home')
             localStorage.setItem('bindid', res.object.bindid)
+            localStorage.setItem('bindinfo', JSON.stringify(res.object))
           } else {
             this.$router.push('/bindhouse')
           }

@@ -25,3 +25,11 @@ export function searchFromCity (value) {
     }
   })
 }
+
+export function toTimestamp (time) {
+  if (time == '' || !time) {
+    return null
+  }
+  let timesTamp = Number(time)
+  return timesTamp
+}

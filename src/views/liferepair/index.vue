@@ -13,7 +13,6 @@
           <span class="iconfont icon-leixing"></span>
           <span>维修类型</span>
         </div>
-
         <div>
           <span id="type-result">点击选择</span>
           <span class="mui-icon mui-icon-arrowright"></span>
@@ -30,37 +29,30 @@
           <span class="mui-icon mui-icon-arrowright"></span>
         </div>
       </button>
-      <!-- <button class="btn mui-btn mui-btn-block">
-        <div>
-          <span class="iconfont icon-fangjian"></span>
-          <span>房间选择</span>
-        </div>
-
-        <span class="room-span">1-101</span>
-      </button> -->
       <div class="repair-user-container">
         <div class="repair-user">
           <span class="iconfont icon-lianxiren"></span>
           <span class="repair-user-title">联系人</span>
-          <input type="text" class="mui-input-clear" placeholder="请输入联系人" />
+          <input v-model="postData.contactname" type="text" class="mui-input-clear" placeholder="请输入联系人" />
         </div>
         <div class="repair-user">
           <span class="iconfont icon-lianxidianhua"></span>
           <span class="repair-user-title">联系电话</span>
-          <input type="text" class="mui-input-clear" placeholder="请输入联系电话" />
+          <input v-model="postData.concatphone" type="text" class="mui-input-clear" placeholder="请输入联系电话" />
         </div>
         <div class="repair-user">
          <span class="iconfont icon-fangjian"></span>
           <span class="repair-user-title">具体地址</span>
-          <input type="text" class="mui-input-clear" placeholder="请输入详细地址" />
+          <input v-model="postData.address" type="text" class="mui-input-clear" placeholder="请输入详细地址" />
         </div>
+        <p>注：只能报修当前登录房屋</p>
       </div>
       <div class="problem-container">
         <div class="problem-container-title">
           <span class="iconfont icon-asterisks-1-copy"></span>
           <span>请描述您遇到的问题</span>
         </div>
-        <textarea type="textarea" rows="5" class="mui-input-speech" placeholder="请输入内容" />
+        <textarea v-model="postData.description" type="textarea" rows="5" class="mui-input-speech" placeholder="请输入内容" />
       </div>
       <div class="problem-container">
         <div class="problem-container-title">
@@ -70,9 +62,8 @@
         <div class="upload-container">
           <button class="upload-btn" v-on:click="upload">
             <span class="mui-icon mui-icon-plusempty" v-show='!uploadimg'></span>
-			<img :src="uploadimg" class="upload-img" v-show='uploadimg' />
+			      <img :src="uploadimg" class="upload-img" v-show='uploadimg' />
           </button>
-
           <input
             @change="changeImage($event)"
             ref="fileBtn"
@@ -84,12 +75,13 @@
         </div>
       </div>
       <div class="submit-container">
-        <button type="button" class="mui-btn submit-btn">确认提交</button>
+        <button @click="handleRepair()" type="button" class="mui-btn submit-btn">确认提交</button>
       </div>
     </div>
   </div>
 </template>
 <script>
+import {toTimestamp} from '../../utils/util'
 export default {
   data () {
     return {
@@ -101,11 +93,16 @@ export default {
         { value: 5, text: '桌椅' },
         { value: 6, text: '其他' }
       ],
-      uploadimg: ''
+      uploadimg: '',
+      date: '',
+      postData: {
+      },
+      root: process.env.API_HOST
     }
   },
   mounted () {
-
+    this.postData.villageid = JSON.parse(localStorage.getItem('bindinfo')).villageid
+    this.postData.bindid = JSON.parse(localStorage.getItem('bindinfo')).bindid
     //    this.initRepair()
   },
   methods: {
@@ -115,8 +112,9 @@ export default {
       var showUserPickerButton = document.getElementById('type-btn')
       var userResult = document.getElementById('type-result')
       // showUserPickerButton.addEventListener('tap', function(event) {
-      picker.show(function (items) {
+      picker.show((items) => {
         userResult.innerText = items[0].text
+        this.postData.repairtype = items[0].value
         // 返回 false 可以阻止选择框的关闭
         // return false;
       })
@@ -129,7 +127,7 @@ export default {
         beginDate: new Date(), // 设置开始日期
         endDate: new Date(d) // 设置结束日期
       })
-      dtPicker.show(function (selectItems) {
+      dtPicker.show((selectItems) => {
         // console.log(selectItems.y);//结果为：{text: "2016",value: 2016}
         // console.log(selectItems.m);//结果为：{text: "05",value: "05"}
         // console.log(selectItems.d.text);//11
@@ -137,6 +135,7 @@ export default {
         // console.log(selectItems.i.text);//09
         // console.log(selectItems.text);//结果为：2016-10-11 09:09
         document.getElementById('date-result').innerText = selectItems.text
+        this.postData.appointmenttime = selectItems.text
         dtPicker.dispose() // 关闭日期控件，释放资源。
       })
     },
@@ -153,11 +152,25 @@ export default {
         reader.readAsDataURL(file)
         reader.onload = e => {
           this.uploadimg = reader.result
+          this.postData.uploadimg = reader.result
         }
       }
     },
     toRecords () {
       this.$router.push('/repairreport')
+    },
+    handleRepair () {
+      this.$ajax.post({
+        url: this.root + 'repairorder/insertOrder',
+        data: this.postData
+
+      }).then(result => {
+        if (result.status) {
+          this.toRecords()
+        } else {
+          mui.toast('提交失败')
+        }
+      })
     }
   }
 }

@@ -5,25 +5,25 @@
             <div class="div-container ">
                 <div class="repair-status">
                     <span>流水号</span>
-                    <span class="status-content">1878564582658</span>
+                    <span class="status-content">{{resultObject.repairid}}</span>
                 </div>
                 <div class="repair-status">
                     <span>报修状态</span>
-                    <span class="status-content">已处理</span>
+                    <span class="status-content">{{resultObject.repairstatus|status}}</span>
                 </div>
                <div class="repair-status">
                     <span>预约时间</span>
-                    <span class="status-content">2019-11-16 </span>
+                    <span class="status-content">{{resultObject.appointmenttime}} </span>
                 </div>
             </div>
 
             <div class="div-container repair-info">
                 <div class="info-title">报修信息</div>
                 <div class="info-content">
-                    <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">其他</button>
-                    <p class="info-des">水龙头坏了水龙头坏了水龙头坏了水龙头坏了水龙头坏了水龙头坏了水龙头坏了水龙头坏了水龙头坏了水龙头坏了</p>
+                    <button type="button" class="mui-btn mui-btn-primary mui-btn-outlined">{{resultObject.repairtype|repairtype}}</button>
+                    <p class="info-des">{{resultObject.description}}</p>
                     <div class="info-img">
-                        <img src="../../assets/image/1.jpg"/>
+                        <img :src="resultObject.photo"/>
                     </div>
 
                 </div>
@@ -32,22 +32,22 @@
                  <div class="info-title">接单人信息</div>
                  <div class="repair-status">
                     <span>联系人</span>
-                    <span class="status-content">1878564582658</span>
+                    <span class="status-content">{{resultObject.reciever}}</span>
                 </div>
                 <div class="repair-status">
                     <span>联系电话</span>
-                    <span class="status-content">1878564582658</span>
+                    <span class="status-content">{{resultObject.recieverphone}}</span>
                 </div>
             </div>
             <div class="div-container repair-info">
                  <div class="info-title">发单人信息</div>
                  <div class="repair-status">
                     <span>联系人</span>
-                    <span class="status-content">1878564582658</span>
+                    <span class="status-content">{{resultObject.contactname}}</span>
                 </div>
                 <div class="repair-status">
                     <span>联系电话</span>
-                    <span class="status-content">1878564582658</span>
+                    <span class="status-content">{{resultObject.concatphone}}</span>
                 </div>
             </div>
         </div>
@@ -56,9 +56,56 @@
 <script>
 import Header from '../../components/LeftHeader'
 export default {
-
   components: {
     Header
+  },
+  data () {
+    return {
+      root: process.env.API_HOST,
+      resultObject: {}
+    }
+  },
+  computed: {
+    repairid () {
+      return this.$route.query.repairid
+    }
+  },
+  mounted () {
+    this.initDetail()
+  },
+  methods: {
+    initDetail () {
+      this.$ajax.post({
+        url: this.root + 'repairorder/selectdetail',
+        data: {
+          repairid: this.repairid
+        }
+      }).then(result => {
+        if (result.status) {
+          this.resultObject = result.object
+        } else {
+          
+        }
+      })
+    }
+  },
+  filters: {
+    repairtype (item) {
+      switch (item) {
+        case 1:
+          return '消防'
+        case 2:
+          return '照明'
+        case 3:
+          return '暖气'
+        case 4:
+          return '马桶'
+        case 5:
+          return '桌椅'
+        case 6:
+          return '其他'
+      }
+    }
   }
 }
 </script>

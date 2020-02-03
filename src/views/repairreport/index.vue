@@ -2,24 +2,14 @@
     <div >
         <Header>报修记录</Header>
         <div class="com-container">
-            <div class="repair-item" @click="toRecords()">
+            <div class="repair-item" @click="toRecords(item.repairid)" v-for="(item,key) in initDataList" :key="key">
                 <div class="repair-item-title">
-                    <span>水龙头坏了</span>
+                    <span>{{item.description}}</span>
                     <span class="mui-icon mui-icon-arrowright"></span>
                 </div>
                 <div class="repair-item-time">
-                    <span class="mui-badge mui-badge-primary">已处理</span>
-                    <span class="item-date">2019-10-24 14:01:22</span>
-                </div>
-            </div>
-            <div class="repair-item">
-                <div class="repair-item-title">
-                    <span>水龙头坏了</span>
-                    <span class="mui-icon mui-icon-arrowright"></span>
-                </div>
-                <div class="repair-item-time">
-                    <span class="mui-badge mui-badge-danger">未处理</span>
-                    <span class="item-date">2019-10-24 14:01:22</span>
+                    <span :class="item.repairstatus|styleStatus">{{item.repairstatus|status}}</span>
+                    <span class="item-date">{{item.publishtime|format}}</span>
                 </div>
             </div>
         </div>
@@ -34,12 +24,52 @@ export default {
     Header,
     ReportRecords
   },
+  data () {
+    return {
+      root: process.env.API_HOST,
+      initDataList:[]
+    }
+  },
+  mounted () {
+    this.initData()
+  },
   methods: {
+    initData () {
+      const bindid = JSON.parse(localStorage.getItem('bindinfo')).bindid
+      this.$ajax.post({
+        url: this.root + 'repairorder/selectsumbybindid',
+        data: {
+          bindid
+        }
+      }).then(result => {
+        if (result.status) {
+          this.initDataList = result.result
+        } else {
+          
+        }
+      })
+    },
     goback () {
       this.$router.go(-1)
     },
-    toRecords () {
-      this.$router.push('/reportrecords')
+    toRecords (repairid) {
+      this.$router.push({
+        path: '/reportrecords',
+        query: {
+          repairid
+        }
+      })
+
+    }
+  },
+  filters: {
+    styleStatus (item) {
+      switch (item) {
+        case '0':
+          return 'mui-badge mui-badge-primary'
+        case '1':
+          return 'mui-badge mui-badge-danger'
+      }
     }
   }
 }
@@ -54,7 +84,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height: 55px;
+        height: 35px;
     }
     .mui-icon-arrowright{
         color: gray;
