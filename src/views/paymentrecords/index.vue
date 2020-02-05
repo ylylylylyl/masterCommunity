@@ -27,6 +27,7 @@
         <div class="footer-container">
             <span>仅展示近6个月的记录</span>
         </div>
+        <Loading v-if="loading"/>
     </div>
 
 </template>
@@ -100,11 +101,13 @@
 </style>
 
 <script>
+import Loading from '../../components/Loading'
 import BackHeader from '../../components/LeftHeader'
 var _=require('lodash')
 export default {
   components: {
-    BackHeader
+    BackHeader,
+    Loading
   },
   mounted () {
     this.init()
@@ -112,7 +115,8 @@ export default {
   data () {
     return {
       root: process.env.API_HOST,
-      listData:[]
+      listData: [],
+      loading: false
     }
   },
   computed: {
@@ -125,6 +129,7 @@ export default {
       this.$router.go(-1)
     },
     init () {
+      this.loading = true
       this.$ajax.post({
         url: this.root + 'livingorder/selectMonthOrder',
         data: {
@@ -132,6 +137,7 @@ export default {
         }
       })
         .then(res => {
+          this.loading = false
           if (res.status) {
             let list = res.result.sort((a, b) => {
               return b.paytime - a.paytime

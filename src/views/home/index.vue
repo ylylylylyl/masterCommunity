@@ -2,7 +2,7 @@
   <div>
     <Header>
       <span class="iconfont icon-dingwei"></span>
-      <span  @click="torouter(0)" class="comm-name">{{chooseVillage}}</span>
+      <span  @click="torouter(0)" class="comm-name">{{curAddr}}</span>
     </Header>
     <div class="main-content">
       <div class="mui-slider">
@@ -15,7 +15,7 @@
           </div>
           <div class="mui-slider-item">
             <a href="#">
-              <img src="../../assets/image/1.jpg" />
+              <img src="../../assets/image/slider-bg-01.jpg" />
             </a>
           </div>
           <div class="mui-slider-item">
@@ -36,7 +36,7 @@
           <!--支持循环，需要重复图片节点-->
           <div class="mui-slider-item mui-slider-item-duplicate">
             <a href="#">
-              <img src="../../assets/image/1.jpg" />
+              <img src="../../assets/image/slider-bg-01.jpg" />
             </a>
           </div>
         </div>
@@ -174,7 +174,10 @@ export default {
   },
   computed: {
     ...mapState(['chooseVillage']),
-    ...mapState(['curUserInfo'])
+    ...mapState(['curUserInfo']),
+    curAddr () {
+      return this.$cookies.get('CUR_BINDINFO').chooseaddr||null
+    }
   },
   watch: {
     chooseVillage (val) {
@@ -260,14 +263,16 @@ export default {
     getDefaultVill () {
       if (this.chooseVillage == null) {
         const root = process.env.API_HOST
+        const {userid} = this.$cookies.get('CUR_USERINFO')
         this.$ajax.post({
           url: root + 'bindhouse/selectdefault',
           data: {
-            userid: this.curUserInfo.userid
+            userid
           }
         })
           .then(res => {
             this.$store.commit('CHOOSE_VILLAGE', res.result)
+            this.$cookies.set('CUR_BINDINFO', res.object)
           })
       }
     }

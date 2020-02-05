@@ -6,20 +6,20 @@
         <span class="title">发布帖子</span>
         <p>admin</p>
       </div>
-      <button type="button" class="mui-btn publish-btn">发布</button>
+      <button @click="publish()" type="button" class="mui-btn publish-btn">发布</button>
     </div>
       <div>
-        <textarea v-model="valueInput" class="content-txt" placeholder="分享新鲜事"></textarea>
+        <input  v-model="postData.forumtitle" type="text" class="mui-input-clear" placeholder="请输入标题">
+        <textarea v-model="postData.forumcontent" class="content-txt" placeholder="分享新鲜事"></textarea>
         <div class="upload-container">
-            <div class="picture-container" v-show="uploadimg.length!=0">
-                <div class="img-container" v-for="(item,key) in uploadimg" :key="key">
+            <div class="picture-container" v-show="postData.uploadimg&&postData.uploadimg.length!=0">
+                <div class="img-container" v-for="(item,key) in postData.uploadimg" :key="key">
                     <img :src="item" class="upload-img" />
                 </div>
-                <div class="upload-item" @click="uploadImg" >
+                <div class="upload-item" @click="uploadImg" v-if="addPic">
                     <span class="mui-icon mui-icon-plusempty"></span>
                 </div>
             </div>
-
           <input
             @change="changeImage($event)"
             ref="fileBtn"
@@ -29,6 +29,16 @@
             id="btn-upload"
             capture="camera"
           />
+        </div>
+        <div class="radio-group">
+          <div class="mui-input-row mui-radio">
+            <label>分享贴</label>
+            <input name="radio1" type="radio" value="0" v-model="postData.forumtype">
+          </div>
+          <div class="mui-input-row mui-radio">
+            <label>提问帖</label>
+            <input name="radio1" type="radio" value="1" v-model="postData.forumtype">
+          </div>
         </div>
       </div>
     <div class="footer">
@@ -57,7 +67,12 @@ export default {
   data: () => ({
     valueInput: '',
     showDialog: false,
-    uploadimg: []
+    uploadimg: [],
+    addPic: true,
+    postData: {
+      uploadimg: [],
+      forumcontent:''
+    }
   }),
   methods: {
     selectEmoji (emoji) {
@@ -67,7 +82,7 @@ export default {
       this.showDialog = !this.showDialog
     },
     onSelectEmoji (dataEmoji) {
-      this.valueInput += dataEmoji.emoji
+      this.postData.forumcontent += dataEmoji.emoji
       // Optional
       // this.toogleDialogEmoji();
     },
@@ -77,12 +92,20 @@ export default {
         var reader = new FileReader()
         reader.readAsDataURL(file)
         reader.onload = e => {
-          this.uploadimg.push(reader.result)
+          if (this.postData.uploadimg.length < 6) {
+            this.postData.uploadimg.push(reader.result)
+          } else {
+            this.addPic = false
+            mui.toast('最多上传六张图片')
+          }
         }
       }
     },
     uploadImg () {
       this.$refs.fileBtn.click()
+    },
+    publish () {
+      console.log(this.postData)
     }
   },
   computed: {
@@ -128,6 +151,7 @@ export default {
 }
 .content-txt {
   min-height: 150px;
+  margin-top: 10px;
 }
 .footer {
     position: fixed;
@@ -139,6 +163,12 @@ export default {
 textarea {
   margin-bottom: 0px;
   border: none;
+}
+.mui-input-clear{
+  padding-left: 15px;
+  border: none;
+  border-bottom: 1px #6e8b3d solid ;
+  font-weight: bold;
 }
 .emoji {
   width: 50%;
@@ -181,5 +211,8 @@ textarea {
     text-align: center;
     line-height: 100px;
      margin-left: 5px;
+}
+.radio-group{
+  display: flex;
 }
 </style>

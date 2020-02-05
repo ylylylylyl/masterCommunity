@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     initData () {
-      const bindid = JSON.parse(localStorage.getItem('bindinfo')).bindid
+      const {bindid} = this.$cookies.get('CUR_BINDINFO')
       this.$ajax.post({
         url: this.root + 'repairorder/selectsumbybindid',
         data: {

@@ -1,34 +1,38 @@
 <template>
-    <div class="l-bg">
-        <div class="l-header">
-            <span @click="goback()" class="mui-icon mui-icon-arrowleft"></span>
-            <span class="l-text">登录</span>
-        </div>
-        <div class="mui-input-group">
-            <div class="mui-input-row">
-                <label>
-                    <span class="mui-icon mui-icon-person"></span>
-                </label>
-                <input v-model="userphone" type="text" class="mui-input-clear" placeholder="请输入手机号">
-            </div>
-            <div class="mui-input-row">
-                <label>
-                    <span class="mui-icon mui-icon-compose"></span>
-                </label>
-                <input v-model="userpassword" type="password" class="mui-input-password" placeholder="请输入密码">
-            </div>
-
-        </div>
-        <div class="bottom">
-            <span class="tip">{{tip}}</span>
-            <p class="regist-btn" @click="regist()">
-                <span class="mui-icon mui-icon-help"></span>
-            没有账号点击注册
-            </p>
-        </div>
-        <button type="button" class="mui-btn mui-btn-outlined l-btn" @click="login()">登录</button>
-        <button type="button" class="mui-btn mui-btn-outlined back-btn" @click="backtohome">返回主页</button>
-          <div class="container">
+  <div class="l-bg">
+    <div class="l-header">
+      <span @click="goback()" class="mui-icon mui-icon-arrowleft"></span>
+      <span class="l-text">登录</span>
+    </div>
+    <div class="mui-input-group">
+      <div class="mui-input-row">
+        <label>
+          <span class="mui-icon mui-icon-person"></span>
+        </label>
+        <input v-model="userphone" type="text" class="mui-input-clear" placeholder="请输入手机号" />
+      </div>
+      <div class="mui-input-row">
+        <label>
+          <span class="mui-icon mui-icon-compose"></span>
+        </label>
+        <input
+          v-model="userpassword"
+          type="password"
+          class="mui-input-password"
+          placeholder="请输入密码"
+        />
+      </div>
+    </div>
+    <div class="bottom">
+      <span class="tip">{{tip}}</span>
+      <p class="regist-btn" @click="regist()">
+        <span class="mui-icon mui-icon-help"></span>
+        没有账号点击注册
+      </p>
+    </div>
+    <button type="button" class="mui-btn mui-btn-outlined l-btn" @click="login()">登录</button>
+    <button type="button" class="mui-btn mui-btn-outlined back-btn" @click="backtohome">返回主页</button>
+    <!-- <div class="container">
       <svg
         class="ghost"
         version="1.1"
@@ -49,63 +53,63 @@
           s-66,6.625-72.125,44l-0.781,63.219c0.062,4.197,1.105,6.177,1.808,7.006c1.94,1.811,5.408,3.465,10.099-0.6
           c7.5-6.5,8.375-10,12.75-6.875s5.875,9.75,13.625,9.25s12.75-9,13.75-9.625s4.375-1.875,7,1.25s5.375,8.25,12.875,7.875
           s12.625-8.375,12.625-8.375s2.25-3.875,7.25,0.375s7.625,9.75,14.375,8.125C114.739,126.01,115.412,125.902,116.223,125.064z"
-                />
-                <circle fill="#013E51" cx="86.238" cy="57.885" r="6.667" />
-                <circle fill="#013E51" cx="40.072" cy="57.885" r="6.667" />
-                <path
-                  fill="#013E51"
-                  d="M71.916,62.782c0.05-1.108-0.809-2.046-1.917-2.095c-0.673-0.03-1.28,0.279-1.667,0.771
+        />
+        <circle fill="#013E51" cx="86.238" cy="57.885" r="6.667" />
+        <circle fill="#013E51" cx="40.072" cy="57.885" r="6.667" />
+        <path
+          fill="#013E51"
+          d="M71.916,62.782c0.05-1.108-0.809-2.046-1.917-2.095c-0.673-0.03-1.28,0.279-1.667,0.771
           c-0.758,0.766-2.483,2.235-4.696,2.358c-1.696,0.094-3.438-0.625-5.191-2.137c-0.003-0.003-0.007-0.006-0.011-0.009l0.002,0.005
           c-0.332-0.294-0.757-0.488-1.235-0.509c-1.108-0.049-2.046,0.809-2.095,1.917c-0.032,0.724,0.327,1.37,0.887,1.749
           c-0.001,0-0.002-0.001-0.003-0.001c2.221,1.871,4.536,2.88,6.912,2.986c0.333,0.014,0.67,0.012,1.007-0.01
           c3.163-0.191,5.572-1.942,6.888-3.166l0.452-0.453c0.021-0.019,0.04-0.041,0.06-0.061l0.034-0.034
           c-0.007,0.007-0.015,0.014-0.021,0.02C71.666,63.771,71.892,63.307,71.916,62.782z"
-                />
-                <circle
-                  fill="#FCEFED"
-                  stroke="#FEEBE6"
-                  stroke-miterlimit="10"
-                  cx="18.614"
-                  cy="99.426"
-                  r="3.292"
-                />
-                <circle
-                  fill="#FCEFED"
-                  stroke="#FEEBE6"
-                  stroke-miterlimit="10"
-                  cx="95.364"
-                  cy="28.676"
-                  r="3.291"
-                />
-                <circle
-                  fill="#FCEFED"
-                  stroke="#FEEBE6"
-                  stroke-miterlimit="10"
-                  cx="24.739"
-                  cy="93.551"
-                  r="2.667"
-                />
-                <circle
-                  fill="#FCEFED"
-                  stroke="#FEEBE6"
-                  stroke-miterlimit="10"
-                  cx="101.489"
-                  cy="33.051"
-                  r="2.666"
-                />
-                <circle
-                  fill="#FCEFED"
-                  stroke="#FEEBE6"
-                  stroke-miterlimit="10"
-                  cx="18.738"
-                  cy="87.717"
-                  r="2.833"
-                />
-                <path
-                  fill="#FCEFED"
-                  stroke="#FEEBE6"
-                  stroke-miterlimit="10"
-                  d="M116.279,55.814c-0.021-0.286-2.323-28.744-30.221-41.012
+        />
+        <circle
+          fill="#FCEFED"
+          stroke="#FEEBE6"
+          stroke-miterlimit="10"
+          cx="18.614"
+          cy="99.426"
+          r="3.292"
+        />
+        <circle
+          fill="#FCEFED"
+          stroke="#FEEBE6"
+          stroke-miterlimit="10"
+          cx="95.364"
+          cy="28.676"
+          r="3.291"
+        />
+        <circle
+          fill="#FCEFED"
+          stroke="#FEEBE6"
+          stroke-miterlimit="10"
+          cx="24.739"
+          cy="93.551"
+          r="2.667"
+        />
+        <circle
+          fill="#FCEFED"
+          stroke="#FEEBE6"
+          stroke-miterlimit="10"
+          cx="101.489"
+          cy="33.051"
+          r="2.666"
+        />
+        <circle
+          fill="#FCEFED"
+          stroke="#FEEBE6"
+          stroke-miterlimit="10"
+          cx="18.738"
+          cy="87.717"
+          r="2.833"
+        />
+        <path
+          fill="#FCEFED"
+          stroke="#FEEBE6"
+          stroke-miterlimit="10"
+          d="M116.279,55.814c-0.021-0.286-2.323-28.744-30.221-41.012
           c-7.806-3.433-15.777-5.173-23.691-5.173c-16.889,0-30.283,7.783-37.187,15.067c-9.229,9.736-13.84,26.712-14.191,30.259
           l-0.748,62.332c0.149,2.133,1.389,6.167,5.019,6.167c1.891,0,4.074-1.083,6.672-3.311c4.96-4.251,7.424-6.295,9.226-6.295
           c1.339,0,2.712,1.213,5.102,3.762c4.121,4.396,7.461,6.355,10.833,6.355c2.713,0,5.311-1.296,7.942-3.962
@@ -141,87 +145,89 @@
           <ellipse fill="rgba(255,246,244)" cx="61.128" cy="19.872" rx="49.25" ry="8.916" />
         </svg>
       </p>
-    </div>
-    </div>
+    </div> -->
+    <!-- <Loading/> -->
+  </div>
 </template>
 <style scoped>
-    .l-bg{
-        background: rgb(239,239,239);
-        height: 100vh;
-    }
-    .l-header{
-        height: 40px;
-        line-height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: left;
-        background: white;
-        text-align: center;
-    }
-    .l-text{
-        display: block;
-        width: 100%;
-        font-size: 18px;
-    }
-    .mui-input-group{
-        margin-top: 20px;
-    }
-    .mui-input-row{
-        height: 50px;
-    }
-    .mui-btn{
-        width: 90%;
-        margin-top: 40px;
-        margin-left: 5%;
-        height: 40px;
-        background-color: #6E8B3D;
-        color: white;
-    }
-    .regist-btn{
-       display: flex;
-       justify-content:flex-end;
-       margin-right: 10px;
-       margin-top: 10px;
-    }
-    .mui-input-clear,.mui-input-password{
-        width: 85%;
-    }
-    .mui-input-row{
-        color: lightgray;
-    }
-    .mui-icon-help{
-        font-size: 16px;
-        margin-right: 5px;
-    }
-    .regist-btn{
-        color: #6E8B3D;
-    }
-    .back-btn{
-        background: lightgrey;
-    }
+.l-bg {
+  background: rgb(239, 239, 239);
+  height: 100vh;
+}
+.l-header {
+  height: 40px;
+  line-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  background: white;
+  text-align: center;
+}
+.l-text {
+  display: block;
+  width: 100%;
+  font-size: 18px;
+}
+.mui-input-group {
+  margin-top: 20px;
+}
+.mui-input-row {
+  height: 50px;
+}
+.mui-btn {
+  width: 90%;
+  margin-top: 40px;
+  margin-left: 5%;
+  height: 40px;
+  background-color: #6e8b3d;
+  color: white;
+}
+.regist-btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+.mui-input-clear,
+.mui-input-password {
+  width: 85%;
+}
+.mui-input-row {
+  color: lightgray;
+}
+.mui-icon-help {
+  font-size: 16px;
+  margin-right: 5px;
+}
+.regist-btn {
+  color: #6e8b3d;
+}
+.back-btn {
+  background: lightgrey;
+}
 
-    .mui-input-row label{
-        width: 15%;
-    }
-    .tip{
-        color: red;
-        font-weight: bold;
-        margin-left: 5px;
-    }
-    .bottom{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+.mui-input-row label {
+  width: 15%;
+}
+.tip {
+  color: red;
+  font-weight: bold;
+  margin-left: 5px;
+}
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    .container {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      align-items: center;
-      height: 150px;
-      margin-top: 40px;
-    }
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 150px;
+  margin-top: 40px;
+}
 
 .ghost {
   animation: float 3s ease-out infinite;
@@ -229,7 +235,7 @@
 
 @keyframes float {
   50% {
-     transform: translate(0, 20px);
+    transform: translate(0, 20px);
   }
 }
 .shadowFrame {
@@ -261,9 +267,13 @@
 </style>
 
 <script>
-import {PHONE_REG} from '../../utils/rej'
-import {mapState} from 'vuex'
+import { PHONE_REG } from '../../utils/rej'
+import { mapState } from 'vuex'
+import Loading from '../../components/Loading'
 export default {
+  components: {
+    Loading
+  },
   mounted () {
     // 解决mui-input框不刷新无icon问题
     mui('.mui-input-row input').input()
@@ -274,7 +284,7 @@ export default {
       userpassword: '',
       tip: '',
       root: process.env.API_HOST
-    }
+    };
   },
   computed: {
     ...mapState(['chooseVillage'])
@@ -307,47 +317,51 @@ export default {
         this.tip = '请输入密码'
         return
       }
-      const root = process.env.API_HOST
+      const root = process.env.API_HOST;
       const user = {
         userphone: this.userphone,
         userpassword: this.userpassword
-      }
-      this.$ajax.post({
-        // http://localhost:8081/regist
-        url: root + 'user/login',
-        data: user
-
-      }).then(result => {
-        if (result.status) {
-          this.$store.commit('CUR_USERINFO', result.object)
-          return result.object.userid
-        } else {
-          this.tip = result.msg
-        }
-      })
-        .then((userid) => {
-          this.chooseBindHouse(userid)
+      };
+      this.$ajax
+        .post({
+          // http://localhost:8081/regist
+          url: root + 'user/login',
+          data: user
+        })
+        .then(result => {
+          if (result.status) {
+            this.$store.commit('CUR_USERINFO', result.object)
+            result.object.avatar = null
+            this.$cookies.set('CUR_USERINFO', result.object)
+            // console.log( this.$cookies.set('CUR_USERINFO', result.object))
+            return result.object.userid
+          } else {
+            this.tip = result.msg
+          }
+        })
+        .then(userid => {
+          this.chooseBindHouse(userid);
         })
     },
     chooseBindHouse (userid) {
       const postData = {
         userid: userid
       }
-      this.$ajax.post({
-        url: this.root + 'bindhouse/selectdefault',
-        data: postData
-      })
+      this.$ajax
+        .post({
+          url: this.root + 'bindhouse/selectdefault',
+          data: postData
+        })
         .then(res => {
           if (res.status) {
             this.$store.commit('CHOOSE_VILLAGE', res.result)
             this.$router.push('/home')
-            localStorage.setItem('bindid', res.object.bindid)
-            localStorage.setItem('bindinfo', JSON.stringify(res.object))
+            this.$cookies.set('CUR_BINDINFO', res.object)
           } else {
             this.$router.push('/bindhouse')
           }
         })
     }
   }
-}
+};
 </script>

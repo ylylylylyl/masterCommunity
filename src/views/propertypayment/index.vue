@@ -3,15 +3,13 @@
         <div class="fixed-container">
             <BackHeader>物业缴费</BackHeader>
             <div class="com-container address-container">
-                <span class="address-span">安顺路181弄2号102室</span>
+                <span class="address-span">{{addr}}室</span>
             </div>
             <div class="select-container">
                 <span class="mui-icon mui-icon-arrowdown" v-show="!isopen"></span>
                 <span class="mui-icon mui-icon-arrowup" v-show="isopen"></span>
                 <select @click="handleChange" class="mui-h5" style="margin:auto; color:#000;">
-                    <option value="1">2019</option>
-                    <option value="2">2018</option>
-                    <option value="3">2017</option>
+                    <option v-for="(year,key) in years" :value="year" :key="key">{{year}}</option>
                 </select>
             </div>
         </div>
@@ -97,8 +95,18 @@ export default {
   },
   data () {
     return {
-      isopen: false
+      isopen: false,
+      years: []
     }
+  },
+  computed: {
+    addr () {
+      const {chooseaddr, building, house} = JSON.parse(localStorage.getItem('bindinfo'))
+      return chooseaddr + building + house
+    }
+  },
+  mounted () {
+    console.log(this.getThreeYear())
   },
   methods: {
     goback () {
@@ -106,6 +114,11 @@ export default {
     },
     handleChange () {
       this.isopen = !this.isopen
+    },
+    getThreeYear () {
+      for (let i = 0; i < 3; i++) {
+        this.years.push(new Date().getFullYear() - i)
+      }
     }
   }
 }
@@ -146,8 +159,8 @@ export default {
     }
     .payment-item{
         background: white;
-         padding: 15px;
-         margin-bottom: 15px;
+         padding: 10px;
+         margin-bottom: 10px;
     }
     .payment-item-date{
         height: 40px;

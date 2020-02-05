@@ -33,6 +33,7 @@ const Wallet = () => import('../views/wallet')
 const Recharge = () => import('../views/wallet/recharge.vue')
 const Deposit = () => import('../views/wallet/deposit.vue')
 const LivingPay = () => import('../views/livingpayment/livingpay.vue')
+const ChangeAvatar = () => import('../views/selfinfo/changeAvatar.vue')
 Vue.use(Router)
 
 export default new Router({
@@ -56,71 +57,100 @@ export default new Router({
     {
       path: '/home',
       name: 'home',
-      component: Home
+      component: Home,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: '/community',
       name: 'community',
-      component: Community
+      component: Community,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: '/selfcenter',
       name: 'selfcenter',
-      component: SelfCenter
-    },
-    {
-      path: '/livingpayment',
-      name: 'livingpayment',
-      component: LivingPayment
+      component: SelfCenter,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: '/addpayuser',
       name: 'addpayuser',
-      component: AddPayUser
+      component: AddPayUser,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: '/propertypayment',
       name: 'propertypayment',
-      component: PropertyPayment
+      component: PropertyPayment,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: '/repairreport',
       name: 'repairReport',
-      component: RepairReport
+      component: RepairReport,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: '/reportrecords',
       name: 'reportrecords',
-      component: ReportRecords
+      component: ReportRecords,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: '/houseinfo/',
       name: 'houseinfo',
-      component: HouseInfo
+      component: HouseInfo,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: '/houseinfodet/:bindid',
       name: 'houseinfodet',
-      component: HouseInfoDetail
+      component: HouseInfoDetail,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: '/bindhouse',
       name: 'bindhouse',
       component: BindHouse,
       meta: {
-        keepAlive: true
+        keepAlive: true,
+        requireAuth: true
       }
 
     },
     {
       path: '/opendoor',
       name: 'opendoor',
-      component: OpenDoor
+      component: OpenDoor,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: '/announcedetail',
       name: 'announcedetail',
-      component: AnnounceDetail
+      component: AnnounceDetail,
+      meta: {
+        requireAuth: true
+      }
     }
     ]
 
@@ -128,34 +158,52 @@ export default new Router({
   {
     path: '/forum',
     name: 'forum',
-    component: Forum
+    component: Forum,
+    meta: {
+      requireAuth: true
+    }
 
   },
   {
     path: '/forumdetail',
     name: 'forumdetail',
-    component: ForumDetail
+    component: ForumDetail,
+    meta: {
+      requireAuth: true
+    }
 
   },
   {
     path: '/publishforum',
     name: 'publishforum',
-    component: PublishForum
+    component: PublishForum,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/citychoose',
     name: 'cityChoose',
-    component: CityChoose
+    component: CityChoose,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/liferepair',
     name: 'liferepair',
-    component: LifeRepair
+    component: LifeRepair,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/selfinfo',
     name: 'selfinfo',
-    component: SelfInfo
+    component: SelfInfo,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/village',
@@ -165,59 +213,107 @@ export default new Router({
       {
         path: '/',
         name: 'province',
-        component: Province
+        component: Province,
+        meta: {
+          requireAuth: true
+        }
       },
       {
         path: '/village/province',
         name: 'province',
-        component: Province
+        component: Province,
+        meta: {
+          requireAuth: true
+        }
       },
       {
         path: '/village/city',
         name: 'city',
-        component: City
+        component: City,
+        meta: {
+          requireAuth: true
+        }
       },
       {
         path: '/village/area',
         name: 'area',
-        component: Area
+        component: Area,
+        meta: {
+          requireAuth: true
+        }
       }
     ]
   },
   {
     path: '/bankcard',
     name: 'bankcard',
-    component: BankCard
+    component: BankCard,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/addcard',
     name: 'addcard',
-    component: AddCard
+    component: AddCard,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/wallet',
     name: 'wallet',
-    component: Wallet
+    component: Wallet,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/recharge',
     name: 'recharge',
-    component: Recharge
+    component: Recharge,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/deposit',
     name: 'deposit',
-    component: Deposit
+    component: Deposit,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/livingpay',
     name: 'livingpay',
-    component: LivingPay
+    component: LivingPay,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/paymentrecords',
     name: 'paymentrecords',
-    component: PaymentRecords
+    component: PaymentRecords,meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: '/livingpayment',
+    name: 'livingpayment',
+    component: LivingPayment,
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: '/changeAvatar',
+    name: 'changeAvatar',
+    component: ChangeAvatar,
+    meta: {
+      requireAuth: true
+    }
   }
   ]
 })

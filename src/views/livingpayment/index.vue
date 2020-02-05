@@ -66,6 +66,7 @@
         <div id="echart" class="echart">
 
         </div>
+        <Loading v-if="loading"/>
     </div>
 </template>
 <style scoped>
@@ -131,17 +132,22 @@
     }
 </style>
 <script>
+import Loading from '../../components/Loading'
 var _=require('lodash')
 export default {
   async mounted () {
-     this.paymentinit()
+    this.paymentinit()
     console.log(this.createDateDate())
+  },
+  components: {
+    Loading
   },
   data () {
     return {
       root: process.env.API_HOST,
       livingnumid: '', // 户号
-      object: {}
+      object: {},
+      loading: false
     }
   },
   methods: {
@@ -154,12 +160,13 @@ export default {
         data: {livingnumid}
       })
         .then(res => {
-          this.object = res.object
-          // if (res.status) {
-            console.log(_.groupBy(res.result, function (item) {
+          if (res.status) {
+            this.loading = false
+            this.object = res.object
+            _.groupBy(res.result, function (item) {
               return item.livingtype
-            }))
-          // }
+            })
+          }
         })
       var echarts = require('echarts')
       // 基于准备好的dom，初始化echarts实例
@@ -217,7 +224,8 @@ export default {
       })
     },
     paymentinit () {
-      const bindid = localStorage.getItem('bindid')
+      const {bindid} = this.$cookies.get('CUR_BINDINFO')
+      this.loading = true
       this.$ajax.post({
         url: this.root + 'bindhouse/selectdetail',
         data: {bindid: Number(bindid)}
@@ -258,15 +266,15 @@ export default {
       this.$router.push('/livingpay')
     },
     createDateDate () {
-       var dataArr = [];
-      var data = new Date();
-      var year = data.getFullYear();
-      data.setMonth(data.getMonth() + 1, 1); //获取到当前月份,设置月份
+      var dataArr = []
+      var data = new Date()
+      var year = data.getFullYear()
+      data.setMonth(data.getMonth() + 1, 1) // 获取到当前月份,设置月份
       for (var i = 0; i < 6; i++) {
-        data.setMonth(data.getMonth() - 1); //每次循环一次 月份值减1
-        var m = data.getMonth() + 1;
-        m = m < 10 ? "0" + m : m;
-        dataArr.push(data.getFullYear() + "-" + m);
+        data.setMonth(data.getMonth() - 1) // 每次循环一次 月份值减1
+        var m = data.getMonth() + 1
+        m = m < 10 ? '0' + m : m
+        dataArr.push(data.getFullYear() + '-' + m)
       }
      return dataArr.reverse();
     }

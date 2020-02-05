@@ -64,7 +64,7 @@ export default {
       this.$router.push('/citychoose')
     },
     submit () {
-      const bindid = localStorage.getItem('bindid')
+      const {bindid} = this.$cookies.get('CUR_BINDINFO')
       const params = {
         bindid: Number(bindid),
         houseNumber: Number(this.houseNumber)
@@ -74,12 +74,9 @@ export default {
         data: params
       }).then(res => {
         if (res.status) {
-            console.log(res)
-            this.$router.push('/livingpayment')
+          this.$router.push('/livingpayment')
         }
       })
-      console.log(this.curUserInfo)
-      console.log(params)
     }
   }
 }

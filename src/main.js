@@ -7,6 +7,7 @@ import '../static/css/mui.css'
 import mui from '../static/js/mui.js'
 import '../static/js/mui.picker.js'
 import '../static/js/mui.dtpicker.js'
+
 import '../static/js/mui.poppicker'
 import '../static/css/mui.picker.min.css'
 import '../static/css/mui.poppicker.css'
@@ -23,15 +24,28 @@ import store from './store'
 
 Vue.config.productionTip = false
 Vue.use(VueResource)
+Vue.use(require('vue-cookies'))
 Vue.prototype.mui = mui
 Vue.prototype.$ajax = Ajax
+Vue.$cookies.config('2d')
+router.beforeEach((to, from, next) => {
+  /* 判断该路由是否需要登录权限 */
+  if (to.matched.some(record => record.meta.requireAuth)) {
+    //是否登录
+    if(!Vue.$cookies.get('CUR_USERINFO')){
+      router.push('/login')
+    }
+  }
+  next();
+})
 
-/* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   store,
-  components: { App },
+  components: {
+    App
+  },
   template: '<App/>'
 
 })

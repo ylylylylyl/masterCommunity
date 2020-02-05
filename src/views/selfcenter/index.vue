@@ -39,9 +39,10 @@
         </div>
         <div class="avatar-container">
           <div class="avatar">
-            <svg class="icon avatar-icon" aria-hidden="true">
+            <img class="avatar-icon" :src="userinfo.avatar"/>
+            <!-- <svg class="icon avatar-icon" aria-hidden="true">
               <use xlink:href="#icon-user__easyico" />
-            </svg>
+            </svg> -->
           </div>
           <div class="login-container" @click="login()">
             <span class="login-text">登录/注册</span>
@@ -143,7 +144,6 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
 import Aside from './aside'
 export default {
   components: {
@@ -153,9 +153,6 @@ export default {
     this.init()
     this.findWalletAndBank()
   },
-  computed: {
-    ...mapGetters(['curUserInfo'])
-  },
   data () {
     return {
       root: process.env.API_HOST,
@@ -164,7 +161,15 @@ export default {
   },
   methods: {
     login () {
-      this.$router.push('/login')
+      var btnArray = ['否', '是'];
+      mui.confirm('确认退出当前账号？', '注销', btnArray, (e) =>{
+        if (e.index == 1) {
+          this.$cookies.remove('CUR_USERINFO')
+          this.$cookies.remove('CUR_BINDINFO')
+          this.$router.push('/login')
+        }
+      })
+     
     },
     toRouter (index) {
       switch (index) {
@@ -196,7 +201,7 @@ export default {
       })
     },
     findWalletAndBank () {
-      const {userid} = this.curUserInfo
+      const {userid} = this.$cookies.get('CUR_USERINFO')
       this.$ajax.post({
         url: this.root + 'user/selectByUserId',
         data: {userid}
@@ -240,7 +245,9 @@ export default {
 }
 .avatar-icon {
   height: 60px;
+  border-radius: 50%;
   width: 60px;
+  z-index: 100;
 }
 .avatar-container {
   display: flex;
