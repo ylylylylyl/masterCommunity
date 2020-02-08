@@ -255,7 +255,6 @@ export default {
       })
         .then(res => {
           if (res.status) {
-            mui.toast(res.result)
             this.$router.push('/home')
           } else {
             mui.toast(res.msg)

@@ -54,7 +54,7 @@ export default {
       }
     },
     init () {
-      const {userid} = this.curUserInfo
+      const {userid} = this.$cookies.get('CUR_USERINFO')
       this.$ajax.post({
         url: this.root + 'user/selectByUserId',
         data: {userid}

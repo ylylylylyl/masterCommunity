@@ -47,26 +47,23 @@
       </div>
     </div>
   <div id="topPopover" class="mui-popover">
-			<div class="mui-popover-arrow"></div>
-			<div class="mui-scroll-wrapper">
-				<div class="mui-scroll">
-					<ul class="mui-table-view">
-						<li class="mui-table-view-cell" @click="toRouter(1)">
-							<a href="#">
-                <span class="mui-icon mui-icon-compose"></span>
-                我要发帖
-              </a>
-						</li>
-						<li class="mui-table-view-cell" @click="toRouter(2)"><a href="#">
-              <span class="mui-icon mui-icon-chatboxes"></span>
-              我的发帖
-            </a>
-						</li>
-					</ul>
-				</div>
-			</div>
+    <div class="mui-popover-arrow"></div>
+    <div class="mui-scroll-wrapper">
+      <div class="mui-scroll">
+        <ul class="mui-table-view">
+          <li class="mui-table-view-cell" @click="toRouter(1)">
+              <span class="mui-icon mui-icon-compose"></span>
+              我要发帖
+          </li>
+          <li class="mui-table-view-cell" @click="toRouter(3)">
+            <span class="mui-icon mui-icon-chatboxes"></span>
+            我的发帖
+          </li>
+        </ul>
+      </div>
+    </div>
 
-		</div>
+  </div>
     <!-- <div class="footer">
       <button type="button" class="mui-btn mui-btn-outlined backhome">
         <span class="mui-icon mui-icon-home"></span>
@@ -106,6 +103,9 @@ export default {
           break
         case 2:
           this.$router.push('/home')
+          break
+        case 3:
+          this.$router.push('/myforum')
           break
       }
     }

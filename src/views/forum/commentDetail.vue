@@ -1,23 +1,57 @@
 <template>
      <div class="comment-container" >
-        <textarea class="comment-txt" :placeholder = "`回复${replytarget}`"></textarea>
+        <textarea v-model="content" class="comment-txt" :placeholder = "`回复${replyname}`"></textarea>
         <div class="action-container">
             <button type="button" class="mui-btn" @click="close">取消</button>
-            <span class="send">发送</span>
+            <span class="send" @click="handleSend()">发送</span>
         </div>
     </div>
 </template>
 <script>
 export default {
   mounted () {
-    console.log(this.replytarget)
+    console.log(this.replyname)
+    console.log(this.forumid)
   },
   props: {
-    replytarget: String
+    replytarget: Number,
+    forumid: Number,
+    replyname: String
+
+  },
+  data () {
+    return {
+      content: '',
+      root: process.env.API_HOST
+    }
   },
   methods: {
     close () {
       this.$emit('changeCommentShow')
+    },
+    handleSend () {
+      const {userid, username} = this.$cookies.get('CUR_USERINFO')
+      console.log(this.replyname)
+      const param = {
+        forumid: this.forumid,
+        userid,
+        username,
+        content: this.content,
+        beforereplyid: Number(this.replytarget),
+        replyname: this.replyname
+      }
+      console.log(param)
+      this.$ajax
+        .post({
+          url: this.root + 'reply/addreply',
+          data: param
+        })
+        .then(result => {
+          if (result.status) {
+            this.close()
+            this.$parent.initReply()
+          }
+        })
     }
   }
 }

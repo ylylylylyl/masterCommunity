@@ -127,7 +127,7 @@ export default {
   },
   methods: {
     initBankCard () {
-      const {userid} = this.curUserInfo
+      const {userid} = this.$cookies.get('CUR_USERINFO')
       this.$ajax.post({
         url: this.root + 'bankcard/selectbankcard',
         data: {userid}

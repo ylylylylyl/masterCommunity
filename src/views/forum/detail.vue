@@ -2,10 +2,10 @@
   <!-- <div :key="i" class="reply-child-item"> -->
     <div   >
      <div v-for="(value,i) in this.listData" :key="i"  class="reply-child-item">
-        <span class="detail-title">{{value.replyid}}&nbsp&nbsp回复&nbsp&nbsp{{value.beforereplyid}}</span>
+        <span class="detail-title">{{value.username}}&nbsp&nbsp回复&nbsp&nbsp{{value.replyname}}</span>
         <div class="reply-container"  >
         <p>{{value.content}}</p>
-        <span class="mui-icon mui-icon-chatboxes" @click="publishCom(value.userid)"></span>
+        <span class="mui-icon mui-icon-chatboxes" @click="publishCom(value.replyid,value.username)"></span>
         </div>
     </div>
        <CommentDetail v-if="commentShow"  @changeCommentShow="changeCommentShow"  :replytarget=replytarget />
@@ -22,6 +22,7 @@ export default {
   name: 'Detail',
   mounted () {
     var list = []
+    console.log(this.replyData)
     this.listData = this.setGridDataFromTree(list, this.replyData, '')
     console.log(this.listData)
   },
@@ -39,7 +40,6 @@ export default {
       if (!(Array.isArray(dataSource) && dataSource.length > 0)) return
       dataSource.forEach((father) => {
         // debugger;
-        console.log(father)
         list.push(father)
         if (typeof (father.child) === 'undefined') {
         } else {
@@ -52,8 +52,8 @@ export default {
       this.temp = value
       return value.userid
     },
-    publishCom (userid) {
-      this.$emit('showDialog', userid)
+    publishCom (userid,username) {
+      this.$emit('showDialog', userid,username)
       // console.log(111)
       // this.replytarget = userid
       // this.commentShow = true

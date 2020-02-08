@@ -2,7 +2,7 @@
   <div>
     <Header>
       <span class="iconfont icon-dingwei"></span>
-      <span  @click="torouter(0)" class="comm-name">{{curAddr}}</span>
+      <span  @click="torouter(0)" class="comm-name">{{curAddr||null}}</span>
     </Header>
     <div class="main-content">
       <div class="mui-slider">
@@ -176,7 +176,8 @@ export default {
     ...mapState(['chooseVillage']),
     ...mapState(['curUserInfo']),
     curAddr () {
-      return this.$cookies.get('CUR_BINDINFO').chooseaddr||null
+      if (this.$cookies.get('CUR_BINDINFO')) return this.$cookies.get('CUR_BINDINFO').chooseaddr
+      return null
     }
   },
   watch: {

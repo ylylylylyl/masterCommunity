@@ -1,24 +1,26 @@
 <template>
     <div>
-         <div class="forum-item " @click="toDetail(item)" v-for="item in forum" :key="item.forumid">
+         <div class="forum-item " v-for="item in forum" :key="item.forumid">
             <div class="left">
                 <b class="num">1</b>
-                <div>
-                    <span class="item-title">今天遇到一件有趣的事</span>
+               <div>
+                 <div @click="toDetail(item)">
+                   <span class="item-title">{{item.forum.forumtitle}}</span>
                     <div class="user-info">
-                        <img src="../../assets/image/self-bg.jpg" class="user-avatar"/>
-                        <span>用户1</span>
+                      <img :src="item.userinfo.avatar" class="user-avatar" />
+                      <span>{{item.userinfo.username}}</span>
                     </div>
-                    <p class="item-des">今天遇到一件有趣的事今天遇到一件有趣的事今天遇到一件有趣的事今天遇到一件有趣的事</p>
-                    <span class="datetime">2019-11-16 14:00 </span>
-                    <span> 14</span>
-                     <svg class="icon icon-zan" aria-hidden="true">
-                        <use xlink:href="#icon-zan" />
-                    </svg>
-                </div>
+                    <p class="item-des">{{item.forum.forumcontent}}</p>
+                 </div>
+                <span class="datetime">{{item.forum.forumtime|format}}</span>
+                <span>14</span>
+                <svg class="icon icon-zan" aria-hidden="true" @click="toZan(item.forum.forumid)">
+                  <use xlink:href="#icon-zan1" />
+                </svg>
+            </div>
             </div>
             <div class="right">
-                <img class="des-img" src="../../assets/image/self-bg.jpg"/>
+                <img class="des-img" :src="item.forumpictureList[0].picture" />
             </div>
         </div>
 
@@ -27,6 +29,9 @@
 <script>
 
 export default {
+  mounted () {
+    this.init()
+  },
   methods: {
     toDetail (item) {
       this.$router.push({
@@ -37,15 +42,41 @@ export default {
         }
       })
       // this.$router.push('/forumdetail'+forumid)
+    },
+    toZan (forumid) {
+      this.isclick = !this.isclick
+      const {userid} = this.$cookies.get('CUR_USERINFO')
+      this.$ajax
+        .post({
+          url: this.root + 'praise/insertpraise',
+          data: {userid, forumid}
+        })
+        .then(result => {
+          if (result.status) {
+            
+          }
+        })
+    },
+    init () {
+      const {villageid} = this.$cookies.get('CUR_BINDINFO')
+      this.$ajax
+        .post({
+          // http://localhost:8081/regist
+          url: this.root + 'forum/selectAll',
+          data: {villageid}
+        })
+        .then(result => {
+          if (result.status) {
+            this.forum = result.result
+          }
+        })
     }
   },
   data () {
     return {
-      forum: [
-        {userid: '001', forumid: '1'},
-        {userid: '002', forumid: '2'},
-        {userid: '003', forumid: '3'}
-      ]
+      forum: [],
+      root: process.env.API_HOST,
+      isclick: false
     }
   }
 }
@@ -68,6 +99,8 @@ export default {
   }
   .left{
       display: flex;
+      width: 60%;
+      overflow:hidden;
   }
   .right{
       display: flex;
@@ -113,6 +146,9 @@ export default {
   }
   .zan-span{
       color: darkred;
+  }
+  .icon-zan{
+    font-size: 16px
   }
 
 </style>

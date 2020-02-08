@@ -3,17 +3,20 @@
     <Header>帖子详情</Header>
     <div class="mui-card detail">
       <div class="mui-card-header detail-header">
-        <img class="user-avatar" src="../../assets/image/self-bg.jpg" />
+        <img class="user-avatar" :src="forum.userinfo.avatar"/>
         <div>
-          <span class="author-span">人民日报</span>
-          <p>11-17 16:40</p>
+          <span class="author-span">{{forum.userinfo.username}}</span>
+          <p>{{forum.forum.forumtime|format}}</p>
         </div>
       </div>
       <!--内容区-->
       <div class="mui-card-content">
-        <span class="detail-title">[好消息！]</span>
-        <p>11月13日下午，智能科技学院学工办在实验楼101组织师生代表集中观看了主题为“以习近平新时代中国特色社会主义思想为指引，大力弘扬科学家精神，加强作风和学风建设”的2019年全国科学道德和学风建设宣讲教育报告会。学院全体辅导员及学生党员代表、各组织优秀学生代表到场观看。</p>
-        <img class="des-img" src="../../assets/image/1.jpg" />
+        <span class="detail-title">[{{forum.forum.forumtitle}}]</span>
+        <p>{{forum.forum.forumcontent}}</p>
+        <div class="img-container">
+          <img v-for="(img,key) in forum.forumpictureList " class="des-img" :src="img.picture" :key="img.key" />
+        </div>
+        
       </div>
       <!--页脚，放置补充信息或支持的操作-->
       <div class="mui-card-footer">
@@ -32,7 +35,7 @@
     <div class="mui-card reply">
       <!--页眉，放置标题-->
       <div class="mui-card-header">
-        <span class="reply-title">评论&nbsp&nbsp5</span>
+        <span class="reply-title">评论&nbsp&nbsp{{reply.length}}</span>
         <span class="zan-title">赞&nbsp&nbsp 4</span>
       </div>
       <!--内容区-->
@@ -46,19 +49,19 @@
             <span>{{item.username}}</span>
             <div style="display:flex">
               <p>{{item.content}}</p>
-              <span style="margin-left:5px" class="mui-icon mui-icon-chatboxes" @click="publishCom(item.userid)"></span>
+              <span style="margin-left:5px" class="mui-icon mui-icon-chatboxes" @click="publishCom(item.replyid,item.username)"></span>
             </div>
 
              <div class="reply-child" >
                 <Detail class="" :replyData='item.child' @showDialog="publishCom"/>
             </div>
-            <p>11-17 16:40</p>
+            <p>{{item.replytime|format}}</p>
           </div>
         </div>
       </div>
     </div>
     <div class="footer">
-      <div class="footer-item" @click="publishCom(forumuserid)">
+      <div class="footer-item" @click="publishCom('',forum.userinfo.username)">
         <span class="mui-icon mui-icon-chatboxes"></span>
         <span>评论</span>
       </div>
@@ -69,7 +72,13 @@
         <span>点赞</span>
       </div>
     </div>
-    <CommentDetail v-if="this.commentShow" @changeCommentShow="changeCommentShow" :replytarget=targtuserid></CommentDetail>
+    <CommentDetail
+      v-if="this.commentShow"
+      @changeCommentShow="changeCommentShow"
+      :replytarget= "targtreplyid"
+      :replyname = "replyname"
+      :forumid = "forum.forumid"
+      ></CommentDetail>
   </div>
 </template>
 <script>
@@ -84,24 +93,54 @@ export default {
   },
   mounted () {
     this.init()
-    this.treeObj(this.reply)
+    this.initReply()
+  },
+  data () {
+    return {
+      commentShow: false,
+      forumuserid: '',
+      targtreplyid: '',
+      reply: [
+      ],
+      replyData: '',
+      root: process.env.API_HOST,
+      forum: {
+        forum:{},
+        userinfo:{}
+      },
+      replyname: '123'
+    }
+  },
+  computed: {
+    forumid () {
+      return this.$route.query.forumid
+    }
   },
   methods: {
     changeCommentShow () {
       this.commentShow = false
     },
-    publishCom (userid) {
-      this.commentShow = true
-      if (userid) {
-        this.targtuserid = userid
+    publishCom (replyid, replyname) {
+      if (replyid) {
+        this.targtreplyid = replyid
       }
+      this.replyname = replyname
+      this.commentShow = true
     },
     init () {
-      const { forumid, userid } = this.$route.query
-      this.forumuserid = userid
+      this.$ajax
+        .post({
+          // http://localhost:8081/regist
+          url: this.root + 'forum/selectdetail',
+          data: {forumid: Number(this.forumid)}
+        })
+        .then(result => {
+          if (result.status) {
+            this.forum = result.object
+          }
+        })
     },
     treeObj (obj) {
-      console.log(obj)
       obj.map(item => {
         if (item.beforereplyid != null) {
           obj.map(o => {
@@ -117,62 +156,19 @@ export default {
       })
       this.replyData = obj.filter(item => item.beforereplyid == null)
       console.log(this.replyData)
-    }
-  },
-
-  data () {
-    return {
-      commentShow: false,
-      forumuserid: '',
-      targtuserid: '',
-      reply: [
-        {
-          replyid: '00000001',
-          forumid: 1,
-          userid: '002',
-          username: '用户2',
-          content: '我是用户2',
-          time: '2019-4-12',
-          beforereplyid: null
-        },
-        {
-          replyid: '00000002',
-          forumid: 1,
-          userid: '003',
-          username: '用户3',
-          content: '我是用户3',
-          time: '2019-4-12',
-          beforereplyid: null
-        },
-        {
-          replyid: '00000003',
-          forumid: 1,
-          userid: '004',
-          username: '用户4',
-          content: '我是用户4',
-          time: '2019-4-12',
-          beforereplyid: '00000001'
-        },
-        {
-          replyid: '00000004',
-          forumid: 1,
-          userid: '005',
-          username: '用户5',
-          content: '我是用户5',
-          time: '2019-4-12',
-          beforereplyid: '00000003'
-        },
-        {
-          replyid: '00000005',
-          forumid: 1,
-          userid: '005',
-          username: '用户5',
-          content: '我是用户5',
-          time: '2019-4-12',
-          beforereplyid: '00000002'
-        }
-      ],
-      replyData: ''
+    },
+    initReply () {
+      this.$ajax
+        .post({
+          url: this.root + 'reply/getReply',
+          data: {forumid: Number(this.forumid)}
+        })
+        .then(result => {
+          if (result.status) {
+            this.reply = result.result
+            this.treeObj(this.reply)
+          }
+        })
     }
   }
 }
@@ -214,11 +210,12 @@ export default {
   font-size: 25px;
 }
 .des-img {
-  width: 100%;
+  width: 100px;
   margin-top: 15px;
 }
 .reply {
   margin-top: 10px;
+  margin-bottom: 80px;
 }
 .reply-title {
   display: inline-block;
@@ -260,5 +257,10 @@ export default {
   align-items: center;
   font-size: 12px;
 }
-
+.img-container{
+  display: flex;
+}
+.img-container>img{
+  margin-right: 10px;
+}
 </style>

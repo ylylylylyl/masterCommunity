@@ -333,14 +333,14 @@ export default {
             this.$store.commit('CUR_USERINFO', result.object)
             result.object.avatar = null
             this.$cookies.set('CUR_USERINFO', result.object)
-            // console.log( this.$cookies.set('CUR_USERINFO', result.object))
             return result.object.userid
           } else {
             this.tip = result.msg
+            return null
           }
         })
         .then(userid => {
-          this.chooseBindHouse(userid);
+          if (userid) this.chooseBindHouse(userid)
         })
     },
     chooseBindHouse (userid) {

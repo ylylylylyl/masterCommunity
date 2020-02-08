@@ -34,6 +34,7 @@ const Recharge = () => import('../views/wallet/recharge.vue')
 const Deposit = () => import('../views/wallet/deposit.vue')
 const LivingPay = () => import('../views/livingpayment/livingpay.vue')
 const ChangeAvatar = () => import('../views/selfinfo/changeAvatar.vue')
+const MyForum = () => import('../views/forum/myforum')
 Vue.use(Router)
 
 export default new Router({
@@ -295,7 +296,8 @@ export default new Router({
   {
     path: '/paymentrecords',
     name: 'paymentrecords',
-    component: PaymentRecords,meta: {
+    component: PaymentRecords,
+    meta: {
       requireAuth: true
     }
   },
@@ -311,6 +313,14 @@ export default new Router({
     path: '/changeAvatar',
     name: 'changeAvatar',
     component: ChangeAvatar,
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: '/myforum',
+    name: 'myforum',
+    component: MyForum,
     meta: {
       requireAuth: true
     }
