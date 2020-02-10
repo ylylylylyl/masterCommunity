@@ -1,7 +1,7 @@
 <template>
   <div class="content-container">
     <Header>我的发帖</Header>
-    <div class="forum-container">
+    <div class="forum-container" v-if="this.forum.length">
       <div class="forum-item" @click="toDetail(item.forum)" v-for="(item,key) in forum" :key="item.forumid">
         <div class="left">
           <b class="num">{{key+1}}</b>
@@ -13,24 +13,32 @@
             </div>
             <p class="item-des">{{item.forum.forumcontent}}</p>
             <span class="datetime">{{item.forum.forumtime|format}}</span>
-            <span>14</span>
+            <span>{{item.forum.count}}</span>
             <svg class="icon icon-zan" aria-hidden="true">
               <use xlink:href="#icon-zan" />
             </svg>
           </div>
         </div>
-        <div class="right">
-          <img class="des-img" :src="item.forumpictureList[0].picture" />
+        <div class="right" v-if="item.forum.picture">
+          <img class="des-img" :src="item.forum.picture" />
         </div>
       </div>
     </div>
+    <div v-if="!this.forum.length" class="nothing">
+      <svg class="icon icon-none" aria-hidden="true">
+        <use xlink:href="#icon-apptubiao-" />
+      </svg>
+      <span>这里空空如也~~~快去发帖吧</span>
+    </div>
+    <Loading v-if="loading"></Loading>
   </div>
 </template>
 <script>
 import Header from '../../components/LeftHeader'
+import Loading from '../../components/Loading'
 export default {
   components: {
-    Header
+    Header,Loading
   },
   mounted () {
     this.init()
@@ -38,11 +46,13 @@ export default {
   data () {
     return {
       root: process.env.API_HOST,
-      forum: []
+      forum: [],
+      loading: false
     }
   },
   methods: {
     init () {
+      this.loading = true
       const {userid} = this.$cookies.get('CUR_USERINFO')
       this.$ajax
         .post({
@@ -52,6 +62,7 @@ export default {
         })
         .then(result => {
           if (result.status) {
+            this.loading = false
             this.forum = result.result
           }
         })
@@ -136,6 +147,18 @@ export default {
   }
   .zan-span{
       color: darkred;
+  }
+  .nothing{
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .icon-none{
+    font-size: 60px;
+    color: #6e8b3d;
+    margin-bottom: 20px
   }
 
 </style>

@@ -16,33 +16,27 @@
         id="sliderSegmentControl"
         class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted"
       >
-        <a class="mui-control-item mui-active" href="#item1mobile">热门</a>
-        <a class="mui-control-item" href="#item2mobile">提问帖</a>
-        <a class="mui-control-item" href="#item3mobile">分享帖</a>
+        <a @click="toForum(1)" class="mui-control-item mui-active" href="#item1mobile">热门</a>
+        <a @click="toForum(2)" class="mui-control-item" href="#item2mobile">提问帖</a>
+        <a @click="toForum(3)" class="mui-control-item" href="#item3mobile">分享帖</a>
       </div>
-
       <div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
-
       <div class="mui-slider-group">
         <div
           id="item1mobile"
           class="md-f1 mui-slider-item mui-control-content detailInfos md-box md-ver mui-active"
         >
-          <Hot></Hot>
+          <Hot v-if="itemmobile=='item1mobile'"></Hot>
         </div>
         <div
-          id="item2mobile"
-          class="bg md-f1 mui-slider-item mui-control-content detailInfos1 md-box md-ver"
-        >
-
-          <Question></Question>
+           id="item2mobile"
+          class="bg md-f1 mui-slider-item mui-control-content detailInfos1 md-box md-ver">
+          <Question v-if="itemmobile=='item2mobile'"></Question>
         </div>
         <div
           id="item3mobile"
-          class="bg md-f1 mui-slider-item mui-control-content detailInfos2 md-box md-ver"
-        >
-
-          <Share></Share>
+          class="bg md-f1 mui-slider-item mui-control-content detailInfos2 md-box md-ver">
+          <Share  v-if="itemmobile=='item3mobile'"></Share>
         </div>
       </div>
     </div>
@@ -86,6 +80,11 @@ export default {
     Question,
     Share
   },
+  data () {
+    return {
+      itemmobile: 'item1mobile'
+    }
+  },
   mounted () {
     mui('.mui-input-row input').input()
     mui('.mui-slider').slider()
@@ -108,6 +107,20 @@ export default {
           this.$router.push('/myforum')
           break
       }
+    },
+    toForum (index) {
+      switch (index) {
+        case 1:
+          this.itemmobile = 'item1mobile'
+          break
+        case 2:
+          this.itemmobile = 'item2mobile'
+          break
+        case 3:
+          this.itemmobile = 'item3mobile'
+          break
+      }
+      return true
     }
   }
 }
@@ -201,9 +214,11 @@ export default {
 .mui-segmented-control.mui-segmented-control-inverted
   ~ .mui-slider-progress-bar {
   background-color: #6e8b3d;
+  /* background-color: white; */
 }
 .mui-active {
   color: #6e8b3d !important;
+  font-weight: bold;
 }
 
 .mui-slider-indicator{

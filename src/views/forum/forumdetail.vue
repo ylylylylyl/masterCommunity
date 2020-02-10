@@ -36,20 +36,24 @@
       <!--页眉，放置标题-->
       <div class="mui-card-header">
         <span class="reply-title">评论&nbsp&nbsp{{reply.length}}</span>
-        <span class="zan-title">赞&nbsp&nbsp 4</span>
+        <span class="zan-title">赞&nbsp&nbsp {{zanobj.count}}</span>
       </div>
       <!--内容区-->
       <div class="mui-card-content reply-container">
         <div class="item-container" v-for="(item,key) in replyData" :key="key">
           <img
             class="user-avatar"
-            src="../../assets/image/self-bg.jpg"
+            :src="item.avatar"
           />
           <div style="width:100%" >
             <span>{{item.username}}</span>
             <div style="display:flex">
               <p>{{item.content}}</p>
               <span style="margin-left:5px" class="mui-icon mui-icon-chatboxes" @click="publishCom(item.replyid,item.username)"></span>
+              <span v-if="item.userid == forumuserid"
+                class="mui-icon mui-icon-trash"
+                @click="deleteCom(item.replyid)">
+              </span>
             </div>
 
              <div class="reply-child" >
@@ -58,6 +62,7 @@
             <p>{{item.replytime|format}}</p>
           </div>
         </div>
+        <Nothing v-if="!this.replyData.length"></Nothing>
       </div>
     </div>
     <div class="footer">
@@ -65,11 +70,17 @@
         <span class="mui-icon mui-icon-chatboxes"></span>
         <span>评论</span>
       </div>
-      <div class="footer-item">
+      <div v-if="!zanobj.isZan" class="footer-item" @click="toZan(forum.forumid)">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-zan1" />
         </svg>
         <span>点赞</span>
+      </div>
+       <div v-if="zanobj.isZan" class="footer-item" @click="toDeleteZan(forum.forumid)">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-zan" />
+        </svg>
+        <span>取消赞</span>
       </div>
     </div>
     <CommentDetail
@@ -79,26 +90,31 @@
       :replyname = "replyname"
       :forumid = "forum.forumid"
       ></CommentDetail>
+      <Loading v-if="loading"></Loading>
   </div>
 </template>
 <script>
 import Header from '../../components/LeftHeader'
+import Loading from '../../components/Loading'
 import Detail from './detail'
 import CommentDetail from './commentDetail'
+import Nothing from '../../components/nothing'
 export default {
   components: {
     Header,
     Detail,
-    CommentDetail
+    CommentDetail,
+    Loading,
+    Nothing
   },
   mounted () {
     this.init()
     this.initReply()
+    this.initPraise()
   },
   data () {
     return {
       commentShow: false,
-      forumuserid: '',
       targtreplyid: '',
       reply: [
       ],
@@ -108,12 +124,17 @@ export default {
         forum:{},
         userinfo:{}
       },
-      replyname: '123'
+      replyname: '123',
+      zanobj: {},
+      loading: false
     }
   },
   computed: {
     forumid () {
       return this.$route.query.forumid
+    },
+    forumuserid () {
+      return this.$cookies.get('CUR_USERINFO').userid
     }
   },
   methods: {
@@ -123,11 +144,14 @@ export default {
     publishCom (replyid, replyname) {
       if (replyid) {
         this.targtreplyid = replyid
+      } else {
+        this.targtreplyid = null
       }
       this.replyname = replyname
       this.commentShow = true
     },
     init () {
+      this.loading = true
       this.$ajax
         .post({
           // http://localhost:8081/regist
@@ -135,6 +159,7 @@ export default {
           data: {forumid: Number(this.forumid)}
         })
         .then(result => {
+          this.loading = false
           if (result.status) {
             this.forum = result.object
           }
@@ -155,21 +180,82 @@ export default {
         }
       })
       this.replyData = obj.filter(item => item.beforereplyid == null)
-      console.log(this.replyData)
     },
     initReply () {
+      this.loading = true
       this.$ajax
         .post({
           url: this.root + 'reply/getReply',
           data: {forumid: Number(this.forumid)}
         })
         .then(result => {
+          this.loading = false
           if (result.status) {
             this.reply = result.result
             this.treeObj(this.reply)
           }
         })
-    }
+    },
+    initPraise () {
+      this.loading = true
+      this.$ajax
+        .post({
+          url: this.root + 'praise/getCount',
+          data: {
+            forumid: Number(this.forumid),
+            userid: this.forumuserid
+          }
+        })
+        .then(result => {
+          this.loading = false
+          if (result.status) {
+            this.zanobj = result.object
+          }
+        })
+    },
+    deleteCom (replyid) {
+      var btnArray = ['否', '是']
+      mui.confirm('确认删除该评论？', '删除', btnArray, (e) =>{
+        if (e.index === 1) {
+          this.$ajax
+            .post({
+              url: this.root + 'reply/deleteReply',
+              data: {replyid}
+            })
+            .then(result => {
+              if (result.status) {
+                this.initReply()
+              }
+            })
+        }
+      })
+    },
+    toZan (forumid) {
+      const {userid} = this.$cookies.get('CUR_USERINFO')
+      this.$ajax
+        .post({
+          url: this.root + 'praise/insertpraise',
+          data: {userid, forumid}
+        })
+        .then(result => {
+          if (result.status) {
+            this.initPraise()
+          }
+        })
+    },
+    toDeleteZan (forumid) {
+      const {userid} = this.$cookies.get('CUR_USERINFO')
+      this.$ajax
+        .post({
+          url: this.root + 'praise/cancelZan',
+          data: {userid, forumid}
+        })
+        .then(result => {
+          if (result.status) {
+            this.initPraise()
+          }
+        })
+    },
   }
 }
 </script>
@@ -207,7 +293,8 @@ export default {
 }
 .icon {
   margin-left: 15px;
-  font-size: 25px;
+  font-size: 18px;
+  margin-right: 10px;
 }
 .des-img {
   width: 100px;
@@ -262,5 +349,17 @@ export default {
 }
 .img-container>img{
   margin-right: 10px;
+}
+.mui-icon{
+  font-size: 18px;
+  margin-right: 10px;
+}
+.mui-icon-chatboxes{
+  margin-left: 10px;
+  color: gray;
+}
+.mui-icon-trash{
+  color: darkred;
+  font-weight: bold;
 }
 </style>

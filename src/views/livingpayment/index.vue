@@ -26,7 +26,7 @@
                         </svg>
                         <div>
                             <span class="pay-title">燃气费</span>
-                            <p>{{livingnumid}}</p>
+                            <p>{{livingnumid||'点击添加户号'}}</p>
                         </div>
                     </div>
                     <div>
@@ -40,7 +40,7 @@
                       </svg>
                       <div>
                           <span class="pay-title">电费</span>
-                          <p>{{livingnumid}}</p>
+                          <p>{{livingnumid||'点击添加户号'}}</p>
                       </div>
                     </div>
                     <div>
@@ -54,7 +54,7 @@
                         </svg>
                         <div>
                             <span class="pay-title">水费</span>
-                            <p>{{livingnumid}}</p>
+                            <p>{{livingnumid||'点击添加户号'}}</p>
                         </div>
                     </div>
                     <div>
@@ -124,6 +124,7 @@
         justify-content: space-between;
         margin-top: 20px;
         border-bottom: 1px rgb(228, 225, 225) solid;
+        padding-bottom: 10px;
     }
     /* 图表 */
     .echart{

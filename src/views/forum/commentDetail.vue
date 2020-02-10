@@ -31,16 +31,15 @@ export default {
     },
     handleSend () {
       const {userid, username} = this.$cookies.get('CUR_USERINFO')
-      console.log(this.replyname)
       const param = {
         forumid: this.forumid,
         userid,
         username,
         content: this.content,
         beforereplyid: Number(this.replytarget),
-        replyname: this.replyname
+        replyname: this.replyname,
+        avatar: localStorage.getItem('avatar')
       }
-      console.log(param)
       this.$ajax
         .post({
           url: this.root + 'reply/addreply',

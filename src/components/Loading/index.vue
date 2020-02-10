@@ -8,8 +8,8 @@
   margin: 100px auto;
   width: 50px;
   height: 50px;
-  border: 5px solid #6E8B3D;
-  border-bottom: #aaa 10px solid;
+  border: 3px solid #6E8B3D;
+  border-bottom: #aaa 3px solid;
   border-radius: 50%;
   animation: load 1.1s infinite linear;
   -webkit-animation: load 1.1s infinite linear;

@@ -1,8 +1,8 @@
 <template>
     <div>
-         <div class="forum-item " v-for="item in forum" :key="item.forumid">
+         <div class="forum-item " v-for="(item,key) in forum" :key="item.forumid">
             <div class="left">
-                <b class="num">1</b>
+                <b class="num">{{key+1}}</b>
                <div>
                  <div @click="toDetail(item)">
                    <span class="item-title">{{item.forum.forumtitle}}</span>
@@ -13,22 +13,23 @@
                     <p class="item-des">{{item.forum.forumcontent}}</p>
                  </div>
                 <span class="datetime">{{item.forum.forumtime|format}}</span>
-                <span>14</span>
+                <span>{{item.forum.count}}</span>
                 <svg class="icon icon-zan" aria-hidden="true" @click="toZan(item.forum.forumid)">
                   <use xlink:href="#icon-zan1" />
                 </svg>
             </div>
             </div>
-            <div class="right">
-                <img class="des-img" :src="item.forumpictureList[0].picture" />
+            <div class="right" v-if="item.forum.picture">
+                <img class="des-img" :src="item.forum.picture" />
             </div>
         </div>
-
+        <Loading v-if="loading"></Loading>
     </div>
 </template>
 <script>
-
+import Loading from '../../components/Loading'
 export default {
+  components:{Loading},
   mounted () {
     this.init()
   },
@@ -58,15 +59,16 @@ export default {
         })
     },
     init () {
+      this.loading = true
       const {villageid} = this.$cookies.get('CUR_BINDINFO')
       this.$ajax
         .post({
-          // http://localhost:8081/regist
           url: this.root + 'forum/selectAll',
           data: {villageid}
         })
         .then(result => {
           if (result.status) {
+            this.loading = false
             this.forum = result.result
           }
         })
@@ -76,7 +78,8 @@ export default {
     return {
       forum: [],
       root: process.env.API_HOST,
-      isclick: false
+      isclick: false,
+      loading: false
     }
   }
 }

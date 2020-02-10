@@ -72,7 +72,7 @@ export default {
     root: process.env.API_HOST,
     postData: {
       uploadimg: [],
-      forumcontent:''
+      forumcontent: ''
     }
   }),
   methods: {
@@ -109,6 +109,7 @@ export default {
       this.postData.userid = this.$cookies.get('CUR_USERINFO').userid
       this.postData.villageid = this.$cookies.get('CUR_BINDINFO').villageid
       this.postData.forumtype = Number(this.postData.forumtype)
+      this.postData.avatar = localStorage.getItem('avatar')
       this.$ajax
         .post({
           // http://localhost:8081/regist

@@ -331,7 +331,9 @@ export default {
         .then(result => {
           if (result.status) {
             this.$store.commit('CUR_USERINFO', result.object)
+            localStorage.setItem('avatar', result.object.avatar)
             result.object.avatar = null
+            
             this.$cookies.set('CUR_USERINFO', result.object)
             return result.object.userid
           } else {
