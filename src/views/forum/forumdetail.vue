@@ -134,7 +134,7 @@ export default {
       return this.$route.query.forumid
     },
     forumuserid () {
-      return this.$cookies.get('CUR_USERINFO').userid
+      return localStorage.getItem('CUR_USERINFO').userid
     }
   },
   methods: {
@@ -231,7 +231,7 @@ export default {
       })
     },
     toZan (forumid) {
-      const {userid} = this.$cookies.get('CUR_USERINFO')
+      const {userid} = localStorage.getItem('CUR_USERINFO')
       this.$ajax
         .post({
           url: this.root + 'praise/insertpraise',
@@ -244,7 +244,7 @@ export default {
         })
     },
     toDeleteZan (forumid) {
-      const {userid} = this.$cookies.get('CUR_USERINFO')
+      const {userid} = localStorage.getItem('CUR_USERINFO')
       this.$ajax
         .post({
           url: this.root + 'praise/cancelZan',

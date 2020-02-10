@@ -164,8 +164,8 @@ export default {
       var btnArray = ['否', '是'];
       mui.confirm('确认退出当前账号？', '注销', btnArray, (e) =>{
         if (e.index == 1) {
-          this.$cookies.remove('CUR_USERINFO')
-          this.$cookies.remove('CUR_BINDINFO')
+          localStorage.removeItem('CUR_USERINFO')
+          localStorage.removeItem('CUR_BINDINFO')
           this.$router.push('/login')
         }
       })
@@ -201,7 +201,7 @@ export default {
       })
     },
     findWalletAndBank () {
-      const {userid} = this.$cookies.get('CUR_USERINFO')
+      const {userid} = localStorage.getItem('CUR_USERINFO')
       this.$ajax.post({
         url: this.root + 'user/selectByUserId',
         data: {userid}
