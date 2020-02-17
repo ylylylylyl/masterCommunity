@@ -24,7 +24,7 @@
             </div>
         </div>
         <Loading v-if="loading"></Loading>
-        <Nothing ></Nothing>
+        <Nothing v-if="!this.forum.length"></Nothing>
     </div>
 </template>
 <script>
@@ -61,6 +61,7 @@ export default {
         })
     },
     init () {
+      console.log('init')
       this.loading = true
       const {villageid} = this.$cookies.get('CUR_BINDINFO')
       const status = 1

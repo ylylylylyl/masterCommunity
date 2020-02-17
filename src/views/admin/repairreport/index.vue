@@ -1,7 +1,14 @@
 <template>
     <div >
-        <Header>报修记录</Header>
+        <Header>报修列表</Header>
         <div class="com-container">
+           <div class="select-container">
+                <span class="mui-icon mui-icon-arrowdown" v-show="!isopen"></span>
+                <span class="mui-icon mui-icon-arrowup" v-show="isopen"></span>
+                <select v-model="showType" @change="handleChangeData()" @click="(e)=>handleChange(e)" class="mui-h5" style="margin:auto; color:#000;">
+                    <option v-for="(type,key) in types" :value="type.value" :key="key">{{type.label}}</option>
+                </select>
+            </div>
             <div class="repair-item" @click="toRecords(item.repairid)" v-for="(item,key) in initDataList" :key="key">
                 <div class="repair-item-title">
                     <span>{{item.description}}</span>
@@ -13,12 +20,11 @@
                 </div>
             </div>
         </div>
-       
     </div>
 </template>
 
 <script>
-import Header from '../../components/LeftHeader'
+import Header from '../../../components/LeftHeader'
 import ReportRecords from './reportrecords'
 export default {
   components: {
@@ -28,7 +34,13 @@ export default {
   data () {
     return {
       root: process.env.API_HOST,
-      initDataList:[]
+      initDataList:[],
+      types: [
+        {label: '全部', value: 0},
+        {label: '我的接单', value: 1}
+      ],
+      isopen: false,
+      showType: 0
     }
   },
   mounted () {
@@ -36,11 +48,11 @@ export default {
   },
   methods: {
     initData () {
-      const {bindid} = this.$cookies.get('CUR_BINDINFO')
+      const {villageid} = this.$cookies.get('CUR_USERINFO')
       this.$ajax.post({
-        url: this.root + 'repairorder/selectsumbybindid',
+        url: this.root + 'repairorder/selectsumbyvill',
         data: {
-          bindid
+          villageid
         }
       }).then(result => {
         if (result.status) {
@@ -55,15 +67,35 @@ export default {
     },
     toRecords (repairid) {
       this.$router.push({
-        path: '/reportrecords',
+        path: '/adminrecords',
         query: {
           repairid
         }
       })
-
     },
-    handleOrder() {
-
+    selectSelf () {
+      const {adminid} = this.$cookies.get('CUR_USERINFO')
+      this.$ajax.post({
+        url: this.root + 'repairorder/selectself',
+        data: {
+          adminid
+        }
+      }).then(result => {
+        if (result.status) {
+          this.initDataList = result.result
+        } else {
+        }
+      })
+    },
+    handleChange () {
+      this.isopen = !this.isopen
+    },
+    handleChangeData () {
+      if (this.showType == 0) {
+        this.initData()
+      } else {
+        this.selectSelf()
+      }
     }
   },
   filters: {
@@ -103,4 +135,28 @@ export default {
         color: gray;
         margin-left: 10px;
     }
+    .select-container{
+      position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        
+    }
+    .select-container>select{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: whitesmoke;
+    }
+      .mui-icon-arrowdown,.mui-icon-arrowup{
+        display: block;
+        position: absolute;
+        margin-left: 35px;
+        font-size: 18px;
+
+      }
+      .mui-h5{
+        text-align-last:center
+      }
 </style>

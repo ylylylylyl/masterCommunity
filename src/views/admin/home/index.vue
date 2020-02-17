@@ -10,33 +10,33 @@
           <!--支持循环，需要重复图片节点-->
           <div class="mui-slider-item mui-slider-item-duplicate">
             <a href="#">
-              <img src="../../assets/image/4.jpg" />
+              <img src="../../../assets/image/4.jpg" />
             </a>
           </div>
           <div class="mui-slider-item">
             <a href="#">
-              <img src="../../assets/image/slider-bg-01.jpg" />
+              <img src="../../../assets/image/slider-bg-01.jpg" />
             </a>
           </div>
           <div class="mui-slider-item">
             <a href="#">
-              <img src="../../assets/image/2.jpg" />
+              <img src="../../../assets/image/2.jpg" />
             </a>
           </div>
           <div class="mui-slider-item">
             <a href="#">
-              <img src="../../assets/image/3.jpg" />
+              <img src="../../../assets/image/3.jpg" />
             </a>
           </div>
           <div class="mui-slider-item">
             <a href="#">
-              <img src="../../assets/image/4.jpg" />
+              <img src="../../../assets/image/4.jpg" />
             </a>
           </div>
           <!--支持循环，需要重复图片节点-->
           <div class="mui-slider-item mui-slider-item-duplicate">
             <a href="#">
-              <img src="../../assets/image/slider-bg-01.jpg" />
+              <img src="../../../assets/image/slider-bg-01.jpg" />
             </a>
           </div>
         </div>
@@ -48,15 +48,15 @@
         </div>
       </div>
       <div class="function-container">
-        <label class="fun-label">智慧社区</label>
+        <label class="fun-label">社区管理</label>
         <div class="mui-content">
           <div class="mui-row">
             <div class="mui-col-xs-3 mui-col-xs-3">
               <a @click="torouter(1)" class="mui-table-view-cell">
                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-icon-test" />
+                  <use xlink:href="#icon-tongzhigonggao" />
                 </svg>
-                <a>生活缴费</a>
+                <a>发布公告</a>
               </a>
             </div>
             <div class="mui-col-xs-3 mui-col-xs-3">
@@ -64,7 +64,7 @@
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-jiaofeidating" />
                 </svg>
-                <a>物业缴费</a>
+                <a>物业费</a>
               </a>
             </div>
             <div class="mui-col-xs-3 mui-col-xs-3">
@@ -72,7 +72,7 @@
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-repair" />
                 </svg>
-                <a>生活报修</a>
+                <a>报修处理</a>
               </a>
             </div>
             <div class="mui-col-xs-3 mui-col-xs-3">
@@ -86,19 +86,19 @@
           </div>
           <div class="mui-row">
             <div class="mui-col-xs-3 mui-col-xs-3" >
-              <li class="mui-table-view-cell">
+              <li @click="torouter(6)" class="mui-table-view-cell">
                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-dianhua" />
+                  <use xlink:href="#icon-wupinshenqing" />
                 </svg>
-                <a href="#picture" :click="open">我要投诉</a>
+                <a >失物招领</a>
               </li>
             </div>
             <div class="mui-col-xs-3 mui-col-xs-3">
               <a @click="torouter(5)" class="mui-table-view-cell">
                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-tingcheku" />
+                  <use xlink:href="#icon-yonghu" />
                 </svg>
-                <a>我要停车</a>
+                <a>用户管理</a>
               </a>
             </div>
             <div class="mui-col-xs-3 mui-col-xs-3">
@@ -120,7 +120,7 @@
           </div>
         </div>
       </div>
-      <div class="notice-container" @click="toAnnounce(notice.noticeid)">
+      <div class="notice-container" @click="toAnnounce()">
         <div class="notice-title">
           <span>社区公告</span>
         </div>
@@ -128,8 +128,8 @@
            <svg class="icon notice-icon" aria-hidden="true">
             <use xlink:href="#icon-tongzhigonggao" />
           </svg>
-          <span>最新公告</span>
-          <p>{{notice.noticetitle}}</p>
+          <span>今日公告</span>
+          <p>111111111111111111111111111111111111111111111111</p>
         </div>
         <div class="notice-icon">
           <span class="mui-icon mui-icon-arrowright"></span>
@@ -153,21 +153,18 @@
         </div>
       </div>
     </div>
-    <Tele v-show="isopen">111</Tele>
   </div>
 </template>
 
 <script>
-import Header from '../../components/Header'
-import Tele from '../../components/telecomplaints'
+import Header from '../../../components/Header'
+import Tele from '../../../components/telecomplaints'
 import {mapState} from 'vuex'
 export default {
   data () {
     return {
       newslist: [],
-      isopen: false,
-      notice: {},
-      root: process.env.API_HOST
+      isopen: false
     }
   },
   components: {
@@ -175,10 +172,8 @@ export default {
     Tele
   },
   computed: {
-    ...mapState(['chooseVillage']),
-    ...mapState(['curUserInfo']),
     curAddr () {
-      if (this.$cookies.get('CUR_BINDINFO')) return this.$cookies.get('CUR_BINDINFO').chooseaddr
+      if (this.$cookies.get('CUR_USERINFO')) return this.$cookies.get('CUR_USERINFO').addr
       return null
     }
   },
@@ -194,7 +189,6 @@ export default {
     this.muinit()
     this.getNews()
     this.getDefaultVill()
-    this.getNotice()
   },
   methods: {
     muinit () {
@@ -242,32 +236,30 @@ export default {
           this.$router.push('/village')
           break
         case 1:
-          this.$router.push('/livingpayment')
+          this.$router.push('/announce')
           break
         case 2:
           this.$router.push('/propertypayment')
           break
         case 3:
-          this.$router.push('/liferepair')
+          this.$router.push('/adminrepair')
           break
         case 4:
           this.$router.push('/forum')
           break
         case 5:
-          this.$router.push('/opendoor')
+          this.$router.push('/adminuserman')
+          break
+        case 6:
+          this.$router.push('/adminlost')
           break
       }
     },
     open () {
       this.isopen = true
     },
-    toAnnounce (noticeid) {
-      this.$router.push({
-        path: '/announcedetail',
-        query: {
-          noticeid
-        }
-      })
+    toAnnounce () {
+      this.$router.push('/announcedetail')
     },
     getDefaultVill () {
       if (this.chooseVillage == null) {
@@ -284,19 +276,6 @@ export default {
             this.$cookies.set('CUR_BINDINFO', res.object)
           })
       }
-    },
-    getNotice () {
-      this.$ajax.post({
-        url: this.root + 'notice/selectlasted',
-        data: {
-          villageid: this.$cookies.get('CUR_BINDINFO').villageid
-        }
-      })
-        .then(res => {
-          if (res.status) {
-            this.notice = res.object
-          }
-        })
     }
   }
 }

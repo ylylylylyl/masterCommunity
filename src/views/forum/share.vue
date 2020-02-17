@@ -24,12 +24,14 @@
             </div>
         </div>
         <Loading v-if="loading"></Loading>
+        <Nothing v-if="!this.forum.length"></Nothing>
     </div>
 </template>
 <script>
 import Loading from '../../components/Loading'
+import Nothing from '../../components/nothing'
 export default {
-  components:{Loading},
+  components:{Loading, Nothing},
   mounted () {
     this.init()
   },
@@ -59,6 +61,7 @@ export default {
         })
     },
     init () {
+      console.log(111)
       this.loading = true
       const {villageid} = this.$cookies.get('CUR_BINDINFO')
       const status = 0

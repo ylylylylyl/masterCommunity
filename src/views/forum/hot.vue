@@ -24,12 +24,14 @@
             </div>
         </div>
         <Loading v-if="loading"></Loading>
+        <Nothing v-if="!this.forum.length"></Nothing>
     </div>
 </template>
 <script>
+import Nothing from '../../components/nothing'
 import Loading from '../../components/Loading'
 export default {
-  components:{Loading},
+  components:{Loading,Nothing},
   mounted () {
     this.init()
   },

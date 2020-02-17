@@ -32,6 +32,11 @@
     </div>
     <button type="button" class="mui-btn mui-btn-outlined l-btn" @click="login()">登录</button>
     <button type="button" class="mui-btn mui-btn-outlined back-btn" @click="backtohome">返回主页</button>
+    <div class="change-container">
+      <span class="mui-icon mui-icon-loop"></span>
+      <a @click="$router.push('/adminlogin')">切换管理员版本</a>
+    </div>
+    
     <!-- <div class="container">
       <svg
         class="ghost"
@@ -228,7 +233,12 @@
   height: 150px;
   margin-top: 40px;
 }
-
+.change-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
 .ghost {
   animation: float 3s ease-out infinite;
 }

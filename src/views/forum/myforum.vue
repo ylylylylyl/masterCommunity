@@ -1,7 +1,7 @@
 <template>
   <div class="content-container">
     <Header>我的发帖</Header>
-    <div class="forum-container" v-if="this.forum.length">
+    <div id="pullrefresh" class="forum-container" v-if="this.forum.length">
       <div class="forum-item" @click="toDetail(item.forum)" v-for="(item,key) in forum" :key="item.forumid">
         <div class="left">
           <b class="num">{{key+1}}</b>
@@ -24,13 +24,13 @@
         </div>
       </div>
     </div>
-    <div v-if="!this.forum.length" class="nothing">
+    <div v-if="!forum.length&&!loading" class="nothing">
       <svg class="icon icon-none" aria-hidden="true">
         <use xlink:href="#icon-apptubiao-" />
       </svg>
       <span>这里空空如也~~~快去发帖吧</span>
     </div>
-    <Loading v-if="loading"></Loading>
+    <Loading v-if="loading&&!forum.length"></Loading>
   </div>
 </template>
 <script>
@@ -42,6 +42,7 @@ export default {
   },
   mounted () {
     this.init()
+
   },
   data () {
     return {
@@ -76,6 +77,7 @@ export default {
       })
       // this.$router.push('/forumdetail'+forumid)
     }
+
   }
 }
 </script>

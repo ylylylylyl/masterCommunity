@@ -6,12 +6,12 @@
         <use xlink:href="#icon-luntanzixun" />
       </svg> -->
       <div class="mui-input-row mui-search">
-        <input type="search" class="search mui-input-clear" placeholder="请输入关键字" />
+        <input ref="input"  v-model="searchtext" type="search" class="search mui-input-clear" placeholder="请输入关键字" />
       </div>
       <a id="menu" class="mui-action-menu mui-icon mui-icon-bars mui-pull-right" href="#topPopover"></a>
       <!-- <span class="mui-icon mui-icon-plus"></span> -->
     </div>
-    <div id="slider" class="mui-slider">
+    <div id="slider" class="mui-slider" v-if="!searchShow">
       <div
         id="sliderSegmentControl"
         class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted"
@@ -20,23 +20,46 @@
         <a @click="toForum(2)" class="mui-control-item" href="#item2mobile">提问帖</a>
         <a @click="toForum(3)" class="mui-control-item" href="#item3mobile">分享帖</a>
       </div>
-      <div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+      <!-- <div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div> -->
       <div class="mui-slider-group">
-        <div
+        <div  v-if="itemmobile=='item1mobile'"
           id="item1mobile"
           class="md-f1 mui-slider-item mui-control-content detailInfos md-box md-ver mui-active"
         >
-          <Hot v-if="itemmobile=='item1mobile'"></Hot>
+          <Hot></Hot>
         </div>
-        <div
+        <div  v-if="itemmobile=='item2mobile'"
            id="item2mobile"
           class="bg md-f1 mui-slider-item mui-control-content detailInfos1 md-box md-ver">
-          <Question v-if="itemmobile=='item2mobile'"></Question>
+          <Question></Question>
         </div>
-        <div
+        <div  v-if="itemmobile=='item3mobile'"
           id="item3mobile"
           class="bg md-f1 mui-slider-item mui-control-content detailInfos2 md-box md-ver">
-          <Share  v-if="itemmobile=='item3mobile'"></Share>
+          <Share ></Share>
+        </div>
+      </div>
+    </div>
+    <div class="forum-container" v-if="searchShow">
+      <div class="forum-item" @click="toDetail(item.forum)" v-for="(item,key) in forum" :key="item.forumid">
+        <div class="left">
+          <b class="num">{{key+1}}</b>
+          <div>
+            <span class="item-title">{{item.forum.forumtitle}}</span>
+            <div class="user-info">
+              <img :src="item.userinfo.avatar" class="user-avatar" />
+              <span>{{item.userinfo.username}}</span>
+            </div>
+            <p class="item-des">{{item.forum.forumcontent}}</p>
+            <span class="datetime">{{item.forum.forumtime|format}}</span>
+            <span>{{item.forum.count}}</span>
+            <svg class="icon icon-zan" aria-hidden="true">
+              <use xlink:href="#icon-zan" />
+            </svg>
+          </div>
+        </div>
+        <div class="right" v-if="item.forum.picture">
+          <img class="des-img" :src="item.forum.picture" />
         </div>
       </div>
     </div>
@@ -71,6 +94,7 @@
   </div>
 </template>
 <script>
+import { Debounce } from '../../utils/util'
 import Hot from './hot'
 import Question from './question'
 import Share from './share'
@@ -82,19 +106,45 @@ export default {
   },
   data () {
     return {
-      itemmobile: 'item1mobile'
+      itemmobile: 'item1mobile',
+      searchtext: '',
+      root: process.env.API_HOST,
+      forum:[],
+      searchShow: false,
+      isRouterAlive: true
     }
   },
+  created: function () {
+    // `debounce` 是一个限制操作频率的函数。防抖操作，在0.5秒内连续更改数据不进行查询
+    this.debouncednewFormName = Debounce(this.newFormName, 500)
+  },
   mounted () {
-    mui('.mui-input-row input').input()
-    mui('.mui-slider').slider()
+    console.log("mount")
+    this.init()
   },
   beforeDestroy () {
     if (document.getElementsByClassName('mui-backdrop')[0]) {
       document.getElementsByClassName('mui-backdrop')[0].style.display = 'none'
     }
   },
+  watch: {
+    searchtext (value) {
+      console.log(value==='')
+      if (value == '') {
+        this.itemmobile = 'item1mobile'
+        this.searchShow = false
+        this.$refs.input.actived = false
+      } else {
+        this.debouncednewFormName()
+        this.searchShow = true
+      }
+    }
+  },
   methods: {
+    init () {
+      mui('.mui-input-row input').input()
+      mui('.mui-slider').slider()
+    },
     toRouter (index) {
       switch (index) {
         case 1:
@@ -120,7 +170,24 @@ export default {
           this.itemmobile = 'item3mobile'
           break
       }
+       console.log(this.itemmobile)
       return true
+    },
+    newFormName () {
+      const {villageid} = this.$cookies.get('CUR_BINDINFO')
+      this.$ajax
+        .post({
+          url: this.root + 'forum/selectByKey',
+          data: {
+            villageid,
+            key: this.searchtext
+          }
+        })
+        .then(result => {
+          if (result.status) {
+            this.forum = result.result
+          }
+        })
     }
   }
 }
@@ -254,6 +321,9 @@ export default {
 }
 .mui-content {
   padding: 10px;
+}
+.forum-container{
+  padding-top: 60px;
 }
 
 /* .mui-slider .mui-slider-group {

@@ -1,59 +1,21 @@
 <template>
   <div id="content2" class="mui-control-content">
-    <div class="mui-card" @click="toDetail()">
+    <div class="mui-card" @click="toDetail(item.noticeid)" v-for="(item,key) in noticeList" :key="key">
       <!--页眉，放置标题-->
       <div class="mui-card-header">
         <div>
           <svg class="icon notice-icon" aria-hidden="true">
             <use xlink:href="#icon-tongzhigonggao" />
           </svg>
-          <span>关于停电的通知</span>
+          <span>{{item.noticetitle}}</span>
         </div>
         <span class="mui-icon mui-icon-arrowright"></span>
       </div>
       <!--内容区-->
       <div class="mui-card-content">
         <div class="notice-footer">
-          <p>物业通知</p>
-          <p>2019.08.08 16:04:30</p>
-        </div>
-      </div>
-    </div>
-    <div class="mui-card">
-      <!--页眉，放置标题-->
-      <div class="mui-card-header">
-        <div>
-          <svg class="icon notice-icon" aria-hidden="true">
-            <use xlink:href="#icon-tongzhigonggao" />
-          </svg>
-          <span>关于停电的通知</span>
-        </div>
-        <span class="mui-icon mui-icon-arrowright"></span>
-      </div>
-      <!--内容区-->
-      <div class="mui-card-content">
-        <div class="notice-footer">
-          <p>物业通知</p>
-          <p>2019.08.08 16:04:30</p>
-        </div>
-      </div>
-    </div>
-    <div class="mui-card">
-      <!--页眉，放置标题-->
-      <div class="mui-card-header">
-        <div>
-          <svg class="icon notice-icon" aria-hidden="true">
-            <use xlink:href="#icon-tongzhigonggao" />
-          </svg>
-          <span>关于停电的通知</span>
-        </div>
-        <span class="mui-icon mui-icon-arrowright"></span>
-      </div>
-      <!--内容区-->
-      <div class="mui-card-content">
-        <div class="notice-footer">
-          <p>物业通知</p>
-          <p>2019.08.08 16:04:30</p>
+          <p>{{item.noticepusher}}</p>
+          <p>{{item.noticetime|format}}</p>
         </div>
       </div>
     </div>
@@ -61,9 +23,40 @@
 </template>
 <script>
 export default {
+  mounted () {
+    this.init()
+  },
+  data () {
+    return {
+      root: process.env.API_HOST,
+      noticeList: []
+    }
+  },
   methods: {
-    toDetail () {
-      this.$router.push('/announcedetail')
+    init () {
+      let villageid
+      if (this.$cookies.get('CUR_USERINFO').villageid) {
+        villageid = this.$cookies.get('CUR_USERINFO').villageid
+      } else {
+        villageid = this.$cookies.get('CUR_BINDINFO').villageid
+      }
+      this.$ajax.post({
+        url: this.root + 'notice/selectnoticelist',
+        data: {villageid}
+      })
+        .then(res => {
+          if (res.status) {
+            this.noticeList = res.result
+          }
+        })
+    },
+    toDetail (noticeid) {
+      this.$router.push({
+        path: '/announcedetail',
+        query: {
+          noticeid
+        }
+      })
     }
   }
 }

@@ -25,3 +25,11 @@ Vue.filter('status', item => {
       return '已处理'
   }
 })
+Vue.filter('losttype', type => {
+  switch (type) {
+    case 0:
+      return '待领取'
+    case 1:
+      return '已领取'
+  }
+})

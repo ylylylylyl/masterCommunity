@@ -4,7 +4,7 @@
                 <span class="mui-icon iconfont icon-shouye"></span>
                 <span class="mui-tab-label">首页</span>
             </a>
-            <a  @click="routerfuc(2)"  :class='{ "mui-active": activeIndex == "/community"}' class="mui-tab-item circle-container">
+            <a v-if="!adminid"  @click="routerfuc(2)"  :class='{ "mui-active": activeIndex == "/community"}' class="mui-tab-item circle-container">
                 <div class="circle">
                     <span class="mui-icon iconfont icon-shequxianxing"></span>
                 </div>
@@ -30,6 +30,15 @@ export default {
       this.activeIndex = to.path
     }
   },
+  computed: {
+    adminid () {
+      if (this.$cookies.get('CUR_USERINFO').adminid) {
+        return this.$cookies.get('CUR_USERINFO').adminid
+      }
+      return ''
+    }
+
+  },
   methods: {
     mounted () {
       console.log(this.activeIndex)
@@ -37,13 +46,21 @@ export default {
     routerfuc (item) {
       switch (item) {
         case 1:
-          this.$router.push('/home')
+          if (!this.adminid) {
+            this.$router.push('/home')
+          } else {
+            this.$router.push('/admin/home')
+          }
           break
         case 2:
           this.$router.push('/community')
           break
         case 3:
-          this.$router.push('/selfcenter')
+          if (!this.adminid) {
+            this.$router.push('/selfcenter')
+          } else {
+            this.$router.push('/admin/selfcenter')
+          }
           break
       }
     }

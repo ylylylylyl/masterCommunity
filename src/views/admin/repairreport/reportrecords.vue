@@ -28,7 +28,7 @@
 
                 </div>
             </div>
-            <div class="div-container repair-info">
+            <div v-if="resultObject.repairstatus!=0" class="div-container repair-info">
                  <div class="info-title">接单人信息</div>
                  <div class="repair-status">
                     <span>联系人</span>
@@ -37,6 +37,10 @@
                 <div class="repair-status">
                     <span>联系电话</span>
                     <span class="status-content">{{resultObject.recieverphone}}</span>
+                </div>
+                 <div class="repair-status">
+                    <span>接单时间</span>
+                    <span class="status-content">{{resultObject.recievetime|format}}</span>
                 </div>
             </div>
             <div class="div-container repair-info">
@@ -51,10 +55,13 @@
                 </div>
             </div>
         </div>
+         <div class="submit-container">
+          <button v-if="resultObject.repairstatus == 0" @click="handleOrder(resultObject.repairid)" type="button" class="mui-btn submit-btn">点击接单</button>
+        </div>
     </div>
 </template>
 <script>
-import Header from '../../components/LeftHeader'
+import Header from '../../../components/LeftHeader'
 export default {
   components: {
     Header
@@ -78,7 +85,7 @@ export default {
       this.$ajax.post({
         url: this.root + 'repairorder/selectdetail',
         data: {
-          repairid: Number(this.repairid)
+          repairid: this.repairid
         }
       }).then(result => {
         if (result.status) {
@@ -87,6 +94,31 @@ export default {
           
         }
       })
+    },
+    handleOrder (repairid) {
+      var btnArray = ['否', '是']
+      mui.confirm('确认接单？', '接单', btnArray, (e) =>{
+        if (e.index == 1) {
+          const {adminid,phone,adminname} = this.$cookies.get('CUR_USERINFO')
+          const postData = {
+            repairid,
+            receivername: adminname,
+            userid: adminid,
+            phone
+          }
+          this.$ajax.post({
+            url: this.root + 'repairorder/order',
+            data: postData
+          }).then(result => {
+            if (result.status) {
+              this.$router.push('/adminrepair') 
+            } else {
+              mui.toast('接单失败')
+            }
+          })
+        }
+      })
+      
     }
   },
   filters: {
@@ -153,5 +185,19 @@ export default {
     }
     .com-container{
         margin-bottom: 80px;
+    }
+    .submit-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+    .submit-btn {
+      background: #6e8b3d;
+      color: white;
+      width: 250px;
+      border-radius: 10px;
+      height: 40px;
+      margin-bottom: 20px;
+      margin-top: 20px;
     }
 </style>

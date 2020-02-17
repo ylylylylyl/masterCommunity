@@ -7,26 +7,31 @@
                      <svg class="icon notice-icon" aria-hidden="true">
                         <use xlink:href="#icon-tongzhigonggao" />
                     </svg>
-                    <span class="item-span">{{announce.noticetitle}}</span>
+                    <span class="item-span">关于停电的通知</span>
                 </div>
                 <div class="info-item">
                     <span class="iconfont icon-yonghu1"></span>
-                    <span class="item-span">{{announce.noticepusher}}</span>
+                    <span class="item-span">物业管理</span>
                 </div>
                 <div class="info-item">
                     <span class="iconfont  icon-dizhi1"></span>
-                    <span class="item-span">{{announce.addr}}</span>
+                    <span class="item-span">XX小区</span>
                 </div>
 
                  <div class="info-item">
                     <span class="iconfont icon-shijian1"></span>
-                    <span class="item-span">{{announce.noticetime|format}}</span>
+                    <span class="item-span">2019-12-13 16:02</span>
                 </div>
             </div>
             <div class="publish-content">
                 <span class="iconfont icon-neirongguanli"></span>
                 <p class="publish-content-p">
-                    {{announce.noticecontent}}
+                    数组中正在处理的当前元素的索引。 如果提供了，则起始索引号为0，否则从索引1起始。
+                    数组中正在处理的当前元素的索引。 如果提供了，则起始索引号为0，否则从索引1起始。
+                    数组中正在处理的当前元素的索引。 如果提供了，则起始索引号为0，否则从索引1起始。
+                    数组中正在处理的当前元素的索引。 如果提供了，则起始索引号为0，否则从索引1起始。
+                    数组中正在处理的当前元素的索引。 如果提供了，则起始索引号为0，否则从索引1起始。
+                    数组中正在处理的当前元素的索引。 如果提供了，则起始索引号为0，否则从索引1起始。
                 </p>
             </div>
         </div>
@@ -34,38 +39,10 @@
     </div>
 </template>
 <script>
-import Header from '../../components/LeftHeader'
+import Header from './../../components/LeftHeader'
 export default {
   components: {
     Header
-  },
-  data () {
-    return {
-      root: process.env.API_HOST,
-      announce: {}
-    }
-  },
-  computed: {
-    noticeid () {
-      return this.$route.query.noticeid
-    }
-  },
-  mounted () {
-    this.init()
-  },
-  methods: {
-    init () {
-      const noticeid = this.noticeid
-      this.$ajax.post({
-        url: this.root + 'notice/selectnotice',
-        data: {noticeid}
-      })
-        .then(res => {
-          if (res.status) {
-            this.announce = res.object
-          }
-        })
-    }
   }
 }
 </script>
@@ -106,6 +83,5 @@ export default {
     margin-left: 10px;
     font-size: 12px;
     font-weight: 500;
-    min-height: 100px;
 }
 </style>
