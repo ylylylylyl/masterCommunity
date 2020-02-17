@@ -48,7 +48,7 @@ export default {
     },
     toZan (forumid) {
       this.isclick = !this.isclick
-      const {userid} = this.$cookies.get('CUR_USERINFO')
+      const {userid} = localStorage.getItem('CUR_USERINFO')
       this.$ajax
         .post({
           url: this.root + 'praise/insertpraise',
@@ -63,7 +63,7 @@ export default {
     init () {
       console.log('init')
       this.loading = true
-      const {villageid} = this.$cookies.get('CUR_BINDINFO')
+      const {villageid} = localStorage.getItem('CUR_BINDINFO')
       const status = 1
       this.$ajax
         .post({

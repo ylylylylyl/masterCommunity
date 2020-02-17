@@ -101,8 +101,8 @@ export default {
     }
   },
   mounted () {
-    this.postData.villageid = this.$cookies.get('CUR_BINDINFO').villageid
-    this.postData.bindid = this.$cookies.get('CUR_BINDINFO').bindid
+    this.postData.villageid = localStorage.getItem('CUR_BINDINFO').villageid
+    this.postData.bindid = localStorage.getItem('CUR_BINDINFO').bindid
     //    this.initRepair()
   },
   methods: {
