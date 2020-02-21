@@ -52,7 +52,7 @@ export default {
       }
     },
     commitAvatar () {
-      const {userid} = localStorage.getItem('CUR_USERINFO')
+      const {userid} = this.$cookies.get('CUR_USERINFO')
       const avatar = this.uploadimg
       this.$ajax.post({
         url: this.root + 'user/updateAvatar',

@@ -106,10 +106,10 @@ export default {
       this.$refs.fileBtn.click()
     },
     publish () {
-      this.postData.userid = localStorage.getItem('CUR_USERINFO').userid
-      this.postData.villageid = localStorage.getItem('CUR_BINDINFO').villageid
+      this.postData.userid = this.$cookies.get('CUR_USERINFO').userid
+      this.postData.villageid = this.$cookies.get('CUR_BINDINFO').villageid
       this.postData.forumtype = Number(this.postData.forumtype)
-      this.postData.avatar = localStorage.getItem('avatar')
+      this.postData.avatar = this.$cookies.get('avatar')
       this.$ajax
         .post({
           // http://localhost:8081/regist

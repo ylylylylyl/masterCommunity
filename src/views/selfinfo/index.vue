@@ -63,8 +63,8 @@ export default {
   },
   methods: {
     init () {
-        const {userid} = localStorage.getItem('CUR_USERINFO')
-        this.$ajax.post({
+      const {userid} = this.$cookies.get('CUR_USERINFO')
+      this.$ajax.post({
         url: this.root + 'user/selectByUserId',
         data: {userid}
       }).then(result => {

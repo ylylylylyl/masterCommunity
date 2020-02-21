@@ -64,7 +64,7 @@ export default {
       this.$router.push('/citychoose')
     },
     submit () {
-      const {bindid} = localStorage.getItem('CUR_BINDINFO')
+      const {bindid} = this.$cookies.get('CUR_BINDINFO')
       const params = {
         bindid: Number(bindid),
         houseNumber: Number(this.houseNumber)

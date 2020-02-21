@@ -1,5 +1,6 @@
 import Ajax from '../utils/ajax'
 
+const root = process.env.API_HOST
 export function goback () {
   this.$router.go(-1)
 }
@@ -92,4 +93,16 @@ export const Throttle = (fn, t) => {
       fn.apply(this, args)
     }
   }
+}
+
+export function updateWallet (userid, money) {
+  return new Promise(function (resolve, reject) {
+    Ajax.post({
+      url: root + 'user/updateWallet',
+      data: {userid, money}
+    })
+      .then(res => {
+        resolve(res)
+      })
+  })
 }

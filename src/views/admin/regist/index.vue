@@ -182,7 +182,7 @@ export default {
     userRegist () {
       if (!this.isNull()) return
       const root = process.env.API_HOST
-      const addr = localStorage.getItem('chooseProvince') + localStorage.getItem('chooseCity') + localStorage.getItem('chooseArea') + this.villagename 
+      const addr = localStorage.getItem('chooseProvince') + localStorage.getItem('chooseCity') + localStorage.getItem('chooseArea') + this.villagename
       const user = {
         phone: this.phone,
         pwd: this.pwd,

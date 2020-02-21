@@ -187,7 +187,7 @@ export default {
     },
     toPay () {
       const money = this.money
-      const userid = this.curUserInfo.userid
+      const {userid} = this.$cookies.get('CUR_USERINFO')
       this.$ajax.post({
         url: this.root + 'user/updateWallet',
         data: {userid, money}

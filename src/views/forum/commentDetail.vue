@@ -30,7 +30,7 @@ export default {
       this.$emit('changeCommentShow')
     },
     handleSend () {
-      const {userid, username} = localStorage.getItem('CUR_USERINFO')
+      const {userid, username} = this.$cookies.get('CUR_USERINFO')
       const param = {
         forumid: this.forumid,
         userid,

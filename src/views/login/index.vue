@@ -343,7 +343,7 @@ export default {
             this.$store.commit('CUR_USERINFO', result.object)
             localStorage.setItem('avatar', result.object.avatar)
             result.object.avatar = null
-            localStorage.setItem('CUR_USERINFO',result.object)
+            this.$cookies.set('CUR_USERINFO',result.object)
             return result.object.userid
           } else {
             this.tip = result.msg
@@ -367,7 +367,7 @@ export default {
           if (res.status) {
             this.$store.commit('CHOOSE_VILLAGE', res.result)
             this.$router.push('/home')
-            localStorage.setItem('CUR_BINDINFO', res.object)
+            this.$cookies.set('CUR_BINDINFO', res.object)
           } else {
             this.$router.push('/bindhouse')
           }

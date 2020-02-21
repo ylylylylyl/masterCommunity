@@ -178,7 +178,7 @@ export default {
     ...mapState(['chooseVillage']),
     ...mapState(['curUserInfo']),
     curAddr () {
-      if (localStorage.getItem('CUR_BINDINFO')) return localStorage.getItem('CUR_BINDINFO').chooseaddr
+      if (this.$cookies.get('CUR_BINDINFO')) return this.$cookies.get('CUR_BINDINFO').chooseaddr
       return null
     }
   },
@@ -272,7 +272,7 @@ export default {
     getDefaultVill () {
       if (this.chooseVillage == null) {
         const root = process.env.API_HOST
-        const {userid} = localStorage.getItem('CUR_USERINFO')
+        const {userid} = this.$cookies.get('CUR_USERINFO')
         this.$ajax.post({
           url: root + 'bindhouse/selectdefault',
           data: {

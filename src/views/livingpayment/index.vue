@@ -225,7 +225,7 @@ export default {
       })
     },
     paymentinit () {
-      const {bindid} = localStorage.getItem('CUR_BINDINFO')
+      const {bindid} = this.$cookies.get('CUR_BINDINFO')
       this.loading = true
       this.$ajax.post({
         url: this.root + 'bindhouse/selectdetail',

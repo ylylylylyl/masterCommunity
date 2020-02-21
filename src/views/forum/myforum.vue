@@ -54,7 +54,7 @@ export default {
   methods: {
     init () {
       this.loading = true
-      const {userid} = localStorage.getItem('CUR_USERINFO')
+      const {userid} = this.$cookies.get('CUR_USERINFO')
       this.$ajax
         .post({
           // http://localhost:8081/regist

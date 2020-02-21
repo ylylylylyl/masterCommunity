@@ -1997,7 +1997,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 
 	function handleScroll(wrapper, iframe) {
 		var key = 'MUI_SCROLL_POSITION_' + document.location.href + '_' + iframe.src;
-		var scrollTop = (parseFloat(localStorage.getItem(key)) || 0);
+		var scrollTop = (parseFloat(this.$cookies.get(key)) || 0);
 		if (scrollTop) {
 			(function(y) {
 				iframe.onload = function() {

@@ -244,7 +244,7 @@ export default {
       this.postData.village = Number(this.postData.village)
       this.postData.cardId = Number(this.postData.cardId)
       this.postData.houseArea = Number(this.postData.houseArea)
-      this.postData.chooseAddr = localStorage.getItem('chooseProvince') + localStorage.getItem('chooseCity') + localStorage.getItem('chooseArea') + this.villagename
+      this.postData.chooseAddr = this.$cookies.get('chooseProvince') + this.$cookies.get('chooseCity') + this.$cookies.get('chooseArea') + this.villagename
       this.postData.phoneNumber = Number(this.postData.phoneNumber)
       this.postData.villageid = Number(this.villageId)
       const root = process.env.API_HOST

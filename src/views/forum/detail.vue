@@ -35,7 +35,7 @@ export default {
   },
   computed: {
     userid () {
-      return localStorage.getItem('CUR_USERINFO').userid
+      return this.$cookies.get('CUR_USERINFO').userid
     }
   },
   data () {

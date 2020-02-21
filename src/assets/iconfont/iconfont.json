@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "5017109",
+      "name": "双开门",
+      "font_class": "shuangkaimen",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
       "icon_id": "3086567",
       "name": "物品申请",
       "font_class": "wupinshenqing",
