@@ -31,9 +31,19 @@ Vue.$cookies.config('2d')
 router.beforeEach((to, from, next) => {
   /* 判断该路由是否需要登录权限 */
   if (to.matched.some(record => record.meta.requireAuth)) {
-    //是否登录
-    if(!Vue.$cookies.get('CUR_USERINFO')){
+    // 是否登录
+    if (!Vue.$cookies.get('CUR_USERINFO')) {
       router.push('/login')
+    }
+  }
+  if (to.matched.some(record => record.meta.requireBind)) {
+    // 是否绑定房屋
+    if (!Vue.$cookies.get('CUR_BINDINFO')) {
+      mui.alert('请先绑定房屋！', '',function() {});
+      next({
+        path: '/bindhouse',
+        query: { redirect: to.fullPath }//添加当前路由信息
+      })
     }
   }
   next();

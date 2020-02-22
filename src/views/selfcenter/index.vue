@@ -39,10 +39,10 @@
         </div>
         <div class="avatar-container">
           <div class="avatar">
-            <img class="avatar-icon" :src="userinfo.avatar"/>
-            <!-- <svg class="icon avatar-icon" aria-hidden="true">
+            <img class="avatar-icon" v-if="userinfo.avatar" :src="userinfo.avatar"/>
+            <svg v-if="!userinfo.avatar" class="icon avatar-icon" aria-hidden="true">
               <use xlink:href="#icon-user__easyico" />
-            </svg> -->
+            </svg>
           </div>
           <div class="login-container" @click="login()">
             <span class="login-text">登录/注册</span>
@@ -161,11 +161,11 @@ export default {
   },
   methods: {
     login () {
-      var btnArray = ['否', '是'];
+      var btnArray = ['否', '是']
       mui.confirm('确认退出当前账号？', '注销', btnArray, (e) =>{
         if (e.index == 1) {
-          localStorage.removeItem('CUR_USERINFO')
-          localStorage.removeItem('CUR_BINDINFO')
+          this.$cookies.set('CUR_USERINFO', '', -1)
+          this.$cookies.set('CUR_BINDINFO', '', -1)
           this.$router.push('/login')
         }
       })

@@ -68,7 +68,7 @@ export default {
   methods: {
     search (value) {
       this.city = value
-      localStorage.setItem('chooseCity', value)
+      this.$cookies.set('chooseCity', value)
       this.loading = true
       searchFromCity(value)
         .then(res => {

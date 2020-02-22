@@ -14,28 +14,28 @@
                     <span class="mui-icon mui-icon-forward"></span>
                 </div>
             </div>
-            <div class="item">
+            <!-- <div class="item">
                 <span>昵称</span>
                 <div>
                     <span>{{user.username||'填写'}}</span>
                     <span class="mui-icon mui-icon-forward"></span>
                 </div>
-            </div>
-            <div class="item">
+            </div> -->
+            <div class="item" @click="$router.push('/changephone')">
                 <span>电话号码</span>
                 <div>
                     <span>{{user.userphone||'填写'}}</span>
                     <span class="mui-icon mui-icon-forward"></span>
                 </div>
             </div>
-            <div class="item">
-                <span>真实姓名</span>
+            <div class="item"  @click="$router.push('/changeusername?username='+user.username)">
+                <span>昵称</span>
                 <div>
                     <span>{{user.username||'填写'}}</span>
                     <span class="mui-icon mui-icon-forward"></span>
                 </div>
             </div>
-            <div class="item">
+            <div class="item" @click="$router.push('/changecardid?cardid='+user.cardid)" >
                 <span>身份证号</span>
                 <div>
                     <span>{{user.cardid||'填写'}}</span>

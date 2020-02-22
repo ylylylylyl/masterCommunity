@@ -35,6 +35,9 @@ const Deposit = () => import('../views/wallet/deposit.vue')
 const LivingPay = () => import('../views/livingpayment/livingpay.vue')
 const ChangeAvatar = () => import('../views/selfinfo/changeAvatar.vue')
 const MyForum = () => import('../views/forum/myforum')
+const ChangePhone = () => import('../views/selfinfo/changePhone.vue')
+const ChangeUsername = () => import('../views/selfinfo/changeUsername.vue')
+const changeCardId = () => import('../views/selfinfo/changeCardId.vue')
 const AdminLogin = () => import('../views/admin/login/login.vue')
 const AdminRegist = () => import('../views/admin/regist')
 const AdminVillage = () => import('../views/admin/village')
@@ -52,6 +55,7 @@ const AdminLost = () => import('../views/admin/lost')
 const AdminLostRecords = () => import('../views/admin/lost/list.vue')
 const AdminLostDetail = () => import('../components/Community/lostdeail.vue')
 const AdminUserMana = () => import('../views/admin/usermanage')
+
 Vue.use(Router)
 
 export default new Router({
@@ -78,7 +82,8 @@ export default new Router({
         name: 'home',
         component: Home,
         meta: {
-          requireAuth: true
+          requireAuth: true,
+          requireBind: true
         }
       },
       {
@@ -86,7 +91,8 @@ export default new Router({
         name: 'community',
         component: Community,
         meta: {
-          requireAuth: true
+          requireAuth: true,
+          requireBind: true
         }
       },
       {
@@ -94,7 +100,8 @@ export default new Router({
         name: 'selfcenter',
         component: SelfCenter,
         meta: {
-          requireAuth: true
+          requireAuth: true,
+          requireBind: true
         }
       },
       {
@@ -102,7 +109,8 @@ export default new Router({
         name: 'addpayuser',
         component: AddPayUser,
         meta: {
-          requireAuth: true
+          requireAuth: true,
+          requireBind: true
         }
       },
       {
@@ -110,7 +118,8 @@ export default new Router({
         name: 'propertypayment',
         component: PropertyPayment,
         meta: {
-          requireAuth: true
+          requireAuth: true,
+          requireBind: true
         }
       },
       {
@@ -118,7 +127,8 @@ export default new Router({
         name: 'repairReport',
         component: RepairReport,
         meta: {
-          requireAuth: true
+          requireAuth: true,
+          requireBind: true
         }
       },
       {
@@ -126,7 +136,8 @@ export default new Router({
         name: 'reportrecords',
         component: ReportRecords,
         meta: {
-          requireAuth: true
+          requireAuth: true,
+          requireBind: true
         }
       },
       {
@@ -134,7 +145,8 @@ export default new Router({
         name: 'houseinfo',
         component: HouseInfo,
         meta: {
-          requireAuth: true
+          requireAuth: true,
+          requireBind: true
         }
       },
       {
@@ -142,7 +154,8 @@ export default new Router({
         name: 'houseinfodet',
         component: HouseInfoDetail,
         meta: {
-          requireAuth: true
+          requireAuth: true,
+          requireBind: true
         }
       },
       {
@@ -160,7 +173,8 @@ export default new Router({
         name: 'opendoor',
         component: OpenDoor,
         meta: {
-          requireAuth: true
+          requireAuth: true,
+          requireBind: true
         }
       },
       {
@@ -168,7 +182,8 @@ export default new Router({
         name: 'announcedetail',
         component: AnnounceDetail,
         meta: {
-          requireAuth: true
+          requireAuth: true,
+          requireBind: true
         }
       }
       ]
@@ -179,7 +194,8 @@ export default new Router({
       name: 'forum',
       component: Forum,
       meta: {
-        requireAuth: true
+        requireAuth: true,
+        requireBind: true
       }
 
     },
@@ -188,7 +204,8 @@ export default new Router({
       name: 'forumdetail',
       component: ForumDetail,
       meta: {
-        requireAuth: true
+        requireAuth: true,
+        requireBind: true
       }
 
     },
@@ -197,7 +214,8 @@ export default new Router({
       name: 'publishforum',
       component: PublishForum,
       meta: {
-        requireAuth: true
+        requireAuth: true,
+        requireBind: true
       }
     },
     {
@@ -205,7 +223,8 @@ export default new Router({
       name: 'cityChoose',
       component: CityChoose,
       meta: {
-        requireAuth: true
+        requireAuth: true,
+        requireBind: true
       }
     },
     {
@@ -213,7 +232,8 @@ export default new Router({
       name: 'liferepair',
       component: LifeRepair,
       meta: {
-        requireAuth: true
+        requireAuth: true,
+        requireBind: true
       }
     },
     {
@@ -221,7 +241,8 @@ export default new Router({
       name: 'selfinfo',
       component: SelfInfo,
       meta: {
-        requireAuth: true
+        requireAuth: true,
+        requireBind: true
       }
     },
     {
@@ -256,7 +277,8 @@ export default new Router({
       name: 'bankcard',
       component: BankCard,
       meta: {
-        requireAuth: true
+        requireAuth: true,
+        requireBind: true
       }
     },
     {
@@ -264,7 +286,8 @@ export default new Router({
       name: 'addcard',
       component: AddCard,
       meta: {
-        requireAuth: true
+        requireAuth: true,
+        requireBind: true
       }
     },
     {
@@ -272,7 +295,8 @@ export default new Router({
       name: 'wallet',
       component: Wallet,
       meta: {
-        requireAuth: true
+        requireAuth: true,
+        requireBind: true
       }
     },
     {
@@ -280,7 +304,8 @@ export default new Router({
       name: 'recharge',
       component: Recharge,
       meta: {
-        requireAuth: true
+        requireAuth: true,
+        requireBind: true
       }
     },
     {
@@ -288,7 +313,8 @@ export default new Router({
       name: 'deposit',
       component: Deposit,
       meta: {
-        requireAuth: true
+        requireAuth: true,
+        requireBind: true
       }
     },
     {
@@ -296,7 +322,8 @@ export default new Router({
       name: 'livingpay',
       component: LivingPay,
       meta: {
-        requireAuth: true
+        requireAuth: true,
+        requireBind: true
       }
     },
     {
@@ -304,7 +331,8 @@ export default new Router({
       name: 'paymentrecords',
       component: PaymentRecords,
       meta: {
-        requireAuth: true
+        requireAuth: true,
+        requireBind: true
       }
     },
     {
@@ -312,7 +340,8 @@ export default new Router({
       name: 'livingpayment',
       component: LivingPayment,
       meta: {
-        requireAuth: true
+        requireAuth: true,
+        requireBind: true
       }
     },
     {
@@ -320,7 +349,17 @@ export default new Router({
       name: 'changeAvatar',
       component: ChangeAvatar,
       meta: {
-        requireAuth: true
+        requireAuth: true,
+        requireBind: true
+      }
+    },
+    {
+      path: '/changeUsername',
+      name: 'changeUsername',
+      component: ChangeUsername,
+      meta: {
+        requireAuth: true,
+        requireBind: true
       }
     },
     {
@@ -328,7 +367,26 @@ export default new Router({
       name: 'myforum',
       component: MyForum,
       meta: {
-        requireAuth: true
+        requireAuth: true,
+        requireBind: true
+      }
+    },
+    {
+      path: '/changephone',
+      name: 'changephone',
+      component: ChangePhone,
+      meta: {
+        requireAuth: true,
+        requireBind: true
+      }
+    },
+    {
+      path: '/changecardid',
+      name: 'changecardid',
+      component: changeCardId,
+      meta: {
+        requireAuth: true,
+        requireBind: true
       }
     },
     {

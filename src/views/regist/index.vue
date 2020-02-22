@@ -31,8 +31,18 @@
             已有账号点击登录
             </p>
         </div>
-    <button type="button" class="mui-btn mui-btn-outlined" @click="userRegist()">注册</button>
-    <button type="button" class="mui-btn mui-btn-outlined back-btn" @click="backtohome">返回主页</button>
+    <button
+      type="button"
+      data-loading-icon-position="right"
+      class="mui-btn mui-btn-outlined"
+      @click="userRegist()"
+      :disabled='loading'>
+      {{!loading?'注册':'注册中...'}}
+    </button>
+    <button
+    type="button"
+    class="mui-btn mui-btn-outlined back-btn"
+    @click="backtohome">返回主页</button>
     </div>
 </template>
 <style scoped>
@@ -79,7 +89,7 @@
         width: 85%;
     }
     .mui-input-row{
-        color: lightgray;
+        /* color: lightgray; */
     }
     .mui-icon-help{
         font-size: 16px;
@@ -104,7 +114,42 @@
         justify-content: space-between;
         align-items: center;
     }
-
+/*自定义一个透明度从0到1的动画，它的名称是fade-in*/
+@keyframes fade-in{  
+    0%{ opacity: 0;}
+    100%{opacity:1;}
+}
+@-webkit-keyframes fade-in{
+    0%{ opacity: 0;}
+    100%{opacity:1;}
+}
+@-ms-keyframes fade-in{
+    0%{ opacity: 0;}
+    100%{opacity:1;}
+}
+@-o-keyframes fade-in{
+    0%{ opacity: 0;}
+    100%{opacity:1;}
+}
+@-moz-keyframes fade-in{
+    0%{ opacity: 0;}
+    100%{opacity:1;}
+}
+.tip{ 
+    opacity: 0;      /*实先规定文字的状态是不显示的*/
+    animation:  fade-in 6s ease 0.1s 1;    /*调用名称为fade-in的动画，全程动画显示时间4S，进入方式为ease，延时0S进入，播放次数1次*/
+    -webkit-animation: fade-in 6s ease 0.1s 1;
+    -moz-animation:  fade-in 6s ease 0.1s 1;
+    -o-animation:  fade-in 6s ease 0.1s 1;
+    -ms-animation:  fade-in 6s ease 0.1s 1;
+    
+    /*规定动画的最后状态为结束状态*/
+    animation-fill-mode:forwards;
+    -webkit-animation-fill-mode: forwards;  
+      -o-animation-fill-mode: forwards; 
+      -ms-animation-fill-mode: forwards;   
+      -moz-animation-fill-mode: forwards; 
+}
 </style>
 
 <script>
@@ -118,7 +163,8 @@ export default {
       phone: '',
       pwd: '',
       pwdAgain: '',
-      tip: '' // 提示内容
+      tip: '' ,// 提示内容
+      loading: false // 是否正在请求服务器
     }
   },
   watch: {
@@ -143,22 +189,8 @@ export default {
       this.$router.push('/home')
     },
     userRegist () {
-      if (this.phone == '' || this.phone == null) {
-        this.tip = '手机号码不能为空'
-        return
-      }
-      if (this.pwd == '' || this.pwd == null) {
-        this.tip = '密码不能为空'
-        return
-      }
-      if (this.pwdAgain == '' || this.pwdAgain == null) {
-        this.tip = '请再次输入密码'
-        return
-      }
-      if (this.pwdAgain !== this.pwd) {
-        this.tip = '两次输入密码不一致'
-        return
-      }
+      if (!this.judge()) return
+      this.loading = true
       const root = process.env.API_HOST
       const user = {
         phone: this.phone,
@@ -170,12 +202,35 @@ export default {
         data: user
 
       }).then(result => {
+        console.log(result)
+        this.loading = false
         if (result.status) {
           this.regist()
         } else {
           this.tip = result.result
         }
+      }, err => {
+        this.loading = false
       })
+    },
+    judge () {
+      if (!this.phone) {
+        this.tip = '手机号码不能为空'
+        return false
+      }
+      if (!this.pwd) {
+        this.tip = '密码不能为空'
+        return false
+      }
+      if (!this.pwdAgain) {
+        this.tip = '请再次输入密码'
+        return false
+      }
+      if (this.pwdAgain !== this.pwd) {
+        this.tip = '两次输入密码不一致'
+        return false
+      }
+      return true
     }
   }
 }

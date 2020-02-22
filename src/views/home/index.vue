@@ -129,7 +129,7 @@
             <use xlink:href="#icon-tongzhigonggao" />
           </svg>
           <span>最新公告</span>
-          <p>{{notice.noticetitle}}</p>
+          <p>{{notice.noticetitle||'暂无公告'}}</p>
         </div>
         <div class="notice-icon">
           <span class="mui-icon mui-icon-arrowright"></span>
@@ -166,7 +166,9 @@ export default {
     return {
       newslist: [],
       isopen: false,
-      notice: {},
+      notice: {
+        noticetitle: ''
+      },
       root: process.env.API_HOST
     }
   },
@@ -178,6 +180,7 @@ export default {
     ...mapState(['chooseVillage']),
     ...mapState(['curUserInfo']),
     curAddr () {
+      console.log(this.$cookies.get('CUR_BINDINFO'))
       if (this.$cookies.get('CUR_BINDINFO')) return this.$cookies.get('CUR_BINDINFO').chooseaddr
       return null
     }
@@ -293,7 +296,7 @@ export default {
         }
       })
         .then(res => {
-          if (res.status) {
+          if (res.status && res.object) {
             this.notice = res.object
           }
         })

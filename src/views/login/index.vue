@@ -30,7 +30,9 @@
         没有账号点击注册
       </p>
     </div>
-    <button type="button" class="mui-btn mui-btn-outlined l-btn" @click="login()">登录</button>
+    <button type="button" :disabled="loading" class="mui-btn mui-btn-outlined l-btn" @click="login()">
+      {{!loading?'登录':'登陆中'}}
+    </button>
     <button type="button" class="mui-btn mui-btn-outlined back-btn" @click="backtohome">返回主页</button>
     <div class="change-container">
       <span class="mui-icon mui-icon-loop"></span>
@@ -198,7 +200,7 @@
   width: 85%;
 }
 .mui-input-row {
-  color: lightgray;
+  /* color: lightgray; */
 }
 .mui-icon-help {
   font-size: 16px;
@@ -293,7 +295,8 @@ export default {
       userphone: '',
       userpassword: '',
       tip: '',
-      root: process.env.API_HOST
+      root: process.env.API_HOST,
+      loading: false // 是否正在请求服务器
     };
   },
   computed: {
@@ -319,11 +322,11 @@ export default {
       this.$router.push('/home')
     },
     async login () {
-      if (this.userphone === '' || this.userphone == null) {
+      if (!this.userphone) {
         this.tip = '请输入手机号码'
         return
       }
-      if (this.userpassword === '' || this.userpassword == null) {
+      if (!this.userpassword) {
         this.tip = '请输入密码'
         return
       }
@@ -332,6 +335,7 @@ export default {
         userphone: this.userphone,
         userpassword: this.userpassword
       };
+      this.loading = true
       this.$ajax
         .post({
           // http://localhost:8081/regist
@@ -339,6 +343,7 @@ export default {
           data: user
         })
         .then(result => {
+          this.loading = false
           if (result.status) {
             this.$store.commit('CUR_USERINFO', result.object)
             localStorage.setItem('avatar', result.object.avatar)
@@ -365,10 +370,13 @@ export default {
         })
         .then(res => {
           if (res.status) {
+            console.log(res)
             this.$store.commit('CHOOSE_VILLAGE', res.result)
-            this.$router.push('/home')
             this.$cookies.set('CUR_BINDINFO', res.object)
+            this.$router.push('/home')
+           
           } else {
+            console.log(111)
             this.$router.push('/bindhouse')
           }
         })

@@ -102,14 +102,14 @@ Axios.interceptors.response.use(response => {
   if (!status) {
     // 拦截断网
     if ((error + '').search('Network Error') !== -1) {
-      // Message.error('哎哟，网络出错咯。请检查您的网络！')
+      mui.toast('哎哟，网络出错咯。请检查您的网络！')
     }
     // 拦截超时
     if ((error + '').search('timeout') !== -1) {
       if (Config.isDownload === true) {
-        // Message.error('哎哟，由于文件过大下载超时咯。请换种方式进行下载！')
+        mui.toast('哎哟，由于文件过大下载超时咯。请换种方式进行下载！')
       } else {
-        // Message.error('哎哟，请求超时咯。请稍后再重试！')
+        mui.toast('哎哟，请求超时咯。请稍后再重试！')
       }
     }
   }
@@ -117,34 +117,35 @@ Axios.interceptors.response.use(response => {
   if (status && status.status) {
     switch (status.status) {
       case 400:
-        // Message.error('非常抱歉，"Bad Request"！')
+        mui.toast('非常抱歉，"Bad Request"！')
         break
       case 401:
-        // Message.error('非常抱歉，未经授权！')
+        mui.toast('非常抱歉，未经授权！')
         break
       case 403:
-        // Message.error('非常抱歉，拒绝访问！')
+        mui.toast('非常抱歉，拒绝访问！')
         break
       case 404:
-        // Message.error('非常抱歉，"Not Found"！')
+        mui.toast('非常抱歉，"Not Found"！')
         break
       case 500:
-        // Message.error('非常抱歉，服务器出错了！')
+        mui.toast('非常抱歉，服务器出错了！')
         break
       case 502:
-        // Message.error('非常抱歉，"Bad Gateway"！')
+        mui.toast('非常抱歉，"Bad Gateway"！')
         break
       case 503:
-        // Message.error('非常抱歉，"Service Unavailable"！')
+        mui.toast('非常抱歉，"Service Unavailable"！')
         break
       case 504:
-        // Message.error('非常抱歉，"Gateway Timeout"！')
+        // mui.toast('非常抱歉，"Gateway Timeout"！')
+        mui.alert('非常抱歉，服务器出错，请联系管理员', '出错了！', function() {});
         break
       case 505:
-        // Message.error('非常抱歉，"HTTP Version Not Supported"！')
+        mui.toast('非常抱歉，"HTTP Version Not Supported"！')
         break
       default:
-            // Message.error('您遇到了一个未知错误，必要情况下请联系管理员！')
+        mui.toast('您遇到了一个未知错误，必要情况下请联系管理员！')
     }
   }
   return Promise.reject(error)

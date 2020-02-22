@@ -67,7 +67,9 @@
         </div>
       </div>
       <div class="btn-container">
-        <button type="button" @click="commitBind()" class="mui-btn mui-btn-primary">提交</button>
+        <button :disabled="!judge()&&tip" type="button" @click="commitBind()" class="mui-btn mui-btn-primary">
+          {{loading?'提交中...':'提交'}}
+        </button>
       </div>
     </div>
   </div>
@@ -129,6 +131,7 @@
 <script>
 import {mapGetters} from 'vuex'
 import Header from '../../components/LeftHeader'
+import {CARD_ID} from '../../utils/rej'
 export default {
   components: {
     Header
@@ -160,7 +163,8 @@ export default {
         phoneNumber: '', // 联系电话
         chooseAddr: '' // 选择的具体地址
       },
-      tip: '' // 提示文字
+      tip: '', // 提示文字
+      loading: false
     }
   },
   computed: {
@@ -170,6 +174,12 @@ export default {
     },
     villageId () {
       return this.$route.query.villageid
+    },
+    bindid () {
+      if (!this.$cookies.get('CUR_BINDINFO')) {
+        return false
+      }
+      return true
     }
   },
   mounted () {
@@ -192,6 +202,16 @@ export default {
   watch: {
     villageId (val) {
       this.postData.village = val
+    },
+    'postData.cardId': {
+      handler: function (val) {
+        if (CARD_ID.test(val)) {
+          this.tip = ''
+        } else {
+          this.tip = '请输入正确的身份证号码'
+        }
+      },
+      deep: true
     }
   },
   methods: {
@@ -211,34 +231,7 @@ export default {
       })
     },
     commitBind () {
-      if (this.villageId === null || this.villageId === '' || !this.villageId) {
-        this.tip = '请选择小区'
-        return
-      }
-      if (this.postData.building === null || this.postData.building === '') {
-        this.tip = '请选择楼栋'
-        return
-      }
-      if (this.postData.houseRoom === null || this.postData.houseRoom === '') {
-        this.tip = '请输入房屋号'
-        return
-      }
-      if (this.postData.houseArea === null || this.postData.houseRoom === '') {
-        this.tip = '请输入房屋面积'
-        return
-      }
-      if (this.postData.houseOwner === null || this.postData.houseOwner === '') {
-        this.tip = '请输入房屋所有人'
-        return
-      }
-      if (this.postData.cardId === null || this.postData.cardId === '') {
-        this.tip = '请输入身份证号码'
-        return
-      }
-      if (this.postData.phoneNumber === null || this.postData.phoneNumber === '') {
-        this.tip = '请输入手机号码'
-        return
-      }
+      if (!this.judge()) return
       this.tip = null
       this.postData.userid = this.curUserInfo.userid
       this.postData.village = Number(this.postData.village)
@@ -248,18 +241,60 @@ export default {
       this.postData.phoneNumber = Number(this.postData.phoneNumber)
       this.postData.villageid = Number(this.villageId)
       const root = process.env.API_HOST
-      console.log(this.postData)
+      this.loading = true
       this.$ajax.post({
         url: root + 'bindhouse/bindhousebyuser',
         data: this.postData
       })
         .then(res => {
+          this.loading = false
           if (res.status) {
-            this.$router.push('/home')
+            console.log(!this.$cookies.get('CUR_BINDINFO'))
+            if(this.$cookies.get('CUR_BINDINFO')) {
+              this.$router.push('/home')
+            } else {
+              console.log(1111111111)
+              this.$cookies.set('CUR_BINDINFO', res.object)
+              this.$router.push('/home')
+            }
+            
           } else {
             mui.toast(res.msg)
           }
+        }, err => {
+          this.loading = false
         })
+    },
+    judge () {
+      if (!this.villageId) {
+        this.tip = '请选择小区'
+        return false
+      }
+      if (!this.postData.building) {
+        this.tip = '请选择楼栋'
+        return false
+      }
+      if (!this.postData.houseRoom) {
+        this.tip = '请输入房屋号'
+        return false
+      }
+      if (!this.postData.houseArea) {
+        this.tip = '请输入房屋面积'
+        return false
+      }
+      if (!this.postData.houseOwner) {
+        this.tip = '请输入房屋所有人'
+        return false
+      }
+      if (!this.postData.cardId) {
+        this.tip = '请输入身份证号码'
+        return false
+      }
+      if (!this.postData.phoneNumber) {
+        this.tip = '请输入手机号码'
+        return false
+      }
+      return true
     }
   }
 }

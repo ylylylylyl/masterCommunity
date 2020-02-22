@@ -76,7 +76,7 @@ export default {
   methods: {
     search (province) {
       this.$store.commit('CUR_PROVINCE', province)
-      localStorage.setItem('chooseProvince', province)
+      this.$cookies.set('chooseProvince', province)
       this.province = province
       this.loading = true
       searchFromCity(province).then(res => {
