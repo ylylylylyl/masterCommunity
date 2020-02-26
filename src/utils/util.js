@@ -106,3 +106,17 @@ export function updateWallet (userid, money) {
       })
   })
 }
+
+export function insertDetail (params) {
+  Ajax.post({
+    url: root + 'change/insertChange',
+    data: params
+  })
+    .then(res => {
+      if (res.status) {
+       
+      } else {
+        mui.toast('服务器出错')
+      }
+    })
+}

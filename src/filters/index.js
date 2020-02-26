@@ -33,3 +33,13 @@ Vue.filter('losttype', type => {
       return '已领取'
   }
 })
+// Vue.filter('initIcon', type => {
+//   switch (type) {
+//     case 1:
+//       return '#icon-ranqifei'
+//     case 2:
+//       return '#icon-dianfei'
+//     case 3:
+//       return '#icon-shuifei'
+//   }
+// })

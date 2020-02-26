@@ -23,7 +23,13 @@
                     </div>
                     <div class="btn-container">
                         <p>当前零钱余额{{walletbalance}}元，<a @click="e=>depositAl(e)">全部提现</a></p>
-                        <button id='promptBtn' type="button" class="mui-btn mui-btn-outlined l-btn">提现</button>
+                        <button
+                          :disabled='!money||loading'
+                          id='promptBtn'
+                          type="button"
+                          class="mui-btn mui-btn-outlined l-btn">
+                          {{loading?'提现中...':'提现'}}
+                        </button>
                     </div>
                 </div>
             </div>
@@ -90,6 +96,8 @@ input{
 <script>
 import Header from '../../components/LeftHeader'
 import {mapGetters} from 'vuex'
+import {POSITIVE_NUMBER} from '../../utils/rej'
+import {insertDetail} from '../../utils/util'
 export default {
   components: {
     Header
@@ -105,7 +113,8 @@ export default {
       bankIcon: '',
       bankid: '',
       root: process.env.API_HOST,
-      bankCardData: []
+      bankCardData: [],
+      loading: false
     }
   },
   computed: {
@@ -129,10 +138,14 @@ export default {
     init () {
       document.getElementById('promptBtn').addEventListener('tap', (e) => {
         e.detail.gesture.preventDefault() // 修复iOS 8.x平台存在的bug，使用plus.nativeUI.prompt会造成输入法闪一下又没了
+        if (!POSITIVE_NUMBER.test(this.money)) {
+          mui.toast('请输入正确的金额！')
+          return
+        }
         var btnArray = ['取消', '确定']
         mui.prompt('请输入支付密码：', '', '提现到银行卡', btnArray, (e) => {
           if (e.index == 1) {
-            const {userid} = this.curUserInfo
+            const {userid} = this.$cookies.get('CUR_USERINFO')
             this.$ajax.post({
               url: this.root + 'user/selectPayPwd',
               data: {userid}
@@ -153,7 +166,7 @@ export default {
       })
     },
     initBankCard () {
-      const {userid} = this.curUserInfo
+      const {userid} = this.$cookies.get('CUR_USERINFO')
       this.$ajax.post({
         url: this.root + 'bankcard/selectbankcard',
         data: {userid}
@@ -198,7 +211,8 @@ export default {
     },
     // 提现
     deposit () {
-      const {userid} = this.curUserInfo
+      this.loading = true
+      const {userid} = this.$cookies.get('CUR_USERINFO')
       const bankid = this.bankid
       const money = this.money
       const params = {
@@ -209,13 +223,24 @@ export default {
         data: params
       })
         .then(res => {
+          this.loading = false
           if (res.status) {
             this.$router.push('/wallet')
+            this.insert(money) // 添加明细
           } else {
             mui.toast(res.result)
           }
+        }, err => {
+          this.loading = false
         })
-      console.log(params)
+    },
+    insert (money) {
+      const type = 1
+      const changemoney = money
+      const changedetail = '零钱提现'
+      const userid = this.$cookies.get('CUR_USERINFO').userid
+      const params = {type, changemoney, changedetail, userid}
+      insertDetail(params)
     }
   }
 }

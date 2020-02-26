@@ -13,17 +13,19 @@
                 </div>
             </div>
         </div>
-       
+        <Nothing></Nothing>
     </div>
 </template>
 
 <script>
 import Header from '../../components/LeftHeader'
 import ReportRecords from './reportrecords'
+import Nothing from '../../components/nothing'
 export default {
   components: {
     Header,
-    ReportRecords
+    ReportRecords,
+    Nothing
   },
   data () {
     return {

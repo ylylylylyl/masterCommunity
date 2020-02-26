@@ -138,7 +138,6 @@ var _=require('lodash')
 export default {
   async mounted () {
     this.paymentinit()
-    console.log(this.createDateDate())
   },
   components: {
     Loading

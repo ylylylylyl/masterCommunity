@@ -135,6 +135,13 @@
               </div>
               <span class="mui-icon mui-icon-forward"></span>
             </div>
+            <div class="self-bottom-item" @click="$router.push('/houseinfo')">
+              <div>
+                <span class="mui-icon mui-icon-loop"></span>
+                <span>切换房屋</span>
+              </div>
+              <span class="mui-icon mui-icon-forward"></span>
+            </div>
           </div>
         </div>
       </div>

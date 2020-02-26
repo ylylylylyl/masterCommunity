@@ -1,9 +1,13 @@
 <template>
     <div class="content-container">
         <Header>银行卡</Header>
-        <div class="bank-card-container">
-            <div class="bank-card-item" v-for="item in this.bankCardData" :key="item.bankid">
-                <div class="bank-icon-container">
+        <div class="bank-card-container"  id="OA_task_1" >
+            <div class="bank-card-item mui-table-view-cell" v-for="item in this.bankCardData" :key="item.bankid">
+                <div class="mui-slider-right mui-disabled" @click="(e)=>deletebank(e,item.bankid)">
+                    <a class="mui-btn mui-btn-red">注销银行卡</a>
+                </div>
+              <div class="bank-card-item mui-slider-handle">
+                  <div class="bank-icon-container">
                     <svg class="icon" aria-hidden="true">
                         <use :xlink:href="item.bankcompany| initIcon"/>
                     </svg>
@@ -15,6 +19,8 @@
                     </div>
                     <p class="bank-num-p">.... .... .... {{item.bankcardnum.slice(12,16)}}</p>
                 </div>
+              </div>
+
             </div>
         </div>
         <div class="bank-add-container" @click="$router.push('/addcard')">
@@ -33,7 +39,7 @@
         padding: 55px 15px 15px 15px;
     }
     .bank-card-item{
-        height: 100px;
+        /* height: 100px; */
         background-color: #C75056;
         display: flex;
         border-radius: 5px;
@@ -104,6 +110,7 @@ export default {
   },
   mounted () {
     this.initBankCard()
+    // this.initMui()
   },
   filters: {
     initIcon (item) {
@@ -135,7 +142,30 @@ export default {
         .then(res => {
           if (res.status) {
             this.bankCardData = res.result
-            console.log(this.bankCardData)
+          }
+        })
+    },
+    deletebank (e, bankid) {
+      let btnArray = ['确认', '取消']
+      let li = e.target.parentNode.parentNode
+      let that = this
+      mui.confirm('确认解除绑定该银行卡？', '解除绑定', btnArray, (e) => {
+        if (e.index == 0) {
+          that.remove(bankid,li)
+        } else {
+          mui.swipeoutClose(li)
+        }
+      })
+    },
+    remove (bankid,li) {
+      this.$ajax.post({
+        url: this.root + 'bankcard/remove',
+        data: {bankid}
+      })
+        .then(res => {
+          if (res.status) {
+            mui.swipeoutClose(li)
+            this.initBankCard()
           }
         })
     }

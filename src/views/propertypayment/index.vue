@@ -43,14 +43,17 @@
       </div>
       <button :disabled='paytotal===0' @click="handleClick()" type="button" class="mui-btn submit">提交订单</button>
     </div>
+    <Nothing v-if="!properties.length"></Nothing>
   </div>
 </template>
 <script>
 import BackHeader from '../../components/LeftHeader'
-import {updateWallet} from '../../utils/util'
+import {updateWallet, insertDetail} from '../../utils/util'
+import Nothing from '../../components/nothing'
 export default {
   components: {
-    BackHeader
+    BackHeader,
+    Nothing
   },
   data () {
     return {
@@ -151,6 +154,7 @@ export default {
             .then(res => {
               if (res.status === true) {
                 this.init()
+                this.insertdetail()
               } else {
                 
               }
@@ -159,6 +163,14 @@ export default {
           mui.toast(res.result)
         }
       })
+    },
+    insertdetail () {
+      const type = 1
+      const changemoney = this.paytotal
+      const changedetail = '物业缴费'
+      const userid = this.$cookies.get('CUR_USERINFO').userid
+      const params = {type, changemoney, changedetail, userid}
+      insertDetail(params)
     }
   },
   filters: {

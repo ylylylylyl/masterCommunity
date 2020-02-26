@@ -25,8 +25,14 @@
                     <span class="input-left">预留号码</span>
                     <input type="text" v-model="postData.binduserphone"  class="mui-input-clear inout-right" placeholder="请输入预留号码" />
                 </div>
+                <span class="tip">{{tip}}</span>
             </div>
-            <button type="button" class="mui-btn mui-btn-outlined l-btn" @click="addBankCard()">确认添加</button>
+            <button
+            type="button"
+            class="mui-btn mui-btn-outlined l-btn"
+            @click="addBankCard()">
+            {{!loading?'确认添加':'正在添加...'}}
+            </button>
         </div>
     </div>
 </template>
@@ -66,6 +72,7 @@
 <script>
 import {mapGetters} from 'vuex'
 import Header from '../../components/LeftHeader'
+import {BANK_ID, PHONE_REG} from '../../utils/rej'
 export default {
   components: {
     Header
@@ -89,7 +96,32 @@ export default {
         bankcompany: '点击选择',
         binduserphone: ''
       },
-      root: process.env.API_HOST
+      root: process.env.API_HOST,
+      tip: '',
+      loading: false,
+      isCommit: false
+    }
+  },
+  watch: {
+    'postData.bankcardnum': {
+      handler: function (val) {
+        if (BANK_ID.test(val)) {
+          this.tip = ''
+        } else {
+          this.tip = '请输入正确的银行卡号'
+        }
+      },
+      deep: true
+    },
+    'postData.binduserphone': {
+      handler: function (val) {
+        if (PHONE_REG.test(val)) {
+          this.tip = ''
+        } else {
+          this.tip = '请输入正确的电话号码'
+        }
+      },
+      deep: true
     }
   },
   methods: {
@@ -105,20 +137,52 @@ export default {
       })
     },
     addBankCard () {
-      const {userid} = this.curUserInfo
+      if (!this.judge()) return
+      const {userid} = this.$cookies.get('CUR_USERINFO')
       const params = {
         userid: userid,
         ...this.postData
       }
+      this.loading = true
       this.$ajax.post({
         url: this.root + 'bankcard/bindbankcard',
         data: params
       })
         .then(res => {
+          this.loading = false
           if (res.status) {
             this.$router.push('/bankcard')
           }
+        }, err => {
+          this.loading = false
         })
+    },
+    judge () {
+      if (!this.postData.bindbankname) {
+        this.tip = '请填写用户名'
+        return false
+      }
+      if (!this.postData.bankcardnum) {
+        this.tip = '请填写银行卡号'
+        return false
+      }
+      if (this.postData.bankcompany === '点击选择') {
+        this.tip = '请选择银行'
+        return false
+      }
+      if (!this.postData.binduserphone) {
+        this.tip = '请填写预留号码'
+        return false
+      }
+      if (!BANK_ID.test(this.postData.bankcardnum)) {
+        this.tip = '请填写正确的银行卡号'
+        return false
+      }
+      if (!PHONE_REG.test(this.postData.binduserphone)) {
+        this.tip = '请填写正确的电话号码'
+        return false
+      }
+      return true
     }
   }
 }

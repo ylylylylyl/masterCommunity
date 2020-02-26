@@ -18,7 +18,7 @@
                 <div class="addpay-item">
                     <span class="addpay-title">缴费单位</span>
                     <div>
-                        <span class="company-span">成都大丰燃气有限公司</span>
+                        <span class="company-span">大丰燃气有限公司</span>
                         <span class="mui-icon mui-icon-arrowright"></span>
                     </div>
                 </div>
@@ -31,9 +31,9 @@
             <div class="btn-container">
                 <div class="mui-input-row mui-checkbox mui-left">
                     <label>我已阅读并同意《智能社区协议》</label>
-                    <input name="checkbox1" value="Item 1" type="checkbox" checked>
+                    <input v-model="isAgree" name="checkbox1" value="Item 1" type="checkbox" >
                 </div>
-                <button type="button" class="mui-btn mui-btn-primary" @click="submit()">确认新建</button>
+                <button :disabled='!houseNumber' type="button" class="mui-btn mui-btn-primary" @click="submit()">确认新建</button>
             </div>
 
         </div>
@@ -42,12 +42,14 @@
 </template>
 <script>
 import {goback} from '../../utils/util'
+import {SIX_NUMBER} from '../../utils/rej'
 import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
       houseNumber: '',
-      root: process.env.API_HOST
+      root: process.env.API_HOST,
+      isAgree:''
     }
   },
   computed: {
@@ -64,6 +66,7 @@ export default {
       this.$router.push('/citychoose')
     },
     submit () {
+      if (!this.judge()) return
       const {bindid} = this.$cookies.get('CUR_BINDINFO')
       const params = {
         bindid: Number(bindid),
@@ -77,6 +80,17 @@ export default {
           this.$router.push('/livingpayment')
         }
       })
+    },
+    judge () {
+      if (!this.isAgree) {
+        mui.toast('请先勾选同意协议！')
+        return false
+      } 
+      if (!SIX_NUMBER.test(this.houseNumber)) {
+        mui.toast('请输入正确的六位户号')
+        return false
+      }
+      return true
     }
   }
 }

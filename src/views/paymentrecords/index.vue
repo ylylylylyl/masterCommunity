@@ -28,6 +28,7 @@
             <span>仅展示近6个月的记录</span>
         </div>
         <Loading v-if="loading"/>
+        <Nothing v-if="!this.listData.length"></Nothing>
     </div>
 
 </template>
@@ -103,11 +104,13 @@
 <script>
 import Loading from '../../components/Loading'
 import BackHeader from '../../components/LeftHeader'
+import Nothing from '../../components/nothing'
 var _=require('lodash')
 export default {
   components: {
     BackHeader,
-    Loading
+    Loading,
+    Nothing
   },
   mounted () {
     this.init()
@@ -148,8 +151,8 @@ export default {
             let re = _.groupBy(list, function (item) {
               return ((new Date(item.paytime).getYear() + 1900) + '-' + (new Date(item.paytime).getMonth() + 1) )
             })
-            console.log(re)
             this.listData = re
+            console.log(this.listData)
           }
         })
     },

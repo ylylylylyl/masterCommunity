@@ -18,7 +18,13 @@
                     <input v-model="money" type="text" class="mui-input-clear" placeholder="请输入金额">
                 </div>
             </div>
-            <button  id='promptBtn' type="button" class="mui-btn mui-btn-outlined l-btn">充值</button>
+            <button
+            :disabled='!money'
+            id='promptBtn'
+            type="button"
+            class="mui-btn mui-btn-outlined l-btn">
+            充值
+            </button>
         </div>
     </div>
 </template>
@@ -66,6 +72,8 @@
 <script>
 import Header from '../../components/LeftHeader'
 import InputPassword from '../../components/InputPassword'
+import {POSITIVE_NUMBER} from '../../utils/rej'
+import {insertDetail} from '../../utils/util'
 import {mapGetters} from 'vuex'
 export default {
   components: {
@@ -78,7 +86,7 @@ export default {
       root: process.env.API_HOST,
       defaultBankCard: '',
       binkid: '',
-      money: 0,
+      money: '',
       bankIcon: ''
     }
   },
@@ -93,11 +101,15 @@ export default {
     init () {
       var info = document.getElementById('info')
       document.getElementById('promptBtn').addEventListener('tap', (e) => {
+        if (!POSITIVE_NUMBER.test(this.money)) {
+          mui.toast('请输入正确的金额！')
+          return
+        }
         e.detail.gesture.preventDefault() // 修复iOS 8.x平台存在的bug，使用plus.nativeUI.prompt会造成输入法闪一下又没了
         var btnArray = ['取消', '确定']
         mui.prompt('请输入支付密码：', '', '充值到零钱', btnArray, (e) => {
           if (e.index == 1) {
-            const {userid} = this.curUserInfo
+            const {userid} = this.$cookies.get('CUR_USERINFO')
             this.$ajax.post({
               url: this.root + 'user/selectPayPwd',
               data: {userid}
@@ -128,7 +140,7 @@ export default {
       })
     },
     initBankCard () {
-      const {userid} = this.curUserInfo
+      const {userid} = this.$cookies.get('CUR_USERINFO')
       this.$ajax.post({
         url: this.root + 'bankcard/selectbankcard',
         data: {userid}
@@ -149,7 +161,7 @@ export default {
     },
     // 充值接口
     recharge () {
-      const {userid} = this.curUserInfo
+      const {userid} = this.$cookies.get('CUR_USERINFO')
       const bankid = this.bankid
       const money = Number(this.money)
       const params = {
@@ -164,10 +176,12 @@ export default {
         .then(res => {
           if (res.status) {
             this.$router.push('/wallet')
+            this.insert(money) // 添加明细
           } else {
             mui.toast(res.result)
           }
         })
+        
     },
     // 渲染银行图标
     initIcon (company) {
@@ -187,8 +201,15 @@ export default {
         default:
           return '未知'
       }
+    },
+    insert (money) {
+      const type = 2
+      const changemoney = money
+      const changedetail = '充值到账'
+      const userid = this.$cookies.get('CUR_USERINFO').userid
+      const params = {type, changemoney, changedetail, userid}
+      insertDetail(params)
     }
-    
   }
 }
 </script>

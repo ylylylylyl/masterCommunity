@@ -160,6 +160,7 @@ export default {
       this.$router.push('/repairreport')
     },
     handleRepair () {
+      if (!this.judge()) return
       this.$ajax.post({
         url: this.root + 'repairorder/insertOrder',
         data: this.postData
@@ -171,6 +172,33 @@ export default {
           mui.toast('提交失败')
         }
       })
+    },
+    judge () {
+      if (!this.postData.repairtype) {
+        mui.toast('请选择维修类型！')
+        return false
+      }
+      if (!this.postData.appointmenttime) {
+        mui.toast('请选择预约时间！')
+        return false
+      }
+      if (!this.postData.contactname) {
+        mui.toast('请填写联系人！')
+        return false
+      }
+      if (!this.postData.concatphone) {
+        mui.toast('请填写联系电话！')
+        return false
+      }
+      if (!this.postData.address) {
+        mui.toast('请填写具体地址！')
+        return false
+      }
+      if (!this.postData.description) {
+        mui.toast('请填写具体描述！')
+        return false
+      }
+      return true
     }
   }
 }

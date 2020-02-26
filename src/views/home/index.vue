@@ -96,9 +96,9 @@
             <div class="mui-col-xs-3 mui-col-xs-3">
               <a @click="torouter(5)" class="mui-table-view-cell">
                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-tingcheku" />
+                  <use xlink:href="#icon-shuangkaimen" />
                 </svg>
-                <a>我要停车</a>
+                <a>扫码开门</a>
               </a>
             </div>
             <div class="mui-col-xs-3 mui-col-xs-3">
@@ -180,7 +180,6 @@ export default {
     ...mapState(['chooseVillage']),
     ...mapState(['curUserInfo']),
     curAddr () {
-      console.log(this.$cookies.get('CUR_BINDINFO'))
       if (this.$cookies.get('CUR_BINDINFO')) return this.$cookies.get('CUR_BINDINFO').chooseaddr
       return null
     }
