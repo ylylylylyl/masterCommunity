@@ -89,7 +89,7 @@
                   <use xlink:href="#icon-gerenjiaofeimingxi" />
                 </svg>
                 <div class="self-info">
-                  <span>我的缴费</span>
+                  <span>零钱明细</span>
                   <p>全部缴费一目了然</p>
                 </div>
               </div>

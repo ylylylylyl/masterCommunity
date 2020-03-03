@@ -28,7 +28,7 @@
             <span>仅展示近6个月的记录</span>
         </div>
         <Loading v-if="loading"/>
-        <Nothing v-if="!this.listData.length"></Nothing>
+        <Nothing v-if="isnone"></Nothing>
     </div>
 
 </template>
@@ -119,7 +119,8 @@ export default {
     return {
       root: process.env.API_HOST,
       listData: [],
-      loading: false
+      loading: false,
+      isnone: false
     }
   },
   computed: {
@@ -142,6 +143,7 @@ export default {
         .then(res => {
           this.loading = false
           if (res.status) {
+            if (res.result.length === 0) this.isnone = true
             let list = res.result.sort((a, b) => {
               return b.paytime - a.paytime
             })

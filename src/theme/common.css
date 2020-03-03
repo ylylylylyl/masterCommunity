@@ -118,3 +118,14 @@ input[type='text']{
     font-weight: bold;
     margin-left: 5px;
 }
+.des-img{
+    height:100px;
+    width: 120px !important;
+}
+.img-container>img{
+    height:80px;
+    width: 100px !important;
+}
+.amap-controlbar {
+    margin-top:40px;
+}

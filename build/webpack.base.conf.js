@@ -91,6 +91,7 @@ module.exports = {
     child_process: 'empty'
   },
   externals: {
-    'BMap': 'BMap'
+    'BMap': 'BMap',
+    // 'AMap': 'AMap'
  }
 }

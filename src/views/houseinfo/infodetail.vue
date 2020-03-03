@@ -73,9 +73,9 @@
         <span>{{houseDetail.status|status}}</span>
       </div>
     </div>
-    <div class="btn-container">
+    <!-- <div class="btn-container">
         <button type="button" class="mui-btn mui-btn-outlined pay-btn">缴费</button>
-    </div>
+    </div> -->
 
   </div>
 </template>

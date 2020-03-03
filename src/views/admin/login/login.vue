@@ -234,25 +234,6 @@ export default {
             return null
           }
         })
-    },
-    chooseBindHouse (userid) {
-      const postData = {
-        userid: userid
-      }
-      this.$ajax
-        .post({
-          url: this.root + 'bindhouse/selectdefault',
-          data: postData
-        })
-        .then(res => {
-          if (res.status) {
-            this.$store.commit('CHOOSE_VILLAGE', res.result)
-            this.$router.push('/home')
-            this.$cookies.set('CUR_BINDINFO', res.object)
-          } else {
-            this.$router.push('/bindhouse')
-          }
-        })
     }
   }
 };

@@ -55,7 +55,9 @@ const AdminLost = () => import('../views/admin/lost')
 const AdminLostRecords = () => import('../views/admin/lost/list.vue')
 const AdminLostDetail = () => import('../components/Community/lostdeail.vue')
 const AdminUserMana = () => import('../views/admin/usermanage')
-
+const Map = () => import('../views/map/index.vue')
+const Ambitus = () => import('../views/map/ambitus.vue')
+const Weather = () => import('../views/weather')
 Vue.use(Router)
 
 export default new Router({
@@ -384,6 +386,33 @@ export default new Router({
       path: '/changecardid',
       name: 'changecardid',
       component: changeCardId,
+      meta: {
+        requireAuth: true,
+        requireBind: true
+      }
+    },
+    {
+      path: '/map',
+      name: 'map',
+      component: Map,
+      meta: {
+        requireAuth: true,
+        requireBind: true
+      }
+    },
+    {
+      path: '/ambitus',
+      name: 'ambitus',
+      component: Ambitus,
+      meta: {
+        requireAuth: true,
+        requireBind: true
+      }
+    },
+    {
+      path: '/weather',
+      name: 'weather',
+      component: Weather,
       meta: {
         requireAuth: true,
         requireBind: true

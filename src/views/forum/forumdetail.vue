@@ -1,7 +1,8 @@
 <template>
   <div>
     <Header>帖子详情</Header>
-    <div class="mui-card detail">
+    <Loading v-if="loading"></Loading>
+    <div v-if="!loading" class="mui-card detail">
       <div class="mui-card-header detail-header">
         <img class="user-avatar" :src="forum.userinfo.avatar"/>
         <div>
@@ -90,7 +91,7 @@
       :replyname = "replyname"
       :forumid = "forum.forumid"
       ></CommentDetail>
-      <Loading v-if="loading"></Loading>
+      
   </div>
 </template>
 <script>

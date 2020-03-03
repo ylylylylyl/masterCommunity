@@ -16,7 +16,18 @@ export function MP (ak) {
     document.head.appendChild(script)
   })
 }
-
+// export function AP (ak) {
+//   return new Promise(function (resolve, reject) {
+//     window.onload = function () {
+//       resolve(AMap)
+//     }
+//     var script = document.createElement('script')
+//     script.type = 'text/javascript'
+//     script.src = '//webapi.amap.com/maps?v=1.4.15&key=8224cb94492d645e544a7b13df3ea7db&plugin=AMap.ControlBar'
+//     script.onerror = reject
+//     document.head.appendChild(script)
+//   })
+// }
 export function searchFromCity (value) {
   return Ajax.get({
     url: 'https:/restapi.amap.com/v3/config/district',

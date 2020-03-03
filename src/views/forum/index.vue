@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content-container">
     <div class="header">
       <span class="mui-icon iconfont icon-shouye" @click="toRouter(2)"></span>
       <!-- <svg class="icon" aria-hidden="true">
@@ -267,7 +267,7 @@ export default {
   margin-right: 10px;
 }
 .des-img {
-  height: 80px;
+  height: 100px;
   width: 120px ;
 }
 .icon-zan {
@@ -299,6 +299,10 @@ export default {
 .mui-slider-group{
   margin-bottom: 60px;
   margin-top: 110px;
+  height: 100%;
+}
+.mui-slider {
+  height: 100%;
 }
 .mui-slider-progress-bar{
   top: 110px;

@@ -51,18 +51,22 @@
                 </div>
             </div>
         </div>
+        <Loading v-if="loading"></Loading>
     </div>
 </template>
 <script>
 import Header from '../../components/LeftHeader'
+import Loading from '../../components/Loading'
 export default {
   components: {
-    Header
+    Header,
+    Loading
   },
   data () {
     return {
       root: process.env.API_HOST,
-      resultObject: {}
+      resultObject: {},
+      loading: false
     }
   },
   computed: {
@@ -75,18 +79,20 @@ export default {
   },
   methods: {
     initDetail () {
+      this.loading = true
       this.$ajax.post({
         url: this.root + 'repairorder/selectdetail',
         data: {
           repairid: Number(this.repairid)
         }
       }).then(result => {
+        this.loading = false
         if (result.status) {
           this.resultObject = result.object
         } else {
           
         }
-      })
+      },err => this.loading = false)
     }
   },
   filters: {

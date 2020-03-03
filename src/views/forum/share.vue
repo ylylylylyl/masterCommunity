@@ -138,10 +138,6 @@ export default {
       overflow: hidden;
       margin-right: 10px;
   }
-  .des-img{
-      height:80px;
-      width: 120px !important;
-  }
   .icon-zan{
       font-size: 10px
   }
@@ -156,5 +152,7 @@ export default {
   .icon-zan{
     font-size: 16px
   }
-
+  .nothing{
+    margin-top: 200px
+  }
 </style>

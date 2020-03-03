@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "3199533",
+      "name": "风车",
+      "font_class": "fengche",
+      "unicode": "e7ee",
+      "unicode_decimal": 59374
+    },
+    {
+      "icon_id": "3865230",
+      "name": "风车",
+      "font_class": "fengche1",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "11876891",
+      "name": "风车",
+      "font_class": "fengche2",
+      "unicode": "e753",
+      "unicode_decimal": 59219
+    },
+    {
       "icon_id": "5017109",
       "name": "双开门",
       "font_class": "shuangkaimen",

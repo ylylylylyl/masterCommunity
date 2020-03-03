@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content-container">
     <div class="back-header">
       <div>
         <span @click="goback()" class="mui-icon mui-icon-arrowleft"></span>
@@ -7,11 +7,11 @@
       </div>
       <span class="records-span" @click="toRecords()">报修记录</span>
     </div>
-    <div class="com-container repair-container">
+    <div class="life-container repair-container">
       <button id="type-btn" class="btn mui-btn mui-btn-block" @click="initRepair()">
         <div>
           <span class="iconfont icon-leixing"></span>
-          <span>维修类型</span>
+          <span class="title-span">维修类型</span>
         </div>
         <div>
           <span id="type-result">点击选择</span>
@@ -21,7 +21,7 @@
       <button id="type-btn" class="btn mui-btn mui-btn-block" @click="initDate()">
         <div>
           <span class="iconfont icon-shijian"></span>
-          <span>预约时间</span>
+          <span  class="title-span">预约时间</span>
         </div>
 
         <div>
@@ -32,17 +32,17 @@
       <div class="repair-user-container">
         <div class="repair-user">
           <span class="iconfont icon-lianxiren"></span>
-          <span class="repair-user-title">联系人</span>
+          <span class="title-span repair-user-title">联系人</span>
           <input v-model="postData.contactname" type="text" class="mui-input-clear" placeholder="请输入联系人" />
         </div>
         <div class="repair-user">
           <span class="iconfont icon-lianxidianhua"></span>
-          <span class="repair-user-title">联系电话</span>
+          <span class="title-span repair-user-title">联系电话</span>
           <input v-model="postData.concatphone" type="text" class="mui-input-clear" placeholder="请输入联系电话" />
         </div>
         <div class="repair-user">
          <span class="iconfont icon-fangjian"></span>
-          <span class="repair-user-title">具体地址</span>
+          <span class="title-span repair-user-title">具体地址</span>
           <input v-model="postData.address" type="text" class="mui-input-clear" placeholder="请输入详细地址" />
         </div>
         <p>注：只能报修当前登录房屋</p>
@@ -50,14 +50,14 @@
       <div class="problem-container">
         <div class="problem-container-title">
           <span class="iconfont icon-asterisks-1-copy"></span>
-          <span>请描述您遇到的问题</span>
+          <span class="title-span">请描述您遇到的问题</span>
         </div>
         <textarea v-model="postData.description" type="textarea" rows="5" class="mui-input-speech" placeholder="请输入内容" />
       </div>
       <div class="problem-container">
         <div class="problem-container-title">
           <span class="iconfont icon-asterisks-1-copy"></span>
-          <span>上传照片</span>
+          <span class="title-span">上传照片</span>
         </div>
         <div class="upload-container">
           <button class="upload-btn" v-on:click="upload">
@@ -82,6 +82,7 @@
 </template>
 <script>
 import {toTimestamp} from '../../utils/util'
+import {PHONE_REG} from '../../utils/rej'
 export default {
   data () {
     return {
@@ -198,12 +199,19 @@ export default {
         mui.toast('请填写具体描述！')
         return false
       }
+      if (!PHONE_REG.test(this.postData.concatphone)) {
+        mui.toast('请填写有效的手机号码！')
+        return false
+      }
       return true
     }
   }
 }
 </script>
 <style  scoped>
+.life-container{
+  padding-top: 40px
+}
 .back-header {
   padding-right: 10px;
   display: flex;
@@ -308,8 +316,14 @@ textarea {
   height: 100px;
   margin-bottom: 10px;
 }
-.upload-img{
+.upload-img {
 	width: 100%;
 	height: 100%;
+}
+.title-span {
+  font-weight: bold;
+}
+.mui-input-clear{
+  padding-left: 10px;
 }
 </style>

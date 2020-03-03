@@ -102,7 +102,7 @@
               </a>
             </div>
             <div class="mui-col-xs-3 mui-col-xs-3">
-              <li class="mui-table-view-cell">
+              <li  @click="torouter(7)" class="mui-table-view-cell">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-tianqi" />
                 </svg>
@@ -110,7 +110,7 @@
               </li>
             </div>
             <div class="mui-col-xs-3 mui-col-xs-3">
-              <li class="mui-table-view-cell">
+              <li @click="torouter(6)" class="mui-table-view-cell">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-gengduo" />
                 </svg>
@@ -169,7 +169,8 @@ export default {
       notice: {
         noticetitle: ''
       },
-      root: process.env.API_HOST
+      root: process.env.API_HOST,
+      href: 'https://m.amap.com/around/?locations=116.470098,39.992838&keywords=%E7%BE%8E%E9%A3%9F,KTV,%E5%9C%B0%E9%93%81%E7%AB%99,%E5%85%AC%E4%BA%A4%E7%AB%99&defaultIndex=3&defaultView=&searchRadius=5000&key=9342d0c3e0b2ebe14922871bb6f3189f'
     }
   },
   components: {
@@ -258,12 +259,22 @@ export default {
         case 5:
           this.$router.push('/opendoor')
           break
+        case 6:
+          this.$router.push('/map')
+          break
+        case 7:
+          this.$router.push('/weather')
+          break
       }
     },
     open () {
       this.isopen = true
     },
     toAnnounce (noticeid) {
+      if (!noticeid) {
+        mui.toast('暂无公告')
+        return
+      } 
       this.$router.push({
         path: '/announcedetail',
         query: {

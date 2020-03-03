@@ -134,10 +134,10 @@ export default {
   },
   computed: {
     ...mapGetters(['curUserInfo']),
-    // type () {
-    //   console.log(this.$route.query.type)
-    //   return this.$route.query.type
-    // },
+    type () {
+      console.log(this.$route.query.type)
+      return this.$route.query.type
+    },
     livingnumid () {
       return this.$route.query.livingnumid
     }

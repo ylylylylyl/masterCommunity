@@ -14,14 +14,15 @@ const CUR_PROVINCE = 'CUR_PROVINCE' // 当前省份
 const CUR_CITY = 'CUR_CITY' // 当前城市
 const CHOOSE_VILLAGE = 'CHOOSE_VILLAGE'// 所选择的小区
 const CUR_USERINFO = 'CUR_USERINFO'
-
+const CENTER = 'CENTER'
 const state = {
   chooseCity: '',
   village: '',
   curProvince: '',
   curCity: '',
   chooseVillage: null,
-  curUserInfo: {} // 当前用户信息
+  curUserInfo: {} , // 当前用户信息
+  center: []
 }
 
 const getters = {
@@ -30,7 +31,8 @@ const getters = {
   curProvince: state => state.curProvince,
   curCity: state => state.city,
   chooseVillage: state => state.chooseVillage,
-  curUserInfo: state => state.curUserInfo
+  curUserInfo: state => state.curUserInfo,
+  center: state => state.center
 }
 
 const mutations = {
@@ -53,6 +55,10 @@ const mutations = {
   [CUR_USERINFO] (state, obj) {
     state.curUserInfo = obj
     console.log(state.curUserInfo)
+  },
+  [CENTER] (state, obj) {
+    state.center = obj
+    console.log(state.center)
   }
 }
 
@@ -63,14 +69,16 @@ const actions = {
     MP('B96xQKulGmzWLRsLRQVHqD4G7EPaF1tD').then(BMap => {
       // 百度地图API功能
       var geolocation = new BMap.Geolocation()
-      geolocation.getCurrentPosition((position) => {
+      geolocation.getCurrentPosition(function (position) {
         console.log(position)
+        let center = []
+        center.push(position.point.lng,position.point.lat)
         let city = position.address.city // 获取城市信息
         let province = position.address.province
         commit(CHOOSE_CITY, city)
         commit(CUR_CITY, city)
         commit(CUR_PROVINCE, province)
-        console.log(province)
+        commit(CENTER, center)
       }, e => {
         commit(CHOOSE_CITY, '定位失败')
       }, {
