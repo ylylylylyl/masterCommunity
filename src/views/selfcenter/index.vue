@@ -83,7 +83,7 @@
               </div>
               <span class="mui-icon mui-icon-forward"></span>
             </div>
-            <div class="self-tab-item">
+            <div class="self-tab-item" @click="toRouter(3)">
               <div class="tab-left">
                 <svg class="icon tab-icon" aria-hidden="true">
                   <use xlink:href="#icon-gerenjiaofeimingxi" />
@@ -176,7 +176,6 @@ export default {
           this.$router.push('/login')
         }
       })
-     
     },
     toRouter (index) {
       switch (index) {
@@ -185,6 +184,9 @@ export default {
           break
         case 2:
           this.$router.push('/wallet')
+          break
+        case 3:
+          this.$router.push('/changedetail')
           break
         case 4:
           // 银行卡

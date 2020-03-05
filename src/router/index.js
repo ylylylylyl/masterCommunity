@@ -58,6 +58,7 @@ const AdminUserMana = () => import('../views/admin/usermanage')
 const Map = () => import('../views/map/index.vue')
 const Ambitus = () => import('../views/map/ambitus.vue')
 const Weather = () => import('../views/weather')
+const ChangeDetail = () => import('../views/changedetail')
 Vue.use(Router)
 
 export default new Router({
@@ -413,6 +414,15 @@ export default new Router({
       path: '/weather',
       name: 'weather',
       component: Weather,
+      meta: {
+        requireAuth: true,
+        requireBind: true
+      }
+    },
+    {
+      path: '/changedetail',
+      name: 'changedetail',
+      component: ChangeDetail,
       meta: {
         requireAuth: true,
         requireBind: true

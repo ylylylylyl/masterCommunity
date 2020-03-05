@@ -35,13 +35,15 @@
         </div>
       </div>
     </div>
+    <Loading v-if="loading"></Loading>
   </div>
 </template>
 <script>
 import Header from '../../components/LeftHeader'
+import Loading from '../../components/Loading'
 import Pie from './pie'
 export default {
-  components: {Header, Pie},
+  components: {Header, Pie, Loading},
   // 天气预报接口
   // https://restapi.amap.com/v3/weather/weatherInfo?key=8224cb94492d645e544a7b13df3ea7db&&city=510104&&extensions=all
   mounted () {
@@ -52,12 +54,14 @@ export default {
       root: process.env.API_HOST,
       feathure: {},
       weather: {},
-      num: ''
+      num: '',
+      loading: false
     }
   },
   methods: {
     init () {
       const villageid = Number(this.$cookies.get('CUR_BINDINFO').villageid)
+      this.loading = true
       this.$ajax.post({
         url: this.root + 'village/getDetail',
         data: {
@@ -65,6 +69,7 @@ export default {
         }
       })
         .then(res => {
+          this.loading = false
           this.getWeather(res.object.cityid)
           this.getFeathure(res.object.cityid)
         })

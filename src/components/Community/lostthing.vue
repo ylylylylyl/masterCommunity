@@ -1,15 +1,6 @@
 <template>
   <div id="content3" class="mui-control-content">
     <div class="mui-card">
-      <!--页眉，放置标题-->
-      <div class="mui-card-header">
-        <div>
-          <svg class="icon lost-icon" aria-hidden="true">
-            <use xlink:href="#icon-dibudaohanglan-" />
-          </svg>
-          <span>零钱若干</span>
-        </div>
-      </div>
       <!--内容区-->
       <div @click="toDetail(lost.lostid)" class="mui-card-content content3-card" v-for="(lost,key) in losts" :key="key">
         <div class="lost-item">
@@ -34,17 +25,21 @@
         </div>
       </div>
     </div>
+    <Nothing v-if="!losts.length"></Nothing>
   </div>
 </template>
 <script>
+import Nothing from '../../components/nothing'
 export default {
+  components:{Nothing},
   mounted () {
+    console.log(11)
     this.init()
   },
   data () {
     return {
       root: process.env.API_HOST,
-      losts:[]
+      losts: []
     }
   },
   methods: {

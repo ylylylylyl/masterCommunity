@@ -14,7 +14,7 @@
             <a class="mui-control-item mui-active" href="#content1" data-index="0">物业缴费</a>
             <a class="mui-control-item" href="#content2" data-index="1">社区公告</a>
             <a class="mui-control-item" href="#content3" data-index="2">失物招领</a>
-            <a class="mui-control-item" href="#content4" data-index="3">便民服务</a>
+            <!-- <a class="mui-control-item" href="#content4" data-index="3">便民服务</a> -->
           </div>
         </div>
         <div
