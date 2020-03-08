@@ -152,6 +152,7 @@
 
 <script>
 import Aside from './aside'
+import { mapState, mapActions } from "vuex";
 export default {
   components: {
     Aside
@@ -167,12 +168,14 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['onLogout', 'onGetFirendBlack']),
     login () {
       var btnArray = ['否', '是']
       mui.confirm('确认退出当前账号？', '注销', btnArray, (e) =>{
         if (e.index == 1) {
           this.$cookies.set('CUR_USERINFO', '', -1)
           this.$cookies.set('CUR_BINDINFO', '', -1)
+          this.onLogout()
           this.$router.push('/login')
         }
       })

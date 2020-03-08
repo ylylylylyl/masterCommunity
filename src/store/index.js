@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-
+import Login from './login'
+import Chat from './chat'
 import {
   MP
 } from '../utils/util'
@@ -114,6 +115,10 @@ const store = new Vuex.Store({
   state,
   getters,
   actions,
-  mutations
+  mutations,
+  modules: {
+	  login: Login,
+    chat: Chat
+  }
 })
 export default store

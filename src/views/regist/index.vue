@@ -153,6 +153,7 @@
 </style>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 export default {
   mounted () {
     // 解决mui-input框不刷新无icon问题
@@ -179,6 +180,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['onLogin', 'setRegisterFlag', 'onRegister']),
     goback () {
       this.$router.go(-1)
     },
@@ -206,6 +208,7 @@ export default {
         this.loading = false
         if (result.status) {
           this.regist()
+          this.registIM()
         } else {
           this.tip = result.result
         }
@@ -231,6 +234,14 @@ export default {
         return false
       }
       return true
+    },
+    // 注册
+    registIM () {
+      this.onRegister({
+        username: this.phone.toLowerCase(),
+        password: this.pwd,
+        nickname: ''
+      })
     }
   }
 }

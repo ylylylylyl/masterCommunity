@@ -240,6 +240,7 @@ export default {
       event.currentTarget.children[0].click()
     },
     torouter (num) {
+      const {userphone} = this.$cookies.get('CUR_USERINFO')
       switch (num) {
         case 0:
           this.$router.push('/village')
@@ -260,7 +261,8 @@ export default {
           this.$router.push('/opendoor')
           break
         case 6:
-          this.$router.push('/map')
+          // this.$router.push('/map')
+          this.$router.push(`/chat/contact?username=${userphone}`)
           break
         case 7:
           this.$router.push('/weather')

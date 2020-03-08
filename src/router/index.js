@@ -59,6 +59,9 @@ const Map = () => import('../views/map/index.vue')
 const Ambitus = () => import('../views/map/ambitus.vue')
 const Weather = () => import('../views/weather')
 const ChangeDetail = () => import('../views/changedetail')
+const Chat = () => import('../views/chat')
+const Contact = () => import('../views/chat/messagebox.vue')
+const Message = () => import('../views/chat/sendMessage.vue')
 Vue.use(Router)
 
 export default new Router({
@@ -500,6 +503,40 @@ export default new Router({
           path: 'selfcenter',
           name: 'selfcenter',
           component: AdminSelfCenter,
+          meta: {
+            requireAuth: true
+          }
+        }
+      ]
+    },
+    {
+      path: '/chat',
+      name: 'chat',
+      component: Chat,
+      meta: {
+        requireAuth: true
+      },
+      children: [
+        {
+          path: '/',
+          name: 'contact',
+          component: Contact,
+          meta: {
+            requireAuth: true
+          }
+        },
+        {
+          path: 'contact',
+          name: 'contact',
+          component: Contact,
+          meta: {
+            requireAuth: true
+          }
+        },
+        {
+          path: 'message/:id/:username',
+          name: 'message',
+          component: Message,
           meta: {
             requireAuth: true
           }
