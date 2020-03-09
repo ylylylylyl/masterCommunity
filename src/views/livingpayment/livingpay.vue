@@ -157,7 +157,7 @@ export default {
           return
         }
         var btnArray = ['取消', '确定']
-        mui.prompt('请输入支付密码：', '', '提现到银行卡', btnArray, (e) => {
+        mui.prompt('请输入支付密码：', '', '缴费', btnArray, (e) => {
           if (e.index == 1) {
             const {userid} = this.$cookies.get('CUR_USERINFO')
             this.$ajax.post({

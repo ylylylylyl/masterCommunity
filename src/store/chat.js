@@ -99,7 +99,9 @@ const Chat = {
 			state.msgList = Object.assign({}, state.msgList);
 		},
 		updateCurrentMsgList(state, messages){
+			console.log(messages)
 			state.currentMsgs = messages;
+			
 		},
 		updateMessageMid(state, message){
 			console.log("update")
@@ -123,10 +125,16 @@ const Chat = {
 			});
 		},
 		updateMessageStatus(state, message){
+			console.log(message)
 			const { id, mid, action, readUser } = message;
 			let { name, params } = Vue.$route;
-			name = 'contact'
-			console.log(state.msgList)
+			
+			if(Vue.$route.path.split('/').includes('group')){
+				name = 'group'
+			}else{
+				name = 'contact'
+			}
+			console.log("name"+name)
 			Object.keys(state.msgList[name]).forEach((user) => {
 				// console.log(state.msgList[name][user]);
                 
@@ -187,6 +195,7 @@ const Chat = {
 		onGetGroupUserList: function(context, payload){
 			var options = {
 				success: function(resp){
+					console.log(resp)
 					let userList = resp.data;
 					userList.forEach((user, index) => {
 						userList[index].name = user.groupname;
@@ -219,9 +228,9 @@ const Chat = {
 		},
 		// 获取当前聊天对象的记录 @payload： {key, type}
 		onGetCurrentChatObjMsg: function(context, payload){
-			console.log(111)
 			const { id, type } = payload;
-			console.log(id,type)
+			console.log(context)
+			console.log(id,context.state.msgList[type][id])
 			context.commit("updateCurrentMsgList", context.state.msgList[type][id]);
 		},
 		onSendText: function(context, payload){

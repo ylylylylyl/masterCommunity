@@ -190,20 +190,22 @@ WebIM.conn.listen({
 	onPresence: function (message) {
 		console.log("onPresence", message);
 		let select_id = Vue.$store.state.group.groupInfo.gid; // 群组相关操作，更新数据时需要
+		console.log(select_id, Vue.$store.state.group.groupInfo)
 		switch (message.type) {
 			case "subscribe":
 				let options = {
 					isShow: true,
 					...message
 				};
-				Vue.$store.commit("changeFriendRequestState", options);
+				Vue.$store.commit('changeFriendRequestState', options);
 				break;
 			case "subscribed":
 				Vue.$store.dispatch("onGetContactUserList");
-				Message({
-					type: "success",
-					message: message.from + " " + "已订阅"
-				});
+				// Message({
+				// 	type: "success",
+				// 	message: message.from + " " + "已订阅"
+				// });
+				mui.toast(message.from + " " + "已成功添加为好友")
 				break;
 			case "unsubscribed":
 				Vue.$store.dispatch("onGetContactUserList");
@@ -212,10 +214,11 @@ WebIM.conn.listen({
 					alert(message.from + " " + "请求被拒绝");
 				}
 				else {
-					Message({
-						type: "success",
-						message: message.from + " " + "已退订"
-					});
+					mui.toast( message.from + " " + "已退订")
+					// Message({
+					// 	type: "success",
+					// 	message: message.from + " " + "已退订"
+					// });
 				}
 				break;
 
@@ -242,10 +245,11 @@ WebIM.conn.listen({
 				break;
 			case "memberJoinPublicGroupSuccess": // 成员加入聊天室成功回调
 				Vue.$store.dispatch("onGetGroupinfo", { select_id });
-				Message({
-					type: "success",
-					message: `${message.from}已加入群组`
-				})
+				// Message({
+				// 	type: "success",
+				// 	message: `${message.from}已加入群组`
+				// })
+				mui.toast(`${message.from}已加入群组`)
 				break;
 			case "joinPublicGroupSuccess":  //申请加入群组成功回调
 				Vue.$store.dispatch("onGetGroupUserList");

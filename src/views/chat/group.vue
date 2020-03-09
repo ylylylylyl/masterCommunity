@@ -1,86 +1,76 @@
 <template>
-
-<div class="messagebox-container">
-  <div
-    class="item"
-    v-for="(item) in userList['contact']"
-    @click="select2(item)"
-  >
-    <div class="avatar">
-      <span class="avatar-span">{{item.name|avatar}}</span>
-    </div>
-    <div class="message-container">
-      <div class="message-info">
-        <div>
-          <span class="message-name">{{item.name}}</span>
-          <div class="icon-style" v-if="getUnreadNum(item) != 0">
-            <span class="unreadNum">{{getUnreadNum(item)}}</span>
-          </div>
+    <div class="group-container">
+        <div
+          class="item"
+            v-for="(item,key) in groupList['group']"
+            @click="select2(item)"
+            :key = key
+        >
+            <div class="avatar">
+            <span class="avatar-span">{{item.groupname|avatar}}</span>
+            </div>
+            <div class="message-container">
+            <div class="message-info">
+                <div>
+                <span class="message-name">{{item.groupname}}</span>
+                <div class="icon-style" v-if="getUnreadNum(item) != 0">
+                    <span class="unreadNum">{{getUnreadNum(item)}}</span>
+                </div>
+                </div>
+                <span class="time-style">{{getLastMsg(item).msgTime}}</span>
+            </div>
+            <div class="message-detail">{{getLastMsg(item).lastMsg}}</div>
+            </div>
         </div>
-        <span class="time-style">{{getLastMsg(item).msgTime}}</span>
-      </div>
-      <div class="message-detail">{{getLastMsg(item).lastMsg}}</div>
     </div>
-  </div>
-  </div>
 </template>
 <script>
-import { mapState, mapActions,mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import moment from 'moment'
 export default {
   beforeMount () {
-    // this.updateMessageMid()
-  },
-  mounted () {
-    this.onGetContactUserList()
+    this.onGetGroupUserList()
+    console.log(this.groupList['group'])
   },
   computed: {
     ...mapGetters({
-      contact: 'onGetContactUserList',
-      msgList: 'onGetCurrentChatObjMsg'
-    // group: "onGetGroupUserList",
-    // chatroom: "onGetChatroomUserList",
+      group: 'onGetGroupUserList'
     }),
-    userList () {
+    groupList () {
       return {
-        contact: this.contact.filter(item => {
+        group: this.group.filter(item => {
           if (item) {
             return item
           }
         }),
-        group: this.group,
+        contact: this.contact,
         chatroom: this.chatroom
       }
     },
     chatList () {
       return this.$store.state.chat.msgList
     },
-    getKey (item) {
-      let key = ""
-      switch (this.type) {
-        case "contact":
-          key = item.name;
-          break;
-        case "group":
-          key = item.groupid;
-          break;
-        case "chatroom":
-          key = item.id;
-          break;
-        default:
-          break;
-      }
-      return key;
-    },
     username () {
       return this.$route.query.username
     }
-  },
-  props: [
-    'type' // 聊天类型 contact, group, chatroom
-  ],
+  }, 
   methods: {
-    ...mapActions(['onLogout', 'onGetFirendBlack', 'onGetContactUserList']),
+    ...mapActions(['onGetGroupUserList']),
+    select2 (item) {
+      this.$router.push(`/chat/group/${item.groupid}/${this.username}`)
+    },
+    getUnreadNum (item) {
+      const chatList = this.chatList['group']
+      let userId = item.groupid
+      const currentMsgs = chatList[userId] || []
+      let unReadNum = 0
+      currentMsgs.forEach(msg => {
+        if (msg.status !== "read" && msg.status !== "recall" && !msg.bySelf) {
+          unReadNum++;
+        }
+      });
+      return unReadNum
+    },
     renderTime (time) {
       const nowStr = new Date();
       const localStr = time ? new Date(time) : nowStr
@@ -90,7 +80,8 @@ export default {
     },
     getLastMsg (item) {
       // let { name, params } = this.$route;
-      let  name = 'contact'
+      let  name = 'group'
+      console.log(this.chatList)
       const chatList = this.chatList[name]
       console.log(chatList)
       let userId = ""
@@ -126,33 +117,17 @@ export default {
         msgTime
       }
     },
-    select2 (item) {
-      this.$router.push(`/chat/message/${item.name}/${this.username}`)
-    },
-    getUnreadNum (item) {
-      const { name, params } = this.$route
-      const chatList = this.chatList['contact']
-      let userId = item.name
-      const currentMsgs = chatList[userId] || []
-      let unReadNum = 0
-      currentMsgs.forEach(msg => {
-        if (msg.status !== "read" && msg.status !== "recall" && !msg.bySelf) {
-          unReadNum++;
-        }
-      });
-      return unReadNum
-    }
   },
-  filters: {
+  filters:{
     avatar (name) {
-      return name.slice(name.length - 4)
+      return name.slice(0,2)
     }
   }
 }
 </script>
 <style scoped>
-.messagebox-container{
-  margin-top: 80px;
+.group-container{
+    padding-top: 40px;
 }
 .item {
   height: 70px;
@@ -193,7 +168,6 @@ export default {
 }
 .message-name{
   font-size: 16px;
-  
 }
 .icon-style {
   display: inline-block;
@@ -205,5 +179,4 @@ export default {
   line-height: 1.5;
   text-align: center;
 }
-
 </style>

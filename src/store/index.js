@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import Login from './login'
 import Chat from './chat'
+import Group from './group'
+import FriendModule from './friendModule'
 import {
   MP
 } from '../utils/util'
@@ -118,7 +120,9 @@ const store = new Vuex.Store({
   mutations,
   modules: {
 	  login: Login,
-    chat: Chat
+    chat: Chat,
+    friendModule: FriendModule,
+    group: Group,
   }
 })
 export default store

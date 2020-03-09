@@ -2,25 +2,36 @@
     <div class="chat-container">
         <div class="chat-item"  v-for="(item,i) in msgList">
           <div class="chat-item-left" v-if="!item.bySelf">
-            <div class="avatar">
-              <span class="avatar-span">{{item.from|avatar}}</span>
+            <div class="avatar-box">
+              <div class="avatar">
+                <span class="avatar-span">{{item.from|avatar}}</span>
+              </div>
             </div>
-            <div class="bubble-container">
-                <!-- <div class="triangle"></div> -->
-                <div class="message-container">
+           
+            <div class="bubble-box">
+                <div class="message-container bubble-container">
                   <span class="message-span">{{item.msg}}</span>
                 </div>
+                <!-- 聊天时间 -->
+                <div
+                  v-if="item.status !== 'recall'"
+                  class="time-style"
+                  :style="{'text-align':item.bySelf ? 'right':'left'}"
+                >{{renderTime(item.time)}} {{item.bySelf?status[item.status]:''}}
+              </div>
             </div>
+
           </div>
           <div class="chat-item-right" v-if="item.bySelf">
-            <div class="bubble-container-right">
-                <!-- <div class="triangle"></div> -->
-                <div class="message-container-right">
-                  <span class="message-span">{{item.msg}}</span>
-                </div>
+            <div class="bubble-box">
+              <div class="message-container-right bubble-container-right">
+                <span class="message-span">{{item.msg}}</span>
+              </div>
             </div>
-            <div class="avatar">
-              <span class="avatar-span">{{username|avatar}}</span>
+            <div class="avatar-box">
+              <div class="avatar">
+                <span class="avatar-span">{{username|avatar}}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -31,6 +42,7 @@
     </div>
 </template>
 <script>
+import moment from 'moment'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   data () {
@@ -42,12 +54,17 @@ export default {
         group: '',
         chatroom: ''
       },
+      status: {
+        sending: '发送中',
+        sent: '已发送',
+        read: '已读'
+      }
     }
   },
   mounted () {
+    console.log(this.msgList)
     this.onGetContactUserList()
     this.getCurrentMsg()
-    console.log(this.msgist)
   },
   computed: {
     chatId () {
@@ -86,6 +103,17 @@ export default {
         type: 'contact',
         id: this.chatId
       });
+      Vue.$store.commit('updateMessageStatus', {
+        action: 'oneUserReadMsgs',
+        readUser: this.chatId
+      })
+    },
+    renderTime (time) {
+      const nowStr = new Date();
+      const localStr = time ? new Date(time) : nowStr;
+      const localMoment = moment(localStr);
+      const localFormat = localMoment.format("MM-DD hh:mm A");
+      return localFormat
     },
   },
   filters: {
@@ -102,6 +130,7 @@ input{
 }
 .chat-container{
   padding-top: 40px;
+  padding-bottom:40px;
 }
 .send-container{
     position: fixed;
@@ -122,6 +151,7 @@ input{
   display: flex;
   justify-content: center;
   align-items: center;
+  flex: 1;
 }
 .avatar-span{
   color: white;
@@ -142,7 +172,7 @@ input{
   align-items: baseline;
 }
 .message-container{
-  min-height: 50px;
+  min-height: 40px;
   border: none;
   border-radius: 0 10px 10px 10px;
   min-width:100px ;
@@ -160,6 +190,12 @@ input{
   background-color: #FFFFFF;
     display: flex;
   align-items: center;
+}
+.bubble-box{
+  flex: 5;
+}
+.avatar-box{
+  flex: 1;
 }
 .bubble-container{
   position: relative;
@@ -182,6 +218,12 @@ input{
 .message-span{
   font-size: 16px;
   margin-left: 5px;
+  padding:10px;
+  word-break:break-all;
 }
-
+.time-style {
+  color: gray;
+  margin-left: 20px;
+  margin-top: 5px;
+}
 </style>

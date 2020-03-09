@@ -62,6 +62,8 @@ const ChangeDetail = () => import('../views/changedetail')
 const Chat = () => import('../views/chat')
 const Contact = () => import('../views/chat/messagebox.vue')
 const Message = () => import('../views/chat/sendMessage.vue')
+const Group = () => import('../views/chat/group.vue')
+const GroupMessage = () => import('../views/chat/groupMessage.vue')
 Vue.use(Router)
 
 export default new Router({
@@ -537,6 +539,22 @@ export default new Router({
           path: 'message/:id/:username',
           name: 'message',
           component: Message,
+          meta: {
+            requireAuth: true
+          }
+        },
+        {
+          path: 'group',
+          name: 'group',
+          component: Group,
+          meta: {
+            requireAuth: true
+          }
+        },
+        {
+          path: 'group/:id/:username',
+          name: 'group',
+          component: GroupMessage,
           meta: {
             requireAuth: true
           }
