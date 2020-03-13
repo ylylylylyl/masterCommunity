@@ -183,20 +183,8 @@ export default {
     }
   },
   mounted () {
-    mui('.mui-switch')['switch']()
-    // var isActive = document.getElementById('mySwitch').classList.contains('mui-active')
-    // if (isActive) {
-    //   console.log('打开状态')
-    // } else {
-    //   console.log('关闭状态')
-    // }
-    document.getElementById('mySwitch').addEventListener('toggle', event => {
-      if (event.detail.isActive) {
-        this.postData.status = 1
-      } else {
-        this.postData.status = 0
-      }
-      console.log(this.postData.status)
+    this.$nextTick(() => {
+      this.initData()
     })
   },
   watch: {
@@ -215,6 +203,19 @@ export default {
     }
   },
   methods: {
+    initData () {
+      mui('.mui-switch')['switch']()
+      if (document.getElementById('mySwitch')) {
+        document.getElementById('mySwitch').addEventListener('toggle', event => {
+          if (event.detail.isActive) {
+            this.postData.status = 1
+          } else {
+            this.postData.status = 0
+          }
+          console.log(this.postData.status)
+        })
+      }
+    },
     initRepair () {
       this.$router.push('/village')
     },

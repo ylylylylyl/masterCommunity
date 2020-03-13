@@ -13,10 +13,10 @@
                   style="padding: 5px 20px;"
                 >关闭</button>
                 <button
-                  id="offCanvasHide"
                   type="button"
                   class="mui-btn mui-btn-danger mui-btn-block"
                   style="padding: 5px 20px;"
+                  @click="addMember()"
                 >添加成员+</button>
               </p>
             </div>
@@ -47,6 +47,7 @@
       </aside>
 </template>
 <script>
+import { mapActions } from "vuex";
 export default {
   mounted () {
     console.log(this.groupinfoList)
@@ -54,6 +55,22 @@ export default {
   computed: {
     groupinfoList () {
       return this.$store.state.group.groupInfo
+    }
+  },
+  methods:{
+    ...mapActions(['onInviteGroup']),
+    
+    addMember () {
+      var btnArray = ['取消', '确定']
+      mui.prompt('请输入手机号：', '', '邀请成员', btnArray, (e) => {
+        if (e.index == 1) {
+          this.onInviteGroup({
+            select_id: this.groupinfoList.gid,
+            select_name: e.value
+          })
+          mui.toast('已发出邀请')
+        }
+      })
     }
   }
 }

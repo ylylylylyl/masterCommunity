@@ -72,7 +72,7 @@ export default {
     },
     ...mapGetters({
       msgList: 'onGetCurrentChatObjMsg',
-      contact: "onGetContactUserList",
+      contact: 'onGetContactUserList',
     }),
     username () {
       return this.$route.params.username
@@ -102,7 +102,7 @@ export default {
       this.onGetCurrentChatObjMsg({
         type: 'contact',
         id: this.chatId
-      });
+      })
       Vue.$store.commit('updateMessageStatus', {
         action: 'oneUserReadMsgs',
         readUser: this.chatId
@@ -192,10 +192,10 @@ input{
   align-items: center;
 }
 .bubble-box{
-  flex: 5;
+  /* flex: 5; */
 }
 .avatar-box{
-  flex: 1;
+  /* flex: 1; */
 }
 .bubble-container{
   position: relative;

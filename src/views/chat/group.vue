@@ -1,11 +1,11 @@
 <template>
     <div class="group-container">
+      <Nothing v-if="!groupList['group'].length"></Nothing>
         <div
           class="item"
             v-for="(item,key) in groupList['group']"
             @click="select2(item)"
-            :key = key
-        >
+            :key = key>
             <div class="avatar">
             <span class="avatar-span">{{item.groupname|avatar}}</span>
             </div>
@@ -27,7 +27,9 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import moment from 'moment'
+import Nothing from '../../components/nothing'
 export default {
+  components: { Nothing },
   beforeMount () {
     this.onGetGroupUserList()
     console.log(this.groupList['group'])
@@ -126,6 +128,9 @@ export default {
 }
 </script>
 <style scoped>
+.group-container{
+  height: 100%;
+}
 .group-container{
     padding-top: 40px;
 }

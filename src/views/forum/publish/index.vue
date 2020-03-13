@@ -72,7 +72,8 @@ export default {
     root: process.env.API_HOST,
     postData: {
       uploadimg: [],
-      forumcontent: ''
+      forumcontent: '',
+      forumtype: 1
     }
   }),
   methods: {
@@ -182,7 +183,7 @@ textarea {
 .mui-input-clear{
   padding-left: 15px;
   border: none;
-  border-bottom: 1px #6e8b3d solid ;
+  border-bottom: 1px lightgray solid ;
   font-weight: bold;
 }
 .emoji {

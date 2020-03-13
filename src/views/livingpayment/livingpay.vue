@@ -4,16 +4,10 @@
         <div class="livingpay-container">
             <div class="living-title">
                 <svg class="icon living-icon" aria-hidden="true">
-                    <use :xlink:href="$route.query.type|initIcon" />
+                    <use :xlink:href="type|initIcon" />
                 </svg>
-                <span class="living-span" ref="myP"> {{$route.query.type|initPayType}}</span>
+                <span class="living-span" ref="myP"> {{type|initPayType}}</span>
             </div>
-            <!-- <div class="living-title">
-                <svg class="icon living-icon" aria-hidden="true">
-                    <use :xlink:href="type" />
-                </svg>
-                <span class="living-span" ref="myP"> {{type}}</span>
-            </div> -->
             <div class="living-content-container">
                 <div class="content-item">
                     <span>缴费单位</span>
@@ -135,7 +129,6 @@ export default {
   computed: {
     ...mapGetters(['curUserInfo']),
     type () {
-      console.log(this.$route.query.type)
       return this.$route.query.type
     },
     livingnumid () {
@@ -143,7 +136,9 @@ export default {
     }
   },
   created () {
+    console.log('开始了1')
     this.$nextTick(() => {
+      console.log('开始了2')
       this.init()
       this.initData()
     })
@@ -267,9 +262,12 @@ export default {
           return '#icon-dianfei'
         case 3:
           return '#icon-shuifei'
+        default:
+          return '#icon-ranqifei'
       }
     },
     initPayType (type) {
+      console.log(type)
       if (!type) return
       switch (type) {
         case 1:

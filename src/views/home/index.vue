@@ -10,12 +10,12 @@
           <!--支持循环，需要重复图片节点-->
           <div class="mui-slider-item mui-slider-item-duplicate">
             <a href="#">
-              <img src="../../assets/image/4.jpg" />
+              <img src="../../assets/image/1.jpg" />
             </a>
           </div>
           <div class="mui-slider-item">
             <a href="#">
-              <img src="../../assets/image/slider-bg-01.jpg" />
+              <img src="../../assets/image/5.jpg" />
             </a>
           </div>
           <div class="mui-slider-item">
@@ -30,13 +30,13 @@
           </div>
           <div class="mui-slider-item">
             <a href="#">
-              <img src="../../assets/image/4.jpg" />
+              <img src="../../assets/image/1.jpg" />
             </a>
           </div>
           <!--支持循环，需要重复图片节点-->
           <div class="mui-slider-item mui-slider-item-duplicate">
             <a href="#">
-              <img src="../../assets/image/slider-bg-01.jpg" />
+              <img src="../../assets/image/5.jpg" />
             </a>
           </div>
         </div>
@@ -112,9 +112,9 @@
             <div class="mui-col-xs-3 mui-col-xs-3">
               <li @click="torouter(6)" class="mui-table-view-cell">
                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-gengduo" />
+                  <use xlink:href="#icon-liaotian" />
                 </svg>
-                <a>更多</a>
+                <a>聊天</a>
               </li>
             </div>
           </div>

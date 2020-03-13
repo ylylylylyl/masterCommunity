@@ -257,13 +257,10 @@ export default {
         })
         .then(res => {
           if (res.status) {
-            console.log(res)
             this.$store.commit('CHOOSE_VILLAGE', res.result)
             this.$cookies.set('CUR_BINDINFO', res.object)
             this.$router.push('/home')
-           
           } else {
-            console.log(111)
             this.$router.push('/bindhouse')
           }
         })

@@ -178,7 +178,7 @@ const Chat = {
 			try{
 				WebIM.conn.getRoster({
 					success: function(roster){
-						// console.log("roster", roster);
+						console.log("roster", roster);
 						const userList = roster.filter(user => ["both", "to"].includes(user.subscription));
 						context.commit("updateUserList", {
 							userList,

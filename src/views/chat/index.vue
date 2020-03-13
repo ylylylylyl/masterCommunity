@@ -1,7 +1,14 @@
 <template>
     <div class="content-container">
-        <Header>聊天</Header>
-        <span class="mui-icon mui-icon-plus" @click="dialog()"></span>
+        <!-- <Header>聊天</Header> -->
+        <div class="back-header">
+          <span @click="goback()" class="mui-icon mui-icon-arrowleft"></span>
+          <span>
+              聊天
+          </span>
+          <span class="mui-icon mui-icon-plus" @click="dialog()"></span>
+        </div>
+        <!-- <span class="mui-icon mui-icon-plus" @click="dialog()"></span> -->
         <div v-if="ishow" class="dialog-container">
           <div class="triangle-container">
             <div class="triangle"></div>
@@ -12,57 +19,69 @@
                 <span class="mui-icon mui-icon-personadd"></span>
                 添加好友
               </li>
-              <li>
+              <li  @click="addGroup()">
                 <span class="mui-icon mui-icon-chatboxes"></span>
                 创建群组
               </li>
             </ul>
           </div>
         </div>
-      
-            <div class="mui-content">
-                    <div id="segmentedControl" class="mui-segmented-control">
-                      <div class="icon-container mui-control-item  mui-active">
-                        <span class="iconfont icon-wode"></span>
-                        <a @click="toFriendList()" >好友 </a>
-                      </div>
-                      <div class="icon-container  mui-control-item">
-                        <span class="iconfont icon-yonghu1"></span>
-                        <a @click="toGroupList()">聊天室</a>
-                      </div>
-                    </div>
-                <router-view class="router">
-                    <router-link></router-link>
-                </router-view>
-                <!-- <div>
-                    <div id="item2" class="mui-control-content">
-                         <MessageBox :type=type v-if="type==='contact'" ref="messageBox"></MessageBox>
-                    </div>
-                    <div id="item3" class="mui-control-content">
-                        <ul v-if="type==='group'" class="mui-table-view">
-                            <li class="mui-table-view-cell">
-                                第三个选项卡子项-1
-                            </li>
-                            <li class="mui-table-view-cell">
-                                第三个选项卡子项-2
-                            </li>
-                            <li class="mui-table-view-cell">
-                                第三个选项卡子项-3
-                            </li>
-                        </ul>
-                    </div>
-                </div> -->
+        <div class="mui-content">
+                <div id="segmentedControl" class="mui-segmented-control">
+                  <div @click="toFriendList()" class="icon-container mui-control-item  mui-active">
+                    <span class="iconfont icon-wode"></span>
+                    <a  >好友 </a>
+                  </div>
+                  <div @click="toGroupList()" class="icon-container  mui-control-item">
+                    <span class="iconfont icon-yonghu1"></span>
+                    <a >聊天室</a>
+                  </div>
+                </div>
+            <router-view class="router">
+                <router-link></router-link>
+            </router-view>
+            <!-- <div>
+                <div id="item2" class="mui-control-content">
+                      <MessageBox :type=type v-if="type==='contact'" ref="messageBox"></MessageBox>
+                </div>
+                <div id="item3" class="mui-control-content">
+                    <ul v-if="type==='group'" class="mui-table-view">
+                        <li class="mui-table-view-cell">
+                            第三个选项卡子项-1
+                        </li>
+                        <li class="mui-table-view-cell">
+                            第三个选项卡子项-2
+                        </li>
+                        <li class="mui-table-view-cell">
+                            第三个选项卡子项-3
+                        </li>
+                    </ul>
+                </div>
+            </div> -->
+        </div>
+        <div  v-show="this.isShowFriendRequest" class="mui-popup mui-popup-in" style="display: block;">
+          <div class="mui-popup-inner">
+            <div class="mui-popup-title">好友请求</div>
+            <div class="mui-popup-text">{{this.$store.state.friendModule.friendRequest.status}}</div>
+          </div>
+          <div class="mui-popup-buttons">
+            <span @click="acceptSubmit" class="mui-popup-button" type="primary">同意</span>
+            <span @click="refusedClick" class="mui-popup-button mui-popup-button-bold">拒绝</span>
+          </div>
+        </div>
+        <!-- <div class="mui-popup mui-popup-in" style="display: block;">
+          <div class="mui-popup-inner">
+            <div class="mui-popup-title">创建群组</div>
+            <div class="mui-popup-text">请输入对方手机号码：</div>
+            <div class="mui-popup-input">
+              <input type="text" autofocus="" placeholder="">
             </div>
-            <div  v-show="this.isShowFriendRequest" class="mui-popup mui-popup-in" style="display: block;">
-              <div class="mui-popup-inner">
-                <div class="mui-popup-title">好友请求</div>
-                <div class="mui-popup-text">{{this.$store.state.friendModule.friendRequest.status}}</div>
-              </div>
-              <div class="mui-popup-buttons">
-                <span @click="acceptSubmit" class="mui-popup-button" type="primary">同意</span>
-                <span @click="refusedClick" class="mui-popup-button mui-popup-button-bold">拒绝</span>
-              </div>
-            </div>
+          </div>
+          <div class="mui-popup-buttons">
+            <span class="mui-popup-button">取消</span>
+            <span class="mui-popup-button mui-popup-button-bold">确定</span>
+          </div>
+        </div> -->
     </div>
 </template>
 <script>
@@ -71,6 +90,9 @@ import MessageBox from './messagebox'
 import { mapState, mapActions } from 'vuex'
 export default {
   components: {Header, MessageBox},
+  mounted () {
+    localStorage.setItem('chatname',this.username)
+  },
   computed: {
     chatList () {
       console.log(this.$store.state.chat.msgList)
@@ -86,8 +108,16 @@ export default {
   data () {
     return {
       type: 'contact',
-      userphone:'',
-      ishow: false
+      userphone: '',
+      ishow: false,
+      isaddGroup: false,
+      form: {
+        groName: '',
+        desc: '',
+        radio: '2',
+        radiopom: '2',
+        membersList: []
+      }
     }
   },
   methods: {
@@ -99,16 +129,17 @@ export default {
       'acceptSubscribe',
       'declineSubscribe',
       'acceptSubscribe',
-      'declineSubscribe'
+      'declineSubscribe',
+      'onCreateGroup'
     ]),
     toFriendList () {
     //   this.$refs.messageBox.onGetContactUserList()
       this.type = 'contact'
-      this.$router.push(`/chat/contact?username=${this.username}`)
+      this.$router.push(`/chat/contact?username=${localStorage.getItem('chatname')}`)
     },
     toGroupList () {
       this.type = 'group'
-      this.$router.push(`/chat/group?username=${this.username}`)
+      this.$router.push(`/chat/group?username=${localStorage.getItem('chatname')}`)
     },
     getUnreadNum (item) {
       const { name, params } = this.$route;
@@ -167,6 +198,29 @@ export default {
     },
     dialog () {
       this.ishow = !this.ishow
+    },
+    addGroup () {
+      this.ishow = false
+      var btnArray = ['取消', '确定']
+      mui.prompt('请输入群名：', '', '创建群组', btnArray, (e) => {
+        if (e.index == 1) {
+          this.form.groName = e.value 
+          this.postCreateGroup()
+          mui.toast('正在创建')
+        }
+      })
+    },
+    postCreateGroup () {
+      this.onCreateGroup({
+        groupname: this.form.groName,
+        desc: this.form.desc,
+        members: this.form.membersList,
+        approval: this.form.radiopom == 2,
+        pub: this.form.radio == 2
+      })
+    },
+    goback () {
+      this.$router.push('/home')
     }
   }
 }
@@ -259,7 +313,9 @@ export default {
   position: fixed;
   z-index: 1000;
 }
-
+.mui-input-group{
+  position: absolute;
+}
 </style>
 
 .mui-segmented-control{

@@ -7,9 +7,15 @@
         <div class="mui-input-group">
             <div class="mui-input-row">
                 <label>
-                    <span class="mui-icon mui-icon-person"></span>
+                    <span class="mui-icon mui-icon-phone"></span>
                 </label>
                 <input v-model="phone" type="text" class="mui-input-clear" placeholder="请输入手机号">
+            </div>
+             <div class="mui-input-row">
+                <label>
+                    <span class="mui-icon mui-icon-person"></span>
+                </label>
+                <input v-model="username" type="text" class="mui-input-clear" placeholder="请输入用户名">
             </div>
             <div class="mui-input-row">
                 <label>
@@ -165,7 +171,9 @@ export default {
       pwd: '',
       pwdAgain: '',
       tip: '' ,// 提示内容
-      loading: false // 是否正在请求服务器
+      loading: false, // 是否正在请求服务器
+      root: process.env.API_HOST,
+      username: ''
     }
   },
   watch: {
@@ -196,7 +204,8 @@ export default {
       const root = process.env.API_HOST
       const user = {
         phone: this.phone,
-        pwd: this.pwd
+        pwd: this.pwd,
+        username: this.username
       }
       this.$ajax.post({
         // http://localhost:8081/regist
@@ -204,7 +213,6 @@ export default {
         data: user
 
       }).then(result => {
-        console.log(result)
         this.loading = false
         if (result.status) {
           this.regist()
@@ -219,6 +227,10 @@ export default {
     judge () {
       if (!this.phone) {
         this.tip = '手机号码不能为空'
+        return false
+      }
+      if (!this.username) {
+        this.tip = '用户名不能为空'
         return false
       }
       if (!this.pwd) {
@@ -240,7 +252,7 @@ export default {
       this.onRegister({
         username: this.phone.toLowerCase(),
         password: this.pwd,
-        nickname: ''
+        nickname: this.username
       })
     }
   }

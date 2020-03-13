@@ -224,10 +224,11 @@ WebIM.conn.listen({
 
 			case "direct_joined": // 被拉进群--不需要同意
 				Vue.$store.dispatch("onGetGroupUserList")
-				Message({
-					type: "success",
-					message: `${message.from}邀请您加入群：${message.gid}`
-				})
+				// Message({
+				// 	type: "success",
+				// 	message: `${message.from}邀请您加入群：${message.gid}`
+				// })
+				mui.toast(`${message.from}邀请您加入群：${message.gid}`)
 				break;
 			case "invite": //收到邀请进群的通知
 				let groupInviteOptions = {
@@ -256,17 +257,19 @@ WebIM.conn.listen({
 				break;
 			case "deleteGroupChat": // 解散群组
 				Vue.$store.dispatch("onGetGroupUserList")
-				Message({
-					type: "error",
-					message: `${message.from}将群：${message.gid} 已解散`
-				})
+				// Message({
+				// 	type: "error",
+				// 	message: `${message.from}将群：${message.gid} 已解散`
+				// })
+				mui.toast(`${message.from}将群：${message.gid} 已解散`)
 				break
 			case "removedFromGroup": //移除
 				Vue.$store.dispatch("onGetGroupUserList")
-				Message({
-					type: "success",
-					message: "已被" + message.from + "移除群：" + message.gid
-				})
+				// Message({
+				// 	type: "success",
+				// 	message: "已被" + message.from + "移除群：" + message.gid
+				// })
+				mui.toast( "已被" + message.from + "移除群：" + message.gid)
 				break;
 			case "leaveGroup":
 				Vue.$store.dispatch("onGetGroupinfo", { select_id });
@@ -290,6 +293,7 @@ WebIM.conn.listen({
 		if (message.type == 0) {
 			console.log('请输入账号密码')
 		} else if (message.type == 28) {
+			Vue.$router.push('/login')
 			console.log("未登陆")
 		} else if (JSON.parse(message.data.data).error_description == "user not found") {
 			alert("用户名不存在！")

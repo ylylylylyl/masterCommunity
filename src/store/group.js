@@ -146,7 +146,7 @@ const Group = {
 				},
 				error: function (err) {
 					if (JSON.parse(err.data).error == "forbidden_op") {
-						Message.error(JSON.parse(err.data).error_description)
+						mui.toast(JSON.parse(err.data).error_description)
 					}
 
 				}

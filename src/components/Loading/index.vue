@@ -8,11 +8,11 @@
   margin: 100px auto;
   width: 50px;
   height: 50px;
-  border: 3px solid #6E8B3D;
-  border-bottom: #aaa 3px solid;
+  border: 3px solid hsl(82, 39%, 39%);
+  border-bottom: gray 3px solid;
   border-radius: 50%;
-  animation: load 1.1s infinite linear;
-  -webkit-animation: load 1.1s infinite linear;
+  animation: load 0.9s infinite linear;
+  -webkit-animation: load 0.5s infinite linear;
   -moz-animation: load 1.1s infinite linear;
   -o-animation: load 1.1s infinite linear;
 }

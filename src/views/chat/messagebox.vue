@@ -1,11 +1,10 @@
 <template>
-
 <div class="messagebox-container">
+  <Nothing v-if="!userList['contact'].length"></Nothing>
   <div
     class="item"
     v-for="(item) in userList['contact']"
-    @click="select2(item)"
-  >
+    @click="select2(item)">
     <div class="avatar">
       <span class="avatar-span">{{item.name|avatar}}</span>
     </div>
@@ -27,12 +26,12 @@
 <script>
 import { mapState, mapActions,mapGetters } from 'vuex'
 import moment from 'moment'
+import Nothing from '../../components/nothing'
 export default {
-  beforeMount () {
-    // this.updateMessageMid()
-  },
+  components: { Nothing },
   mounted () {
     this.onGetContactUserList()
+    console.log(this.contact)
   },
   computed: {
     ...mapGetters({
@@ -153,6 +152,7 @@ export default {
 <style scoped>
 .messagebox-container{
   margin-top: 80px;
+  height: 100%;
 }
 .item {
   height: 70px;

@@ -64,6 +64,7 @@ const Contact = () => import('../views/chat/messagebox.vue')
 const Message = () => import('../views/chat/sendMessage.vue')
 const Group = () => import('../views/chat/group.vue')
 const GroupMessage = () => import('../views/chat/groupMessage.vue')
+const ChangePWD = () => import('../views/selfinfo/changePwd.vue')
 Vue.use(Router)
 
 export default new Router({
@@ -383,6 +384,15 @@ export default new Router({
       path: '/changephone',
       name: 'changephone',
       component: ChangePhone,
+      meta: {
+        requireAuth: true,
+        requireBind: true
+      }
+    },
+    {
+      path: '/changepwd',
+      name: 'changepwd',
+      component: ChangePWD,
       meta: {
         requireAuth: true,
         requireBind: true

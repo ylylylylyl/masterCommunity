@@ -1,5 +1,6 @@
 <template>
   <div id="content2" class="mui-control-content">
+    <Nothing v-show="!noticeList.length"></Nothing>
     <div class="mui-card" @click="toDetail(item.noticeid)" v-for="(item,key) in noticeList" :key="key">
       <!--页眉，放置标题-->
       <div class="mui-card-header">
@@ -22,18 +23,22 @@
   </div>
 </template>
 <script>
+import Nothing from '../nothing'
 export default {
+  components: {Nothing},
   mounted () {
     this.init()
   },
   data () {
     return {
       root: process.env.API_HOST,
-      noticeList: []
+      noticeList: [],
+      loading: false
     }
   },
   methods: {
     init () {
+      this.loading = true
       let villageid
       if (this.$cookies.get('CUR_USERINFO').villageid) {
         villageid = this.$cookies.get('CUR_USERINFO').villageid
@@ -45,9 +50,12 @@ export default {
         data: {villageid}
       })
         .then(res => {
+          this.loading = false
           if (res.status) {
             this.noticeList = res.result
           }
+        },err => {
+          this.loading = true
         })
     },
     toDetail (noticeid) {

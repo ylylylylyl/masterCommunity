@@ -1,5 +1,6 @@
 <template>
   <div id="content3" class="mui-control-content">
+    <Nothing v-if="!losts.length"></Nothing>
     <div class="mui-card">
       <!--内容区-->
       <div @click="toDetail(lost.lostid)" class="mui-card-content content3-card" v-for="(lost,key) in losts" :key="key">
@@ -25,7 +26,6 @@
         </div>
       </div>
     </div>
-    <Nothing v-if="!losts.length"></Nothing>
   </div>
 </template>
 <script>

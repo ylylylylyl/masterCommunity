@@ -13,6 +13,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: gray;
   }
   .icon{
        font-size: 60px;

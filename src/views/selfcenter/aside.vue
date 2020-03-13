@@ -7,7 +7,7 @@
         <span class="tongyong">通用设置</span>
         <div class="mui-scroll">
           <ul class="mui-table-view">
-            <li class="mui-table-view-cell">
+            <li class="mui-table-view-cell" @click="$router.push('/changepwd')">
                 <svg class="icon icon-ziyuan" aria-hidden="true">
                     <use xlink:href="#icon-xiugaimima" />
                 </svg>

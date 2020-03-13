@@ -3,7 +3,7 @@
     <Header>帖子详情</Header>
     <Loading v-if="loading"></Loading>
     <div v-if="!loading" class="mui-card detail">
-      <div class="mui-card-header detail-header">
+      <div class="mui-card-header detail-header" >
         <img class="user-avatar" :src="forum.userinfo.avatar"/>
         <div>
           <span class="author-span">{{forum.userinfo.username}}</span>
@@ -14,8 +14,13 @@
       <div class="mui-card-content">
         <span class="detail-title">[{{forum.forum.forumtitle}}]</span>
         <p>{{forum.forum.forumcontent}}</p>
-        <div class="img-container">
-          <img v-for="(img,key) in forum.forumpictureList " class="des-img" :src="img.picture" :key="img.key" />
+        <div class="img-container" >
+          <img 
+          v-for="(img,key) in forum.forumpictureList"
+          v-show="img.picture"
+          class="des-img" 
+          :src="img.picture" 
+          :key="img.key" />
         </div>
         
       </div>

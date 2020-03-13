@@ -39,10 +39,10 @@ const Login = {
 				nickname: payload.nickname,
 				appKey: WebIM.config.appkey,
 				success: () => {
-					Message({
-						type: "success",
-						message: "注册成功"
-					});
+					// Message({
+					// 	type: "success",
+					// 	message: "注册成功"
+					// });
 					context.commit("setRegisterFlag", false);
 				},
 				error: (err) => {

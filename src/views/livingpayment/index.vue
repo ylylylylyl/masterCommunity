@@ -152,7 +152,7 @@ export default {
   },
   methods: {
     goback () {
-      this.$router.go(-1)
+      this.$router.push('/home')
     },
     async echartsinit (livingnumid) {
       await this.$ajax.post({

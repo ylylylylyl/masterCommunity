@@ -2,7 +2,7 @@
   <div class="content-container">
     <div class="back-header">
       <div>
-        <span @click="goback()" class="mui-icon mui-icon-arrowleft"></span>
+        <span @click="$router.push('/home')" class="mui-icon mui-icon-arrowleft"></span>
         <span>我要报修</span>
       </div>
       <span class="records-span" @click="toRecords()">报修记录</span>
