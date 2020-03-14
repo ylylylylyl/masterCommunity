@@ -82,9 +82,6 @@
 .mui-input-password {
   width: 85%;
 }
-.mui-input-row {
-  color: lightgray;
-}
 .mui-icon-help {
   font-size: 16px;
   margin-right: 5px;

@@ -18,6 +18,7 @@
           <p>{{item.noticepusher}}</p>
           <p>{{item.noticetime|format}}</p>
         </div>
+        <span @click="e=>deleteNotice(e,item.noticeid)" class="delete" v-if="$route.path=='/adminannounce'">删除</span>
       </div>
     </div>
   </div>
@@ -28,6 +29,7 @@ export default {
   components: {Nothing},
   mounted () {
     this.init()
+    console.log(this.$route)
   },
   data () {
     return {
@@ -65,6 +67,30 @@ export default {
           noticeid
         }
       })
+    },
+    deleteNotice (e, noticeid) {
+      e.stopPropagation()
+      let btnArray = ['确认', '取消']
+      mui.confirm('确认删除该条公告？', '删除公告', btnArray, (e) => {
+        if (e.index == 0) {
+          this.$ajax.post({
+            url: this.root + 'notice/deletenotice',
+            data: {noticeid}
+          })
+            .then(res => {
+              if (res.status) {
+                mui.toast('删除成功')
+                this.init()
+              } else {
+                mui.toast('删除失败')
+              }
+            }, err => {
+              mui.toast('删除失败')
+            })
+          
+        }
+      })
+      console.log(noticeid)
     }
   }
 }
@@ -96,5 +122,15 @@ export default {
 }
 .notice-icon {
   font-size: 25px;
+}
+.mui-card-content{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+.delete{
+  color: darkred;
+  font-weight: bolder;
 }
 </style>

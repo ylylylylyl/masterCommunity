@@ -5,7 +5,7 @@
       <span class="title">小区选择</span>
     </header>
     <div class="mui-input-row mui-search">
-        <input type="search" class="mui-input-clear" placeholder="">
+        <!-- <input type="search" class="mui-input-clear" placeholder=""> -->
     </div>
     <router-view></router-view>
   </div>

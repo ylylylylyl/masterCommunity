@@ -44,8 +44,8 @@
               <use xlink:href="#icon-user__easyico" />
             </svg>
           </div>
-          <div class="login-container" @click="login()">
-            <span class="login-text">登录/注册</span>
+          <div class="login-container">
+            <span class="login-text">你好，{{userinfo.username}}</span>
             <span class="mui-icon mui-icon-arrowright"></span>
           </div>
         </div>
@@ -95,7 +95,7 @@
               </div>
               <span class="mui-icon mui-icon-forward"></span>
             </div>
-            <div class="self-tab-item">
+            <div class="self-tab-item" @click="$router.push('/myforum')">
               <div class="tab-left">
                 <svg class="icon tab-icon" aria-hidden="true">
                   <use xlink:href="#icon-luntanzixun" />
@@ -107,7 +107,7 @@
               </div>
               <span class="mui-icon mui-icon-forward"></span>
             </div>
-            <div class="self-tab-item">
+            <div class="self-tab-item" @click="$router.push('/repairreport')">
               <div class="tab-left">
                 <svg class="icon tab-icon" aria-hidden="true">
                   <use xlink:href="#icon-repair" />

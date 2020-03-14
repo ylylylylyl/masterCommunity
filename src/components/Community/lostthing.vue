@@ -1,27 +1,50 @@
 <template>
   <div id="content3" class="mui-control-content">
     <Nothing v-if="!losts.length"></Nothing>
-    <div class="mui-card">
+    <div class="mui-card" v-for="(lost,key) in losts" :key="key">
       <!--内容区-->
-      <div @click="toDetail(lost.lostid)" class="mui-card-content content3-card" v-for="(lost,key) in losts" :key="key">
+      <div @click="toDetail(lost.lostid)" class="mui-card-content content3-card" >
         <div class="lost-item">
-          <span>遗失地点：</span>
+          <div>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-dibudaohanglan-" />
+            </svg>
+            <span>遗失物品：</span>
+          </div>
           <p>{{lost.lostname}}</p>
         </div>
         <div class="lost-item">
-          <span>遗失时间：</span>
+          <div>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-shijian1" />
+            </svg>
+            <span>遗失时间：</span>
+          </div>
           <p>{{lost.losttime}}</p>
         </div>
         <div class="lost-item">
-          <span>遗失详情：</span>
+          <div>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-leixing" />
+            </svg>
+            <span>遗失详情：</span>
+          </div>
           <p>{{lost.lostdes}}</p>
         </div>
         <div class="lost-item">
-          <span>领取地址：</span>
+          <div>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-dizhi" />
+            </svg>
+            <span>领取地址：</span>
+          </div>
           <p>物业处三楼</p>
         </div>
         <div class="lost-item">
-          <span>遗失状态：</span>
+           <div>
+            <span class="mui-icon mui-icon-info"></span>
+            <span>遗失状态：</span>
+          </div>
           <p>{{lost.losttype|losttype}}</p>
         </div>
       </div>
@@ -33,7 +56,6 @@ import Nothing from '../../components/nothing'
 export default {
   components:{Nothing},
   mounted () {
-    console.log(11)
     this.init()
   },
   data () {
@@ -44,8 +66,9 @@ export default {
   },
   methods: {
     init () {
-      const {villageid} = this.$cookies.get('CUR_BINDINFO')
-      this.$ajax.post({
+      const villageid = this.$cookies.get('CUR_BINDINFO').villageid ||this.$cookies.get('CUR_USERINFO').villageid
+     console.log(villageid)
+     this.$ajax.post({
         url: this.root + 'lost/lostlist',
         data: {villageid}
       }).then(result => {
@@ -89,5 +112,8 @@ export default {
   font-weight: bold;
   font-size: 25px;
   margin-right: 5px;
+}
+.mui-icon, .iconfont{
+  font-size: 14px;
 }
 </style>

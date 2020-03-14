@@ -29,7 +29,9 @@
                 <textarea v-model="postData.noticecontent" class="announce-content" placeholder="请输入内容"></textarea>
             </div>
             <div class="btn-container" >
-                <button class="mui-btn" @click="publish()">发布公告</button>
+                <button class="mui-btn" @click="publish()">
+                  {{loading?'发布中':'发布公告'}}
+                </button>
             </div>
         </div>
 
@@ -48,19 +50,25 @@ export default {
         addr: this.$cookies.get('CUR_USERINFO').addr,
         villageid:this.$cookies.get('CUR_USERINFO').villageid
       },
-      root: process.env.API_HOST
+      root: process.env.API_HOST,
+      loading: false
     }
   },
   methods: {
     publish () {
+      if (!this.judge()) return
+      this.loading = true
       this.$ajax.post({
         url: this.root + 'notice/insertnotice',
         data: this.postData
       })
         .then(res => {
+          this.loading = false
           if (res.status) {
-            this.$router.push('/admin/home')
+            this.$router.push('/adminannounce')
           }
+        }, err => {
+          this.loading = true
         })
     },
     toList () {
@@ -68,6 +76,17 @@ export default {
     },
     goback () {
       this.$router.go(-1)
+    },
+    judge () {
+      if (!this.postData.noticetitle) {
+        mui.toast('请输入标题！')
+        return false
+      }
+      if (!this.postData.noticecontent) {
+        mui.toast('请输入内容！')
+        return false
+      }
+      return true
     }
   }
 }
@@ -134,5 +153,8 @@ input{
     background: #6e8b3d;
     color: white;
     width: 100%;
+}
+.icon{
+  font-size: 16px;
 }
 </style>

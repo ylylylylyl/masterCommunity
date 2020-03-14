@@ -56,7 +56,7 @@ export default {
     }
   },
   mounted () {
-    this.postData.villageid = this.$cookies.get('CUR_BINDINFO').villageid
+    this.postData.villageid = this.$cookies.get('CUR_BINDINFO').villageid ||  this.$cookies.get('CUR_USERINFO').villageid
     this.postData.publisher = this.$cookies.get('CUR_USERINFO').adminname
     //    this.initRepair()
   },
@@ -68,16 +68,32 @@ export default {
       this.$router.push('/lostlist')
     },
     handleLost () {
+      if (!this.judge()) return
       this.$ajax.post({
         url: this.root + 'lost/insertlost',
         data: this.postData
       }).then(result => {
         if (result.status) {
-          this.$router.push('/adminlost')
+          this.toLostList()
         } else {
           mui.toast('提交失败')
         }
       })
+    },
+    judge () {
+      if (!this.postData.lostname) {
+        mui.toast('请输入具体物品')
+        return false
+      }
+      if (!this.postData.losttime) {
+        mui.toast('请输入遗失时间')
+        return false
+      }
+      if (!this.postData.lostdes) {
+        mui.toast('请输入遗失详情')
+        return false
+      }
+      return true
     }
   }
 }

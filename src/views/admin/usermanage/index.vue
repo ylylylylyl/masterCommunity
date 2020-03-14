@@ -5,12 +5,11 @@
            <span class="header-title">用户管理</span>
        </header>
        <div class="item-container" id="OA_task_1">
-           <div  class="item mui-table-view-cell"  v-for="item in bindHouseList" :key="item.binid">
-               <div class="mui-slider-right mui-disabled" @click="(e)=>deleteuser(e,item.bindid)">
+           <div  class="item mui-table-view-cell"  v-for="item in bindHouseList" :key="item.binid" @click="$router.push(`/houseinfodet/${item.bindid}`)">
+               <div class="mui-slider-right mui-disabled" @click="(e)=>deleteuser(e,item.bindid)" >
                     <a class="mui-btn mui-btn-red">注销用户</a>
                 </div>
-               <div class="mui-slider-handle">
-                   
+                <div class="mui-slider-handle">
                    <div class="item-self">
                         <span>业主：{{item.houseowner}}</span>
                         <span>{{item.phonenumber}}</span>
@@ -20,7 +19,7 @@
                     </div>
                     <div class="item-addr">
                         <span>住址：{{item.chooseaddr}}</span>
-                        <span class="detail-span" @click="$router.push(`/houseinfodet/${item.bindid}`)">查看详情</span>
+                        <span class="detail-span"  @click="(e)=>deleteuser(e,item.bindid)" >注销</span>
                     </div>
                </div>
            </div>
@@ -70,6 +69,7 @@ export default {
         })
     },
     deleteuser (e,bindid) {
+      e.stopPropagation()
       const elem = e.target.parentNode
       var btnArray = ['否', '是']
       mui.confirm('确认注销当前用户，注销后不可撤回？', '注销用户', btnArray, (e) =>{
@@ -83,9 +83,10 @@ export default {
             .then(res => {
               if (res.status) {
                 this.init()
-                mui.swipeoutClose(elem);
+                mui.swipeoutClose(elem)
+                return
               }
-             
+              mui.toast(res.msg)
             })
         } else {
           mui.swipeoutClose(elem)

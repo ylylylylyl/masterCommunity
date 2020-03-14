@@ -45,6 +45,10 @@ export default {
       root: process.env.API_HOST
     }
   },
+  mounted () {
+    // 解决mui-input框不刷新无icon问题
+    mui('.mui-input-row input').input()
+  },
   methods: {
     commit () {
       if (this.originpwd === this.newpwd) {
@@ -52,7 +56,7 @@ export default {
         return
       }
       this.loading = true
-      const {userid} = this.$cookie.get('CUR_USERINFO')
+      const {userid} = this.$cookies.get('CUR_USERINFO')
       this.$ajax
         .post({
           url: this.root + 'user/changePwd',
@@ -68,6 +72,8 @@ export default {
             this.$router.go(-1)
           }
           mui.toast(result.msg)
+        }, err => {
+          this.loading = true
         })
     }
   }

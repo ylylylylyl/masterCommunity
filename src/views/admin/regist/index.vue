@@ -195,7 +195,6 @@ export default {
         data: user
       }).then(result => {
         if (result.status) {
-          console.log(result.status)
           this.regist()
           this.user = null
         } else {

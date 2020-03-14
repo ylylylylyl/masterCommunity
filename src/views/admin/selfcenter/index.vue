@@ -39,19 +39,19 @@
         </div>
         <div class="avatar-container">
           <div class="avatar">
-            <img class="avatar-icon" :src="userinfo.avatar"/>
-            <!-- <svg class="icon avatar-icon" aria-hidden="true">
+            <!-- <img class="avatar-icon" :src="userinfo.avatar"/> -->
+            <svg class="icon avatar-icon" aria-hidden="true">
               <use xlink:href="#icon-user__easyico" />
-            </svg> -->
+            </svg>
           </div>
           <div class="login-container" @click="login()">
-            <span class="login-text">登录/注册</span>
+            <span class="login-text">你好，{{userinfo.adminname}}</span>
             <span class="mui-icon mui-icon-arrowright"></span>
           </div>
         </div>
         <div class="wallet-container">
           <div class="detail-item" @click="toRouter(2)">
-            <span>{{userinfo.walletbalance}}</span>
+            <span>0</span>
             <span>零钱</span>
           </div>
           <div class="detail-item">
@@ -63,7 +63,7 @@
             <span>现金</span>
           </div>
           <div class="detail-item" @click="toRouter(4)">
-            <span>{{userinfo.bankcount}}</span>
+            <span>0</span>
             <span>银行卡</span>
           </div>
         </div>
@@ -83,7 +83,7 @@
               </div>
               <span class="mui-icon mui-icon-forward"></span>
             </div>
-            <div class="self-tab-item">
+            <!-- <div class="self-tab-item">
               <div class="tab-left">
                 <svg class="icon tab-icon" aria-hidden="true">
                   <use xlink:href="#icon-gerenjiaofeimingxi" />
@@ -118,7 +118,7 @@
                 </div>
               </div>
               <span class="mui-icon mui-icon-forward"></span>
-            </div>
+            </div> -->
           </div>
           <div class="self-bottom">
             <div class="self-bottom-item">
@@ -201,14 +201,15 @@ export default {
       })
     },
     findWalletAndBank () {
-      const {userid} = this.$cookies.get('CUR_USERINFO')
+      const {adminid} = this.$cookies.get('CUR_USERINFO')
       this.$ajax.post({
-        url: this.root + 'user/selectByUserId',
-        data: {userid}
+        url: this.root + 'adminuser/selectByAdminId',
+        data: {adminid}
       })
         .then(res => {
           if (res.status) {
             this.userinfo = res.object
+            console.log(this.userinfo)
           }
         })
     }

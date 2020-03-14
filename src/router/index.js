@@ -56,6 +56,7 @@ const AdminLostRecords = () => import('../views/admin/lost/list.vue')
 const AdminLostDetail = () => import('../components/Community/lostdeail.vue')
 const AdminUserMana = () => import('../views/admin/usermanage')
 const Map = () => import('../views/map/index.vue')
+const AdminForum = () => import('../views/admin/forum')
 const Ambitus = () => import('../views/map/ambitus.vue')
 const Weather = () => import('../views/weather')
 const ChangeDetail = () => import('../views/changedetail')
@@ -520,6 +521,14 @@ export default new Router({
           }
         }
       ]
+    },
+    {
+      path: '/adminforum',
+      name: 'adminforum',
+      component: AdminForum,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: '/chat',

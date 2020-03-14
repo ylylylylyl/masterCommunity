@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     init () {
-      const villageid = Number(this.$cookies.get('CUR_BINDINFO').villageid)
+      const villageid = Number(this.$cookies.get('CUR_BINDINFO').villageid) || Number(this.$cookies.get('CUR_USERINFO').villageid)
       this.loading = true
       this.$ajax.post({
         url: this.root + 'village/getDetail',

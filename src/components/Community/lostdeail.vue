@@ -110,6 +110,7 @@ export default {
       })
     },
     handleLostBack (lostid) {
+      if (!this.judge()) return
       this.postData.lostid = lostid
       this.$ajax.post({
         url: this.root + 'lost/lostback',
@@ -121,6 +122,17 @@ export default {
 
         }
       })
+    },
+    judge () {
+      if (!this.postData.username) {
+        mui.toast('请输入领回人')
+        return false
+      }
+      if (!this.postData.lostphone) {
+        mui.toast('请输入领回人电话')
+        return false
+      }
+      return true
     }
   }
 

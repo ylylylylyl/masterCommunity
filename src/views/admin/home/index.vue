@@ -59,14 +59,14 @@
                 <a>发布公告</a>
               </a>
             </div>
-            <div class="mui-col-xs-3 mui-col-xs-3">
+            <!-- <div class="mui-col-xs-3 mui-col-xs-3">
               <a @click="torouter(2)" class="mui-table-view-cell">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-jiaofeidating" />
                 </svg>
                 <a>物业费</a>
               </a>
-            </div>
+            </div> -->
             <div class="mui-col-xs-3 mui-col-xs-3">
               <a @click="torouter(3)" class="mui-table-view-cell">
                 <svg class="icon" aria-hidden="true">
@@ -101,7 +101,7 @@
                 <a>用户管理</a>
               </a>
             </div>
-            <div class="mui-col-xs-3 mui-col-xs-3">
+            <div class="mui-col-xs-3 mui-col-xs-3" @click="torouter(7)">
               <li class="mui-table-view-cell">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-tianqi" />
@@ -120,7 +120,7 @@
           </div>
         </div>
       </div>
-      <div class="notice-container" @click="toAnnounce()">
+      <!-- <div class="notice-container" @click="toAnnounce()">
         <div class="notice-title">
           <span>社区公告</span>
         </div>
@@ -128,13 +128,13 @@
            <svg class="icon notice-icon" aria-hidden="true">
             <use xlink:href="#icon-tongzhigonggao" />
           </svg>
-          <span>今日公告</span>
-          <p>111111111111111111111111111111111111111111111111</p>
+          <span>发布公告</span>
+          <p>点击快捷发布公告</p>
         </div>
         <div class="notice-icon">
           <span class="mui-icon mui-icon-arrowright"></span>
         </div>
-      </div>
+      </div> -->
       <div class="function-container news-container">
         <label class="fun-label">精选推荐</label>
         <span class="label-add">有料</span>
@@ -245,13 +245,16 @@ export default {
           this.$router.push('/adminrepair')
           break
         case 4:
-          this.$router.push('/forum')
+          this.$router.push('/adminforum')
           break
         case 5:
           this.$router.push('/adminuserman')
           break
         case 6:
           this.$router.push('/adminlost')
+          break
+        case 7:
+          this.$router.push('/weather')
           break
       }
     },
