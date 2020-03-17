@@ -160,7 +160,7 @@
 
 <script>
 import { PHONE_REG } from '../../../utils/rej'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import Loading from '../../../components/Loading'
 export default {
   components: {
@@ -192,6 +192,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['onLogin', 'setRegisterFlag', 'onRegister']),
     goback () {
       this.$router.go(-1)
     },
@@ -210,7 +211,7 @@ export default {
         this.tip = '请输入密码'
         return
       }
-      const root = process.env.API_HOST;
+      const root = process.env.API_HOST
       const user = {
         userphone: this.userphone,
         userpassword: this.userpassword
@@ -224,6 +225,7 @@ export default {
         })
         .then(result => {
           if (result.status) {
+            this.LoginIM()
             this.$cookies.set('CUR_USERINFO', result.object)
             this.$router.push('admin/home')
           } else {
@@ -231,6 +233,12 @@ export default {
             return null
           }
         })
+    },
+    LoginIM () {
+      this.onLogin({
+        username: this.userphone.toLowerCase(),
+        password: this.userpassword
+      })
     }
   }
 };

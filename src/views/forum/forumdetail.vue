@@ -148,6 +148,7 @@ export default {
       this.commentShow = false
     },
     publishCom (replyid, replyname) {
+      console.log(replyid)
       if (replyid) {
         this.targtreplyid = replyid
       } else {

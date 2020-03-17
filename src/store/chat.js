@@ -1,9 +1,9 @@
-import WebIM from "../utils/WebIM";
+import WebIM from '../utils/WebIM'
 
 // import WebIM from "../utils/WebIM";
 
 // TODO 处理页面刷新无法获取到音频url
-const res = function(response){
+const res = function (response) {
 	let objectUrl = WebIM.utils.parseDownloadResponse.call(WebIM.conn, response);
 	return objectUrl;  //  'blob:http://localhost:8080/536070e2-b3a0-444a-b1cc-f0723cf95588'
 };

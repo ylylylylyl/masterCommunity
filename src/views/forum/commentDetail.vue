@@ -34,11 +34,11 @@ export default {
       const param = {
         forumid: this.forumid,
         userid,
-        username,
+        // username,
         content: this.content,
         beforereplyid: Number(this.replytarget),
-        replyname: this.replyname,
-        avatar: localStorage.getItem('avatar')
+        replyname: this.replyname
+        // avatar: localStorage.getItem('avatar')
       }
       this.$ajax
         .post({

@@ -119,7 +119,6 @@ export default {
     this.debouncednewFormName = Debounce(this.newFormName, 500)
   },
   mounted () {
-    console.log("mount")
     this.init()
   },
   beforeDestroy () {
@@ -170,7 +169,6 @@ export default {
           this.itemmobile = 'item3mobile'
           break
       }
-       console.log(this.itemmobile)
       return true
     },
     newFormName () {
@@ -193,6 +191,9 @@ export default {
 }
 </script>
 <style scoped>
+.content-container{
+  height: auto;
+}
 .header {
   height: 60px;
   background: #6e8b3d;

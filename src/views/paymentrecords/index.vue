@@ -1,6 +1,7 @@
 <template>
-    <div class="com-container">
+    <div class="body-container">
         <BackHeader>缴费记录</BackHeader>
+        <Nothing v-if="isnone"></Nothing>
         <div class="records-content">
             <div class="records-content-item" v-for="(item1,key) in listData" :key="key">
                 <div class="item-title">
@@ -28,11 +29,13 @@
             <span>仅展示近6个月的记录</span>
         </div>
         <Loading v-if="loading"/>
-        <Nothing v-if="isnone"></Nothing>
     </div>
 
 </template>
 <style scoped>
+    .body-container{
+      height: 100%;
+    }
     p{
         margin-bottom: 0px;
     }

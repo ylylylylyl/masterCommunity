@@ -91,11 +91,10 @@ import { mapState, mapActions } from 'vuex'
 export default {
   components: {Header, MessageBox},
   mounted () {
-    localStorage.setItem('chatname',this.username)
+    localStorage.setItem('chatname', this.username)
   },
   computed: {
     chatList () {
-      console.log(this.$store.state.chat.msgList)
       return this.$store.state.chat.msgList
     },
     isShowFriendRequest () {
@@ -117,7 +116,8 @@ export default {
         radio: '2',
         radiopom: '2',
         membersList: []
-      }
+      },
+      root: process.env.API_HOST
     }
   },
   methods: {
@@ -130,7 +130,8 @@ export default {
       'declineSubscribe',
       'acceptSubscribe',
       'declineSubscribe',
-      'onCreateGroup'
+      'onCreateGroup',
+      'getFriends'
     ]),
     toFriendList () {
     //   this.$refs.messageBox.onGetContactUserList()
@@ -194,7 +195,22 @@ export default {
     acceptSubmit () {
       const id = this.$store.state.friendModule.friendRequest.from
       this.acceptSubscribe(id)
+      this.insertFriend(id)
       this.changeModal()
+    },
+    insertFriend (id) {
+      this.$ajax.post({
+        url: this.root + 'chat/insertFriend',
+        data: {
+          fromuser: this.username,
+          touser:id
+        }
+      }).then(result => {
+        if (result.status) {
+          this.getFriends()
+        } else {
+        }
+      })
     },
     dialog () {
       this.ishow = !this.ishow

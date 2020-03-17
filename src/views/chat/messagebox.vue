@@ -3,15 +3,17 @@
   <Nothing v-if="!userList['contact'].length"></Nothing>
   <div
     class="item"
-    v-for="(item) in userList['contact']"
+    v-for="(item) in friendList"
     @click="select2(item)">
-    <div class="avatar">
-      <span class="avatar-span">{{item.name|avatar}}</span>
+    <div  v-if="!item.avatar" class="avatar">
+      <span class="avatar-span">{{item.username|avatar}}</span>
     </div>
+    <img class="avatar" v-if="item.avatar" :src="item.avatar"/>
     <div class="message-container">
       <div class="message-info">
         <div>
-          <span class="message-name">{{item.name}}</span>
+          <!-- <span class="message-name">{{item.name}}</span> -->
+          <span class="message-name">{{item.username}}</span>
           <div class="icon-style" v-if="getUnreadNum(item) != 0">
             <span class="unreadNum">{{getUnreadNum(item)}}</span>
           </div>
@@ -29,14 +31,17 @@ import moment from 'moment'
 import Nothing from '../../components/nothing'
 export default {
   components: { Nothing },
-  mounted () {
+  async mounted () {
     this.onGetContactUserList()
-    console.log(this.contact)
+    await this.getFriends()
+    // this.init()
+    console.log(this.friendList)
   },
   computed: {
     ...mapGetters({
       contact: 'onGetContactUserList',
-      msgList: 'onGetCurrentChatObjMsg'
+      msgList: 'onGetCurrentChatObjMsg',
+      friendList: 'friends'
     // group: "onGetGroupUserList",
     // chatroom: "onGetChatroomUserList",
     }),
@@ -57,17 +62,17 @@ export default {
     getKey (item) {
       let key = ""
       switch (this.type) {
-        case "contact":
-          key = item.name;
-          break;
-        case "group":
-          key = item.groupid;
-          break;
-        case "chatroom":
-          key = item.id;
-          break;
+        case 'contact':
+          key = item.name
+          break
+        case 'group':
+          key = item.groupid
+          break
+        case 'chatroom':
+          key = item.id
+          break
         default:
-          break;
+          break
       }
       return key;
     },
@@ -75,31 +80,29 @@ export default {
       return this.$route.query.username
     }
   },
+  data () {
+    return {
+      root: process.env.API_HOST,
+      friends: []
+    }
+  },
   props: [
     'type' // 聊天类型 contact, group, chatroom
   ],
   methods: {
-    ...mapActions(['onLogout', 'onGetFirendBlack', 'onGetContactUserList']),
+    ...mapActions(['onLogout', 'onGetFirendBlack', 'onGetContactUserList', 'getFriends']),
     renderTime (time) {
-      const nowStr = new Date();
+      const nowStr = new Date()
       const localStr = time ? new Date(time) : nowStr
       const localMoment = moment(localStr)
-      const localFormat = localMoment.format("MM-DD hh:mm A")
+      const localFormat = localMoment.format('MM-DD hh:mm A')
       return localFormat
     },
     getLastMsg (item) {
       // let { name, params } = this.$route;
       let  name = 'contact'
       const chatList = this.chatList[name]
-      console.log(chatList)
-      let userId = ""
-      if (name == 'contact') {
-        userId = item.name
-      } else if (name == 'group') {
-        userId = item.groupid
-      } else {
-        userId = item.id
-      }
+      const userId = item.touser
       const currentMsgs = chatList[userId] || []
       let lastMsg = ''
       let lastType =
@@ -126,12 +129,13 @@ export default {
       }
     },
     select2 (item) {
-      this.$router.push(`/chat/message/${item.name}/${this.username}`)
+      // this.$router.push(`/chat/message/${item.name}/${this.username}`)
+      this.$router.push(`/chat/message/${item.touser}/${this.username}/${item.username}`)
     },
     getUnreadNum (item) {
       const { name, params } = this.$route
       const chatList = this.chatList['contact']
-      let userId = item.name
+      let userId = item.touser
       const currentMsgs = chatList[userId] || []
       let unReadNum = 0
       currentMsgs.forEach(msg => {
@@ -140,11 +144,24 @@ export default {
         }
       });
       return unReadNum
+    },
+    init () {
+      this.$ajax.post({
+        url: this.root + 'chat/selectFriends',
+        data: {
+          userphone: this.username
+        }
+      }).then(result => {
+        if (result.status) {
+          this.friends = result.result
+        } else {
+        }
+      })
     }
   },
   filters: {
     avatar (name) {
-      return name.slice(name.length - 4)
+      return name.charAt(name.length - 1)
     }
   }
 }

@@ -67,6 +67,14 @@
                 <a>物业费</a>
               </a>
             </div> -->
+             <div class="mui-col-xs-3 mui-col-xs-3">
+              <a @click="torouter(8)" class="mui-table-view-cell">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-dizhi" />
+                </svg>
+                <a>地图</a>
+              </a>
+            </div>
             <div class="mui-col-xs-3 mui-col-xs-3">
               <a @click="torouter(3)" class="mui-table-view-cell">
                 <svg class="icon" aria-hidden="true">
@@ -110,13 +118,21 @@
               </li>
             </div>
             <div class="mui-col-xs-3 mui-col-xs-3">
+              <li @click="torouter(9)" class="mui-table-view-cell">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-liaotian" />
+                </svg>
+                <a>聊天</a>
+              </li>
+            </div>
+            <!-- <div class="mui-col-xs-3 mui-col-xs-3">
               <li class="mui-table-view-cell">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-gengduo" />
                 </svg>
                 <a>更多</a>
               </li>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -231,6 +247,7 @@ export default {
       event.currentTarget.children[0].click()
     },
     torouter (num) {
+      const {phone} = this.$cookies.get('CUR_USERINFO')
       switch (num) {
         case 0:
           this.$router.push('/village')
@@ -255,6 +272,12 @@ export default {
           break
         case 7:
           this.$router.push('/weather')
+          break
+        case 8:
+          this.$router.push('/map')
+          break
+        case 9:
+          this.$router.push(`/chat/contact?username=${phone}`)
           break
       }
     },

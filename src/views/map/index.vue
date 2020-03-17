@@ -3,10 +3,10 @@
     <Header>小区周边</Header>
     <div class="back-header">
       <div>
-        <span @click="$router.push('/home')" class="mui-icon mui-icon-arrowleft"></span>
+        <span @click="$router.push('admin/home')" class="mui-icon mui-icon-arrowleft"></span>
         <span>小区周边</span>
       </div>
-      <a @click="$router.push('/ambitus')" class="records-span"  >周边</a>
+      <a @click="$router.push('/ambitus')" class="records-span">周边</a>
     </div>
     <!-- <div id="container" style="width:100%; height:100%;resize:both;"></div> -->
     <div id="container"></div>

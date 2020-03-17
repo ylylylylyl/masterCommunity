@@ -10,8 +10,26 @@
     fill: currentColor;
     overflow: hidden;
  }
-body{
-    height: 100vh !important;
+ body {
+    -webkit-text-size-adjust:none;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+html,body{
+    height: 100vh;
+}
+p{
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+.body{
+    width: 100%;
+    height: 100%;
+}
+.body-container{
+    width: 100%;
+    padding-top: 40px;
 }
 li{
     list-style: none;
@@ -25,9 +43,6 @@ p{
 input[type='text']{
     padding: 0px;
     margin: 0px;
-}
-.body{
-    height: 100%;
 }
 .mui-bar-tab .mui-tab-item.mui-active {
     color: 	#6E8B3D;

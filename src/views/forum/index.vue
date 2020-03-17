@@ -1,5 +1,5 @@
 <template>
-  <div class="content-container">
+  <div class="body-container">
     <div class="header">
       <span class="mui-icon iconfont icon-shouye" @click="toRouter(2)"></span>
       <!-- <svg class="icon" aria-hidden="true">
@@ -16,7 +16,7 @@
         id="sliderSegmentControl"
         class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted"
       >
-        <a @click="toForum(1)" class="mui-control-item mui-active" href="#item1mobile">热门</a>
+        <a @click="toForum(1)" class="mui-control-item mui-active" href="#item1mobile">最新</a>
         <a @click="toForum(2)" class="mui-control-item" href="#item2mobile">提问帖</a>
         <a @click="toForum(3)" class="mui-control-item" href="#item3mobile">分享帖</a>
       </div>
@@ -119,7 +119,6 @@ export default {
     this.debouncednewFormName = Debounce(this.newFormName, 500)
   },
   mounted () {
-    console.log("mount")
     this.init()
   },
   beforeDestroy () {
@@ -129,7 +128,6 @@ export default {
   },
   watch: {
     searchtext (value) {
-      console.log(value==='')
       if (value == '') {
         this.itemmobile = 'item1mobile'
         this.searchShow = false
@@ -170,7 +168,6 @@ export default {
           this.itemmobile = 'item3mobile'
           break
       }
-       console.log(this.itemmobile)
       return true
     },
     newFormName () {
@@ -298,7 +295,7 @@ export default {
 }
 .mui-slider-group{
   margin-bottom: 60px;
-  margin-top: 110px;
+  margin-top: 70px;
   height: 100%;
 }
 .mui-slider {
@@ -328,6 +325,9 @@ export default {
 }
 .forum-container{
   padding-top: 60px;
+}
+.mui-slider .mui-segmented-control.mui-segmented-control-inverted ~ .mui-slider-group .mui-slider-item{
+  border-bottom: none;
 }
 
 /* .mui-slider .mui-slider-group {

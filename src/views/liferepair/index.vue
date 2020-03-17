@@ -1,5 +1,5 @@
 <template>
-  <div class="content-container">
+  <div class="body-container">
     <div class="back-header">
       <div>
         <span @click="$router.push('/home')" class="mui-icon mui-icon-arrowleft"></span>
@@ -8,7 +8,7 @@
       <span class="records-span" @click="toRecords()">报修记录</span>
     </div>
     <div class="life-container repair-container">
-      <button id="type-btn" class="btn mui-btn mui-btn-block" @click="initRepair()">
+       <button id="type-btn" class="btn mui-btn mui-btn-block" @click="initRepair()">
         <div>
           <span class="iconfont icon-leixing"></span>
           <span class="title-span">维修类型</span>
@@ -45,7 +45,7 @@
           <span class="title-span repair-user-title">具体地址</span>
           <input v-model="postData.address" type="text" class="mui-input-clear" placeholder="请输入详细地址" />
         </div>
-        <p>注：只能报修当前登录房屋</p>
+        <p class="note">注：只能报修当前登录房屋</p>
       </div>
       <div class="problem-container">
         <div class="problem-container-title">
@@ -209,9 +209,6 @@ export default {
 }
 </script>
 <style  scoped>
-.life-container{
-  padding-top: 40px
-}
 .back-header {
   padding-right: 10px;
   display: flex;
@@ -325,5 +322,8 @@ textarea {
 }
 .mui-input-clear{
   padding-left: 10px;
+}
+.note{
+  margin-top: 5px;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
     <div>
-         <div class="forum-item " v-for="item in forum" :key="item.forumid">
+         <div class="forum-item " v-for="(item,key) in forum" :key="item.forumid">
             <div class="left">
-                <b class="num">1</b>
+                <b class="num">{{key+1}}</b>
                <div>
                  <div @click="toDetail(item)">
                    <span class="item-title">{{item.forum.forumtitle}}</span>

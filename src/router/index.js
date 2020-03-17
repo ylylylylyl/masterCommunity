@@ -555,7 +555,7 @@ export default new Router({
           }
         },
         {
-          path: 'message/:id/:username',
+          path: 'message/:id/:username/:toname',
           name: 'message',
           component: Message,
           meta: {

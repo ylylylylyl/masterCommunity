@@ -1,5 +1,6 @@
 <template>
     <div >
+      <Nothing v-if="!this.forum.length"></Nothing>
          <div class="forum-item " v-for="(item,key) in forum" :key="item.forumid">
             <div class="left">
                 <b class="num">{{key+1}}</b>
@@ -24,7 +25,7 @@
             </div>
         </div>
         <Loading v-if="loading"></Loading>
-        <Nothing v-if="!this.forum.length"></Nothing>
+        
     </div>
 </template>
 <script>

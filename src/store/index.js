@@ -18,6 +18,7 @@ const CUR_CITY = 'CUR_CITY' // 当前城市
 const CHOOSE_VILLAGE = 'CHOOSE_VILLAGE'// 所选择的小区
 const CUR_USERINFO = 'CUR_USERINFO'
 const CENTER = 'CENTER'
+const FRIENDS = 'FRIENDS'
 const state = {
   chooseCity: '',
   village: '',
@@ -25,7 +26,8 @@ const state = {
   curCity: '',
   chooseVillage: null,
   curUserInfo: {} , // 当前用户信息
-  center: []
+  center: [],
+  friends: []
 }
 
 const getters = {
@@ -35,7 +37,8 @@ const getters = {
   curCity: state => state.city,
   chooseVillage: state => state.chooseVillage,
   curUserInfo: state => state.curUserInfo,
-  center: state => state.center
+  center: state => state.center,
+  friends: state => state.friends
 }
 
 const mutations = {
@@ -62,6 +65,9 @@ const mutations = {
   [CENTER] (state, obj) {
     state.center = obj
     console.log(state.center)
+  },
+  [FRIENDS] (state,obj) {
+    state.friends = obj
   }
 }
 
@@ -110,6 +116,26 @@ const actions = {
       .catch(err => {
         console.log(err)
       })
+  },
+  getFriends ({commit}) {
+    let url = ''
+    if (window.Vue.$cookies.get('CUR_USERINFO').adminid) {
+      url = 'chat/selectAdminFriends'
+    } else {
+      url = 'chat/selectFriends'
+    }
+    return window.Vue.$ajax.post({
+      url: process.env.API_HOST + url,
+      data: {
+        userphone: window.Vue.$cookies.get('CUR_USERINFO').userphone || window.Vue.$cookies.get('CUR_USERINFO').phone
+      }
+    }).then(result => {
+      if (result.status) {
+        commit(FRIENDS, result.result)
+      } else {
+
+      }
+    })
   }
 }
 

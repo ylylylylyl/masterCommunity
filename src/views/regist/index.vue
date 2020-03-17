@@ -208,7 +208,6 @@ export default {
         username: this.username
       }
       this.$ajax.post({
-        // http://localhost:8081/regist
         url: root + 'user/regist',
         data: user
 

@@ -47,7 +47,7 @@ const Login = {
 				},
 				error: (err) => {
 					if (JSON.parse(err.data).error == "duplicate_unique_property_exists") {
-						mui.toast("用户已存在！")
+						console.log("用户已存在！")
 					} else if (JSON.parse(err.data).error == "illegal_argument") {
 						mui.toast("用户名不合法！")
 					} else if (JSON.parse(err.data).error == "unauthorized") {

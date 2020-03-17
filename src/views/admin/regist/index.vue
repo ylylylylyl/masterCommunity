@@ -169,7 +169,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setCurCity', 'setVillage']),
+    ...mapActions(['setCurCity', 'setVillage', 'onRegister']),
     goback () {
       this.$router.go(-1)
     },
@@ -195,6 +195,7 @@ export default {
         data: user
       }).then(result => {
         if (result.status) {
+          this.registIM()
           this.regist()
           this.user = null
         } else {
@@ -228,6 +229,14 @@ export default {
         return false
       }
       return true
+    },
+    // 注册
+    registIM () {
+      this.onRegister({
+        username: this.phone.toLowerCase(),
+        password: this.pwd,
+        nickname: this.adminname
+      })
     }
   }
 }

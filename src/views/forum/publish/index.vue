@@ -4,12 +4,18 @@
       <button type="button" class="mui-btn" @click="$router.push('/forum')">取消</button>
       <div class="header-title-container">
         <span class="title">发布帖子</span>
-        <p>admin</p>
+        <p>{{$cookies.get('CUR_USERINFO').username}}</p>
       </div>
       <button @click="publish()" type="button" class="mui-btn publish-btn">发布</button>
     </div>
       <div>
-        <input  v-model="postData.forumtitle" type="text" class="mui-input-clear" placeholder="请输入标题">
+        <input
+          v-model="postData.forumtitle"
+          type="text"
+          class="mui-input-clear"
+          placeholder="请输入标题"
+          style="font-size:14px"
+        >
         <textarea v-model="postData.forumcontent" class="content-txt" placeholder="分享新鲜事"></textarea>
         <div class="upload-container">
             <div class="picture-container" v-show="postData.uploadimg&&postData.uploadimg.length!=0">
@@ -110,7 +116,7 @@ export default {
       this.postData.userid = this.$cookies.get('CUR_USERINFO').userid
       this.postData.villageid = this.$cookies.get('CUR_BINDINFO').villageid
       this.postData.forumtype = Number(this.postData.forumtype)
-      this.postData.avatar = this.$cookies.get('avatar')
+      // this.postData.avatar = this.$cookies.get('avatar')
       this.$ajax
         .post({
           // http://localhost:8081/regist
@@ -137,6 +143,9 @@ export default {
 </script>
 
 <style scoped>
+.content-container{
+  height: auto;
+}
 .container{
     background: white;
     height: 100vh;

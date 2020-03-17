@@ -1,11 +1,12 @@
 <template>
     <div class="chat-container">
+      <span class="name">{{toname}}</span>
         <div class="chat-item"  v-for="(item,i) in msgList">
           <div class="chat-item-left" v-if="!item.bySelf">
             <div class="avatar-box">
-              <div class="avatar">
+              <!-- <div class="avatar">
                 <span class="avatar-span">{{item.from|avatar}}</span>
-              </div>
+              </div> -->
             </div>
            
             <div class="bubble-box">
@@ -28,11 +29,11 @@
                 <span class="message-span">{{item.msg}}</span>
               </div>
             </div>
-            <div class="avatar-box">
+            <!-- <div class="avatar-box">
               <div class="avatar">
                 <span class="avatar-span">{{username|avatar}}</span>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="send-container">
@@ -62,7 +63,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.msgList)
     this.onGetContactUserList()
     this.getCurrentMsg()
   },
@@ -76,6 +76,9 @@ export default {
     }),
     username () {
       return this.$route.params.username
+    },
+    toname () {
+      return this.$route.params.toname
     }
   },
   methods: {
@@ -127,6 +130,11 @@ export default {
 input{
   border-left: none;
   border-right: none;
+}
+.name{
+  display: block;
+  text-align: center;
+
 }
 .chat-container{
   padding-top: 40px;

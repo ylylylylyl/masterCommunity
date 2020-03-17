@@ -70,9 +70,10 @@ export default {
       return value.userid
     },
     publishCom (userid, username) {
+      console.log(userid)
       this.$emit('showDialog', userid, username)
       // console.log(111)
-      // this.replytarget = userid
+      this.replytarget = userid
       // this.commentShow = true
     },
     deleteCom (replyid) {

@@ -1,6 +1,5 @@
 <template>
   <div class="body">
-
     <div class="content-container" >
       <!-- <transition name="transitionRouter"> -->
         <keep-alive>
@@ -9,9 +8,7 @@
         <router-view v-if="!$route.meta.keepAlive"></router-view>
       <!-- </transition> -->
     </div>
-
     <NavBar  v-show="$route.name!=='propertypayment'">
-
     </NavBar>
   </div>
 
