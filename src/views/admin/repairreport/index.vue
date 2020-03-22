@@ -93,11 +93,11 @@ export default {
       })
     },
     selectSelf () {
-      const {adminid} = this.$cookies.get('CUR_USERINFO')
+      const {userid} = this.$cookies.get('CUR_USERINFO')
       this.$ajax.post({
         url: this.root + 'repairorder/selectself',
         data: {
-          adminid
+          userid
         }
       }).then(result => {
         if (result.status) {

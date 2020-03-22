@@ -2,14 +2,14 @@
   <div class="l-bg">
     <div class="l-header">
       <span @click="goback()" class="mui-icon mui-icon-arrowleft"></span>
-      <span class="l-text">用户登录</span>
+      <span class="l-text">超级管理员登录</span>
     </div>
     <div class="mui-input-group">
       <div class="mui-input-row">
         <label>
           <span class="mui-icon mui-icon-person"></span>
         </label>
-        <input v-model="userphone" type="text" class="mui-input-clear" placeholder="请输入手机号" />
+        <input v-model="username" type="text" class="mui-input-clear" placeholder="请输入用户名" />
       </div>
       <div class="mui-input-row">
         <label>
@@ -23,22 +23,24 @@
         />
       </div>
     </div>
-    <div class="bottom">
+      <div class="bottom">
       <span class="tip">{{tip}}</span>
-      <p class="regist-btn" @click="regist()">
+      <!-- <p class="regist-btn" @click="regist()">
         <span class="mui-icon mui-icon-help"></span>
         没有账号点击注册
-      </p>
+      </p> -->
     </div>
-    <button type="button" :disabled="loading" class="mui-btn mui-btn-outlined l-btn" @click="login()">
-      {{!loading?'登录':'登陆中'}}
-    </button>
-    <button type="button" class="mui-btn mui-btn-outlined back-btn" @click="backtohome">返回主页</button>
+    <button type="button" class="mui-btn mui-btn-outlined l-btn" @click="login()">登录</button>
+    <!-- <button type="button" class="mui-btn mui-btn-outlined back-btn" @click="backtohome">返回主页</button> -->
     <div class="change-container">
       <span class="mui-icon mui-icon-loop"></span>
-      <a @click="$router.push('/adminlogin')">切换管理员版本</a>
+      <a @click="$router.push('/login')">切换用户版本</a>
     </div>
-    <!-- <Loading/> -->
+     <div class="change-container">
+      <span class="mui-icon mui-icon-loop"></span>
+      <a @click="$router.push('/adminlogin')">切换管理员</a>
+    </div>
+    <Loading v-if="loading"/>
   </div>
 </template>
 <style scoped>
@@ -83,9 +85,6 @@
 .mui-input-clear,
 .mui-input-password {
   width: 85%;
-}
-.mui-input-row {
-  /* color: lightgray; */
 }
 .mui-icon-help {
   font-size: 16px;
@@ -164,8 +163,6 @@
 </style>
 
 <script>
-import { PHONE_REG } from '../../utils/rej'
-import { mapState, mapActions } from 'vuex'
 import Loading from '../../components/Loading'
 export default {
   components: {
@@ -177,100 +174,47 @@ export default {
   },
   data () {
     return {
-      userphone: '',
+      username: '',
       userpassword: '',
       tip: '',
       root: process.env.API_HOST,
-      loading: false // 是否正在请求服务器
-    };
-  },
-  computed: {
-    ...mapState(['chooseVillage'])
-  },
-  watch: {
-    userphone (val) {
-      if (PHONE_REG.test(val)) {
-        this.tip = ''
-      } else {
-        this.tip = '请输入正确的手机号码'
-      }
+      loading: false
     }
   },
   methods: {
-    ...mapActions(['onLogin', 'setRegisterFlag', 'onRegister']),
     goback () {
       this.$router.go(-1)
     },
-    regist () {
-      this.$router.push('/regist')
-    },
-    backtohome () {
-      this.$router.push('/home')
-    },
     async login () {
-      if (!this.userphone) {
-        this.tip = '请输入手机号码'
+      if (!this.username) {
+        this.tip = '请输入用户名'
         return
       }
-      if (!this.userpassword) {
+      if (this.userpassword === '' || this.userpassword == null) {
         this.tip = '请输入密码'
         return
       }
       const root = process.env.API_HOST
       const user = {
-        userphone: this.userphone,
+        username: this.username,
         userpassword: this.userpassword,
-        status: '0'
+        status: '1'
       };
       this.loading = true
       this.$ajax
         .post({
-          url: root + 'user/login',
+          url: root + 'user/superlogin',
           data: user
         })
         .then(result => {
-          this.loading = false
           if (result.status) {
-            this.$store.commit('CUR_USERINFO', result.object)
-            localStorage.setItem('avatar', result.object.avatar)
-            result.object.avatar = null
-            this.$cookies.set('CUR_USERINFO',result.object)
-            this.LoginIM()
-            return result.object.userid
+            this.$router.push('super/home')
           } else {
             this.tip = result.msg
             return null
           }
         })
-        .then(userid => {
-          if (userid) this.chooseBindHouse(userid)
-        })
-    },
-    chooseBindHouse (userid) {
-      const postData = {
-        userid: userid
-      }
-      this.$ajax
-        .post({
-          url: this.root + 'bindhouse/selectdefault',
-          data: postData
-        })
-        .then(res => {
-          if (res.status) {
-            this.$store.commit('CHOOSE_VILLAGE', res.result)
-            this.$cookies.set('CUR_BINDINFO', res.object)
-            this.$router.push('/home')
-          } else {
-            this.$router.push('/bindhouse')
-          }
-        })
-    },
-    LoginIM () {
-      this.onLogin({
-        username: this.userphone.toLowerCase(),
-        password: this.userpassword
-      })
     }
   }
-};
+}
 </script>

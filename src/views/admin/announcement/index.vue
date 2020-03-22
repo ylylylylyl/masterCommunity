@@ -46,7 +46,7 @@ export default {
   data () {
     return {
       postData: {
-        adminname: this.$cookies.get('CUR_USERINFO').adminname,
+        adminname: this.$cookies.get('CUR_USERINFO').username,
         addr: this.$cookies.get('CUR_USERINFO').addr,
         villageid:this.$cookies.get('CUR_USERINFO').villageid
       },

@@ -45,7 +45,7 @@
             </svg>
           </div>
           <div class="login-container" @click="login()">
-            <span class="login-text">你好，{{userinfo.adminname}}</span>
+            <span class="login-text">你好，{{userinfo.username}}</span>
             <span class="mui-icon mui-icon-arrowright"></span>
           </div>
         </div>
@@ -201,15 +201,15 @@ export default {
       })
     },
     findWalletAndBank () {
-      const {adminid} = this.$cookies.get('CUR_USERINFO')
+      const {userid} = this.$cookies.get('CUR_USERINFO')
       this.$ajax.post({
-        url: this.root + 'adminuser/selectByAdminId',
-        data: {adminid}
+        // url: this.root + 'adminuser/selectByAdminId',
+        url: this.root + 'user/selectByUserId',
+        data: {userid}
       })
         .then(res => {
           if (res.status) {
             this.userinfo = res.object
-            console.log(this.userinfo)
           }
         })
     }

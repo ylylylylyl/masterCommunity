@@ -212,4 +212,7 @@ textarea {
     font-size: 24px;
     color: black;
 }
+.mui-input-clear{
+  margin-left: 10px;
+}
 </style>

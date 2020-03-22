@@ -1,6 +1,7 @@
 <template>
     <div class="content-container">
         <Header>零钱明细</Header>
+        <Nothing v-if="!changes.length"></Nothing>
         <div class="change-container">
             <div class="item" v-for="item in changes" :key="item.changeid">
                 <div class="item-top">
@@ -15,9 +16,10 @@
 </template>
 <script>
 import Header from '../../components/LeftHeader'
+import Nothing from '../../components/nothing'
 export default {
   components: {
-    Header
+    Header,Nothing
   },
   mounted () {
     this.init()

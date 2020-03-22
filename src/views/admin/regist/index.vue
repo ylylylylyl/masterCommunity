@@ -47,7 +47,10 @@
             已有账号点击登录
             </p>
         </div>
-    <button type="button" class="mui-btn mui-btn-outlined" @click="userRegist()">注册</button>
+    <button type="button" class="mui-btn mui-btn-outlined" @click="userRegist()">
+      <!-- {{!loading?'注册中....':'注册'}} -->
+      注册
+    </button>
     <button type="button" class="mui-btn mui-btn-outlined back-btn" @click="backtohome">返回主页</button>
     </div>
 </template>
@@ -108,7 +111,7 @@
         background: lightgrey;
     }
     label{
-        width: 15%;
+        width: 15% !important;
     }
     .tip{
         color: red;
@@ -154,7 +157,8 @@ export default {
       pwd: '',
       pwdAgain: '',
       tip: '', // 提示内容
-      adminname: ''
+      adminname: '',
+      loading: false
     }
   },
   watch: {
@@ -181,6 +185,7 @@ export default {
     },
     userRegist () {
       if (!this.isNull()) return
+      this.loading = true
       const root = process.env.API_HOST
       const addr = this.$cookies.get('chooseProvince') + this.$cookies.get('chooseCity') + this.$cookies.get('chooseArea') + this.villagename
       const user = {
@@ -191,32 +196,38 @@ export default {
         addr
       }
       this.$ajax.post({
-        url: root + 'adminuser/adduser',
+        // url: root + 'adminuser/adduser',
+        url: root + 'user/addadmin',
         data: user
       }).then(result => {
         if (result.status) {
           this.registIM()
+          this.clear()
           this.regist()
+          this.loading = false
           this.user = null
         } else {
           this.tip = result.result
         }
+      },
+      err => {
+        this.loading = false
       })
     },
     initVillage () {
       this.$router.push('/adminvillage')
     },
     isNull () {
-      if (!NOT_NULL.test(this.phone)) {
+      if (!this.phone) {
         this.tip = '手机号码不能为空'
         console.log(this.tip)
         return false
       }
-      if (!NOT_NULL.test(this.pwd)) {
+      if (!this.pwd) {
         this.tip = '密码不能为空'
         return false
       }
-      if (!NOT_NULL.test(this.phone)) {
+      if (!this.phone) {
         this.tip = '请再次输入密码'
         return false
       }
@@ -224,7 +235,7 @@ export default {
         this.tip = '两次输入密码不一致'
         return false
       }
-      if (!NOT_NULL.test(this.villagename)) {
+      if (!this.villageId) {
         this.tip = '请选择要管理的小区'
         return false
       }
@@ -237,6 +248,12 @@ export default {
         password: this.pwd,
         nickname: this.adminname
       })
+    },
+    clear () {
+      this.phone = null
+      this.pwd = null
+      this.pwdAgain = null
+      this.adminname = null
     }
   }
 }

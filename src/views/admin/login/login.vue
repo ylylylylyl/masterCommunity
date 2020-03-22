@@ -2,7 +2,7 @@
   <div class="l-bg">
     <div class="l-header">
       <span @click="goback()" class="mui-icon mui-icon-arrowleft"></span>
-      <span class="l-text">登录</span>
+      <span class="l-text">管理员登录</span>
     </div>
     <div class="mui-input-group">
       <div class="mui-input-row">
@@ -35,6 +35,10 @@
     <div class="change-container">
       <span class="mui-icon mui-icon-loop"></span>
       <a @click="$router.push('/login')">切换用户版本</a>
+    </div>
+     <div class="change-container">
+      <span class="mui-icon mui-icon-loop"></span>
+      <a @click="$router.push('/superadmin')">切换超级管理员</a>
     </div>
     <Loading v-if="loading"/>
   </div>
@@ -214,18 +218,22 @@ export default {
       const root = process.env.API_HOST
       const user = {
         userphone: this.userphone,
-        userpassword: this.userpassword
+        userpassword: this.userpassword,
+        status: '1'
       };
       this.loading = true
       this.$ajax
         .post({
           // http://localhost:8081/regist
-          url: root + 'adminuser/login',
+          // url: root + 'adminuser/login',
+          url: root + 'user/login',
           data: user
         })
         .then(result => {
           if (result.status) {
+            localStorage.setItem('avatar', result.object.avatar)
             this.LoginIM()
+            result.object.avatar = null
             this.$cookies.set('CUR_USERINFO', result.object)
             this.$router.push('admin/home')
           } else {

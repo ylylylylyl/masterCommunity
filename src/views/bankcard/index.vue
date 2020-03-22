@@ -40,7 +40,7 @@
     }
     .bank-card-item{
         /* height: 100px; */
-        background-color: #C75056;
+        background-color: #C75056 !important;
         display: flex;
         border-radius: 5px;
         padding: 10px;

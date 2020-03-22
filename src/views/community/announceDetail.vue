@@ -88,9 +88,12 @@ export default {
     line-height: 50px;
     padding-left: 5px;
     border-bottom: 1px rgb(240, 240, 240) solid;
+    
 }
 .item-span{
     margin-left: 10px;
+    font-size: 14px;
+    color: gray;
 }
 .publish-content{
     margin-top: 10px;
@@ -104,8 +107,9 @@ export default {
 }
 .publish-content-p{
     margin-left: 10px;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 500;
     min-height: 100px;
+    color: black;
 }
 </style>

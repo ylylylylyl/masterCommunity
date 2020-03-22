@@ -247,7 +247,7 @@ export default {
       event.currentTarget.children[0].click()
     },
     torouter (num) {
-      const {phone} = this.$cookies.get('CUR_USERINFO')
+      const {userphone} = this.$cookies.get('CUR_USERINFO')
       switch (num) {
         case 0:
           this.$router.push('/village')
@@ -277,7 +277,7 @@ export default {
           this.$router.push('/map')
           break
         case 9:
-          this.$router.push(`/chat/contact?username=${phone}`)
+          this.$router.push(`/chat/contact?username=${userphone}`)
           break
       }
     },

@@ -250,11 +250,9 @@ export default {
         .then(res => {
           this.loading = false
           if (res.status) {
-            console.log(!this.$cookies.get('CUR_BINDINFO'))
             if(this.$cookies.get('CUR_BINDINFO')) {
               this.$router.push('/home')
             } else {
-              console.log(1111111111)
               this.$cookies.set('CUR_BINDINFO', res.object)
               this.$router.push('/home')
             }

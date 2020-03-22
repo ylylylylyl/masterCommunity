@@ -62,7 +62,7 @@ export default {
     },
     init () {
       this.loading = true
-      const {villageid} = this.$cookies.get('CUR_BINDINFO')
+      const {villageid} = this.$cookies.get('CUR_USERINFO')
       this.$ajax
         .post({
           url: this.root + 'forum/selectAll',

@@ -55,6 +55,9 @@ const AdminLost = () => import('../views/admin/lost')
 const AdminLostRecords = () => import('../views/admin/lost/list.vue')
 const AdminLostDetail = () => import('../components/Community/lostdeail.vue')
 const AdminUserMana = () => import('../views/admin/usermanage')
+const SuperAdmin = () => import('../views/superadmin/index.vue')
+const SuperHome = () => import('../views/superadmin/home.vue')
+const SuperAdd = () => import('../views/superadmin/addvill.vue')
 const Map = () => import('../views/map/index.vue')
 const AdminForum = () => import('../views/admin/forum')
 const Ambitus = () => import('../views/map/ambitus.vue')
@@ -443,6 +446,21 @@ export default new Router({
         requireAuth: true,
         requireBind: true
       }
+    },
+    {
+      path: '/superadmin',
+      name: 'superadmin',
+      component: SuperAdmin
+    },
+    {
+      path: '/super/home',
+      name: 'superhome',
+      component: SuperHome
+    },
+    {
+      path: '/super/add',
+      name: 'superadd',
+      component: SuperAdd
     },
     {
       path: '/adminlogin',

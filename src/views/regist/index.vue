@@ -108,7 +108,7 @@
         background: lightgrey;
     }
     label{
-        width: 15%;
+        width: 15% !important;
     }
     .tip{
         color: red;
@@ -205,7 +205,8 @@ export default {
       const user = {
         phone: this.phone,
         pwd: this.pwd,
-        username: this.username
+        username: this.username,
+        status: '0'
       }
       this.$ajax.post({
         url: root + 'user/regist',

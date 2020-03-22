@@ -32,10 +32,10 @@ export default {
   },
   computed: {
     adminid () {
-      if (this.$cookies.get('CUR_USERINFO').adminid) {
-        return this.$cookies.get('CUR_USERINFO').adminid
+      if (this.$cookies.get('CUR_USERINFO').status === '1') {
+        return true
       }
-      return ''
+      return false
     }
 
   },

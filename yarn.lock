@@ -8948,6 +8948,13 @@ uuid@^3.0.1, uuid@^3.3.2:
   resolved "https://registry.npm.taobao.org/uuid/download/uuid-3.3.3.tgz#4568f0216e78760ee1dbf3a4d2cf53e224112866"
   integrity sha1-RWjwIW54dg7h2/Ok0s9T4iQRKGY=
 
+v-distpicker@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.npm.taobao.org/v-distpicker/download/v-distpicker-1.2.2.tgz#9db5ba3aa9aba48507ae4b2994293365c5a9a27d"
+  integrity sha1-nbW6OqmrpIUHrksplCkzZcWpon0=
+  dependencies:
+    vue "^2.6.10"
+
 v-emoji-picker@^1.2.6:
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/v-emoji-picker/-/v-emoji-picker-1.2.6.tgz#441652c687afd6f7e54946a44752c43406d5d5a3"
@@ -9111,6 +9118,11 @@ vue@^2.5.2:
   version "2.6.10"
   resolved "https://registry.npm.taobao.org/vue/download/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha1-pysaQqTYKnIepDjRtr9V5mGVxjc=
+
+vue@^2.6.10:
+  version "2.6.11"
+  resolved "https://registry.npm.taobao.org/vue/download/vue-2.6.11.tgz?cache=0&sync_timestamp=1584399511613&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue%2Fdownload%2Fvue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
+  integrity sha1-dllNh31LEiNEBuhONSdcbVFBJcU=
 
 vuex@^3.1.2:
   version "3.1.2"

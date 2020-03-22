@@ -17,19 +17,21 @@ import './assets/iconfont/iconfont.js'
 import Ajax from './utils/ajax'
 import './filters'
 import '../static/css/app.css'
+import store from './store'
+import WebIM from './utils/WebIM'
+console.log(WebIM.conn)
+// import WebIM from '../static/js/WebIM'
 
 import './theme/common.css'
 import AMap from 'vue-amap'
-
-
 import VueResource from 'vue-resource'
-import store from './store'
-import WebIM from './utils/WebIM'
+
 
 Vue.config.productionTip = false
 Vue.use(VueResource)
 Vue.use(require('vue-cookies'))
 Vue.use(AMap)
+// Vue.use(WebIM)
 Vue.prototype.mui = mui
 Vue.prototype.$ajax = Ajax
 AMap.initAMapApiLoader({
@@ -47,7 +49,7 @@ router.beforeEach((to, from, next) => {
   }
   if (to.matched.some(record => record.meta.requireBind)) {
     // 是否绑定房屋
-    if (!Vue.$cookies.get('CUR_BINDINFO')) {
+    if (!Vue.$cookies.get('CUR_BINDINFO')&&!Vue.$cookies.get('CUR_USERINFO').status === '1') {
       mui.alert('请先绑定房屋！', '', function () {})
       next({
         path: '/bindhouse',

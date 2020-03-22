@@ -152,6 +152,7 @@ export default {
     }
     .info-img>img{
         width: 100%;
+        max-height: 335px;
     }
     .info-img{
         display: flex;

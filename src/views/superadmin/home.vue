@@ -1,8 +1,9 @@
 <template>
   <div>
     <Header>
-      <span class="iconfont icon-dingwei"></span>
-      <span  class="comm-name">{{curAddr||null}}</span>
+      <!-- <span class="iconfont icon-dingwei"></span> -->
+      <span  class="comm-name">admin</span>
+      <span class="logout" @click="logout()">退出</span>
     </Header>
     <div class="main-content">
       <div class="mui-slider">
@@ -52,87 +53,14 @@
         <div class="mui-content">
           <div class="mui-row">
             <div class="mui-col-xs-3 mui-col-xs-3">
-              <a @click="torouter(1)" class="mui-table-view-cell">
+              <a @click="torouter(0)" class="mui-table-view-cell">
                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-icon-test" />
+                  <use xlink:href="#icon-fangwu" />
                 </svg>
-                <a>生活缴费</a>
-              </a>
-            </div>
-            <div class="mui-col-xs-3 mui-col-xs-3">
-              <a @click="torouter(2)" class="mui-table-view-cell">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-jiaofeidating" />
-                </svg>
-                <a>物业缴费</a>
-              </a>
-            </div>
-            <div class="mui-col-xs-3 mui-col-xs-3">
-              <a @click="torouter(3)" class="mui-table-view-cell">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-repair" />
-                </svg>
-                <a>生活报修</a>
-              </a>
-            </div>
-            <div class="mui-col-xs-3 mui-col-xs-3">
-              <a @click="torouter(4)" class="mui-table-view-cell">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-luntanzixun" />
-                </svg>
-                <a>社区论坛</a>
+                <a>添加社区</a>
               </a>
             </div>
           </div>
-          <div class="mui-row">
-            <div class="mui-col-xs-3 mui-col-xs-3" >
-              <li class="mui-table-view-cell">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-dianhua" />
-                </svg>
-                <a href="#picture" :click="open">我要投诉</a>
-              </li>
-            </div>
-            <div class="mui-col-xs-3 mui-col-xs-3">
-              <a @click="torouter(5)" class="mui-table-view-cell">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-shuangkaimen" />
-                </svg>
-                <a>扫码开门</a>
-              </a>
-            </div>
-            <div class="mui-col-xs-3 mui-col-xs-3">
-              <li  @click="torouter(7)" class="mui-table-view-cell">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-tianqi" />
-                </svg>
-                <a>天气预报</a>
-              </li>
-            </div>
-            <div class="mui-col-xs-3 mui-col-xs-3">
-              <li @click="torouter(6)" class="mui-table-view-cell">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-liaotian" />
-                </svg>
-                <a>聊天</a>
-              </li>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="notice-container" @click="toAnnounce(notice.noticeid)">
-        <div class="notice-title">
-          <span>社区公告</span>
-        </div>
-        <div class="notice-content" >
-           <svg class="icon notice-icon" aria-hidden="true">
-            <use xlink:href="#icon-tongzhigonggao" />
-          </svg>
-          <span>最新公告</span>
-          <p>{{notice.noticetitle||'暂无公告'}}</p>
-        </div>
-        <div class="notice-icon">
-          <span class="mui-icon mui-icon-arrowright"></span>
         </div>
       </div>
       <div class="function-container news-container">
@@ -196,8 +124,6 @@ export default {
   mounted () {
     this.muinit()
     this.getNews()
-    this.getDefaultVill()
-    this.getNotice()
   },
   methods: {
     muinit () {
@@ -240,78 +166,21 @@ export default {
       event.currentTarget.children[0].click()
     },
     torouter (num) {
-      const {userphone} = this.$cookies.get('CUR_USERINFO')
       switch (num) {
         case 0:
-          this.$router.push('/village')
-          break
-        case 1:
-          this.$router.push('/livingpayment')
-          break
-        case 2:
-          this.$router.push('/propertypayment')
-          break
-        case 3:
-          this.$router.push('/liferepair')
-          break
-        case 4:
-          this.$router.push('/forum')
-          break
-        case 5:
-          this.$router.push('/opendoor')
-          break
-        case 6:
-          // this.$router.push('/map')
-          this.$router.push(`/chat/contact?username=${userphone}`)
-          break
-        case 7:
-          this.$router.push('/weather')
+          this.$router.push('/super/add')
           break
       }
     },
-    open () {
-      this.isopen = true
-    },
-    toAnnounce (noticeid) {
-      if (!noticeid) {
-        mui.toast('暂无公告')
-        return
-      } 
-      this.$router.push({
-        path: '/announcedetail',
-        query: {
-          noticeid
+    logout () {
+      var btnArray = ['否', '是']
+      mui.confirm('确认退出当前账号？', '注销', btnArray, (e) =>{
+        if (e.index == 1) {
+          this.$cookies.set('CUR_USERINFO', '', -1)
+          this.$cookies.set('CUR_BINDINFO', '', -1)
+          this.$router.push('/login')
         }
       })
-    },
-    getDefaultVill () {
-      if (this.chooseVillage == null) {
-        const root = process.env.API_HOST
-        const {userid} = this.$cookies.get('CUR_USERINFO')
-        this.$ajax.post({
-          url: root + 'bindhouse/selectdefault',
-          data: {
-            userid
-          }
-        })
-          .then(res => {
-            this.$store.commit('CHOOSE_VILLAGE', res.result)
-            localStorage.setItem('CUR_BINDINFO', res.object)
-          })
-      }
-    },
-    getNotice () {
-      this.$ajax.post({
-        url: this.root + 'notice/selectlasted',
-        data: {
-          villageid: this.$cookies.get('CUR_BINDINFO').villageid
-        }
-      })
-        .then(res => {
-          if (res.status && res.object) {
-            this.notice = res.object
-          }
-        })
     }
   }
 }
@@ -437,5 +306,10 @@ export default {
 .mui-icon-arrowright {
   color: gray;
   opacity: 0.8;
+}
+.logout{
+    color: white;
+    position: absolute;
+    right: 5px;
 }
 </style>

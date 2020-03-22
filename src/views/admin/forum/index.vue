@@ -172,7 +172,7 @@ export default {
       return true
     },
     newFormName () {
-      const {villageid} = this.$cookies.get('CUR_BINDINFO')
+      const {villageid} = this.$cookies.get('CUR_USERINFO')
       this.$ajax
         .post({
           url: this.root + 'forum/selectByKey',
@@ -329,6 +329,12 @@ export default {
 }
 .forum-container{
   padding-top: 60px;
+}
+.mui-slider .mui-segmented-control.mui-segmented-control-inverted ~ .mui-slider-group .mui-slider-item{
+  border-bottom:none
+}
+.content-container{
+  height: 100%;
 }
 
 /* .mui-slider .mui-slider-group {

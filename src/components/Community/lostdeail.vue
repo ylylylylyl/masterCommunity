@@ -80,7 +80,7 @@ export default {
       return this.$route.query.lostid
     },
     isAdmin () {
-      if (this.$cookies.get('CUR_USERINFO').adminid) {
+      if (this.$cookies.get('CUR_USERINFO').status==='1') {
         return true
       }
       return false

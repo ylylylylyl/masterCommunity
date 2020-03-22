@@ -236,7 +236,12 @@ export default {
       })
     },
     goback () {
-      this.$router.push('/home')
+      if (this.$cookies.get('CUR_USERINFO').status === '1') {
+        this.$router.push('/admin/home')
+      } else {
+        this.$router.push('/home')
+      }
+      
     }
   }
 }
@@ -258,6 +263,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-right: none;
 }
 .iconfont{
   margin-right: 10px;

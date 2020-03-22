@@ -43,10 +43,8 @@ WebIM.conn.listen({
 		// const path = location.pathname.indexOf("login") !== -1 || location.pathname.indexOf("register") !== -1 ? "/contct" : location.pathname;
 		// const redirectUrl = `${path}?username=${username}`;
 		// Vue.$router.push({ path: redirectUrl });
-		console.log("连接打开")
 	},
 	onClosed: function (message) {
-		console.log('连接关闭')
 		Vue.$router.push({ path: "/login" });
 	}, // 连接关闭回调
 	onTextMessage: function (message) {
