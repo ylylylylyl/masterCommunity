@@ -11,7 +11,7 @@
             <div class="living-content-container">
                 <div class="content-item">
                     <span>缴费单位</span>
-                    <p>国网供电公司</p>
+                    <p> {{type|initPayCompany}}</p>
                 </div>
                 <div class="content-item">
                     <span>缴费户号</span>
@@ -267,7 +267,6 @@ export default {
       }
     },
     initPayType (type) {
-      console.log(type)
       if (!type) return
       switch (type) {
         case 1:
@@ -276,6 +275,17 @@ export default {
           return '电费'
         case 3:
           return '水费'
+      }
+    },
+    initPayCompany (type) {
+      if (!type) return
+      switch (type) {
+        case 1:
+          return '大丰燃气公司'
+        case 2:
+          return '国网供电公司'
+        case 3:
+          return '国家水利局'
       }
     }
   }

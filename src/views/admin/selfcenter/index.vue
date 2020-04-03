@@ -39,10 +39,10 @@
         </div>
         <div class="avatar-container">
           <div class="avatar">
-            <!-- <img class="avatar-icon" :src="userinfo.avatar"/> -->
-            <svg class="icon avatar-icon" aria-hidden="true">
+            <img class="avatar-icon" :src="userinfo.avatar"/>
+            <!-- <svg class="icon avatar-icon" aria-hidden="true">
               <use xlink:href="#icon-user__easyico" />
-            </svg>
+            </svg> -->
           </div>
           <div class="login-container" @click="login()">
             <span class="login-text">你好，{{userinfo.username}}</span>
@@ -162,7 +162,7 @@ export default {
   methods: {
     login () {
       var btnArray = ['否', '是']
-      mui.confirm('确认退出当前账号？', '注销', btnArray, (e) =>{
+      mui.confirm('确认退出当前账号？', '退出登录', btnArray, (e) =>{
         if (e.index == 1) {
           this.$cookies.remove('CUR_USERINFO')
           this.$cookies.remove('CUR_BINDINFO')
@@ -329,7 +329,7 @@ export default {
 }
 /* 侧边 */
 .mui-off-canvas-right {
-  background-color: whitesmoke;
+  background-color: white;
 }
 .mui-table-view {
   background-color: whitesmoke;

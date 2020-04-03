@@ -1,5 +1,5 @@
 <template>
-  <div id="content2" class="mui-control-content">
+  <div id="content2" class="mui-control-content mui-active">
     <Nothing v-show="!noticeList.length"></Nothing>
     <div class="mui-card" @click="toDetail(item.noticeid)" v-for="(item,key) in noticeList" :key="key">
       <!--页眉，放置标题-->
@@ -55,6 +55,7 @@ export default {
           this.loading = false
           if (res.status) {
             this.noticeList = res.result
+            console.log(JSON.stringify(this.noticeList))
           }
         },err => {
           this.loading = true

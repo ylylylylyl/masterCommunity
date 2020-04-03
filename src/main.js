@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import WebIM from './utils/WebIM'
 import router from './router'
 import '../static/css/mui.css'
 import mui from '../static/js/mui.js'
@@ -18,8 +19,8 @@ import Ajax from './utils/ajax'
 import './filters'
 import '../static/css/app.css'
 import store from './store'
-import WebIM from './utils/WebIM'
-console.log(WebIM.conn)
+
+
 // import WebIM from '../static/js/WebIM'
 
 import './theme/common.css'
@@ -31,7 +32,6 @@ Vue.config.productionTip = false
 Vue.use(VueResource)
 Vue.use(require('vue-cookies'))
 Vue.use(AMap)
-// Vue.use(WebIM)
 Vue.prototype.mui = mui
 Vue.prototype.$ajax = Ajax
 AMap.initAMapApiLoader({
@@ -59,17 +59,17 @@ router.beforeEach((to, from, next) => {
   }
   next()
 })
+Vue.config.productionTip = false
 window.urlsPath = {
   statisticsUrl: 'https://m.amap.com/around/?locations=116.470098,39.992838&keywords=%E7%BE%8E%E9%A3%9F,KTV,%E5%9C%B0%E9%93%81%E7%AB%99,%E5%85%AC%E4%BA%A4%E7%AB%99&defaultIndex=3&defaultView=&searchRadius=5000&key=9342d0c3e0b2ebe14922871bb6f3189f'
 }
 window.Vue = new Vue({
   el: '#app',
   router,
-  store,
-  WebIM,
   components: {
     App
   },
-  template: '<App/>'
-
+  template: '<App/>',
+  store,
+  WebIM
 })

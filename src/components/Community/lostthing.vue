@@ -1,5 +1,5 @@
 <template>
-  <div id="content3" class="mui-control-content">
+  <div id="content3" class="mui-control-content mui-active">
     <Nothing v-if="!losts.length"></Nothing>
     <div class="mui-card" v-for="(lost,key) in losts" :key="key">
       <!--内容区-->
@@ -66,9 +66,10 @@ export default {
   },
   methods: {
     init () {
-      const villageid = this.$cookies.get('CUR_BINDINFO').villageid ||this.$cookies.get('CUR_USERINFO').villageid
-     console.log(villageid)
-     this.$ajax.post({
+      // const villageid = this.$cookies.get('CUR_BINDINFO').villageid ||this.$cookies.get('CUR_USERINFO').villageid
+      const villageid = this.$cookies.get('CUR_BINDINFO')?
+      this.$cookies.get('CUR_BINDINFO').villageid : this.$cookies.get('CUR_USERINFO').villageid
+      this.$ajax.post({
         url: this.root + 'lost/lostlist',
         data: {villageid}
       }).then(result => {

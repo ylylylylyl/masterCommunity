@@ -174,7 +174,7 @@ export default {
     },
     logout () {
       var btnArray = ['否', '是']
-      mui.confirm('确认退出当前账号？', '注销', btnArray, (e) =>{
+      mui.confirm('确认退出当前账号？', '退出登录', btnArray, (e) =>{
         if (e.index == 1) {
           this.$cookies.set('CUR_USERINFO', '', -1)
           this.$cookies.set('CUR_BINDINFO', '', -1)

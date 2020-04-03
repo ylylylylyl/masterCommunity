@@ -28,7 +28,7 @@ function getUrl(){
     }
     return {
         apiUrl: apiUrl,
-        xmppUrl: xmppUrl
+        xmppUrl: "http://im-api-v2.easemob.com/ws"
     }
 }
 
@@ -38,10 +38,12 @@ var config = {
      * XMPP server
      */
     xmppURL: getUrl().xmppUrl,
+    // xmppURL: 'im-api.easemob.com',
     /*
      * Backend REST API URL
      */
     apiURL: getUrl().apiUrl,
+    // apiURL: 'http://a1.easemob.com',
   
     /*
      * Application AppKey

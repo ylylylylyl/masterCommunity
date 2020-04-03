@@ -92,9 +92,9 @@ export default {
 }
 </script>
 <style scoped>
-input{
-    border: none;
-    margin-left: 5px;
+.mui-input-clear{
+  border: none;
+  margin-left: 5px;
 }
 .back-header {
   padding-right: 10px;

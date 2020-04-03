@@ -1,8 +1,9 @@
 import config from "./WebIMConfig";
+window.Strophe = require('strophe.js').Strophe
 import websdk from "easemob-websdk";
 import emedia from "easemob-emedia";
 import webrtc from "easemob-webrtc";
-// import { Message } from "element-ui";
+
 function ack(message) {
 	var bodyId = message.id; // 需要发送已读回执的消息id
 	var msg = new WebIM.message("read", WebIM.conn.getUniqueId());
@@ -39,10 +40,11 @@ if (!WebIM.conn.apiUrl) {
 WebIM.conn.listen({
 	onOpened: function (message) { // 连接成功回调
 		// 登录或注册成功后 跳转到好友页面
-		const username = Vue.$store.state.login.username || localStorage.getItem("userInfo") && JSON.parse(localStorage.getItem("userInfo")).userId;
+		// const username = Vue.$store.state.login.username || localStorage.getItem("userInfo") && JSON.parse(localStorage.getItem("userInfo")).userId;
 		// const path = location.pathname.indexOf("login") !== -1 || location.pathname.indexOf("register") !== -1 ? "/contct" : location.pathname;
 		// const redirectUrl = `${path}?username=${username}`;
 		// Vue.$router.push({ path: redirectUrl });
+		// alert(444)
 		console.log("连接打开")
 	},
 	onClosed: function (message) {
@@ -295,7 +297,7 @@ WebIM.conn.listen({
 		if (message.type == 0) {
 			console.log('请输入账号密码')
 		} else if (message.type == 28) {
-			Vue.$router.push('/login')
+			// Vue.$router.push('/login')
 			console.log("未登陆")
 		} else if (JSON.parse(message.data.data).error_description == "user not found") {
 			alert("用户名不存在！")

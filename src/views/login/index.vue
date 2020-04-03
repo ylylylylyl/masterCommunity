@@ -223,6 +223,7 @@ export default {
         status: '0'
       };
       this.loading = true
+      this.LoginIM()
       this.$ajax
         .post({
           url: root + 'user/login',
@@ -235,7 +236,6 @@ export default {
             localStorage.setItem('avatar', result.object.avatar)
             result.object.avatar = null
             this.$cookies.set('CUR_USERINFO',result.object)
-            this.LoginIM()
             return result.object.userid
           } else {
             this.tip = result.msg

@@ -10,12 +10,12 @@
           <!--支持循环，需要重复图片节点-->
           <div class="mui-slider-item mui-slider-item-duplicate">
             <a href="#">
-              <img src="../../../assets/image/4.jpg" />
+              <img src="../../../assets/image/1.jpg" />
             </a>
           </div>
           <div class="mui-slider-item">
             <a href="#">
-              <img src="../../../assets/image/slider-bg-01.jpg" />
+              <img src="../../../assets/image/5.jpg" />
             </a>
           </div>
           <div class="mui-slider-item">
@@ -30,13 +30,13 @@
           </div>
           <div class="mui-slider-item">
             <a href="#">
-              <img src="../../../assets/image/4.jpg" />
+              <img src="../../../assets/image/1.jpg" />
             </a>
           </div>
           <!--支持循环，需要重复图片节点-->
           <div class="mui-slider-item mui-slider-item-duplicate">
             <a href="#">
-              <img src="../../../assets/image/slider-bg-01.jpg" />
+              <img src="../../../assets/image/5.jpg" />
             </a>
           </div>
         </div>

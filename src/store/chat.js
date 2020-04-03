@@ -1,4 +1,4 @@
-import WebIM from '../utils/WebIM'
+// import WebIM from '../utils/WebIM'
 
 // import WebIM from "../utils/WebIM";
 
@@ -246,6 +246,7 @@ const Chat = {
 				chatroom: "id"
 			};
 			const msgObj = new WebIM.message("txt", id);
+			
 			msgObj.set({
 				msg: message,
 				// to: chatId[jid[chatType]],
@@ -271,7 +272,6 @@ const Chat = {
 			if(chatType === "group" || chatType === "chatroom"){
 				msgObj.setGroup("groupchat");
 			}
-			console.log(msgObj.body)
 			WebIM.conn.send(msgObj.body);
 		},
 		sendImgMessage: function(context, payload){

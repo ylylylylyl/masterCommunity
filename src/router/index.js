@@ -69,6 +69,10 @@ const Message = () => import('../views/chat/sendMessage.vue')
 const Group = () => import('../views/chat/group.vue')
 const GroupMessage = () => import('../views/chat/groupMessage.vue')
 const ChangePWD = () => import('../views/selfinfo/changePwd.vue')
+
+import Property from '../components/Community/property'
+import Announce from '../components/Community/announce'
+import LostThing from '../components/Community/lostthing'
 Vue.use(Router)
 
 export default new Router({
@@ -103,6 +107,27 @@ export default new Router({
         path: '/community',
         name: 'community',
         component: Community,
+        children: [
+          {
+            path: '/',
+            name: 'comindex',
+            component: Property
+          },
+          {
+            path: 'property',
+            name: 'comindex',
+            component: Property
+          },
+          {
+            path: 'announce',
+            name: 'comannounce',
+            component: Announce
+          },
+          {
+            path: 'lostthing',
+            name: 'comlost',
+            component: LostThing
+          }],
         meta: {
           requireAuth: true,
           requireBind: true

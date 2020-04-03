@@ -92,6 +92,7 @@ export default {
   components: {Header, MessageBox},
   mounted () {
     localStorage.setItem('chatname', this.username)
+    // this.LoginIM()
   },
   computed: {
     chatList () {
@@ -123,6 +124,7 @@ export default {
   methods: {
     ...mapActions([
       'onLogout',
+      'onLogin',
       'onGetFirendBlack',
       'onGetContactUserList',
       'addfirend',
@@ -131,7 +133,8 @@ export default {
       'acceptSubscribe',
       'declineSubscribe',
       'onCreateGroup',
-      'getFriends'
+      'getFriends',
+      'onGetGroupUserList'
     ]),
     toFriendList () {
     //   this.$refs.messageBox.onGetContactUserList()
@@ -197,6 +200,7 @@ export default {
       this.acceptSubscribe(id)
       this.insertFriend(id)
       this.changeModal()
+      this.onGetGroupUserList()
     },
     insertFriend (id) {
       this.$ajax.post({
@@ -241,7 +245,12 @@ export default {
       } else {
         this.$router.push('/home')
       }
-      
+    },
+    LoginIM () {
+      this.onLogin({
+        username: '18780522290',
+        password: '123456'
+      })
     }
   }
 }
@@ -263,7 +272,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-right: none;
+  border-right: none !important;
+  border-left: none !important;
 }
 .iconfont{
   margin-right: 10px;

@@ -11,26 +11,29 @@
             id="segmentedControls"
             class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical"
           >
-            <a class="mui-control-item mui-active" href="#content1" data-index="0">物业缴费</a>
+            <!-- <a class="mui-control-item mui-active" href="#content1" data-index="0">物业缴费</a>
             <a class="mui-control-item" href="#content2" data-index="1">社区公告</a>
-            <a class="mui-control-item" href="#content3" data-index="2">失物招领</a>
+            <a class="mui-control-item" href="#content3" data-index="2">失物招领</a> -->
+            <a class="mui-control-item mui-active" @click="()=>$router.push('/community/property')" data-index="0">物业缴费</a>
+            <a class="mui-control-item" @click="()=>$router.push('/community/announce')" data-index="1">社区公告</a>
+            <a class="mui-control-item" @click="()=>$router.push('/community/lostthing')" data-index="2">失物招领</a>
             <!-- <a class="mui-control-item" href="#content4" data-index="3">便民服务</a> -->
           </div>
         </div>
         <div
-          id="segmentedControlContents"
           class="mui-col-xs-9"
           style="border-left: 1px solid #c8c7cc;"
         >
-          <Property></Property>
-          <Announce></Announce>
-          <LostThing></LostThing>
+          <!-- <Property v-if="index==1"></Property>
+          <Announce v-if="index==2"></Announce>
+          <LostThing v-if="index==3"></LostThing>
           <div id="content4" class="mui-control-content">
             <ul class="mui-table-view">
               <li class="mui-table-view-cell">第3个选项卡子项-0</li>
               <li class="mui-table-view-cell">第3个选项卡子项-1</li>
             </ul>
-          </div>
+          </div> -->
+            <router-view></router-view>
         </div>
       </div>
     </div>
@@ -89,11 +92,21 @@ import Property from '../../components/Community/property'
 import Announce from '../../components/Community/announce'
 import LostThing from '../../components/Community/lostthing'
 export default {
+  data () {
+    return {
+      index: 2
+    }
+  },
   components: {
     Header,
     Property,
     Announce,
     LostThing
+  },
+  methods: {
+    clickNav (index) {
+      this.index = index
+    }
   }
 }
 </script>

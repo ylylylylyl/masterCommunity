@@ -5,6 +5,7 @@ import Login from './login'
 import Chat from './chat'
 import Group from './group'
 import FriendModule from './friendModule'
+import Main from './main'
 import {
   MP
 } from '../utils/util'
@@ -140,15 +141,16 @@ const actions = {
 }
 
 const store = new Vuex.Store({
-  state,
-  getters,
-  actions,
-  mutations,
+  // state,
+  // getters,
+  // actions,
+  // mutations,
   modules: {
+    main: Main,
 	  login: Login,
     chat: Chat,
     friendModule: FriendModule,
-    group: Group,
+    group: Group
   }
 })
 export default store

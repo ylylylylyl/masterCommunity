@@ -56,7 +56,7 @@ export default {
     }
   },
   mounted () {
-    this.postData.villageid = this.$cookies.get('CUR_BINDINFO').villageid ||  this.$cookies.get('CUR_USERINFO').villageid
+    this.postData.villageid = this.$cookies.get('CUR_USERINFO').villageid
     this.postData.publisher = this.$cookies.get('CUR_USERINFO').adminname
     //    this.initRepair()
   },

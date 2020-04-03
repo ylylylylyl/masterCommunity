@@ -20,12 +20,11 @@ const Login = {
 				pwd: payload.password,
 				appKey: WebIM.config.appkey
 			};
-			console.log(WebIM)
 			WebIM.conn.open(options);
-			localStorage.setItem("userInfo", JSON.stringify({ userId: payload.username, password: payload.password }));
+			// localStorage.setItem("userInfo", JSON.stringify({ userId: payload.username, password: payload.password }));
 		},
 		onLogout: function (context) {
-			console.log(WebIM)
+			// console.log(WebIM.conn.logOut)
 			WebIM.conn.close();
 			context.commit("setUserName", "");
 			localStorage.setItem("userInfo", "");

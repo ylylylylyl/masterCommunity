@@ -84,7 +84,6 @@ export default {
   methods: {
     ...mapActions(['onSendText', 'onGetCurrentChatObjMsg','onGetContactUserList']),
     onSendTextMsg () {
-      console.log( this.activedKey[this.type])
       // if (this.$data.message == "" || this.$data.message == "\n") {
       //   this.$data.message = ""
       //   return

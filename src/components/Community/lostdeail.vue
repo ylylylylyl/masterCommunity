@@ -1,5 +1,5 @@
 <template>
-    <div class="content-container">
+    <div class="content-container mui-active">
         <Header>招领详情</Header>
         <div class="div-container repair-info">
                  <div class="info-title">失物信息</div>
