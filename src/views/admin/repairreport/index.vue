@@ -1,6 +1,12 @@
 <template>
     <div >
-        <Header>报修列表</Header>
+        <!-- <Header>报修列表</Header> -->
+        <div class="back-header">
+          <span @click="$router.push('/admin/home')" class="mui-icon mui-icon-arrowleft"></span>
+          <span>
+              报修列表
+          </span>
+        </div>
         <div class="com-container">
            <div class="select-container">
                 <span class="mui-icon mui-icon-arrowdown" v-show="!isopen"></span>
@@ -97,7 +103,7 @@ export default {
       this.$ajax.post({
         url: this.root + 'repairorder/selectself',
         data: {
-          userid
+          adminid: userid
         }
       }).then(result => {
         if (result.status) {

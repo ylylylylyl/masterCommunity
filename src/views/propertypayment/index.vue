@@ -86,6 +86,12 @@ export default {
     this.init()
     this.getThreeYear()
   },
+  watch:{
+    selectyear (data) {
+      console.log(data)
+      this.init()
+    }
+  },
   methods: {
     init () {
       const { bindid } = this.$cookies.get('CUR_BINDINFO')
@@ -108,7 +114,7 @@ export default {
     },
     handleChange () {
       this.isopen = !this.isopen
-      this.init();
+      // this.init();
     },
     getThreeYear () {
       for (let i = 0; i < 3; i++) {

@@ -1,6 +1,11 @@
 <template>
     <div class="add-container">
-        <Header>添加社区</Header>
+             <div class="back-header">
+              <div>
+                <span @click="$router.go(-1)" class="mui-icon mui-icon-arrowleft"></span>
+                <span>添加社区</span>
+              </div>
+            </div>
         <div >
             <span class="city-span">选择城市</span>
             <Distpicker  @selected="onSelected">
@@ -65,6 +70,18 @@ export default {
 }
 </script>
 <style scoped>
+.back-header {
+  padding-right: 10px;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 100;
+}
+.records-span {
+  color: #6e8b3d;
+  font-size: 14px;
+  font-weight: 700;
+}
 .add-container{
     padding-top: 40px;
 }

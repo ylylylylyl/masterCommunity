@@ -194,6 +194,7 @@ export default {
     this.sliderinterval()
   },
   mounted () {
+    this.curAddr = this.$cookies.get('CUR_BINDINFO').chooseaddr || ''
     this.muinit()
     this.getNews()
     this.getDefaultVill()

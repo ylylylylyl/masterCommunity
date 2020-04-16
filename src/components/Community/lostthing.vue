@@ -67,8 +67,9 @@ export default {
   methods: {
     init () {
       // const villageid = this.$cookies.get('CUR_BINDINFO').villageid ||this.$cookies.get('CUR_USERINFO').villageid
-      const villageid = this.$cookies.get('CUR_BINDINFO')?
+      const villageid = this.$cookies.get('CUR_BINDINFO')? 
       this.$cookies.get('CUR_BINDINFO').villageid : this.$cookies.get('CUR_USERINFO').villageid
+      console.log(this.$cookies.get('CUR_USERINFO').villageid)
       this.$ajax.post({
         url: this.root + 'lost/lostlist',
         data: {villageid}

@@ -49,7 +49,7 @@
         </div>
       </div>
       <div class="function-container">
-        <label class="fun-label">智慧社区</label>
+        <label class="fun-label">社区管理</label>
         <div class="mui-content">
           <div class="mui-row">
             <div class="mui-col-xs-3 mui-col-xs-3">
@@ -168,7 +168,7 @@ export default {
     torouter (num) {
       switch (num) {
         case 0:
-          this.$router.push('/super/add')
+          this.$router.push('/super/villist')
           break
       }
     },

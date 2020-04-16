@@ -1,6 +1,12 @@
 <template>
     <div class="com-container">
         <Header>报修记录</Header>
+         <!-- <div class="back-header">
+          <span @click="$router.push('/adminrepair')" class="mui-icon mui-icon-arrowleft"></span>
+          <span>
+              报修记录
+          </span>
+        </div> -->
         <div class="records-main">
             <div class="div-container ">
                 <div class="repair-status">
@@ -53,6 +59,10 @@
                     <span>联系电话</span>
                     <span class="status-content">{{resultObject.concatphone}}</span>
                 </div>
+                 <div class="repair-status">
+                    <span>详细地址</span>
+                    <span class="status-content">{{resultObject.address}}</span>
+                </div>
             </div>
         </div>
          <div class="submit-container">
@@ -99,12 +109,12 @@ export default {
       var btnArray = ['否', '是']
       mui.confirm('确认接单？', '接单', btnArray, (e) =>{
         if (e.index == 1) {
-          const {adminid,phone,adminname} = this.$cookies.get('CUR_USERINFO')
+          const {userid , userphone ,username} = this.$cookies.get('CUR_USERINFO')
           const postData = {
-            repairid,
-            receivername: adminname,
-            userid: adminid,
-            phone
+            repairid: repairid,
+            receivername: username,
+            userid: userid,
+            phone: userphone
           }
           this.$ajax.post({
             url: this.root + 'repairorder/order',

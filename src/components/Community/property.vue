@@ -11,7 +11,7 @@
           </svg>
           <span>房屋信息</span>
         </div>
-        <div class="card-item">
+        <div class="card-item" @click="toRouter(2)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-techreport-" />
           </svg>
@@ -28,6 +28,10 @@ export default {
       switch (route) {
         case 1:
           this.$router.push('/houseinfo')
+          break
+        case 2:
+          this.$router.push('/propertypayment')
+          break
       }
     }
   }

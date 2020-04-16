@@ -70,6 +70,8 @@ const Group = () => import('../views/chat/group.vue')
 const GroupMessage = () => import('../views/chat/groupMessage.vue')
 const ChangePWD = () => import('../views/selfinfo/changePwd.vue')
 
+const SuperVillList = () => import('../views/superadmin/villist.vue')
+
 import Property from '../components/Community/property'
 import Announce from '../components/Community/announce'
 import LostThing from '../components/Community/lostthing'
@@ -486,6 +488,11 @@ export default new Router({
       path: '/super/add',
       name: 'superadd',
       component: SuperAdd
+    },
+    {
+      path: '/super/villist',
+      name: 'superlist',
+      component: SuperVillList
     },
     {
       path: '/adminlogin',

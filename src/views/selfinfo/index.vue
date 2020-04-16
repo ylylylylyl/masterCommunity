@@ -1,6 +1,12 @@
 <template>
     <div>
-        <Header>我的资料</Header>
+        <!-- <Header>我的资料</Header> -->
+         <div class="back-header">
+          <span @click="$router.push('/selfcenter')" class="mui-icon mui-icon-arrowleft"></span>
+          <span>
+              我的资料
+          </span>
+        </div>
         <div class="com-container" v-if="userid">
             <div class="item avatar" @click="$router.push('/changeAvatar')">
                 <span>头像</span>
