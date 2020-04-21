@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     initBMap () {
-      // await this.setCurCity()
+      this.setCurCity()
       var map;
       map = new AMap.Map('container', {
         resizeEnable: true,
@@ -52,7 +52,6 @@ export default {
   },
   mounted () {
     this.initBMap()
-
   }
 };
 </script>

@@ -175,7 +175,7 @@
 <script>
 import Header from '../../../components/Header'
 import Tele from '../../../components/telecomplaints'
-import {mapState} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 export default {
   data () {
     return {
@@ -205,6 +205,7 @@ export default {
     this.muinit()
     this.getNews()
     this.getDefaultVill()
+    this.setCurCity()
   },
   methods: {
     muinit () {
@@ -302,7 +303,8 @@ export default {
             this.$cookies.set('CUR_BINDINFO', res.object)
           })
       }
-    }
+    },
+    ...mapActions(['setCurCity'])
   }
 }
 </script>

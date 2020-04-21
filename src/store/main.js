@@ -16,7 +16,8 @@ const Main = {
     curCity: '',
     chooseVillage: null,
     curUserInfo: {} , // 当前用户信息
-    center: [106.53063501, 29.54460611],
+    center:[106.5032550000,29.5927180000],
+    // center: [106.53063501, 29.54460611],
     // center: '',
     friends: []
   },
@@ -44,16 +45,13 @@ const Main = {
       state.curProvince = str
     },
     [CHOOSE_VILLAGE] (state, str) {
-      console.log(str)
       state.chooseVillage = str
     },
     [CUR_USERINFO] (state, obj) {
       state.curUserInfo = obj
-      console.log(state.curUserInfo)
     },
     [CENTER] (state, obj) {
       state.center = obj
-      console.log(state.center)
     },
     [FRIENDS] (state,obj) {
       state.friends = obj
@@ -64,11 +62,13 @@ const Main = {
       commit
     }) {
       MP('B96xQKulGmzWLRsLRQVHqD4G7EPaF1tD').then(BMap => {
+        console.log("-------------------------------------------------------")
         // 百度地图API功能
         var geolocation = new BMap.Geolocation()
         geolocation.getCurrentPosition(function (position) {
           let center = []
           center.push(position.point.lng,position.point.lat)
+          console.log(position.point.lng,position.point.lat)
           let city = position.address.city // 获取城市信息
           let province = position.address.province
           commit(CHOOSE_CITY, city)
