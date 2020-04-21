@@ -51,7 +51,7 @@
       <!-- {{!loading?'注册中....':'注册'}} -->
       注册
     </button>
-    <button type="button" class="mui-btn mui-btn-outlined back-btn" @click="backtohome">返回主页</button>
+    <!-- <button type="button" class="mui-btn mui-btn-outlined back-btn" @click="backtohome">返回主页</button> -->
     </div>
 </template>
 <style scoped>

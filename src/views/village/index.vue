@@ -4,9 +4,9 @@
       <span class="mui-icon mui-icon-arrowleft" @click="$router.push('/home')"></span>
       <span class="title">小区选择</span>
     </header>
-    <div class="mui-input-row mui-search">
+    <!-- <div class="mui-input-row mui-search">
         <input type="search" class="mui-input-clear" placeholder="">
-    </div>
+    </div> -->
     <router-view></router-view>
   </div>
 </template>

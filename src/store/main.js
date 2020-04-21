@@ -16,7 +16,8 @@ const Main = {
     curCity: '',
     chooseVillage: null,
     curUserInfo: {} , // 当前用户信息
-    center: [],
+    center: [106.53063501, 29.54460611],
+    // center: '',
     friends: []
   },
   getters: {
@@ -66,7 +67,6 @@ const Main = {
         // 百度地图API功能
         var geolocation = new BMap.Geolocation()
         geolocation.getCurrentPosition(function (position) {
-          console.log(position)
           let center = []
           center.push(position.point.lng,position.point.lat)
           let city = position.address.city // 获取城市信息
@@ -75,6 +75,8 @@ const Main = {
           commit(CUR_CITY, city)
           commit(CUR_PROVINCE, province)
           commit(CENTER, center)
+          localStorage.setItem('center', center)
+          console.log(localStorage.getItem('center'))
         }, e => {
           commit(CHOOSE_CITY, '定位失败')
         }, {

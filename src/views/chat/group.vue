@@ -32,7 +32,6 @@ export default {
   components: { Nothing },
   beforeMount () {
     this.onGetGroupUserList()
-    console.log(this.groupList['group'])
   },
   computed: {
     ...mapGetters({

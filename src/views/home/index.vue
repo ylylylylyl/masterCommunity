@@ -169,6 +169,7 @@ export default {
       notice: {
         noticetitle: ''
       },
+      curAddr: this.$cookies.get('CUR_BINDINFO').chooseaddr || null,
       root: process.env.API_HOST,
       href: 'https://m.amap.com/around/?locations=116.470098,39.992838&keywords=%E7%BE%8E%E9%A3%9F,KTV,%E5%9C%B0%E9%93%81%E7%AB%99,%E5%85%AC%E4%BA%A4%E7%AB%99&defaultIndex=3&defaultView=&searchRadius=5000&key=9342d0c3e0b2ebe14922871bb6f3189f'
     }
@@ -180,10 +181,9 @@ export default {
   computed: {
     ...mapState(['chooseVillage']),
     ...mapState(['curUserInfo']),
-    curAddr () {
-      if (this.$cookies.get('CUR_BINDINFO')) return this.$cookies.get('CUR_BINDINFO').chooseaddr
-      return null
-    }
+    // curAddr () {
+    //   return this.$cookies.get('CUR_BINDINFO') ? this.$cookies.get('CUR_BINDINFO').chooseaddr : null
+    // }
   },
   watch: {
     chooseVillage (val) {

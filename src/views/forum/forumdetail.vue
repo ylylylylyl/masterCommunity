@@ -4,7 +4,10 @@
     <Loading v-if="loading"></Loading>
     <div v-if="!loading" class="mui-card detail">
       <div class="mui-card-header detail-header" >
-        <img class="user-avatar" :src="forum.userinfo.avatar"/>
+        <img v-if="forum.userinfo.avatar" class="user-avatar" :src="forum.userinfo.avatar"/>
+        <svg v-if="!forum.userinfo.avatar" class="user-avatar" aria-hidden="true">
+          <use xlink:href="#icon-user__easyico" />
+        </svg>
         <div>
           <span class="author-span">{{forum.userinfo.username}}</span>
           <p>{{forum.forum.forumtime|format}}</p>
@@ -27,13 +30,13 @@
       <!--页脚，放置补充信息或支持的操作-->
       <div class="mui-card-footer">
         <span>分享</span>
-        <svg class="icon" aria-hidden="true">
+        <svg class="icon" aria-hidden="true" @click="share()">
           <use xlink:href="#icon-qq" />
         </svg>
-        <svg class="icon" aria-hidden="true">
+        <svg class="icon" aria-hidden="true"  @click="share()">
           <use xlink:href="#icon-weixin" />
         </svg>
-        <svg class="icon" aria-hidden="true">
+        <svg class="icon" aria-hidden="true"  @click="share()">
           <use xlink:href="#icon-pengyouquan" />
         </svg>
       </div>
@@ -48,9 +51,13 @@
       <div class="mui-card-content reply-container">
         <div class="item-container" v-for="(item,key) in replyData" :key="key">
           <img
+            v-if="item.avatar"
             class="user-avatar"
             :src="item.avatar"
           />
+          <svg v-if="!item.avatar" class="user-avatar" aria-hidden="true">
+            <use xlink:href="#icon-user__easyico" />
+          </svg>
           <div style="width:100%" >
             <span>{{item.username}}</span>
             <div style="display:flex">
@@ -61,7 +68,6 @@
                 @click="deleteCom(item.replyid)">
               </span>
             </div>
-
              <div class="reply-child" >
                 <Detail class="" :replyData='item.child' @showDialog="publishCom"/>
             </div>
@@ -263,6 +269,9 @@ export default {
           }
         })
     },
+    share () {
+      mui.toast('分享功能暂未开放，敬请期待！')
+    }
   }
 }
 </script>

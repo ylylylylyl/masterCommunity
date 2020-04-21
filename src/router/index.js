@@ -93,8 +93,7 @@ export default new Router({
       component: Layout,
       children: [{
         path: '/',
-        name: 'login',
-        component: Login
+        redirect: '/login'
       },
       {
         path: '/home',

@@ -99,7 +99,6 @@ const Chat = {
 			state.msgList = Object.assign({}, state.msgList);
 		},
 		updateCurrentMsgList(state, messages){
-			console.log(messages)
 			state.currentMsgs = messages;
 			
 		},
@@ -125,7 +124,6 @@ const Chat = {
 			});
 		},
 		updateMessageStatus(state, message){
-			console.log(message)
 			const { id, mid, action, readUser } = message;
 			let { name, params } = Vue.$route;
 			
@@ -195,7 +193,6 @@ const Chat = {
 		onGetGroupUserList: function(context, payload){
 			var options = {
 				success: function(resp){
-					console.log(resp)
 					let userList = resp.data;
 					userList.forEach((user, index) => {
 						userList[index].name = user.groupname;
@@ -229,11 +226,12 @@ const Chat = {
 		// 获取当前聊天对象的记录 @payload： {key, type}
 		onGetCurrentChatObjMsg: function(context, payload){
 			const { id, type } = payload;
-			console.log(context)
-			console.log(id,context.state.msgList[type][id])
+			// console.log(context)
+			// console.log(id,context.state.msgList[type][id])
 			context.commit("updateCurrentMsgList", context.state.msgList[type][id]);
 		},
 		onSendText: function(context, payload){
+			console.log(context, payload)
 			const { chatType, chatId, message } = payload;
 			const id = WebIM.conn.getUniqueId();
 			const time = +new Date();

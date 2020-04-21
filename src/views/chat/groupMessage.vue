@@ -29,7 +29,7 @@
             >{{renderTime(item.time)}} {{item.bySelf?status[item.status]:''}}</div>
           </div>
         </div>
-        <div class="chat-item-right" v-if="item.bySelf">
+        <div class="chat-item-right" v-else>
           <div class="bubble-box">
             <div class="message-container-right bubble-container-right">
               <span class="message-span">{{item.msg}}</span>
@@ -76,7 +76,7 @@ export default {
     this.getCurrentMsg()
     this.init()
     this.onGetGroupinfo({select_id: this.groupid})
-    console.log(this.groupinfoList)
+    console.log(this.group)
   },
   computed: {
     groupid() {
@@ -84,7 +84,7 @@ export default {
     },
     ...mapGetters({
       // group: "onGetGroupUserList"
-      group: "onGetCurrentChatObjMsg"
+      group: 'onGetCurrentChatObjMsg'
     }),
     username() {
       return this.$route.params.username;

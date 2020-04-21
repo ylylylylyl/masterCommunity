@@ -110,16 +110,13 @@ export default {
     initRepair () {
       var picker = new mui.PopPicker()
       picker.setData(this.typedata)
-      var showUserPickerButton = document.getElementById('type-btn')
       var userResult = document.getElementById('type-result')
-      // showUserPickerButton.addEventListener('tap', function(event) {
       picker.show((items) => {
         userResult.innerText = items[0].text
         this.postData.repairtype = items[0].value
         // 返回 false 可以阻止选择框的关闭
         // return false;
       })
-      // }, false);
     },
     initDate () {
       var d = new Date()
@@ -129,12 +126,6 @@ export default {
         endDate: new Date(d) // 设置结束日期
       })
       dtPicker.show((selectItems) => {
-        // console.log(selectItems.y);//结果为：{text: "2016",value: 2016}
-        // console.log(selectItems.m);//结果为：{text: "05",value: "05"}
-        // console.log(selectItems.d.text);//11
-        // console.log(selectItems.h.text);//09
-        // console.log(selectItems.i.text);//09
-        // console.log(selectItems.text);//结果为：2016-10-11 09:09
         document.getElementById('date-result').innerText = selectItems.text
         this.postData.appointmenttime = selectItems.text
         dtPicker.dispose() // 关闭日期控件，释放资源。

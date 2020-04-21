@@ -1,6 +1,6 @@
 <template>
     <div class="content-container">
-        <Header>银行卡</Header>
+        <Header ref="myheader">银行卡</Header>
         <div class="bank-card-container"  id="OA_task_1" >
             <div class="bank-card-item mui-table-view-cell" v-for="item in this.bankCardData" :key="item.bankid">
                 <div class="mui-slider-right mui-disabled" @click="(e)=>deletebank(e,item.bankid)">
@@ -110,6 +110,7 @@ export default {
   },
   mounted () {
     this.initBankCard()
+    this.changeBack()
     // this.initMui()
   },
   filters: {
@@ -168,6 +169,11 @@ export default {
             this.initBankCard()
           }
         })
+    },
+    changeBack () {
+      this.$refs.myheader.goback = function () {
+        this.$router.push('/selfcenter')
+      }
     }
   }
 }

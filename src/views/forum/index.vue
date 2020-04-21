@@ -1,12 +1,12 @@
 <template>
-  <div class="body-container">
+  <div>
     <div class="header">
       <span class="mui-icon iconfont icon-shouye" @click="toRouter(2)"></span>
       <!-- <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-luntanzixun" />
       </svg> -->
       <div class="mui-input-row mui-search">
-        <input ref="input"  v-model="searchtext" type="search" class="search mui-input-clear" placeholder="请输入关键字" />
+        <input ref="input"  v-model="searchtext" type="search" :class='searchClass' placeholder="请输入关键字" />
       </div>
       <a id="menu" class="mui-action-menu mui-icon mui-icon-bars mui-pull-right" href="#topPopover"></a>
       <!-- <span class="mui-icon mui-icon-plus"></span> -->
@@ -47,7 +47,10 @@
           <div>
             <span class="item-title">{{item.forum.forumtitle}}</span>
             <div class="user-info">
-              <img :src="item.userinfo.avatar" class="user-avatar" />
+              <img v-if="item.userinfo.avatar" :src="item.userinfo.avatar" class="user-avatar" />
+              <svg v-if="!item.userinfo.avatar" class="user-avatar" aria-hidden="true">
+                <use xlink:href="#icon-user__easyico" />
+              </svg>
               <span>{{item.userinfo.username}}</span>
             </div>
             <p class="item-des">{{item.forum.forumcontent}}</p>
@@ -111,7 +114,8 @@ export default {
       root: process.env.API_HOST,
       forum:[],
       searchShow: false,
-      isRouterAlive: true
+      isRouterAlive: true,
+      searchClass: 'search mui-input-clear'
     }
   },
   created: function () {
@@ -185,6 +189,16 @@ export default {
             this.forum = result.result
           }
         })
+    },
+    toDetail (item) {
+      this.$router.push({
+        path: '/forumdetail',
+        query: {
+          forumid: item.forumid,
+          userid: item.userid
+        }
+      })
+      // this.$router.push('/forumdetail'+forumid)
     }
   }
 }

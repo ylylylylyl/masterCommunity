@@ -31,7 +31,7 @@ import VueResource from 'vue-resource'
 Vue.config.productionTip = false
 Vue.use(VueResource)
 Vue.use(require('vue-cookies'))
-Vue.use(AMap)
+
 Vue.prototype.mui = mui
 Vue.prototype.$ajax = Ajax
 AMap.initAMapApiLoader({
@@ -49,7 +49,7 @@ router.beforeEach((to, from, next) => {
   }
   if (to.matched.some(record => record.meta.requireBind)) {
     // 是否绑定房屋
-    if (!Vue.$cookies.get('CUR_BINDINFO')&&!Vue.$cookies.get('CUR_USERINFO').status === '1') {
+    if (!Vue.$cookies.get('CUR_BINDINFO')&&Vue.$cookies.get('CUR_USERINFO').status == '0') {
       mui.alert('请先绑定房屋！', '', function () {})
       next({
         path: '/bindhouse',
@@ -60,6 +60,7 @@ router.beforeEach((to, from, next) => {
   next()
 })
 Vue.config.productionTip = false
+Vue.use(AMap)
 window.urlsPath = {
   statisticsUrl: 'https://m.amap.com/around/?locations=116.470098,39.992838&keywords=%E7%BE%8E%E9%A3%9F,KTV,%E5%9C%B0%E9%93%81%E7%AB%99,%E5%85%AC%E4%BA%A4%E7%AB%99&defaultIndex=3&defaultView=&searchRadius=5000&key=9342d0c3e0b2ebe14922871bb6f3189f'
 }

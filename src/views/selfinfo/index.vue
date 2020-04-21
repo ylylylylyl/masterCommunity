@@ -2,7 +2,7 @@
     <div>
         <!-- <Header>我的资料</Header> -->
          <div class="back-header">
-          <span @click="$router.push('/selfcenter')" class="mui-icon mui-icon-arrowleft"></span>
+          <span @click="toRouter" class="mui-icon mui-icon-arrowleft"></span>
           <span>
               我的资料
           </span>
@@ -11,12 +11,10 @@
             <div class="item avatar" @click="$router.push('/changeAvatar')">
                 <span>头像</span>
                 <div class="avatar-right-container">
-                    <div class="avatarimg-container">
+                    <div v-if='user.avatar' class="avatarimg-container">
                         <img class="avatar-icon" :src="user.avatar"/>
-                        <!-- <svg class="icon avatar-icon" aria-hidden="true">
-                            <use :xlink:href="user.avatar"></use>
-                        </svg> -->
                     </div>
+                    <span v-else>点击上传头像</span>
                     <span class="mui-icon mui-icon-forward"></span>
                 </div>
             </div>
@@ -144,6 +142,13 @@ export default {
           this.user = result.object
         }
       })
+    },
+    toRouter () {
+      if (this.$cookies.get('CUR_USERINFO').status == 0) {
+        this.$router.push('/selfcenter')
+      } else {
+        this.$router.push('/admin/selfcenter')
+      }
     }
   }
 }

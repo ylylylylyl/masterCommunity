@@ -2,16 +2,6 @@
     <div class="content-container">
         <Header>报修记录</Header>
         <div class="report-container">
-            <!-- <div class="repair-item" @click="toRecords(item.repairid)" v-for="(item,key) in initDataList" :key="key">
-                <div class="repair-item-title">
-                    <span>{{item.description}}</span>
-                    <span class="mui-icon mui-icon-arrowright"></span>
-                </div>
-                <div class="repair-item-time">
-                    <span :class="item.repairstatus|styleStatus">{{item.repairstatus|status}}</span>
-                    <span class="item-date">{{item.publishtime|format}}</span>
-                </div>
-            </div> -->
             <div class="mui-card"  @click="toRecords(item.repairid)" v-for="(item,key) in initDataList" :key="key">
               <div class="mui-card-header">
                 <div v-if="item.repairstatus==0" class="font-topright">{{item.repairstatus|status}}</div>
@@ -31,8 +21,8 @@
                 </div>
               </div>
             </div>
-            
         </div>
+        <Loading v-if="loading"></Loading>
         <Nothing v-if="!initDataList.length"></Nothing>
     </div>
 </template>
@@ -41,16 +31,19 @@
 import Header from '../../components/LeftHeader'
 import ReportRecords from './reportrecords'
 import Nothing from '../../components/nothing'
+import Loading from '../../components/Loading'
 export default {
   components: {
     Header,
     ReportRecords,
-    Nothing
+    Nothing,
+    Loading
   },
   data () {
     return {
       root: process.env.API_HOST,
-      initDataList:[]
+      initDataList:[],
+      loading: false
     }
   },
   mounted () {
@@ -58,6 +51,7 @@ export default {
   },
   methods: {
     initData () {
+      this.loading = true
       const {bindid} =this.$cookies.get('CUR_BINDINFO')
       this.$ajax.post({
         url: this.root + 'repairorder/selectsumbybindid',
@@ -65,12 +59,13 @@ export default {
           bindid
         }
       }).then(result => {
+        this.loading = false
         if (result.status) {
           this.initDataList = result.result
         } else {
           
         }
-      })
+      },err => this.loading = false)
     },
     goback () {
       this.$router.go(-1)

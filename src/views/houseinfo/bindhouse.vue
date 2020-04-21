@@ -234,7 +234,7 @@ export default {
     commitBind () {
       if (!this.judge()) return
       this.tip = null
-      this.postData.userid = this.curUserInfo.userid
+      this.postData.userid = this.$cookies.get('CUR_USERINFO').userid
       this.postData.village = Number(this.postData.village)
       this.postData.cardId = Number(this.postData.cardId)
       this.postData.houseArea = Number(this.postData.houseArea)

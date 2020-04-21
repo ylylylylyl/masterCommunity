@@ -33,7 +33,7 @@
     <button type="button" :disabled="loading" class="mui-btn mui-btn-outlined l-btn" @click="login()">
       {{!loading?'登录':'登陆中'}}
     </button>
-    <button type="button" class="mui-btn mui-btn-outlined back-btn" @click="backtohome">返回主页</button>
+    <!-- <button type="button" class="mui-btn mui-btn-outlined back-btn" @click="backtohome">返回主页</button> -->
     <div class="change-container">
       <span class="mui-icon mui-icon-loop"></span>
       <a @click="$router.push('/adminlogin')">切换管理员版本</a>
@@ -208,6 +208,7 @@ export default {
       this.$router.push('/home')
     },
     async login () {
+      this.clear()
       if (!this.userphone) {
         this.tip = '请输入手机号码'
         return
@@ -216,17 +217,16 @@ export default {
         this.tip = '请输入密码'
         return
       }
-      const root = process.env.API_HOST
       const user = {
         userphone: this.userphone,
         userpassword: this.userpassword,
         status: '0'
-      };
+      }
       this.loading = true
       this.LoginIM()
       this.$ajax
         .post({
-          url: root + 'user/login',
+          url: this.root + 'user/login',
           data: user
         })
         .then(result => {
@@ -245,6 +245,10 @@ export default {
         .then(userid => {
           if (userid) this.chooseBindHouse(userid)
         })
+    },
+    clear () {
+      this.$cookies.set('CUR_USERINFO', '', -1)
+      this.$cookies.set('CUR_BINDINFO', '', -1)
     },
     chooseBindHouse (userid) {
       const postData = {

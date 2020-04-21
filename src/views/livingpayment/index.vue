@@ -157,16 +157,20 @@ export default {
     async echartsinit (livingnumid) {
       await this.$ajax.post({
         url: this.root + 'livingorder/selectMonthOrderByTpe',
-        data: {livingnumid}
+        data: {
+          livingnumid
+        }
       })
         .then(res => {
+          this.loading = false
           if (res.status) {
-            this.loading = false
             this.object = res.object
             _.groupBy(res.result, function (item) {
               return item.livingtype
             })
           }
+        },err=>{
+          this.loading = false
         })
       var echarts = require('echarts')
       // 基于准备好的dom，初始化echarts实例

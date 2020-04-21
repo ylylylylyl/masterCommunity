@@ -1,7 +1,7 @@
 <template>
     <div class="com-container">
         <Header>报修记录</Header>
-        <div class="records-main">
+        <div v-if="!loading" class="records-main">
             <div class="div-container ">
                 <div class="repair-status">
                     <span>流水号</span>
@@ -9,7 +9,7 @@
                 </div>
                 <div class="repair-status">
                     <span>报修状态</span>
-                    <span class="status-content">{{resultObject.repairstatus|status}}</span>
+                    <span class="status-content repair-status-span">{{resultObject.repairstatus|status}}</span>
                 </div>
                <div class="repair-status">
                     <span>预约时间</span>
@@ -32,11 +32,11 @@
                  <div class="info-title">接单人信息</div>
                  <div class="repair-status">
                     <span>联系人</span>
-                    <span class="status-content">{{resultObject.reciever}}</span>
+                    <span class="status-content repair-status-span">{{resultObject.reciever||'暂无联系人'}}</span>
                 </div>
                 <div class="repair-status">
                     <span>联系电话</span>
-                    <span class="status-content">{{resultObject.recieverphone}}</span>
+                    <span class="status-content repair-status-span">{{resultObject.recieverphone||'暂无联系方式'}}</span>
                 </div>
             </div>
             <div class="div-container repair-info">
@@ -48,6 +48,10 @@
                 <div class="repair-status">
                     <span>联系电话</span>
                     <span class="status-content">{{resultObject.concatphone}}</span>
+                </div>
+                 <div class="repair-status">
+                    <span>详细地址</span>
+                    <span class="status-content">{{resultObject.address}}</span>
                 </div>
             </div>
         </div>
@@ -160,5 +164,9 @@ export default {
     }
     .com-container{
         margin-bottom: 80px;
+    }
+    .repair-status-span{
+      color: darkred;
+      font-weight: bolder;
     }
 </style>

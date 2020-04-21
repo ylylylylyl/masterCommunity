@@ -31,7 +31,7 @@
       </p>
     </div>
     <button type="button" class="mui-btn mui-btn-outlined l-btn" @click="login()">登录</button>
-    <button type="button" class="mui-btn mui-btn-outlined back-btn" @click="backtohome">返回主页</button>
+    <!-- <button type="button" class="mui-btn mui-btn-outlined back-btn" @click="backtohome">返回主页</button> -->
     <div class="change-container">
       <span class="mui-icon mui-icon-loop"></span>
       <a @click="$router.push('/login')">切换用户版本</a>

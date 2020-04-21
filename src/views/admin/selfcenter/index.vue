@@ -31,18 +31,18 @@
       <div class="self-header">
         <div class="settings-container">
           <span></span>
-          <a
+          <!-- <a
             id="offCanvasBtn"
             href="#offCanvasSide"
             class="mui-icon mui-action-menu mui-icon-gear mui-pull-right"
-          ></a>
+          ></a> -->
         </div>
         <div class="avatar-container">
           <div class="avatar">
-            <img class="avatar-icon" :src="userinfo.avatar"/>
-            <!-- <svg class="icon avatar-icon" aria-hidden="true">
+            <img v-if="userinfo.avatar" class="avatar-icon" :src="userinfo.avatar"/>
+            <svg v-else class="icon avatar-icon" aria-hidden="true">
               <use xlink:href="#icon-user__easyico" />
-            </svg> -->
+            </svg>
           </div>
           <div class="login-container" @click="login()">
             <span class="login-text">你好，{{userinfo.username}}</span>

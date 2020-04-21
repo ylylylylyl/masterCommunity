@@ -175,6 +175,7 @@ export default {
         if (e.index == 1) {
           this.$cookies.set('CUR_USERINFO', '', -1)
           this.$cookies.set('CUR_BINDINFO', '', -1)
+          localStorage.setItem('avatar','')
           this.onLogout()
           this.$router.push('/login')
         }

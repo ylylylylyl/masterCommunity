@@ -45,10 +45,10 @@
       :disabled='loading'>
       {{!loading?'注册':'注册中...'}}
     </button>
-    <button
+    <!-- <button
     type="button"
     class="mui-btn mui-btn-outlined back-btn"
-    @click="backtohome">返回主页</button>
+    @click="backtohome">返回主页</button> -->
     </div>
 </template>
 <style scoped>
@@ -243,6 +243,9 @@ export default {
       }
       if (this.pwdAgain !== this.pwd) {
         this.tip = '两次输入密码不一致'
+        return false
+      }
+      if (this.tip) {
         return false
       }
       return true

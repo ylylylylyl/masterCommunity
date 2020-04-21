@@ -7,7 +7,10 @@
                  <div @click="toDetail(item)">
                    <span class="item-title">{{item.forum.forumtitle}}</span>
                     <div class="user-info">
-                      <img :src="item.userinfo.avatar" class="user-avatar" />
+                      <img  v-if="item.userinfo.avatar" :src="item.userinfo.avatar" class="user-avatar" />
+                      <svg v-if="!item.userinfo.avatar" class="user-avatar" aria-hidden="true">
+                        <use xlink:href="#icon-user__easyico" />
+                      </svg>
                       <span>{{item.userinfo.username}}</span>
                     </div>
                     <p class="item-des">{{item.forum.forumcontent}}</p>
